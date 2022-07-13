@@ -2,7 +2,7 @@ const router = require('express').Router()
 const Items = require('../models/Items')
 const { verifyToken, verifyTokenAndAuthor, verifyTokenAndAdmin } = require('./verifyToken')
 
-router.post('/', verifyTokenAndAdmin, async (req, res)=>{
+router.post('/add', verifyTokenAndAdmin, async (req, res)=>{
     const newItem = new Items(req.body)
 
     try {

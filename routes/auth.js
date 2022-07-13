@@ -23,7 +23,7 @@ router.post('/login', async (req, res)=>{
         !user && res.status(401).json('Wrong login or password')
         
         const hashedPassword = CryptoJS.AES.decrypt(user.password, process.env.SECRET_PASS)
-        const RealPassword = hashedPassword.toString()
+        const RealPassword = hashedPassword.toString(CryptoJS.enc.Utf8)
 
         RealPassword !== req.body.password && res.status(401).json('Wrong login or password')
         
@@ -31,7 +31,7 @@ router.post('/login', async (req, res)=>{
             id: user._id,
             isAdmin: user.isAdmin
         }, process.env.SECRET_JWT,
-        {expiresIn: '24h'})
+        {expiresIn: '30d'})
 
         const {password, ...others} = user._doc
         res.status(200).json({...others, accessToken})
