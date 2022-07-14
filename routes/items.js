@@ -54,7 +54,7 @@ router.get('/find', async (req, res) => {
         let items
 
         if(qNew){
-            items = await Items.find().sort({createdAt: -1}).limit(5)
+            items = await Items.find().sort({createdAt: -1}).limit(10)
         } else if(qCategory) {
             items = await Items.find({category: {
                 $in: [qCategory],
