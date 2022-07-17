@@ -1,13 +1,13 @@
 const router = require('express').Router()
-const Categories = require('../models/Categories')
+const Slider = require('../models/Slider')
 const { verifyToken, verifyTokenAndAuthor, verifyTokenAndAdmin } = require('./verifyToken')
 
 router.post('/', verifyTokenAndAdmin, async (req, res)=>{
-    const newCat = new Categories(req.body)
+    const newSlider = new Slider(req.body)
 
     try {
-        const savedCat = await newCat.save()
-        res.status(200).json(savedCat)
+        const savedSlider = await newSlider.save()
+        res.status(200).json(savedSlider)
     } catch (e) {
         res.status(500).json(e)
     }
@@ -16,10 +16,10 @@ router.post('/', verifyTokenAndAdmin, async (req, res)=>{
 
 router.put('/:id', verifyTokenAndAdmin, async (req, res) => {
     try {
-        const updatedCat = await Categories.findByIdAndUpdate(req.params.id, {
+        const updatedSlider = await Slider.findByIdAndUpdate(req.params.id, {
             $set: req.body
         }, { new: true })
-        res.status(200).json(updatedCat)
+        res.status(200).json(updatedSlider)
     } catch (e) {
         res.status(500).json(e);
     }
@@ -27,8 +27,8 @@ router.put('/:id', verifyTokenAndAdmin, async (req, res) => {
 
 router.delete('/:id', verifyTokenAndAdmin, async (req, res) => {
     try {
-        await Categories.findByIdAndDelete(req.params.id)
-        res.status(200).json('Category has been deleted')
+        await Slider.findByIdAndDelete(req.params.id)
+        res.status(200).json('Slider has been deleted')
     } catch (e) {
         res.status(500).json(e)
     }
@@ -37,8 +37,8 @@ router.delete('/:id', verifyTokenAndAdmin, async (req, res) => {
 
 router.get('/find/:id', async (req, res) => {
     try {
-        const cat = await Categories.findById(req.params.id)
-        res.status(200).json(cat)
+        const slider = await Slider.findById(req.params.id)
+        res.status(200).json(slider)
     } catch (e) {
         res.status(500).json(e)
     }
@@ -47,8 +47,8 @@ router.get('/find/:id', async (req, res) => {
 
 router.get('/find', async (req, res) => {
     try{
-        const Cat = await Categories.find();
-        res.status(200).json(Cat)
+        const slider = await Slider.find();
+        res.status(200).json(slider)
     } catch (e) {
         res.status(500).json(e)
     }
