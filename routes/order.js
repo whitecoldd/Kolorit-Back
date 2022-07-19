@@ -2,7 +2,7 @@ const router = require('express').Router()
 const Order = require('../models/Order')
 const { verifyToken, verifyTokenAndAuthor, verifyTokenAndAdmin } = require('./verifyToken')
 
-router.post('/', verifyToken, async (req, res) => {
+router.post('/',  async (req, res) => {
     const newOrder = new Order(req.body)
 
     try {
@@ -39,6 +39,15 @@ router.get('/find/:userId', async (req, res) => {
     try {
         const orders = await Order.find({ userId: req.params.userId })
         res.status(200).json(orders)
+    } catch (e) {
+        res.status(500).json(e)
+    }
+})
+
+router.get('/:id', async (req, res) => {
+    try {
+        const order = await Order.findById(req.params.id)
+        res.status(200).json(order)
     } catch (e) {
         res.status(500).json(e)
     }
