@@ -1,10 +1,11 @@
 const mongoose = require('mongoose')
 const OrderSchema = new mongoose.Schema(
     {
-        userId: { type: String, required: true, unique: true },
+        userFName: { type: String, unique: false },
 
         productId: {
-            type: Array
+            type: Array,
+            unique: false
         },
         quantity: {
             type: Number,
@@ -12,7 +13,7 @@ const OrderSchema = new mongoose.Schema(
         },
         payment: { type: String, required: true },
         delType: { type: String, required: true },
-        address: { type: String, required: true },
+        address: { type: String },
         status: { type: String, default: 'В обработке' },
 
     },
