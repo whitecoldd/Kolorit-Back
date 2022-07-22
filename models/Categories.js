@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 const CategoriesSchema = new mongoose.Schema(
     {
-        name: { type: String, required: true, unique: true },
-        img: {type: String, required: true, unique: true},
+        name: { type: String, required: true },
+        img: {type: String, required: true},
 
     },
     { timestamps: true }
