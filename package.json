@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false  npm install --legacy-peer-deps --prefix Kolorit-Front && npm run build --prefix Kolorit-Front && npm install --legacy-peer-deps --prefix Kolorit-admin && npm run build --prefix Kolorit-admin"
   },
   "keywords": [],
   "author": "",
