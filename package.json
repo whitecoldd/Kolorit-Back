@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false  npm install --legacy-peer-deps --prefix Kolorit-Front && npm run build --prefix Kolorit-Front"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
@@ -19,5 +18,9 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.4.3",
     "nodemon": "^2.0.19"
+  },
+  "engines" : { 
+    "npm" : ">=8.15.0",
+    "node" : ">=16.16.0"
   }
 }
