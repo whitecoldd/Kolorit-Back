@@ -33,6 +33,13 @@ app.use('/api/about', aboutRoute)
 app.use('/api/article', articlesRoute)
 
 
+// app.use(express.static(__dirname))
+// app.use(express.static(path.resolve(__dirname, 'build')))
+
+// app.get('*', (req, res) =>{
+//     res.sendFile(path.join(__dirname, 'build', 'index.html'))
+// })
+
 app.listen(1000, ()=>{
     console.log('backend server is up')
 })
