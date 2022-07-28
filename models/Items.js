@@ -11,6 +11,7 @@ const ItemsSchema = new mongoose.Schema(
         img: {type: String, required: true},
         code: {type: String, required: true, unique: true },
         category: { type: Array, required: true },
+        brand: { type: String, required: true },
         inStock: { type: Boolean, default: true },
         char1: {type: String},
         char2: {type: String},

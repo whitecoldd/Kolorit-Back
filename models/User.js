@@ -6,7 +6,7 @@ const UserSchema = new mongoose.Schema(
         phone: { type: String, required: true, unique: true },
         fname: { type: String, required: true},
         lname: { type: String, required: true},
-        password: { type: String, required: true },
+        password: { type: String, required: true, select: false },
         address: {type: Array},
         isAdmin: {
             type: Boolean,
