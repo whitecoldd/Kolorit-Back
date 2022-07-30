@@ -12,7 +12,7 @@
     "build": "cd Kolorit-Front $$ npm run build",
     "install-front": "cd Kolorit-Front $$ npm install --force",
     "install-admin": "cd Kolorit-Admin $$ npm install --force",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install-front && npm run build "
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm run install-front && npm run build "
   },
   "keywords": [],
   "author": "",
