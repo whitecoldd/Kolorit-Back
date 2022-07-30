@@ -10,7 +10,7 @@
     "admin": "cd Kolorit-Admin && npm start",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "cd Kolorit-Front $$ npm run build",
-    "install-front": "cd kolorit-front && npm install --force",
+    "install-front": "cd Kolorit-Front && npm install --force",
     "install-admin": "cd Kolorit-Admin $$ npm install --force",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm run install-front && npm run build "
   },
