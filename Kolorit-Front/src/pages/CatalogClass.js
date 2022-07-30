@@ -224,14 +224,14 @@ const CatalogClass = ({
           </Container>
 
           <Container className="d-flex flex-wrap justify-content-start items-list-handle cataloghandle">
-            {Items.filter((Items) => Items.name.toLowerCase().includes(query))
-              .filter((item) =>
+            {Items?.filter((Items) => Items.name.toLowerCase().includes(query))
+              ?.filter((item) =>
                 Object.entries(filter).every(([key, value]) =>
                   item[key]?.includes(value)
                 )
               )
-              .filter((Items) => Items.salePrice > parseInt(value, 10))
-              .map((Items) => (
+              ?.filter((Items) => Items.salePrice > parseInt(value, 10))
+              ?.map((Items) => (
                 <ItemModelForCat
                   Items={Items}
                   key={Items.id}
