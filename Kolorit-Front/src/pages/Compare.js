@@ -10,7 +10,7 @@ const Compare = ({ selectedItems, addToCompare, removeFromCompare, onAdd, onRemo
     useEffect(() => {
         const getItems = async () => {
             try {
-                const res = await publicRequest.get("api/items/find");
+                const res = await publicRequest.get("/api/items/find");
                 setItems(res.data);
             } catch { }
         };

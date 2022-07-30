@@ -37,7 +37,7 @@ const Profile = () => {
   useEffect(() => {
     const getItems = async () => {
       try {
-        const res = await userRequest.get(`api/user/find/${id}`);
+        const res = await userRequest.get(`/api/user/find/${id}`);
         setItems(res.data);
       } catch (e) {
         console.log(e);

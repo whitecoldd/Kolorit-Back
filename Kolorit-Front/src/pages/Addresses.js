@@ -34,7 +34,7 @@ const Addresses = () => {
   useEffect(() => {
     const getItems = async () => {
       try {
-        const res = await userRequest.get(`api/user/find/${id}`);
+        const res = await userRequest.get(`/api/user/find/${id}`);
         setItems(res.data);
         console.log(res.data);
       } catch (e) {

@@ -29,7 +29,7 @@ const ProcessOrder = ({ cartItems }) => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const res = await userRequest.post(`api/order/`, order)
+            const res = await userRequest.post(`/api/order/`, order)
             console.log(res.data)
         } catch (e) {
             console.log(e)
@@ -42,7 +42,7 @@ const ProcessOrder = ({ cartItems }) => {
     useEffect(() => {
         const getItems = async () => {
             try {
-                const res = await publicRequest.get(`/contact/find`)
+                const res = await publicRequest.get(`/api/contact/find`)
                 setItems(res.data)
             } catch (e) {
                 console.log(e)
