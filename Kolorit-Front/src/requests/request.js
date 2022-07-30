@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://kolloritt.herokuapp.com/api/";
+const BASE_URL = "http://localhost:1000/api/";
 // const TOKEN =
 //   JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser
 //     .accessToken || "";
@@ -10,10 +10,10 @@ const currentUser = user && JSON.parse(user).currentUser;
 const TOKEN = currentUser?.accessToken;
 
 export const publicRequest = axios.create({
-  baseURL: BASE_URL,
+  baseURL: BASE_URL || process.env.PUBLIC_URL,
 });
 
 export const userRequest = axios.create({
-  baseURL: BASE_URL,
+  baseURL: BASE_URL || process.env.PUBLIC_URL,
   headers: { token: `Bearer ${TOKEN}` },
 });
