@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "cd Kolorit-Front $$ npm run build",
+    "install-front": "cd Kolorit-Front $$ npm install --force",
+    "heroku-postbuild": "npm run install-front && npm run build"
   },
   "keywords": [],
   "author": "",
