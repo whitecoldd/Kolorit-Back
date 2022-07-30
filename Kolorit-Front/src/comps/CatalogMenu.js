@@ -32,7 +32,7 @@ const CatalogMenu = ({
   useEffect(() => {
     const getItems = async () => {
       try {
-        const res = await publicRequest.get(`api/brand/find`);
+        const res = await publicRequest.get(`/api/brand/find`);
         setItems(res.data);
       } catch (e) {
         console.log(e);

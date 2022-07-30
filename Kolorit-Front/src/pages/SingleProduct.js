@@ -20,7 +20,7 @@ const SingleProduct = ({ decreaseQty, onAdd, onRemoveFromPage, addToCompare, rem
     useEffect(() => {
         const getItems = async () => {
             try {
-                const res = await publicRequest.get('api/items/find/' + id)
+                const res = await publicRequest.get('/api/items/find/' + id)
                 setitems(res.data)
             } catch {
 
@@ -31,7 +31,7 @@ const SingleProduct = ({ decreaseQty, onAdd, onRemoveFromPage, addToCompare, rem
     useEffect(() => {
         const getItems = async () => {
             try {
-                const res = await publicRequest.get("api/items/find");
+                const res = await publicRequest.get("/api/items/find");
                 setItems(res.data);
             } catch { }
         };

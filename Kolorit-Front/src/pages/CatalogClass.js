@@ -137,7 +137,7 @@ const CatalogClass = ({
     const getItems = async () => {
       try {
         const res = await publicRequest.get(
-          category ? `api/items/find?category=${category}` : `api/items/find`
+          category ? `/api/items/find?category=${category}` : `/api/items/find`
         );
         setItems(res.data);
       } catch (e) {}
