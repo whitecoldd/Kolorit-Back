@@ -12,7 +12,7 @@ export default function Catalog() {
   useEffect(() => {
     const getItems = async () => {
       try {
-        const res = await publicRequest.get("/cat/find");
+        const res = await publicRequest.get("api/cat/find");
         setItems(res.data);
       } catch { }
     };

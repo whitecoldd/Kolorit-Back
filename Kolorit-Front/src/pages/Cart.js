@@ -20,7 +20,7 @@ export default function Cart(props) {
   useEffect(() => {
     const getItems = async () => {
       try {
-        const res = await publicRequest.get(`/items/find?new=new`)
+        const res = await publicRequest.get(`api/items/find?new=new`)
         setItems(res.data)
       } catch (e) {
         console.log(e)

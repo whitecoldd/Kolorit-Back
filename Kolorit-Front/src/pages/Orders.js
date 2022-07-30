@@ -24,7 +24,7 @@ const Orders = () => {
   useEffect(() => {
     const getItems = async () => {
       try {
-        const res = await userRequest.get(`/order/find/${username}`);
+        const res = await userRequest.get(`api/order/find/${username}`);
         setItems(res.data);
       } catch (e) {
         console.log(e);

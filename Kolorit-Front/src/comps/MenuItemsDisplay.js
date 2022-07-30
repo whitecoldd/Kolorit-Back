@@ -7,7 +7,7 @@ const MenuItemsDisplay = () => {
     useEffect(() => {
         const getItems = async () => {
             try {
-                const res = await publicRequest.get("/cat/find");
+                const res = await publicRequest.get("api/cat/find");
                 setCat(res.data);
             } catch { }
         };
@@ -17,7 +17,7 @@ const MenuItemsDisplay = () => {
     useEffect(() => {
         const getItems = async () => {
             try {
-                const res = await publicRequest.get(`/items/find`)
+                const res = await publicRequest.get(`api/items/find`)
                 setItem(res.data)
             } catch (e) {
 

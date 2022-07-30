@@ -11,7 +11,7 @@ export default function About() {
   useEffect(() => {
     const getItems = async () => {
       try {
-        const res = await publicRequest.get(`/about/find`)
+        const res = await publicRequest.get(`api/about/find`)
         setItems(res.data)
       } catch (e) {
         console.log(e)

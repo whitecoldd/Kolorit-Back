@@ -27,7 +27,7 @@ const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const res = await publicRequest.post(`/auth/register`, user)
+            const res = await publicRequest.post(`api/auth/register`, user)
             console.log(res.data)
             history('/login')
         } catch (e) {

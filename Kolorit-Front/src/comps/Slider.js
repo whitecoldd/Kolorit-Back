@@ -14,7 +14,7 @@ const Slider = () => {
     useEffect(() => {
         const getItems = async ()=>{
           try {
-            const res = await publicRequest.get(`/slider/find`)
+            const res = await publicRequest.get(`api/slider/find`)
             setItems(res.data)
           } catch (e) {
             console.log(e)

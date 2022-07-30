@@ -29,7 +29,7 @@ const ProcessOrder = ({ cartItems }) => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const res = await userRequest.post(`/order/`, order)
+            const res = await userRequest.post(`api/order/`, order)
             console.log(res.data)
         } catch (e) {
             console.log(e)

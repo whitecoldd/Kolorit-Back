@@ -9,7 +9,7 @@ const PromosDisplay = () => {
     useEffect(() => {
         const getItems = async () => {
             try {
-                const res = await publicRequest.get(`/article/find`)
+                const res = await publicRequest.get(`api/article/find`)
                 setitems(res.data)
             } catch (e) {
                 console.log(e)

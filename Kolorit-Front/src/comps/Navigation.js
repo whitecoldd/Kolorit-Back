@@ -26,7 +26,7 @@ export default function Navigation({ cartItems, selectedItems, onAdd, onRemoveFr
   useEffect(() => {
     const getItems = async () => {
       try {
-        const res = await publicRequest.get(`/items/find`)
+        const res = await publicRequest.get(`api/items/find`)
         setItems(res.data)
       } catch (e) {
 

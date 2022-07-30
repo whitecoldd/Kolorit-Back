@@ -16,7 +16,7 @@ export default function Contacts() {
 useEffect(() => {
   const getItems = async ()=>{
     try {
-      const res = await publicRequest.get(`/contact/find`)
+      const res = await publicRequest.get(`api/contact/find`)
       setItems(res.data)
     } catch (e) {
       console.log(e)
