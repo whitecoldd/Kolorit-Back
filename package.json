@@ -6,13 +6,13 @@
   "scripts": {
     "dev": "concurrently \"nodemon index.js\" \"npm start --prefix kolorit-front\"  \"npm start --prefix kolorit-admin \"",
     "start": "node index.js",
-    "front": "cd Kolorit-Front && npm start",
+    "front": "npm start --prefix Kolorit-Front",
     "admin": "cd Kolorit-Admin && npm start",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "cd Kolorit-Front $$ npm run build",
-    "install-front": "cd Kolorit-Front && npm install --force",
+    "install-front": "npm install --prefix client",
     "install-admin": "cd Kolorit-Admin $$ npm install --force",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm run install-front && npm run build "
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix front && npm run build --prefix front"
   },
   "keywords": [],
   "author": "",
