@@ -103,7 +103,7 @@ const CatalogMenu = ({
               </InputGroup>
 
               <select name="brand" className="classic mt-3" onChange={handleFilter}>
-                {Items.map((item) => (
+                {Items?.map((item) => (
                   <option>{item.name}</option>
                 ))}
               </select>
