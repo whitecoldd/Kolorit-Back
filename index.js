@@ -52,6 +52,6 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-app.listen(process.env.PORT || 1000, () => {
-  console.log("backend server is up on PORT" + process.env.PORT);
+app.listen(process.env.PORT || 5000, () => {
+  console.log("backend server is up on PORT" + process.env.PORT||5000);
 });
