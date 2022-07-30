@@ -4,14 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"nodemon index.js\" \"npm start --prefix client\"  \"npm start --prefix admin \"",
+    "dev": "concurrently \"nodemon index.js\" \"npm start --prefix kolorit-front\"  \"npm start --prefix kolorit-admin \"",
     "start": "node index.js",
-    "client": "npm start --prefix client",
+    "Kolorit-Front": "npm start --prefix Kolorit-Front",
     "admin": "cd Kolorit-Admin && npm start",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "install-client": "npm install --prefix client",
+    "install-Kolorit-Front": "npm install --prefix Kolorit-Front",
     "install-admin": "cd Kolorit-Admin $$ npm install --force",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --force --prefix client && npm run build --prefix client"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --force --prefix Kolorit-Front && npm run build --prefix Kolorit-Front"
   },
   "keywords": [],
   "author": "",
