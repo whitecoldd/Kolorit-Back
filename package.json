@@ -6,10 +6,13 @@
   "scripts": {
     "dev": "nodemon index.js",
     "start": "node index.js",
+    "front": "cd Kolorit-Front && npm start",
+    "admin": "cd Kolorit-Admin && npm start",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "cd Kolorit-Front $$ npm run build",
     "install-front": "cd Kolorit-Front $$ npm install --force",
-    "heroku-postbuild": "npm run install-front && npm run build"
+    "install-admin": "cd .. && cd Kolorit-Admin $$ npm install --force",
+    "heroku-postbuild": "npm run install-front && npm run build && npm run install-admin && npm run build"
   },
   "keywords": [],
   "author": "",

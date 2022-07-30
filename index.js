@@ -26,6 +26,11 @@ mongoose
 app.use(cors());
 app.use(express.json());
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("Kolorit-Front/build"));
+  app.use(express.static("Kolorit-Admin/build"));
+}
+
 app.use("/api/auth", authRoute);
 app.use("/api/cat", catRoute);
 app.use("/api/slider", sliderRoute);
@@ -44,11 +49,6 @@ app.use("/api/brand", brandRoute);
 // app.get('*', (req, res) =>{
 //     res.sendFile(path.join(__dirname, 'build', 'index.html'))
 // })
-
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("Kolorit-Front/build"));
-  app.use(express.static("Kolorit-Admin/build"));
-}
 
 app.listen(process.env.PORT || 1010, () => {
   console.log("backend server is up on PORT" + process.env.PORT);
