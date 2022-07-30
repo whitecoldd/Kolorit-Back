@@ -17,7 +17,7 @@ const articlesRoute = require("./routes/articles");
 const brandRoute = require("./routes/brand");
 dotenv.config();
 mongoose
-  .connect(process.env.MONGODB_URI || process.env.MONGO_URL)
+  .connect(process.env.MONGO_URL)
   .then(() => console.log("Connection Successful"))
   .catch((err) => {
     console.log(err);
@@ -52,6 +52,6 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-app.listen(process.env.PORT || 1010, () => {
+app.listen(process.env.PORT || 1000, () => {
   console.log("backend server is up on PORT" + process.env.PORT);
 });
