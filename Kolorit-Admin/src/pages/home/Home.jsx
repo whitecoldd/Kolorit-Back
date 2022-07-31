@@ -8,7 +8,7 @@ export default function Home({userData}) {
     return (
         <div className='home'>
             <FeaturedInfo/>
-            <Chart title="User Analytics" grid dataKey="Active User" data={userData} />
+            <Chart title="User Orders" grid dataKey="Active User" data={userData} />
             <div className='homeWidgets'> 
                 <WidgetLg/>
                 <WidgetSm/>

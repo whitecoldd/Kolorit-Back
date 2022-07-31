@@ -32,7 +32,7 @@ const Login = () => {
                         <Form.Label>{t('name')}</Form.Label>
                         <Form.Control type="email" placeholder="name@example.com" onChange={(e) => setUsername(e.target.value)} />
                     </Form.Group>
-                    <Form.Group className="mb-3 d-flex flex-wrap  w-50" controlId="exampleForm.ControlInput1">
+                    <Form.Group className="mb-3 d-flex flex-wrap  w-50" controlId="exampleForm.ControlInput122">
                         <Form.Label>{t('pw')}</Form.Label>
                         <Form.Control type="password" placeholder="********" onChange={(e) => setPassword(e.target.value)} />
                     </Form.Group>

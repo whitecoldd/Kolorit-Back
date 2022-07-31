@@ -15,6 +15,7 @@ const OrderSchema = new mongoose.Schema(
         payment: { type: String, required: true },
         delType: { type: String, required: true },
         address: { type: String },
+        sum: {type: Number},
         status: { type: String, default: 'В обработке' },
 
     },

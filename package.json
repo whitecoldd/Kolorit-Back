@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"nodemon index.js\" \"npm start --prefix kolorit-front\"  \"npm start --prefix kolorit-admin \"",
+    "dev": "concurrently \"pm2 start index.js -i max\" \"npm start --prefix kolorit-front\"  \"npm start --prefix kolorit-admin \"",
     "start": "node index.js",
     "Kolorit-Front": "npm start --prefix Kolorit-Front",
     "admin": "cd Kolorit-Admin && npm start",
