@@ -32,7 +32,7 @@ const MenuItemsDisplay = () => {
             {Cat?.map((Cat) =>
                 <NavDropdown.Item className='d-flex align-items-center position-relative' type='button'>
                     <img width={20} height={20} src={Cat.img} />
-                    <Nav.Link className='nav-fix' eventKey={Cat._id} >
+                    <Nav.Link className='nav-fix d-flex align-items-center' eventKey={Cat._id} >
 
                         <span>
                             <DropdownButton
