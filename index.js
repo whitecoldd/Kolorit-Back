@@ -17,7 +17,7 @@ const articlesRoute = require("./routes/articles");
 const brandRoute = require("./routes/brand");
 dotenv.config();
 mongoose
-  .connect(process.env.MONGODB_URI || process.env.MONGO_URL)
+  .connect(process.env.MONGODB_URI)
   .then(() => console.log("Connection Successful"))
   .catch((err) => {
     console.log(err);

@@ -10,10 +10,10 @@ const currentUser = user && JSON.parse(user).currentUser;
 const TOKEN = currentUser?.accessToken;
 
 export const publicRequest = axios.create({
-  baseURL: process.env.PUBLIC_URL || BASE_URL,
+  baseURL: process.env.PUBLIC_URL,
 });
 
 export const userRequest = axios.create({
-  baseURL: process.env.PUBLIC_URL || BASE_URL,
+  baseURL: process.env.PUBLIC_URL,
   headers: { token: `Bearer ${TOKEN}` },
 });
