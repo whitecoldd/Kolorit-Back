@@ -37,7 +37,7 @@ router.post('/login', async (req, res) => {
             { expiresIn: '30d' })
 
         const { password, ...others } = user._doc
-        res.status(200).json({ ...others, accessToken })
+        res.status(200).json({ user, accessToken })
     } catch (e) {
         res.status(500).json(e)
     }
