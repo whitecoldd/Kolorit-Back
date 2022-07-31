@@ -7,11 +7,11 @@
     "dev": "concurrently \"pm2 start index.js -i max\" \"npm start --prefix kolorit-front\"  \"npm start --prefix kolorit-admin \"",
     "start": "node index.js",
     "Kolorit-Front": "npm start --prefix Kolorit-Front",
-    "admin": "cd Kolorit-Admin && npm start",
+    "Kolorit-Admin": "npm start --prefix Kolorit-Admin",
     "test": "echo \"Error: no test specified\" && exit 1",
     "install-Kolorit-Front": "npm install --prefix Kolorit-Front",
-    "install-admin": "cd Kolorit-Admin $$ npm install --force",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --force --prefix Kolorit-Front && npm run build --prefix Kolorit-Front"
+    "install-Kolorit-Admin": "npm install --prefix Kolorit-Front",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --force --prefix Kolorit-Front && npm run build --prefix Kolorit-Front && npm install --force --prefix Kolorit-Admin && npm run build --prefix Kolorit-Admin"
   },
   "keywords": [],
   "author": "",
