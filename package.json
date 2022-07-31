@@ -10,8 +10,8 @@
     "Kolorit-Admin": "npm start --prefix Kolorit-Admin",
     "test": "echo \"Error: no test specified\" && exit 1",
     "install-Kolorit-Front": "npm install --prefix Kolorit-Front",
-    "install-Kolorit-Admin": "npm install --prefix Kolorit-Front",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --force --prefix Kolorit-Admin && npm run build --prefix Kolorit-Admin"
+    "install-Kolorit-Admin": "npm install --prefix Kolorit-Admin",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --force --prefix Kolorit-Admin && npm run build --prefix Kolorit-Admin" 
   },
   "keywords": [],
   "author": "",
