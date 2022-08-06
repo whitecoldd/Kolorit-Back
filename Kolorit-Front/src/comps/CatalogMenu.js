@@ -9,7 +9,16 @@ import {
   Navbar,
   Select,
 } from "react-bootstrap";
-import { Box, Slider, Typography } from "@mui/material";
+import {
+  Box,
+  Slider,
+  Typography,
+  TextField,
+  FormControl,
+  FormGroup,
+  FormControlLabel,
+  Checkbox,
+} from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { publicRequest } from "../requests/request";
 function valuetext(value) {
@@ -18,6 +27,7 @@ function valuetext(value) {
 const CatalogMenu = ({
   setQuery,
   value,
+  value1,
   handleCheck,
   inStock,
   handleFilter,
@@ -25,7 +35,9 @@ const CatalogMenu = ({
   handleChange,
   handleInput,
   Clear,
+  brands,
   handleBrands,
+  checked,
 }) => {
   const { t } = useTranslation();
   const [Items, setItems] = useState([]);
@@ -73,10 +85,9 @@ const CatalogMenu = ({
               <Box sx={{ width: 300 }}>
                 <Slider
                   sx={{ width: 200, backgroundColor: "warning" }}
-                  valueLabelDisplay="Price range"
+                  valueLabelDisplay="auto"
                   value={value}
-                  onChange={handleChange}
-                  onInput={handleInput}
+                  onChange={handleInput}
                   min={0}
                   max={40000}
                   getAriaValueText={valuetext}
@@ -88,11 +99,15 @@ const CatalogMenu = ({
         <Accordion>
           <Accordion.Item>
             <Accordion.Header>{t("prods")}</Accordion.Header>
-            <Accordion.Body className='d-flex flex-wrap justify-content-center'>
-              <InputGroup>
-                <InputGroup.Checkbox></InputGroup.Checkbox>
-                <InputGroup.Text>{t("allprods")}</InputGroup.Text>
-              </InputGroup>
+            <Accordion.Body className="d-flex flex-wrap justify-content-start">
+              {/* <InputGroup>
+              <FormControlLabel
+                      className=""
+                      control={<Checkbox size="small" onChange={handleChange} />}
+                      label={t('allprods')}
+                      value={t('allprods')}
+                    />
+              </InputGroup> */}
               <InputGroup>
                 <Form.Control
                   placeholder="Поиск..."
@@ -102,11 +117,20 @@ const CatalogMenu = ({
                 />
               </InputGroup>
 
-              <select name="brand" className="classic mt-3" onChange={handleFilter}>
-                {Items?.map((item) => (
-                  <option>{item.name}</option>
-                ))}
-              </select>
+              <FormControl>
+                <FormGroup className="d-flex justify-content-start">
+                  <div className="scrollable-div d-flex flex-column justify-content-start p-0 ms-0   ">
+                  {Items.map((item) => (
+                    <FormControlLabel
+                      key={item._id}
+                      control={<Checkbox size="small" onChange={handleChange} />}
+                      label={item.name}
+                      value={item.name}
+                    />
+                  ))}
+                  </div>
+                </FormGroup>
+              </FormControl>
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>
@@ -136,7 +160,11 @@ const CatalogMenu = ({
           </Accordion.Item>
         </Accordion>
         <Container className="d-flex justify-content-center pt-1 pb-3">
-          <Button variant="outline-dark" onClick={Clear} className="catalog-menu-bttn">
+          <Button
+            variant="outline-dark"
+            onClick={Clear}
+            className="catalog-menu-bttn"
+          >
             Сбросить
           </Button>
         </Container>

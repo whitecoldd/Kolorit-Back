@@ -23,6 +23,7 @@ import Login from './pages/Login';
 import ProcessOrder from './pages/ProcessOrder';
 import Orders from './pages/Orders';
 import Order from './pages/Order';
+import BrandCatalog from './pages/BrandCatalog';
 import { useSelector } from 'react-redux'
 
 
@@ -69,6 +70,7 @@ function App() {
     setSelectedItems((selectedItems) => filteredItems);
   };
 
+  
 
   const admin = useSelector((state) => state.user.currentUser);
 
@@ -85,6 +87,7 @@ function App() {
           <Route exact path={`/catalog/:title`} element={<CatalogClass addToCompare={addToCompare} removeFromCompare={removeFromCompare} selectedItems={selectedItems} cartItems={cartItems} onAdd={onAdd} onRemoveFromPage={onRemoveFromPage} />}></Route>
           <Route exact path="/partnership" element={<Partnership />}></Route>
           <Route exact path="/brands" element={<Brands />}></Route>
+          <Route exact path={`/brandscatalog/:title`} element={<BrandCatalog addToCompare={addToCompare} removeFromCompare={removeFromCompare} selectedItems={selectedItems} cartItems={cartItems} onAdd={onAdd} onRemoveFromPage={onRemoveFromPage} />}></Route>
           <Route exact path="/register" element={<Register />}></Route>
           <Route exact path="/login" {...admin ? <Navigate to="/profile" /> : <Navigate to="/login" />} element={<Login />}></Route>
           {admin &&

@@ -33,6 +33,8 @@ export default function AboutList() {
         );
       },
     },
+    { field: "lng", headerName: "Language", width: 100 },
+    { field: "year", headerName: "Year", width: 100 },
     {
       field: "action",
       headerName: "Action",
@@ -67,7 +69,7 @@ export default function AboutList() {
         disableSelectionOnClick
         columns={columns}
         getRowId={(row) => row._id}
-        pageSize={12}
+        pageSize={14}
         checkboxSelection
       />
     </div>

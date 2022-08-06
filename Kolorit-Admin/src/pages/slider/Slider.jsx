@@ -102,6 +102,12 @@ export default function Slider({productData}) {
             <input type="text" name="header" value={inputs.header} onChange={handleChange}/>
             <label>Product Description</label>
             <input type="text" name="text" value={inputs.text} onChange={handleChange}/>
+            <label>Language</label>
+            <select name="lng" onChange={handleChange}>
+              <option value="ru">ru</option>
+              <option value="ro">ro</option>
+              <option value="en">en</option>
+            </select>
           </div>
           <div className="productFormRight">
             <div className="productUpload">

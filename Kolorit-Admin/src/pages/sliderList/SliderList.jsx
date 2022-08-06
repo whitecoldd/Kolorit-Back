@@ -39,6 +39,11 @@ export default function SliderList() {
       width: 500,
     },
     {
+      field: "lng",
+      headerName: "Language",
+      width: 50,
+    },
+    {
       field: "action",
       headerName: "Action",
       width: 150,

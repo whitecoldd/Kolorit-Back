@@ -3,6 +3,9 @@ import userReducer from "./userRedux";
 import usersReducer from "./usersRedux";
 import productReducer from "./productRedux";
 import categoryReducer from "./categoryRedux";
+import subCategoryReducer from "./subcategoryRedux";
+import subSubCategoryReducer from "./subsubcategoryRedux";
+import brandsIconReducer from "./brandsIconRedux";
 import brandReducer from "./brandRedux";
 import sliderReducer from "./sliderRedux";
 import contactReducer from "./contactsRedux";
@@ -37,12 +40,15 @@ const rootReducer = combineReducers({
   users: usersReducer,
   product: productReducer,
   category: categoryReducer,
+  subcategory: subCategoryReducer,
+  subsubcategory: subSubCategoryReducer,
   slider: sliderReducer,
   contact: contactReducer,
   about: aboutReducer,
   article: articleReducer,
   order: orderReducer,
   brand: brandReducer,
+  brandsIcon: brandsIconReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

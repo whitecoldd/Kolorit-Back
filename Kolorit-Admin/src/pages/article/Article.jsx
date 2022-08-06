@@ -104,7 +104,15 @@ export default function Product({productData}) {
           </div>
           <div className="productFormLeft">
             <label>Article Text</label>
-            <input type="text" name="text" value={inputs.name} onChange={handleChange}/>
+            <textarea type="text" name="text" value={inputs.text} onChange={handleChange}/>
+          </div>
+          <div className="productFormLeft">
+          <label>Language</label>
+            <select name="lng" onChange={handleChange}>
+              <option value="ru">ru</option>
+              <option value="ro">ro</option>
+              <option value="en">en</option>
+            </select>
           </div>
           <div className="productFormRight">
             <div className="productUpload">

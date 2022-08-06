@@ -18,10 +18,14 @@ const PromosDisplay = () => {
         getItems()
     }, [])
 
-
+    const [myLocalStorageData, setMyLocalStorageData] = useState({});
+    useEffect(() => {
+      const lng = localStorage.getItem("i18nextLng");
+      setMyLocalStorageData(lng);
+    }, []);
     return (
         <Container className='d-flex justify-content-center promo-table'>
-            {items?.map(items => (
+            {items?.filter((items)=> items.lng === myLocalStorageData).map(items => (
                 <Container className="promos d-flex flex-wrap align-content-start me-3">
 
                     <>

@@ -9,8 +9,8 @@ const ItemsSchema = new mongoose.Schema(
         promoType: {type: String, default: 'transparent' },
         currency: {type: String, required: true},
         img: {type: String, required: true},
-        code: {type: String, required: true, unique: true },
-        category: { type: Array, required: true },
+        code: {type: String, required: true},
+        category: { type: Array, required: true,  },
         brand: { type: String, required: true },
         inStock: { type: Boolean, default: true },
         char1: {type: String},
@@ -29,6 +29,7 @@ const ItemsSchema = new mongoose.Schema(
         length: {type: String},
         height: {type: String},
         width: {type: String},
+        lng: {type: String, required: true}
     },
     { timestamps: true }
 )

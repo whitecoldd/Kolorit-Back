@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
-import { Container, Form, Breadcrumb } from 'react-bootstrap'
-import BrandsItemDisplay from '../comps/BrandsItemDisplay';
-import { BrandsItem } from '../comps/BrandsItem';
-import {useTranslation} from 'react-i18next'
+import React, { useState, useEffect } from "react";
+import { Container, Form, Breadcrumb } from "react-bootstrap";
+import BrandsItemDisplay from "../comps/BrandsItemDisplay";
+import { useTranslation } from "react-i18next";
+import { publicRequest } from "../requests/request";
 function Brands({ placeholder, data }) {
   const alpha = Array.from(Array(26)).map((e, i) => i + 65);
   const alphabet = alpha.map((x) => String.fromCharCode(x));
-  const {t} = useTranslation()
+  const { t } = useTranslation();
   const [filteredData, setFilteredData] = useState([]);
   const [wordEntered, setWordEntered] = useState("");
 
@@ -23,60 +23,104 @@ function Brands({ placeholder, data }) {
       setFilteredData(newFilter);
     }
   };
-
+  const [BrandsItem, setBrandsItem] = useState([]);
+  useEffect(() => {
+    const getItems = async () => {
+      try {
+        const res = await publicRequest.get(`/api/brand/find`);
+        setBrandsItem(res.data);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    getItems();
+  }, []);
+  
   const clearInput = () => {
     setFilteredData([]);
     setWordEntered("");
   };
 
-
   return (
     <>
-      <Container className='mt-3'>
+      <Container className="mt-3">
         <Breadcrumb>
-          <Breadcrumb.Item href="/">{t('main')}</Breadcrumb.Item>
-          <Breadcrumb.Item active><mark>{t('nav5')}</mark></Breadcrumb.Item>
+          <Breadcrumb.Item href="/">{t("main")}</Breadcrumb.Item>
+          <Breadcrumb.Item active>
+            <mark>{t("nav5")}</mark>
+          </Breadcrumb.Item>
         </Breadcrumb>
       </Container>
-      <Container className='mt-5 mb-5'>
-        <center>{t('nav5')} A-Z</center>
+      <Container className="mt-5 mb-5">
+        <center>{t("nav5")} A-Z</center>
       </Container>
-      <Container fluid className='bgalpha d-flex justify-content-center mt-3 pt-4 pb-2'> {alphabet.map((alpha, i) => (<a type='button' className='text-uppercase alpha nodec' href={`#${alphabet[i]}`} >  {alpha}</a>))}</Container>
-      <Container className='mt-5 mb-5'>
+      <Container
+        fluid
+        className="bgalpha d-flex justify-content-center mt-3 pt-4 pb-2"
+      >
+        {" "}
+        {alphabet.map((alpha, i) => (
+          <a
+            type="button"
+            className="text-uppercase alpha nodec"
+            href={`#${alphabet[i]}`}
+          >
+            {" "}
+            {alpha}
+          </a>
+        ))}
+      </Container>
+      <Container className="mt-5 mb-5">
         <Form.Control
-          type='text'
+          type="text"
           placeholder={placeholder}
-          id='searchbrand'
+          id="searchbrand"
           aria-label="Search"
           value={wordEntered}
           onChange={handleFilter}
-          data={alphabet} />
+          data={alphabet}
+        />
       </Container>
       <Container>
         {alphabet.map((alpha, i) => (
-          <Container className='d-flex align-items-center mb-5'>
+          <Container className="d-flex align-items-center mb-5">
             <h1 id={alphabet[i]}>{alpha}</h1>
-            <Container className='d-flex flex-column align-items-center'>
-              {BrandsItem.filter(item => item.name.toLowerCase().includes(wordEntered)).map((item) => (
-                <BrandsItemDisplay item={item} key={item.id} ></BrandsItemDisplay>
+            <Container className="d-flex flex-wrap justify-content-around">
+              {BrandsItem.filter((item)=> item.name[0].includes(alpha))
+              .filter((item) =>
+                item.name.toLowerCase().includes(wordEntered)
+              ).map((item) => (
+                <BrandsItemDisplay
+                  item={item}
+                  key={item.id}
+                ></BrandsItemDisplay>
               ))}
             </Container>
-            <Container className='d-flex flex-column align-items-center'>
-              {BrandsItem.filter(item => item.name.toLowerCase().includes(wordEntered)).map((item) => (
-                <BrandsItemDisplay item={item} key={item.id} ></BrandsItemDisplay>
+            {/* <Container className="d-flex flex-column align-items-center">
+              {BrandsItem.filter((item) =>
+                item.name.toLowerCase().includes(wordEntered)
+              ).map((item) => (
+                <BrandsItemDisplay
+                  item={item}
+                  key={item.id}
+                ></BrandsItemDisplay>
               ))}
             </Container>
-            <Container className='d-flex flex-column align-items-center'>
-              {BrandsItem.filter(item => item.name.toLowerCase().includes(wordEntered)).map((item) => (
-                <BrandsItemDisplay item={item} key={item.id} ></BrandsItemDisplay>
+            <Container className="d-flex flex-column align-items-center">
+              {BrandsItem.filter((item) =>
+                item.name.toLowerCase().includes(wordEntered)
+              ).map((item) => (
+                <BrandsItemDisplay
+                  item={item}
+                  key={item.id}
+                ></BrandsItemDisplay>
               ))}
-            </Container>
+            </Container> */}
           </Container>
-        )
-        )}
+        ))}
       </Container>
     </>
-  )
+  );
 }
 
-export default Brands
+export default Brands;

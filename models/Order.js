@@ -16,7 +16,7 @@ const OrderSchema = new mongoose.Schema(
         delType: { type: String, required: true },
         address: { type: String },
         sum: {type: Number},
-        status: { type: String, default: 'В обработке' },
+        status: { type: String, default: 'Новый' },
 
     },
     { timestamps: true }

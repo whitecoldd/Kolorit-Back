@@ -43,6 +43,48 @@ import {
   addCategoryFailure,
 } from "./categoryRedux";
 import {
+  getSubCategoryStart,
+  getSubCategorySuccess,
+  getSubCategoryFailure,
+  deleteSubCategoryStart,
+  deleteSubCategorySuccess,
+  deleteSubCategoryFailure,
+  updateSubCategoryStart,
+  updateSubCategorySuccess,
+  updateSubCategoryFailure,
+  addSubCategoryStart,
+  addSubCategorySuccess,
+  addSubCategoryFailure,
+} from "./subcategoryRedux";
+import {
+  getSubSubCategoryStart,
+  getSubSubCategorySuccess,
+  getSubSubCategoryFailure,
+  deleteSubSubCategoryStart,
+  deleteSubSubCategorySuccess,
+  deleteSubSubCategoryFailure,
+  updateSubSubCategoryStart,
+  updateSubSubCategorySuccess,
+  updateSubSubCategoryFailure,
+  addSubSubCategoryStart,
+  addSubSubCategorySuccess,
+  addSubSubCategoryFailure,
+} from "./subsubcategoryRedux";
+import {
+  getBrandsIconStart,
+  getBrandsIconSuccess,
+  getBrandsIconFailure,
+  deleteBrandsIconStart,
+  deleteBrandsIconSuccess,
+  deleteBrandsIconFailure,
+  updateBrandsIconStart,
+  updateBrandsIconSuccess,
+  updateBrandsIconFailure,
+  addBrandsIconStart,
+  addBrandsIconSuccess,
+  addBrandsIconFailure,
+} from "./brandsIconRedux";
+import {
   getBrandStart,
   getBrandSuccess,
   getBrandFailure,
@@ -171,6 +213,42 @@ export const addUser = async (user, dispatch) => {
     dispatch(addUserFailure());
   }
 };
+export const getBrandsIcon = async (dispatch) => {
+  dispatch(getBrandsIconStart());
+  try {
+    const res = await userRequest.get("/api/brandsIcon/find");
+    dispatch(getBrandsIconSuccess(res.data));
+  } catch (err) {
+    dispatch(getBrandsIconFailure());
+  }
+};
+export const deleteBrandsIcon = async (id, dispatch) => {
+  dispatch(deleteBrandsIconStart());
+  try {
+    const res = await userRequest.delete(`/api/brandsIcon/${id}`);
+    dispatch(deleteBrandsIconSuccess(id));
+  } catch (err) {
+    dispatch(deleteBrandsIconFailure());
+  }
+};
+export const updateBrandsIcon = async (id, brandsIcon, dispatch) => {
+  dispatch(updateBrandsIconStart());
+  try {
+    const res = await userRequest.put(`/api/brandsIcon/${id}`, brandsIcon);
+    dispatch(updateBrandsIconSuccess(res.data));
+  } catch (err) {
+    dispatch(updateBrandsIconFailure());
+  }
+};
+export const addBrandsIcon = async (brandsIcon, dispatch) => {
+  dispatch(addBrandsIconStart());
+  try {
+    const res = await userRequest.post(`/api/brandsIcon/`, brandsIcon);
+    dispatch(addBrandsIconSuccess(res.data));
+  } catch (err) {
+    dispatch(addBrandsIconFailure());
+  }
+};
 export const getBrand = async (dispatch) => {
   dispatch(getBrandStart());
   try {
@@ -224,6 +302,24 @@ export const getCategory = async (dispatch) => {
     dispatch(getCategorySuccess(res.data));
   } catch (err) {
     dispatch(getCategoryFailure());
+  }
+};
+export const getSubCategory = async (dispatch) => {
+  dispatch(getSubCategoryStart());
+  try {
+    const res = await publicRequest.get("/api/subcat/find/");
+    dispatch(getSubCategorySuccess(res.data));
+  } catch (err) {
+    dispatch(getSubCategoryFailure());
+  }
+};
+export const getSubSubCategory = async (dispatch) => {
+  dispatch(getSubSubCategoryStart());
+  try {
+    const res = await publicRequest.get("/api/subsubcat/find/");
+    dispatch(getSubSubCategorySuccess(res.data));
+  } catch (err) {
+    dispatch(getSubSubCategoryFailure());
   }
 };
 export const getSlider = async (dispatch) => {
@@ -290,6 +386,24 @@ export const deleteCategory = async (id, dispatch) => {
     dispatch(deleteCategoryFailure());
   }
 };
+export const deleteSubCategory = async (id, dispatch) => {
+  dispatch(deleteSubCategoryStart());
+  try {
+    const res = await userRequest.delete(`/api/subcat/${id}`);
+    dispatch(deleteSubCategorySuccess(id));
+  } catch (err) {
+    dispatch(deleteSubCategoryFailure());
+  }
+};
+export const deleteSubSubCategory = async (id, dispatch) => {
+  dispatch(deleteSubSubCategoryStart());
+  try {
+    const res = await userRequest.delete(`/api/subsubcat/${id}`);
+    dispatch(deleteSubSubCategorySuccess(id));
+  } catch (err) {
+    dispatch(deleteSubSubCategoryFailure());
+  }
+};
 export const deleteSlider = async (id, dispatch) => {
   dispatch(deleteSliderStart());
   try {
@@ -354,6 +468,24 @@ export const updateCategory = async (id, category, dispatch) => {
     dispatch(updateCategoryFailure(err));
   }
 };
+export const updateSubCategory = async (id, subCategory, dispatch) => {
+  dispatch(updateSubCategoryStart());
+  try {
+    const res = await userRequest.put(`/api/subcat/${id}`, subCategory);
+    dispatch(updateSubCategorySuccess(res.data));
+  } catch (err) {
+    dispatch(updateSubCategoryFailure(err));
+  }
+};
+export const updateSubSubCategory = async (id, subSubCategory, dispatch) => {
+  dispatch(updateSubSubCategoryStart());
+  try {
+    const res = await userRequest.put(`/api/subsubcat/${id}`, subSubCategory);
+    dispatch(updateSubSubCategorySuccess(res.data));
+  } catch (err) {
+    dispatch(updateSubSubCategoryFailure(err));
+  }
+};
 export const updateSlider = async (id, slider, dispatch) => {
   dispatch(updateSliderStart());
   try {
@@ -415,6 +547,24 @@ export const addCategory = async (category, dispatch) => {
     dispatch(addCategorySuccess(res.data));
   } catch (err) {
     dispatch(addCategoryFailure());
+  }
+};
+export const addSubCategory = async (subCategory, dispatch) => {
+  dispatch(addSubCategoryStart());
+  try {
+    const res = await userRequest.post(`/api/subcat/`, subCategory);
+    dispatch(addSubCategorySuccess(res.data));
+  } catch (err) {
+    dispatch(addSubCategoryFailure());
+  }
+};
+export const addSubSubCategory = async (subSubCategory, dispatch) => {
+  dispatch(addSubSubCategoryStart());
+  try {
+    const res = await userRequest.post(`/api/subsubcat/`, subSubCategory);
+    dispatch(addSubSubCategorySuccess(res.data));
+  } catch (err) {
+    dispatch(addSubSubCategoryFailure());
   }
 };
 export const addSlider = async (slider, dispatch) => {

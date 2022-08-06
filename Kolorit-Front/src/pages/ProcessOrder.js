@@ -8,7 +8,7 @@ import {
   Image,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import phone from "../assets/phone.png";
+import phonep from "../assets/phone.png";
 import address from "../assets/address.png";
 import clock from "../assets/clock.png";
 import { useSelector } from "react-redux";
@@ -30,18 +30,6 @@ const ProcessOrder = ({ cartItems }) => {
   const email = useSelector((state) => state.user?.currentUser?.email);
   const productId = cartItems;
   const quantity = cartItems.length;
-  const order = {
-    ...inputs,
-    userName: userName || inputs.userFName,
-    phone: phone || inputs.phone,
-    email: email || inputs.email,
-    productId: productId,
-    quantity: quantity,
-    sum: productId?.reduce(
-      (salePrice, item) => salePrice + item.qty * item.salePrice,
-      0
-    ),
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -67,59 +55,87 @@ const ProcessOrder = ({ cartItems }) => {
     };
     getItems();
   }, []);
+  const [filtered, setFiltered] = useState({});
 
+  // const handleFilter = (e) => {
+  //   const value = e.target.value;
+  //   setFilter({
+  //     ...filter,
+  //     [e.target.name]: value,
+  //   });
+  // };
+
+  const [myLocalStorageData, setMyLocalStorageData] = useState({});
+  useEffect(() => {
+    const lng = localStorage.getItem("i18nextLng");
+    setMyLocalStorageData(lng);
+  }, []);
   const handleSelect = (event) => {
     setSelect(event.target.value);
     console.log(select);
     if (select === "delivery") {
       setText(
         <>
-          {Items?.slice(0, 1).map((item) => (
-            <Container>
-              <Container className="content-cont d-flex mt-5">
-                <Image fluid src={item.img}></Image>
-                <Container className="p-4">
-                  <h1 className="p-3">{item.name}</h1>
-                  <Container className="d-flex align-items-start">
-                    <Image width="auto" height="auto" src={phone}></Image>
-                    <Container className="d-flex flex-column align-items-start">
-                      <h3>{t("phone")}</h3>
-                      <p>{item.phone}</p>
+          <select
+            name="address"
+            className="classic mt-3"
+            onChange={handleChange}
+          >
+            {Items.filter((Items)=> Items.lng === myLocalStorageData).map(
+              (item) => (
+                <option value={item.address}>
+                  {item.name}, {item.address}
+                </option>
+              )
+            )}
+          </select>
+          {/* {Items?.filter((item) => item.lng === myLocalStorageData)
+            .map((Items) => (
+              <Container>
+                <Container className="content-cont d-flex mt-5">
+                  <Image fluid src={Items.img}></Image>
+                  <Container className="p-4">
+                    <h1 className="p-3">{Items.name}</h1>
+                    <Container className="d-flex align-items-start">
+                      <Image width="auto" height="auto" src={phonep}></Image>
+                      <Container className="d-flex flex-column align-items-start">
+                        <h3>{t("phone")}</h3>
+                        <p>{Items.phone}</p>
+                      </Container>
                     </Container>
-                  </Container>
-                  <Container className="d-flex align-items-start">
-                    <Image width="auto" height="auto" src={address}></Image>
-                    <Container
-                      name="address"
-                      className="d-flex flex-column align-items-start mb-3"
-                    >
-                      <h3>{t("address")}</h3>
-                      <p name="address">{item.address}</p>
-                      <a href="#map" type="button" className="bttn-map">
-                        {t("map-btn")}
-                      </a>
+                    <Container className="d-flex align-items-start">
+                      <Image width="auto" height="auto" src={address}></Image>
+                      <Container
+                        name="address"
+                        className="d-flex flex-column align-items-start mb-3"
+                      >
+                        <h3>{t("address")}</h3>
+                        <p name="address">{Items.address}</p>
+                        <a href="#map" type="button" className="bttn-map">
+                          {t("map-btn")}
+                        </a>
+                      </Container>
                     </Container>
-                  </Container>
-                  <Container className="d-flex align-items-start">
-                    <Image width="auto" height="auto" src={clock}></Image>
-                    <Container className="d-flex flex-column align-items-start">
-                      <h3>{t("nav7")}</h3>
-                      <Container className="d-flex align-items-start">
-                        <Container className="text-center linevert">
-                          <p>{t("days")}</p>
-                          <p>{item.workHours} </p>
-                        </Container>
-                        <Container className="text-center">
-                          <p>{t("day")}</p>
-                          <p> {item.workHoursH} </p>
+                    <Container className="d-flex align-items-start">
+                      <Image width="auto" height="auto" src={clock}></Image>
+                      <Container className="d-flex flex-column align-items-start">
+                        <h3>{t("nav7")}</h3>
+                        <Container className="d-flex align-items-start">
+                          <Container className="text-center linevert">
+                            <p>{t("days")}</p>
+                            <p>{Items.workHours} </p>
+                          </Container>
+                          <Container className="text-center">
+                            <p>{t("day")}</p>
+                            <p> {Items.workHoursH} </p>
+                          </Container>
                         </Container>
                       </Container>
                     </Container>
                   </Container>
                 </Container>
               </Container>
-            </Container>
-          ))}
+            ))} */}
         </>
       );
       return text;
@@ -145,6 +161,19 @@ const ProcessOrder = ({ cartItems }) => {
       setText("");
       return text;
     }
+  };
+  const order = {
+    ...inputs,
+    userName: userName || inputs.userFName,
+    phone: phone || inputs.phone,
+    email: email || inputs.email,
+    //address: Items[0].address || inputs.address,
+    productId: productId,
+    quantity: quantity,
+    sum: productId?.reduce(
+      (salePrice, item) => salePrice + item.qty * item.salePrice,
+      0
+    ),
   };
   return (
     <>

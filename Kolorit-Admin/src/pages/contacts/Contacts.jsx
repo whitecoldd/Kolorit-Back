@@ -1,27 +1,27 @@
 import { Link, useLocation } from "react-router-dom";
 import "../product/product.css";
-import Chart from "../../comps/chart/Chart"
+import Chart from "../../comps/chart/Chart";
 import { Publish } from "@material-ui/icons";
 import { productData } from "../../dummyData";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useMemo, useState } from "react";
 import { userRequest } from "../../requestMethods";
 import { updateContact } from "../../redux/apiCalls";
-import app from '../../firebase'
+import app from "../../firebase";
 import {
   getStorage,
   ref,
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
-export default function Product({productData}) {
+export default function Product({ productData }) {
   const dispatch = useDispatch();
   const location = useLocation();
   const productId = location.pathname.split("/")[2];
 
   const product = useSelector((state) =>
     state.contact.contacts.find((product) => product._id === productId)
-    );  
+  );
 
   const [inputs, setInputs] = useState({});
   const [file, setFile] = useState(null);
@@ -64,19 +64,18 @@ export default function Product({productData}) {
         }
       },
       (error) => {
-        console.log(error)
+        console.log(error);
       },
       () => {
-
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          console.log({ ...inputs, img: downloadURL});
+          console.log({ ...inputs, img: downloadURL });
           const product = { ...inputs, img: downloadURL };
           updateContact(productId, product, dispatch);
         });
       }
     );
   };
-  
+
   return (
     <div className="product">
       <div className="productTitleContainer">
@@ -100,25 +99,63 @@ export default function Product({productData}) {
         <form className="productForm">
           <div className="productFormLeft">
             <label>Contact Name</label>
-            <input type="text" name="name" value={inputs.name} onChange={handleChange}/>
+            <input
+              type="text"
+              name="name"
+              value={inputs.name}
+              onChange={handleChange}
+            />
             <label>Contact Phone</label>
-            <input type="text" name="phone" value={inputs.phone} onChange={handleChange}/>
+            <input
+              type="text"
+              name="phone"
+              value={inputs.phone}
+              onChange={handleChange}
+            />
             <label>Contact Address</label>
-            <input type="text" name="address" value={inputs.address} onChange={handleChange}/>
+            <input
+              type="text"
+              name="address"
+              value={inputs.address}
+              onChange={handleChange}
+            />
             <label>Contact Work Hours</label>
-            <input type="text" name="workHours" value={inputs.workHours} onChange={handleChange}/>
+            <input
+              type="text"
+              name="workHours"
+              value={inputs.workHours}
+              onChange={handleChange}
+            />
             <label>Contact Work Hours Holidays</label>
-            <input type="text" name="workHoursH" value={inputs.workHours} onChange={handleChange}/>
+            <input
+              type="text"
+              name="workHoursH"
+              value={inputs.workHours}
+              onChange={handleChange}
+            />
+            <label>Language</label>
+            <select name="lng" onChange={handleChange}>
+              <option value="ru">ru</option>
+              <option value="ro">ro</option>
+              <option value="en">en</option>
+            </select>
           </div>
           <div className="productFormRight">
             <div className="productUpload">
-              <img src={product.img} alt="" className="productUploadImg"/>
+              <img src={product.img} alt="" className="productUploadImg" />
               <label for="file">
                 <Publish />
               </label>
-              <input type="file" id="file" style={{ display: "none" }}  onChange={(e) => setFile(e.target.files[0])} />
+              <input
+                type="file"
+                id="file"
+                style={{ display: "none" }}
+                onChange={(e) => setFile(e.target.files[0])}
+              />
             </div>
-            <button onClick={handleClick} className="productButton">Update</button>
+            <button onClick={handleClick} className="productButton">
+              Update
+            </button>
           </div>
         </form>
       </div>

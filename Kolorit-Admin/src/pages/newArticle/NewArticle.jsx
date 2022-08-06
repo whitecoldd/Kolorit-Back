@@ -2,7 +2,7 @@ import "../newProduct/newproduct.css";
 import { addArticle } from "../../redux/apiCalls";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import app from '../../firebase'
+import app from "../../firebase";
 import {
   getStorage,
   ref,
@@ -30,30 +30,32 @@ export default function NewArticle() {
     // 1. 'state_changed' observer, called any time the state changes
     // 2. Error observer, called on failure
     // 3. Completion observer, called on successful completion
-    uploadTask.on('state_changed',
+    uploadTask.on(
+      "state_changed",
       (snapshot) => {
         // Observe state change events such as progress, pause, and resume
         // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log('Upload is ' + progress + '% done');
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log("Upload is " + progress + "% done");
         switch (snapshot.state) {
-          case 'paused':
-            console.log('Upload is paused');
+          case "paused":
+            console.log("Upload is paused");
             break;
-          case 'running':
-            console.log('Upload is running');
+          case "running":
+            console.log("Upload is running");
             break;
         }
       },
       (error) => {
-        console.log(error)
+        console.log(error);
       },
       () => {
         // Handle successful uploads on complete
         // For instance, get the download URL: https://firebasestorage.googleapis.com/...
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          console.log({ ...inputs, img: downloadURL});
-          const product = { ...inputs, img: downloadURL};
+          console.log({ ...inputs, img: downloadURL });
+          const product = { ...inputs, img: downloadURL };
           addArticle(product, dispatch);
         });
       }
@@ -82,12 +84,20 @@ export default function NewArticle() {
         </div>
         <div className="addProductItem">
           <label>Text</label>
-          <input
+          <textarea
             name="text"
             type="text"
             placeholder="drills"
             onChange={handleChange}
           />
+        </div>
+        <div className="addProductItem">
+          <label>Language</label>
+          <select name="lng" onChange={handleChange}>
+            <option value="ru">ru</option>
+            <option value="ro">ro</option>
+            <option value="en">en</option>
+          </select>
         </div>
         <button onClick={handleClick} className="addProductButton">
           Create

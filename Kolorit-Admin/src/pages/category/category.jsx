@@ -1,39 +1,37 @@
 import { Link, useLocation } from "react-router-dom";
 import "../product/product.css";
-import Chart from "../../comps/chart/Chart"
+import Chart from "../../comps/chart/Chart";
 import { Publish } from "@material-ui/icons";
 import { productData } from "../../dummyData";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useMemo, useState } from "react";
 import { userRequest } from "../../requestMethods";
 import { updateCategory } from "../../redux/apiCalls";
-import app from '../../firebase'
+import app from "../../firebase";
 import {
   getStorage,
   ref,
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
-export default function Product({productData}) {
+export default function Product({ productData }) {
   const dispatch = useDispatch();
   const location = useLocation();
   const productId = location.pathname.split("/")[2];
 
   const product = useSelector((state) =>
     state.category.categories.find((product) => product._id === productId)
-    );  
+  );
 
   const [inputs, setInputs] = useState({});
   const [file, setFile] = useState(null);
   const [cat, setCat] = useState([]);
+  const [subcat, setSubcat] = useState([]);
 
   const handleChange = (e) => {
     setInputs((prev) => {
       return { ...prev, [e.target.name]: e.target.value };
     });
-  };
-  const handleCat = (e) => {
-    setCat(e.target.value.split(","));
   };
   const handleClick = (e) => {
     e.preventDefault();
@@ -64,19 +62,18 @@ export default function Product({productData}) {
         }
       },
       (error) => {
-        console.log(error)
+        console.log(error);
       },
       () => {
-
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          console.log({ ...inputs, img: downloadURL});
-          const product = { ...inputs, img: downloadURL };
+          console.log({ ...inputs, img: downloadURL });
+          const product = { ...inputs, img: downloadURL, name: cat, subcat: subcat };
           updateCategory(productId, product, dispatch);
         });
       }
     );
   };
-  
+
   return (
     <div className="product">
       <div className="productTitleContainer">
@@ -87,6 +84,8 @@ export default function Product({productData}) {
           <div className="productInfoTop">
             <img src={product.img} alt="" className="productInfoImg" />
             <span className="productName">{product.name}</span>
+            <span className="productName">{product.subcat}</span>
+            <span className="productName">{product.subsubcat}</span>
           </div>
           <div className="productInfoBottom">
             <div className="productInfoItem">
@@ -99,18 +98,44 @@ export default function Product({productData}) {
       <div className="productBottom">
         <form className="productForm">
           <div className="productFormLeft">
-            <label>Product Name</label>
-            <input type="text" name="name" value={inputs.name} onChange={handleChange}/>
+            <label>Sub SubCategory</label>
+            <input
+              type="text"
+              name="subsubcat"
+              value={inputs.subsubcat}
+              onChange={handleChange}
+            />
+            <label>Subcategory</label>
+            <input
+              type="text"
+              name="subcat"
+              value={inputs.subcat}
+              onChange={handleSubcat}
+            />
+            <label>Category</label>
+            <input
+              type="text"
+              name="name"
+              value={inputs.name}
+              onChange={handleCat}
+            />
           </div>
           <div className="productFormRight">
             <div className="productUpload">
-              <img src={product.img} alt="" className="productUploadImg"/>
+              <img src={product.img} alt="" className="productUploadImg" />
               <label for="file">
                 <Publish />
               </label>
-              <input type="file" id="file" style={{ display: "none" }}  onChange={(e) => setFile(e.target.files[0])} />
+              <input
+                type="file"
+                id="file"
+                style={{ display: "none" }}
+                onChange={(e) => setFile(e.target.files[0])}
+              />
             </div>
-            <button onClick={handleClick} className="productButton">Update</button>
+            <button onClick={handleClick} className="productButton">
+              Update
+            </button>
           </div>
         </form>
       </div>

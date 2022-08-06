@@ -58,7 +58,7 @@ const ItemModel = (props) => {
 
                         </Link>
 
-                        {isShown && <Container><button className='nobr-bttn img-hover' onClick={Compare} ><Image src={com}></Image></button><Image className='img-hover1' src={heart}></Image> </Container>}
+                        {isShown && <Container><button className='nobr-bttn img-hover5' onClick={Compare} ><Image src={com}></Image></button><Image className='img-hover4' src={heart}></Image> </Container>}
                     </Container>
                     <b>{Items.name}</b>
                     <Container className='d-flex flex-nowrap align-items-end low-item p-0'>

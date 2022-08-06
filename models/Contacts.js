@@ -7,6 +7,7 @@ const ContactsSchema = new mongoose.Schema(
         address: {type: String, required: true},
         workHours: {type: String, required: true},
         workHoursH: {type: String, required: true},
+        lng: {type: String, required: true}
 
     },
     { timestamps: true }

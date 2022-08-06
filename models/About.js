@@ -4,7 +4,8 @@ const AboutSchema = new mongoose.Schema(
         text: { type: String, required: true},
         img: {type: String, required: true},
         header: {type: String, required: true},
-        year: {type: Number}
+        year: {type: Number},
+        lng: {type: String, required: true}
 
     },
     { timestamps: true }

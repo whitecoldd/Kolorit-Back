@@ -53,7 +53,7 @@ router.get('/find', async (req, res) => {
         let about
 
         if(qNew){
-            about = await About.find().sort({createdAt: -1}).limit(10)
+            about = await About.find().sort({createdAt: -1}).limit(50)
         }  else {
             about = await About.find();
         }

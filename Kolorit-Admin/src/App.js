@@ -21,8 +21,10 @@ import AboutList from "./pages/aboutList/AboutList";
 import ArticleList from "./pages/articleList/ArticleList";
 import OrderList from "./pages/orderList/OrderList";
 import BrandsList from "./pages/brandsList/BrandsList";
+import BrandsIconList from "./pages/brandsIconList/BrandsIconList";
 import Product from "./pages/product/Product";
 import Brand from "./pages/brand/Brand";
+import BrandsIcon from "./pages/brandsIcon/brandsIcon";
 import Category from "./pages/category/category";
 import Slider from "./pages/slider/Slider";
 import Contact from "./pages/contacts/Contacts";
@@ -35,11 +37,12 @@ import NewContact from "./pages/newContacts/NewContacts";
 import NewAbout from "./pages/newAbout/NewAbout";
 import NewArticle from "./pages/newArticle/NewArticle";
 import NewBrand from "./pages/newBrand/NewBrand";
+import NewBrandsIcon from "./pages/newBrandsIcon/newBrandsIcon";
 import Login from "./pages/login/Login";
 import { useContext } from "react";
 import { AuthContext } from "../src/contexts/authContext";
 import { useSelector } from "react-redux";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 
 function App() {
   //const admin = JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser.isAdmin
@@ -70,17 +73,18 @@ function App() {
                   path="/newCategory"
                   element={<NewCategory />}
                 ></Route>
+                <Route
+                  exact
+                  path="/newBrandsIcon"
+                  element={<NewBrandsIcon />}
+                ></Route>
                 <Route exact path="/newSlider" element={<NewSlider />}></Route>
                 <Route
                   exact
                   path="/newContact"
                   element={<NewContact />}
                 ></Route>
-                <Route
-                  exact
-                  path="/newBrand"
-                  element={<NewBrand />}
-                ></Route>
+                <Route exact path="/newBrand" element={<NewBrand />}></Route>
                 <Route exact path="/newAbout" element={<NewAbout />}></Route>
                 <Route
                   exact
@@ -91,6 +95,11 @@ function App() {
                   exact
                   path="/product/:productId"
                   element={<Product productData={productData} />}
+                ></Route>
+                <Route
+                  exact
+                  path="/brandsIcon/:brandsIconId"
+                  element={<BrandsIcon/>}
                 ></Route>
                 <Route
                   exact
@@ -124,15 +133,16 @@ function App() {
                   path="/products"
                   element={<ProductList productRows={productRows} />}
                 ></Route>
-                <Route
-                  exact
-                  path="/brands"
-                  element={<BrandsList />}
-                ></Route>
+                <Route exact path="/brands" element={<BrandsList />}></Route>
                 <Route
                   exact
                   path="/categories"
                   element={<CategoryList />}
+                ></Route>
+                <Route
+                  exact
+                  path="/brandsIcons"
+                  element={<BrandsIconList />}
                 ></Route>
                 <Route exact path="/contacts" element={<ContactList />}></Route>
                 <Route exact path="/sliders" element={<SliderList />}></Route>

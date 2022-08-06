@@ -29,8 +29,8 @@ export function Footer (props) {
             </Container>
             <Container className='footer-nav me-5'>
               <h4 className='linedown pb-4'>{t('foot3')}</h4>
-              <Container className='d-flex'>
-                <Container>
+              <Container className='d-flex p-0 m-0'>
+                <Container className=' p-0 m-0'>
                   <p>{t('foot4')}</p>
                   <p>{t('foot5')}</p>
                   <p>{t('foot6')}</p>

@@ -4,7 +4,7 @@ import dataService  from '../services/dataService'
 
 
 const pageSize = 5
-const AppPagination = ({setItems, Items}) => {
+const AppPagination = ({setFilteredBrands, filteredBrands}) => {
 
     const [page, setPage] = useState(
         {count: 0,
@@ -14,9 +14,9 @@ const AppPagination = ({setItems, Items}) => {
     )
 
     useEffect(() => {
-      dataService.getData({from: page.from, to: page.to, item: Items}).then(response => {
+      dataService.getData({from: page.from, to: page.to, item: filteredBrands}).then(response => {
         setPage({...page, count: response.count})
-        setItems(response.data)
+        setFilteredBrands(response.data)
     })
     
     }, [page.from, page.to])

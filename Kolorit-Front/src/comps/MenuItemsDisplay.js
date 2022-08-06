@@ -1,68 +1,82 @@
-import React, { useState, useEffect } from 'react'
-import { NavDropdown, Nav, DropdownButton, ButtonGroup, Dropdown } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
-import { publicRequest } from '../requests/request'
+import React, { useState, useEffect } from "react";
+import {
+  NavDropdown,
+  Nav,
+  DropdownButton,
+  ButtonGroup,
+  Dropdown,
+} from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { publicRequest } from "../requests/request";
 const MenuItemsDisplay = () => {
-    const [Cat, setCat] = useState([])
-    useEffect(() => {
-        const getItems = async () => {
-            try {
-                const res = await publicRequest.get("api/cat/find");
-                setCat(res.data);
-            } catch { }
-        };
-        getItems();
-    }, []);
-    const [item, setItem] = useState([])
-    useEffect(() => {
-        const getItems = async () => {
-            try {
-                const res = await publicRequest.get(`api/items/find`)
-                setItem(res.data)
-            } catch (e) {
+  const [Cat, setCat] = useState([]);
+  useEffect(() => {
+    const getItems = async () => {
+      try {
+        const res = await publicRequest.get("api/cat/find");
+        setCat(res.data);
+      } catch {}
+    };
+    getItems();
+  }, []);
+  const [item, setItem] = useState([]);
+  useEffect(() => {
+    const getItems = async () => {
+      try {
+        const res = await publicRequest.get(`api/items/find`);
+        setItem(res.data);
+      } catch (e) {}
+    };
+    getItems();
+  }, []);
 
-            }
-        }
-        getItems()
-    }, [])
+  const [myLocalStorageData, setMyLocalStorageData] = useState({});
+  useEffect(() => {
+    const lng = localStorage.getItem("i18nextLng");
+    setMyLocalStorageData(lng);
+  }, []);
+  return (
+    <>
+      {Cat?.map((Cat) => (
+        <NavDropdown.Item
+          className="d-flex align-items-center position-relative"
+          type="button"
+        >
+          <img width={20} height={20} src={Cat.img} />
+          <Nav.Link
+            className="nav-fix d-flex align-items-center"
+            eventKey={Cat._id}
+          >
+            <span>
+              <DropdownButton
+                key={"end"}
+                id={`dropdown-button-drop-end`}
+                drop={"end"}
+                variant="secondary"
+                title={` ${Cat.name} `}
+              >
+                {item
+                  //?.filter((item) => item.lng === myLocalStorageData)
+                  .map((item) => {
+                    if (
+                      Cat.name[0] === item.category[0] ||
+                      Cat.name[1] === item.category[1]
+                    )
+                      return (
+                        <Dropdown.Item eventKey={item._id}>
+                          <Link to={`/catalog/category/${item._id}`}>
+                            {item.name}
+                          </Link>
+                        </Dropdown.Item>
+                      );
+                  })}
+              </DropdownButton>
+            </span>
+          </Nav.Link>
+        </NavDropdown.Item>
+      ))}
+    </>
+  );
+};
 
-    return (
-        <>
-
-            {Cat?.map((Cat) =>
-                <NavDropdown.Item className='d-flex align-items-center position-relative' type='button'>
-                    <img width={20} height={20} src={Cat.img} />
-                    <Nav.Link className='nav-fix d-flex align-items-center' eventKey={Cat._id} >
-
-                        <span>
-                            <DropdownButton
-                                key={'end'}
-                                id={`dropdown-button-drop-end`}
-                                drop={'end'}
-                                variant="secondary"
-                                title={` ${Cat.name} `}
-                                
-                            >
-                                {item?.map((item) => {
-                                    if (Cat.name === item.category[0] || Cat.name === item.category[1])
-                                        return (
-                                            <Dropdown.Item eventKey={item._id}><Link to={`/catalog/category/${item._id}`}>{item.name}</Link></Dropdown.Item>
-                                        )
-                                }
-                                )}
-
-
-                            </DropdownButton>
-                        </span>
-                    </Nav.Link>
-
-
-
-                </NavDropdown.Item>
-            )}
-
-        </>
-    )
-}
-
-export default MenuItemsDisplay
+export default MenuItemsDisplay;

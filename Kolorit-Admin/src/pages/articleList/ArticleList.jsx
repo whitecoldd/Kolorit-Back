@@ -33,6 +33,7 @@ export default function ArticleList() {
         );
       },
     },
+    { field: "lng", headerName: "Language", width: 100 },
     {
       field: "action",
       headerName: "Action",

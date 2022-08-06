@@ -17,7 +17,7 @@ const ProductDisplay = () => {
   return (
     <>
       {
-        Items?.map(Items =>
+        Items?.slice(0,8).map(Items =>
           <Link to={`/catalog/${Items.name}`} className='stuff d-flex flex-wrap justify-content-center mb-4 nav-link me-1' eventKey='1'>
             <Image width='100%' height='auto' src={Items.img}></Image>
             <p className='bulb-text'>{Items.name}</p>

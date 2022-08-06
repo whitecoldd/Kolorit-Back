@@ -49,6 +49,7 @@ router.get('/find', async (req, res) => {
 
     const qNew = req.query.new
     const qCategory = req.query.category
+    const qBrand = req.query.brand
 
     try {
         let items
@@ -58,6 +59,10 @@ router.get('/find', async (req, res) => {
         } else if(qCategory) {
             items = await Items.find({category: {
                 $in: [qCategory],
+            }})
+        } else if(qBrand) {
+            items = await Items.find({brand: {
+                $in: [qBrand],
             }})
         } else {
             items = await Items.find();

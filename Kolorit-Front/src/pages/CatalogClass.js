@@ -76,63 +76,34 @@ const CatalogClass = ({
     setPSorting(!sortingP);
   };
 
-  const [brands, setBrands] = useState({
-    products: Items,
-    filters: new Set(),
-  });
-
-  const handleFilterChange = useCallback(
-    (event) => {
-      setBrands((previousState) => {
-        let filters = new Set(previousState.filters);
-        let products = Items;
-
-        if (event.target.checked) {
-          filters.add(event.target.value);
-        } else {
-          filters.delete(event.target.value);
-        }
-
-        if (filters.size) {
-          products = products.filter((product) => {
-            return filters.has(product.brand);
-          });
-        }
-
-        return {
-          filters,
-          products,
-        };
-      });
-    },
-    [setBrands]
-  );
-
   const [value, setValue] = useState([0, 40000]);
-  // const [brands, setBrands] = useState();
+  const [brands, setBrands] = useState([]);
+  const [newBrands, setNewBrands] = useState([]);
+  const [filteredBrands, setFilteredBrands] = useState([]);
+  useEffect(() => {
+    const getItems = async () => {
+      try {
+        const res = await publicRequest.get(`/api/brand/find`);
+        setBrands(res.data);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    getItems();
+  }, []);
+  const handleChange = (e) => {
+    if (e.target.checked) {
+      setNewBrands([...newBrands, e.target.value]);
+    } else {
+      setNewBrands(newBrands.filter((id) => id !== e.target.value));
+    }
+  };
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-  const handleBrands = (e) => {
-    setBrands({ ...brands, [e.target.value]: e.target.checked });
-  };
-  const handleCheck = (e) => {
-    setInStock(!inStock);
-  };
   const handleInput = (e) => {
     setValue(e.target.value);
   };
   const location = useLocation();
   const category = location.pathname.split("/")[2];
-  const [filter, setFilter] = useState({});
-  const handleFilter = (e) => {
-    const value = e.target.value;
-    setFilter({
-      ...filter,
-      [e.target.name]: value,
-    });
-  };
   useEffect(() => {
     const getItems = async () => {
       try {
@@ -144,28 +115,34 @@ const CatalogClass = ({
     };
     getItems();
   }, [category]);
+  useEffect(() => {
+    if (newBrands.length === 0) {
+      setFilteredBrands(Items);
+    } else {
+      setFilteredBrands(
+        Items.filter((Items) =>
+          newBrands.some((cat) => [Items.brand].flat().includes(cat))
+        )
+      );
+    }
+  }, [newBrands]);
 
-  const Clear = () =>{
-    setFilter('')
-  }
-
+  const [myLocalStorageData, setMyLocalStorageData] = useState({});
+  useEffect(() => {
+    const lng = localStorage.getItem("i18nextLng");
+    setMyLocalStorageData(lng);
+  }, []);
   return (
     <>
       <Container className="d-flex align-items-start mb-3 sprodhandle1 justify-content-center">
         <CatalogMenu
-          handleFilter={handleFilter}
-          handleFilterChange={handleFilterChange}
-          filter={filter}
-          setFilter={setFilter}
           query={query}
           setQuery={setQuery}
-          handleCheck={handleCheck}
-          handleBrands={handleBrands}
           value={value}
           setValue={setValue}
-          handleChange={handleChange}
           handleInput={handleInput}
-          Clear={Clear}
+          handleChange={handleChange}
+          //Clear={Clear}
         ></CatalogMenu>
         <Container id="flex2" className="d-flex flex-wrap fluke">
           <Container>
@@ -224,17 +201,15 @@ const CatalogClass = ({
           </Container>
 
           <Container className="d-flex flex-wrap justify-content-start items-list-handle cataloghandle">
-            {Items?.filter((Items) => Items.name.toLowerCase().includes(query))
-              ?.filter((item) =>
-                Object.entries(filter).every(([key, value]) =>
-                  item[key]?.includes(value)
-                )
-              )
-              ?.filter((Items) => Items.salePrice > parseInt(value, 10))
+            {filteredBrands
+              ?.filter((Items) => Items.lng === myLocalStorageData)
+              ?.filter((Items) => Items.name.toLowerCase().includes(query))
+              ?.filter((Items) => Items.salePrice > parseInt(value[0], 10))
+              ?.filter((Items) => Items.salePrice < parseInt(value[1], 10))
               ?.map((Items) => (
                 <ItemModelForCat
                   Items={Items}
-                  key={Items.id}
+                  key={Items._id}
                   addToCompare={addToCompare}
                   removeFromCompare={removeFromCompare}
                   selectedItems={selectedItems}
@@ -246,9 +221,8 @@ const CatalogClass = ({
 
           <Container className="d-flex justify-content-center">
             <AppPagination
-              setItems={(item) => setItems(item)}
-              Items={Items}
-              pageSize={10}
+              setFilteredBrands={(item) => setFilteredBrands(item)}
+              filteredBrands={filteredBrands}
             ></AppPagination>
           </Container>
         </Container>

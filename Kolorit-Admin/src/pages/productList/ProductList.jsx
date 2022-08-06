@@ -33,7 +33,9 @@ export default function ProductList({productRows}) {
         );
       },
     },
-    { field: "inStock", headerName: "inStock", width: 200 },
+    { field: "inStock", headerName: "inStock", width: 100 },
+    { field: "lng", headerName: "Language", width: 50 },
+    { field: "category", headerName: "Category", width: 50 },
     {
       field: "code",
       headerName: "Code",

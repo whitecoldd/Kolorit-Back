@@ -44,6 +44,11 @@ export default function ContactList() {
             width: 160,
         },
         {
+            field: "lng",
+            headerName: "Language",
+            width: 100,
+        },
+        {
             field: "action",
             headerName: "Action",
             width: 150,

@@ -304,6 +304,14 @@ export default function NewProduct() {
                 <option value="false">No</option>
               </select>
             </div>
+            <div className="addProductItem">
+              <label>Language</label>
+              <select name="lng" onChange={handleChange}>
+                <option value="ru">ru</option>
+                <option value="ro">ro</option>
+                <option value="en">en</option>
+              </select>
+            </div>
             </div>
             <button onClick={handleClick} className="addProductButton">
               Create

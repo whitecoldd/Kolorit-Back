@@ -10,7 +10,10 @@ import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import ItemModel from "../comps/ItemModel";
 import { useTranslation } from "react-i18next";
-
+import home from "../assets/home.png";
+import shop from "../assets/shop.png";
+import profile from "../assets/profile.png";
+import cart from "../assets/cart1.png";
 const Order = () => {
   const [Items, setItems] = useState({});
   const user = useSelector((state) => state.user.currentUser);
@@ -52,32 +55,92 @@ const Order = () => {
               <Navbar.Toggle aria-controls="responsive-navbar-nav" />
               <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav collapseOnSelect className="d-flex flex-column">
-                  {ProfileMenu.map((item) => (
-                    <Nav.Item key={item.id}>
-                      <Link to="/profile">
-                        <Container className="d-flex align-items-center prof-item">
-                          <Image src={item.img}></Image>
-                          <Link to="/profile" className="black nav-link">
-                            {item.title}
-                          </Link>
-                        </Container>
-                      </Link>
-                      <Container className="d-flex flex-column prof-item">
-                        <Link to="/profileinfo" className="menu-profile-text">
-                          {item.subtitle1 || ""}
+                <Nav.Item>
+                    <Link to="/profile" className="black nav-link">
+                      <Container className="d-flex align-items-center prof-item">
+                        <Image src={home}></Image>
+                        <Link
+                          to="/profile"
+                          className="black nav-link real-no-dec"
+                        >
+                          Личный Кабинет
                         </Link>
-                        <Link to="/addresses" className="menu-profile-text">
-                          {item.subtitle2 || ""}
-                        </Link>
-                        <Nav.Link className="menu-profile-text">
-                          {item.subtitle3 || ""}
-                        </Nav.Link>
-                        <Nav.Link className="menu-profile-text">
-                          {item.subtitle4 || ""}
-                        </Nav.Link>
                       </Container>
-                    </Nav.Item>
-                  ))}
+                    </Link>
+                    <Link to="/orders" className="black nav-link">
+                      <Container className="d-flex align-items-center prof-item">
+                        <Image src={shop}></Image>
+                        <Link to="/orders" className="black nav-link">
+                          Заказы
+                        </Link>
+                      </Container>
+                    </Link>
+                    <Container className="d-flex flex-column prof-item">
+                      <Link to="/orders" className="menu-profile-text nav-link">
+                        Все заказы
+                      </Link>
+                      <Link to="/orders" className="menu-profile-text nav-link">
+                        Активные заказы
+                      </Link>
+                    </Container>
+                    <Link to="/profile" className="black nav-link">
+                      <Container className="d-flex align-items-center prof-item">
+                        <Image src={profile}></Image>
+                        <Link to="/profile" className="black nav-link">
+                          Профиль
+                        </Link>
+                      </Container>
+                    </Link>
+                    <Container className="d-flex flex-column prof-item">
+                      <Link
+                        to="/profileinfo"
+                        className="menu-profile-text nav-link"
+                      >
+                        Личные данные
+                      </Link>
+                      <Link
+                        to="/addresses"
+                        className="menu-profile-text nav-link"
+                      >
+                        Мои адресса
+                      </Link>
+                      <Link
+                        to="/profile"
+                        className="menu-profile-text nav-link"
+                      >
+                        Накопительная карта
+                      </Link>
+                    </Container>
+                    <Link to="/orders" className="black nav-link">
+                      <Container className="d-flex align-items-center prof-item">
+                        <Image src={cart}></Image>
+                        <Link to="/orders" className="black nav-link">
+                          Товары
+                        </Link>
+                      </Container>
+                    </Link>
+                    <Container className="d-flex flex-column prof-item">
+                      <Link
+                        disabled
+                        to="/"
+                        className="menu-profile-text nav-link"
+                      >
+                        Избранное
+                      </Link>
+                      <Link
+                        to="/"
+                        className="menu-profile-text nav-link"
+                      >
+                        Просмотренные товары
+                      </Link>
+                      <Link
+                        to="/cart"
+                        className="menu-profile-text nav-link"
+                      >
+                        Корзина
+                      </Link>
+                    </Container>
+                  </Nav.Item>
                 </Nav>
               </Navbar.Collapse>
             </Navbar>
