@@ -9,10 +9,14 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
+import { ToastContainer, toast } from "react-toastify";
+import { injectStyle } from "react-toastify/dist/inject-style";
 export default function NewBrandsIcon() {
   const [file, setFile] = useState(null);
   const dispatch = useDispatch();
-  
+  if (typeof window !== "undefined") {
+    injectStyle();
+  }
   const handleClick = (e) => {
     e.preventDefault();
     const fileName = new Date().getTime() + file.name;
@@ -48,9 +52,10 @@ export default function NewBrandsIcon() {
         // Handle successful uploads on complete
         // For instance, get the download URL: https://firebasestorage.googleapis.com/...
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          console.log({  img: downloadURL });
-          const product = {  img: downloadURL };
+          console.log({ img: downloadURL });
+          const product = { img: downloadURL };
           addBrandsIcon(product, dispatch);
+          toast("Product added!");
         });
       }
     );
@@ -70,6 +75,7 @@ export default function NewBrandsIcon() {
         <button onClick={handleClick} className="addProductButton">
           Create
         </button>
+        <ToastContainer />
       </form>
     </div>
   );

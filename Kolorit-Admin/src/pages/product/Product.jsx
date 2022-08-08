@@ -7,19 +7,25 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useMemo, useState } from "react";
 import { userRequest } from "../../requestMethods";
 import { updateProduct } from "../../redux/apiCalls";
+import { ToastContainer, toast } from "react-toastify";
+import { injectStyle } from "react-toastify/dist/inject-style";
 import app from "../../firebase";
+
 import {
   getStorage,
   ref,
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
+import { createChainedFunction } from "@material-ui/core";
 export default function Product({ productData }) {
   const dispatch = useDispatch();
   const location = useLocation();
   const productId = location.pathname.split("/")[2];
   const [pStats, setPStats] = useState([]);
-
+  if (typeof window !== "undefined") {
+    injectStyle();
+  }
   const product = useSelector((state) =>
     state.product.products.find((product) => product._id === productId)
   );
@@ -50,6 +56,7 @@ export default function Product({ productData }) {
     // 1. 'state_changed' observer, called any time the state changes
     // 2. Error observer, called on failure
     // 3. Completion observer, called on successful completion
+
     uploadTask.on(
       "state_changed",
       (snapshot) => {
@@ -69,6 +76,7 @@ export default function Product({ productData }) {
       },
       (error) => {
         console.log(error);
+        toast("Upload an image!");
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
@@ -85,6 +93,7 @@ export default function Product({ productData }) {
             complect: comp,
           };
           updateProduct(productId, product, dispatch);
+          toast("Product updated!");
         });
       }
     );
@@ -311,8 +320,10 @@ export default function Product({ productData }) {
             />
             <label>In Stock</label>
             <select name="inStock" id="idStock" onChange={handleChange}>
-              <option value="true">Yes</option>
-              <option value="false">No</option>
+              <option value="В наличии">В наличии</option>
+              <option value="Наличие в магазинах">Наличие в магазинах</option>
+              <option value="Под заказ : завтра">Под заказ : завтра</option>
+              <option value="Под заказ : позже">Под заказ : позже</option>
             </select>
             <label>Language</label>
             <select name="lng" onChange={handleChange}>
@@ -335,9 +346,14 @@ export default function Product({ productData }) {
                 onChange={(e) => setFile(e.target.files[0])}
               />
             </div>
-            <button onClick={handleClick} className="productButton">
+            <button
+              onClick={handleClick}
+              id="animate.css"
+              className="productButton"
+            >
               Update
             </button>
+            <ToastContainer />
           </div>
         </form>
       </div>

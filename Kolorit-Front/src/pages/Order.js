@@ -155,9 +155,7 @@ const Order = () => {
                   </h1>
                 </Link>
                 <Container className="d-flex justify-content-around">
-                  <p className="smthg black">{t("ordtaken")}</p>
-                  <p className="smthg black">{t("ordpend")}</p>
-                  <p className="smthg black">{t("ordgot")}</p>
+                  <p className="smthg black">{t('status')}: {Items.status}</p>
                 </Container>
 
                 <Container className="smth">
@@ -186,11 +184,7 @@ const Order = () => {
                   <Container className="mt-3">
                     <p className="black">
                       {t("priceall")}{" "}
-                      {Items?.productId?.reduce(
-                        (salePrice, item) =>
-                          salePrice + item.qty * item.salePrice,
-                        0
-                      )}
+                      {Items?.sum}
                     </p>
                     <p className="black">
                       {t("qtyall")} {Items.quantity}
@@ -199,11 +193,7 @@ const Order = () => {
                     <p className="black">{t("del")} 0</p>
                     <h4 className="orange">
                       {t("all")}{" "}
-                      {Items?.productId?.reduce(
-                        (salePrice, item) =>
-                          salePrice + item.qty * item.salePrice,
-                        0
-                      )}
+                      {Items?.sum}
                     </h4>
                   </Container>
                   <Container className="tablenew d-flex flex-column align-items-baseline mt-4 p-3">

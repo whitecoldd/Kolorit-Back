@@ -9,11 +9,15 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
+import { ToastContainer, toast } from "react-toastify";
+import { injectStyle } from "react-toastify/dist/inject-style";
 export default function NewAbout() {
   const [inputs, setInputs] = useState({});
   const [file, setFile] = useState(null);
   const dispatch = useDispatch();
-
+  if (typeof window !== "undefined") {
+    injectStyle();
+  }
   const handleChange = (e) => {
     setInputs((prev) => {
       return { ...prev, [e.target.name]: e.target.value };
@@ -57,6 +61,7 @@ export default function NewAbout() {
           console.log({ ...inputs, img: downloadURL });
           const product = { ...inputs, img: downloadURL };
           addAbout(product, dispatch);
+          toast("Product added!");
         });
       }
     );
@@ -111,6 +116,7 @@ export default function NewAbout() {
         <button onClick={handleClick} className="addProductButton">
           Create
         </button>
+        <ToastContainer/>
       </form>
     </div>
   );

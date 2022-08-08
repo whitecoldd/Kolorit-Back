@@ -9,6 +9,8 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
+import { ToastContainer, toast } from "react-toastify";
+import { injectStyle } from "react-toastify/dist/inject-style";
 export default function NewCategory() {
   const [inputs, setInputs] = useState({});
   const [subcat, setSubcat] = useState([]);
@@ -21,12 +23,9 @@ export default function NewCategory() {
       return { ...prev, [e.target.name]: e.target.value };
     });
   };
-  const handleCat = (e) => {
-    setCat(e.target.value.split(","));
-  };
-  const handleSubcat = (e) => {
-    setSubcat(e.target.value.split(","));
-  };
+  if (typeof window !== "undefined") {
+    injectStyle();
+  }
   const handleClick = (e) => {
     e.preventDefault();
     const fileName = new Date().getTime() + file.name;
@@ -63,8 +62,12 @@ export default function NewCategory() {
         // For instance, get the download URL: https://firebasestorage.googleapis.com/...
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           console.log({ ...inputs, img: downloadURL });
-          const product = { ...inputs, img: downloadURL, subcat: subcat, name: cat };
+          const product = {
+            ...inputs,
+            img: downloadURL,
+          };
           addCategory(product, dispatch);
+          toast("Product added!");
         });
       }
     );
@@ -82,36 +85,26 @@ export default function NewCategory() {
           />
         </div>
         <div className="addProductItem">
-          <label>Sub Sub Category</label>
+          <label>Category</label>
           <input
-            name="subsubcat"
+            name="name"
             type="text"
             placeholder="drills"
             onChange={handleChange}
           />
         </div>
         <div className="addProductItem">
-          <label>Sub Category</label>
-          <input
-            name="subcat"
-            type="text"
-            placeholder="drills"
-            onChange={handleSubcat}
-          />
-        </div>
-
-        <div className="addProductItem">
-          <label>Category</label>
-          <input
-            name="name"
-            type="text"
-            placeholder="drills"
-            onChange={handleCat}
-          />
+          <label>Language</label>
+          <select name="lng" onChange={handleChange}>
+            <option value="ru">ru</option>
+            <option value="ro">ro</option>
+            <option value="en">en</option>
+          </select>
         </div>
         <button onClick={handleClick} className="addProductButton">
           Create
         </button>
+        <ToastContainer />
       </form>
     </div>
   );

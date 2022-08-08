@@ -9,6 +9,8 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
+import { ToastContainer, toast } from "react-toastify";
+import { injectStyle } from "react-toastify/dist/inject-style";
 export default function NewContact() {
   const [inputs, setInputs] = useState({});
   const [file, setFile] = useState(null);
@@ -19,6 +21,9 @@ export default function NewContact() {
       return { ...prev, [e.target.name]: e.target.value };
     });
   };
+  if (typeof window !== "undefined") {
+    injectStyle();
+  }
   const handleClick = (e) => {
     e.preventDefault();
     const fileName = new Date().getTime() + file.name;
@@ -57,6 +62,7 @@ export default function NewContact() {
           console.log({ ...inputs, img: downloadURL });
           const product = { ...inputs, img: downloadURL };
           addContact(product, dispatch);
+          toast("Product added!");
         });
       }
     );
@@ -129,6 +135,7 @@ export default function NewContact() {
         <button onClick={handleClick} className="addProductButton">
           Create
         </button>
+        <ToastContainer />
       </form>
     </div>
   );

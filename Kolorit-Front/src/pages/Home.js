@@ -177,9 +177,9 @@ export default function Home(props) {
         <Container>
           <PromosDisplay></PromosDisplay>
           <Container className="d-flex flex-wrap justify-content-center mt-5 mb-3">
-            <Button variant="outline-warning" className="bttn-low">
+            <Link type='button' to='/promotions' className="bttn-more">
               {t("more2")}
-            </Button>
+            </Link>
           </Container>
         </Container>
       </Container>

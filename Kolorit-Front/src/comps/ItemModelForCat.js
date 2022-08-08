@@ -30,21 +30,17 @@ const ItemModel = (props) => {
             addToCompare(Items);
         }
     }
-    //    useEffect(() => {
     const SetPromoType = async () => {
         if (Items.promo === "Скидка") {
-            Items.promoType = "danger"
+          Items.promoType = "danger";
         } else if (Items.promo === "Новое") {
-            Items.promoType = "warning"
-        } else if (Items.promo === ' ') {
-            Items.promoType = "transparent"
+          Items.promoType = "warning";
+        } else if (Items.promo === " ") {
+          Items.promoType = "transparent";
         } else {
-            Items.promoType = "secondary"
+          Items.promoType = "secondary";
         }
-    }
-
-    //     SetPromoType()
-    //    }, [])
+      };
 
 
 
@@ -52,7 +48,7 @@ const ItemModel = (props) => {
         <>
             <Container onMouseEnter={() => setIsShown(true)} onMouseLeave={() => setIsShown(false)} key={Items.id} className='d-flex flex-wrap align-content-between mt-2 mb-2 sales-prod w-23 m-1 p-2'>
                 <Badge onMouseEnter={SetPromoType()} bg={Items.promoType}>{Items.promo}</Badge>
-                <Container className='d-flex flex-column align-items-center justify-content-between img-on-hover'>
+                <Container className='d-flex flex-column align-items-start img-on-hover'>
                     <Container>
                         <Link to={`/catalog/category/${Items._id}`}><Image width='90%' height='100%' src={Items.img} ></Image>
 

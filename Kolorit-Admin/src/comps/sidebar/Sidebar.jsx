@@ -83,6 +83,18 @@ export default function Sidebar() {
                 Categories
               </li>
             </Link>
+            <Link to='/subcategories'>
+              <li className="sidebarListItem">
+                <BarChart className="sidebarIcon" />
+                SubCategories
+              </li>
+            </Link>
+            <Link to='/subsubcategories'>
+              <li className="sidebarListItem">
+                <BarChart className="sidebarIcon" />
+                SubSubCategories
+              </li>
+            </Link>
             <Link to='/contacts'>
               <li className="sidebarListItem">
                 <BarChart className="sidebarIcon" />

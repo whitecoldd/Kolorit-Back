@@ -9,13 +9,17 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
+import { ToastContainer, toast } from "react-toastify";
+import { injectStyle } from "react-toastify/dist/inject-style";
 export default function NewProduct() {
   const [inputs, setInputs] = useState({});
   const [file, setFile] = useState(null);
   const [cat, setCat] = useState([]);
   const [comp, setComp] = useState([]);
   const dispatch = useDispatch();
-
+  if (typeof window !== "undefined") {
+    injectStyle();
+  }
   const handleChange = (e) => {
     setInputs((prev) => {
       return { ...prev, [e.target.name]: e.target.value };
@@ -63,6 +67,8 @@ export default function NewProduct() {
           console.log({ ...inputs, img: downloadURL, category: cat, complect: comp, });
           const product = { ...inputs, img: downloadURL, category: cat, complect: comp };
           addProduct(product, dispatch);
+          toast("Product added!");
+
         });
       }
     );
@@ -300,8 +306,10 @@ export default function NewProduct() {
             <div className="addProductItem">
               <label>Stock</label>
               <select name="inStock" onChange={handleChange}>
-                <option value="true">Yes</option>
-                <option value="false">No</option>
+                <option value="В наличии">В наличии</option>
+                <option value="Наличие в магазинах">Наличие в магазинах</option>
+                <option value="Под заказ : завтра">Под заказ : завтра</option>
+                <option value="Под заказ : позже">Под заказ : позже</option>
               </select>
             </div>
             <div className="addProductItem">
@@ -316,6 +324,8 @@ export default function NewProduct() {
             <button onClick={handleClick} className="addProductButton">
               Create
             </button>
+            <ToastContainer />
+
           </form>
         </div>
       </div>

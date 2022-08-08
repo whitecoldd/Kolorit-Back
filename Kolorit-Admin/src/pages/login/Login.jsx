@@ -2,17 +2,22 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom'
 import { login } from "../../redux/apiCalls";
-
+import { ToastContainer, toast } from "react-toastify";
+import { injectStyle } from "react-toastify/dist/inject-style";
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const history = useNavigate()
+  if (typeof window !== "undefined") {
+    injectStyle();
+  }
   const handleClick = (e) => {
     e.preventDefault();
     try{
       login(dispatch, { username, password });
       console.log('Login Successful')
+      toast("Login Successful");
       history('/')
     } catch (e){
       history('/login')
@@ -48,6 +53,7 @@ const Login = () => {
       <button onClick={handleClick} style={{ padding: 10, width:100 }}>
         Login
       </button>
+      <ToastContainer/>
     </div>
   );
 };

@@ -27,11 +27,11 @@ function valuetext(value) {
 const CatalogMenu = ({
   setQuery,
   value,
-  value1,
+  setValue,
   handleCheck,
   inStock,
   handleFilter,
-  handleFilterChange,
+  handleInputChange,
   handleChange,
   handleInput,
   Clear,
@@ -83,9 +83,24 @@ const CatalogMenu = ({
             <Accordion.Header>{t("price")}</Accordion.Header>
             <Accordion.Body>
               <Box sx={{ width: 300 }}>
+                <Typography className="d-flex align-items-center">
+                  <input
+                    type="text"
+                    className="pricebox me-3"
+                    defaultValue={value[0]}
+                    onChange={(e)=>handleInputChange(e)}
+                  ></input>{" "}
+                  <span className="ls-0 orange">---</span>{" "}
+                  <input
+                    type="text"
+                    className="pricebox ms-3"
+                    defaultValue={value[1]}
+                    onChange={(e)=>handleInputChange(e)}
+                  ></input>
+                </Typography>
                 <Slider
                   sx={{ width: 200, backgroundColor: "warning" }}
-                  valueLabelDisplay="auto"
+                  //valueLabelDisplay="auto"
                   value={value}
                   onChange={handleInput}
                   min={0}
@@ -120,14 +135,16 @@ const CatalogMenu = ({
               <FormControl>
                 <FormGroup className="d-flex justify-content-start">
                   <div className="scrollable-div d-flex flex-column justify-content-start p-0 ms-0   ">
-                  {Items.map((item) => (
-                    <FormControlLabel
-                      key={item._id}
-                      control={<Checkbox size="small" onChange={handleChange} />}
-                      label={item.name}
-                      value={item.name}
-                    />
-                  ))}
+                    {Items.map((item) => (
+                      <FormControlLabel
+                        key={item._id}
+                        control={
+                          <Checkbox size="small" onChange={handleChange} />
+                        }
+                        label={item.name}
+                        value={item.name}
+                      />
+                    ))}
                   </div>
                 </FormGroup>
               </FormControl>

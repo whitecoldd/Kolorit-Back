@@ -57,15 +57,6 @@ const SingleProduct = ({
   const [first, setfirst] = useState(0);
   const { t } = useTranslation();
 
-  const SetAvailability = () => {
-    if (items.inStock === true) {
-      items.inStock = "В наличии";
-      return items.inStock;
-    } else if (items.inStock === false) {
-      items.inStock = " Нет в наличии";
-      return items.inStock;
-    }
-  };
   const [myLocalStorageData, setMyLocalStorageData] = useState({});
   useEffect(() => {
     const lng = localStorage.getItem("i18nextLng");
@@ -107,7 +98,6 @@ const SingleProduct = ({
                   <span className="orange fatund">{items.category}</span>
                 </p>
                 <p
-                  onMouseEnter={SetAvailability()}
                   className="d-flex align-items-center"
                 >
                   <img src={checked} className="me-2" />{" "}

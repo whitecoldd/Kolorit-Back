@@ -1,67 +1,67 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const subSubCategorySlice = createSlice({
-  name: "subSubCategory",
+export const subsubcategorySlice = createSlice({
+  name: "subsubcategory",
   initialState: {
-    subSubCategories: [],
+    subsubcategories: [],
     isFetching: false,
     error: false,
   },
   reducers: {
     //GET ALL
-    getSubSubCategoryStart: (state) => {
+    getSubsubcategoryStart: (state) => {
       state.isFetching = true;
       state.error = false;
     },
-    getSubSubCategorySuccess: (state, action) => {
+    getSubsubcategorySuccess: (state, action) => {
       state.isFetching = false;
-      state.subSubCategories = action.payload;
+      state.subsubcategories = action.payload;
     },
-    getSubSubCategoryFailure: (state) => {
+    getSubsubcategoryFailure: (state) => {
       state.isFetching = false;
       state.error = true;
     },
     //DELETE
-    deleteSubSubCategoryStart: (state) => {
+    deleteSubsubcategoryStart: (state) => {
       state.isFetching = true;
       state.error = false;
     },
-    deleteSubSubCategorySuccess: (state, action) => {
+    deleteSubsubcategorySuccess: (state, action) => {
       state.isFetching = false;
-      state.subSubCategories.splice(
-        state.subSubCategories.findIndex((item) => item._id === action.payload),
+      state.subsubcategories.splice(
+        state.subsubcategories.findIndex((item) => item._id === action.payload),
         1
       );
     },
-    deleteSubSubCategoryFailure: (state) => {
+    deleteSubsubcategoryFailure: (state) => {
       state.isFetching = false;
       state.error = true;
     },
     //UPDATE
-    updateSubSubCategoryStart: (state) => {
+    updateSubsubcategoryStart: (state) => {
       state.isFetching = true;
       state.error = false;
     },
-    updateSubSubCategorySuccess: (state, action) => {
+    updateSubsubcategorySuccess: (state, action) => {
       state.isFetching = false;
-      state.subSubCategories[
-        state.subSubCategories.findIndex((item) => item._id === action.payload.id)
-      ] = action.payload.subSubCategory;
+      state.subsubcategories[
+        state.subsubcategories.findIndex((item) => item._id === action.payload.id)
+      ] = action.payload.subsubcategory;
     },
-    updateSubSubCategoryFailure: (state) => {
+    updateSubsubcategoryFailure: (state) => {
       state.isFetching = false;
       state.error = true;
     },
     //ADD
-    addSubSubCategoryStart: (state) => {
+    addSubsubcategoryStart: (state) => {
       state.isFetching = true;
       state.error = false;
     },
-    addSubSubCategorySuccess: (state, action) => {
+    addSubsubcategorySuccess: (state, action) => {
       state.isFetching = false;
-      state.subSubCategories.push(action.payload);
+      state.subsubcategories.push(action.payload);
     },
-    addSubSubCategoryFailure: (state) => {
+    addSubsubcategoryFailure: (state) => {
       state.isFetching = false;
       state.error = true;
     },
@@ -69,18 +69,18 @@ export const subSubCategorySlice = createSlice({
 });
 
 export const {
-  getSubSubCategoryStart,
-  getSubSubCategorySuccess,
-  getSubSubCategoryFailure,
-  deleteSubSubCategoryStart,
-  deleteSubSubCategorySuccess,
-  deleteSubSubCategoryFailure,
-  updateSubSubCategoryStart,
-  updateSubSubCategorySuccess,
-  updateSubSubCategoryFailure,
-  addSubSubCategoryStart,
-  addSubSubCategorySuccess,
-  addSubSubCategoryFailure,
-} = subSubCategorySlice.actions;
+  getSubsubcategoryStart,
+  getSubsubcategorySuccess,
+  getSubsubcategoryFailure,
+  deleteSubsubcategoryStart,
+  deleteSubsubcategorySuccess,
+  deleteSubsubcategoryFailure,
+  updateSubsubcategoryStart,
+  updateSubsubcategorySuccess,
+  updateSubsubcategoryFailure,
+  addSubsubcategoryStart,
+  addSubsubcategorySuccess,
+  addSubsubcategoryFailure,
+} = subsubcategorySlice.actions;
 
-export default subSubCategorySlice.reducer;
+export default subsubcategorySlice.reducer;

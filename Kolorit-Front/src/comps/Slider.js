@@ -39,7 +39,7 @@ const Slider = () => {
           <Link
             to="/catalog"
             type="button"
-            className="bttn position-absolute btn-warning"
+            className="bttn position-absolute btn-warning real-no-dec"
             aria-pressed="false"
           >
             {t("gotocat")}

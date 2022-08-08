@@ -13,6 +13,7 @@ import shop from "../assets/shop.png";
 import profile from "../assets/profile.png";
 import cart from "../assets/cart1.png";
 import { useTranslation } from "react-i18next";
+import { format } from "date-fns";
 
 const Orders = () => {
   const [Items, setItems] = useState([]);
@@ -35,14 +36,6 @@ const Orders = () => {
     };
     getItems();
   }, [username]);
-  let today = new Date();
-
-  let date =
-    today.getDate() +
-    "-" +
-    parseInt(today.getMonth() + 1) +
-    "-" +
-    today.getFullYear();
   return (
     <>
       <Container className="profile d-flex mb-3">
@@ -52,7 +45,7 @@ const Orders = () => {
               <Navbar.Toggle aria-controls="responsive-navbar-nav" />
               <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav collapseOnSelect className="d-flex flex-column">
-                <Nav.Item>
+                  <Nav.Item>
                     <Link to="/profile" className="black nav-link">
                       <Container className="d-flex align-items-center prof-item">
                         <Image src={home}></Image>
@@ -124,16 +117,10 @@ const Orders = () => {
                       >
                         Избранное
                       </Link>
-                      <Link
-                        to="/"
-                        className="menu-profile-text nav-link"
-                      >
+                      <Link to="/" className="menu-profile-text nav-link">
                         Просмотренные товары
                       </Link>
-                      <Link
-                        to="/cart"
-                        className="menu-profile-text nav-link"
-                      >
+                      <Link to="/cart" className="menu-profile-text nav-link">
                         Корзина
                       </Link>
                     </Container>
@@ -149,7 +136,7 @@ const Orders = () => {
                   <thead>
                     <tr>
                       <th className="hid">#</th>
-                      <th>{t("prod")}</th>
+                      <th>{t("deltype")}</th>
                       <th>{t("date")}</th>
                       <th>{t("price")}</th>
                       <th>{t("status")}</th>
@@ -164,18 +151,19 @@ const Orders = () => {
                           <tbody>
                             <th className="hid">{item._id}</th>
                             <th>{item.delType}</th>
-                            <th>{item.createdAt}</th>
                             <th>
-                              {item?.productId?.reduce(
-                                (salePrice, item) =>
-                                  salePrice + item.qty * item.salePrice,
-                                0
-                              )}{" "}
-                              MDL
+                              {format(new Date(item.createdAt), "dd-MM-yyyy")}
+                            </th>
+                            <th>
+                              {item?.sum}
+                              <span>MDL</span>
                             </th>
                             <th>{item.status}</th>
-                            <Link to={`/order/${item._id}`}>
-                              <th>&#8594;</th>
+                            <Link
+                              className="real-no-dec"
+                              to={`/order/${item._id}`}
+                            >
+                              <th className="noborder">&#8594;</th>
                             </Link>
                           </tbody>
                         </>

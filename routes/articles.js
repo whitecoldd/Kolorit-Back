@@ -53,7 +53,7 @@ router.get('/find', async (req, res) => {
         let arts
 
         if(qNew){
-            arts = await Articles.find().sort({createdAt: -1}).limit(10)
+            arts = await Articles.find().sort({createdAt: -1}).limit(50)
         }  else {
             arts = await Articles.find();
         }

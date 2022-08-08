@@ -14,6 +14,8 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
+import { ToastContainer, toast } from "react-toastify";
+import { injectStyle } from "react-toastify/dist/inject-style";
 export default function Product({productData}) {
   const dispatch = useDispatch();
   const location = useLocation();
@@ -35,6 +37,9 @@ export default function Product({productData}) {
   const handleCat = (e) => {
     setCat(e.target.value.split(","));
   };
+  if (typeof window !== "undefined") {
+    injectStyle();
+  }
   const handleClick = (e) => {
     e.preventDefault();
     const fileName = new Date().getTime() + file.name;
@@ -72,6 +77,7 @@ export default function Product({productData}) {
           console.log({ ...inputs, img: downloadURL});
           const product = { ...inputs, img: downloadURL };
           updateArticle(productId, product, dispatch);
+          toast("Product updated!");
         });
       }
     );
@@ -123,6 +129,7 @@ export default function Product({productData}) {
               <input type="file" id="file" style={{ display: "none" }}  onChange={(e) => setFile(e.target.files[0])} />
             </div>
             <button onClick={handleClick} className="productButton">Update</button>
+            <ToastContainer/>
           </div>
         </form>
       </div>

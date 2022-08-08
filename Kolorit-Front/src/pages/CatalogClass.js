@@ -35,42 +35,22 @@ const CatalogClass = ({
   const [sorting, setSorting] = useState();
   const [sortingS, setSSorting] = useState();
   const [sortingP, setPSorting] = useState();
-  const [state, setState] = useState("ASC");
-  const [sale, setSale] = useState("w");
+  const [state, setState] = useState(false);
+  const [sale, setSale] = useState(false);
   const { t } = useTranslation();
-
-  const handleSort = () => {
-    setSorting(!sorting);
-    if (state === "ASC") {
-      const sorted = [...Items].sort((a, b) =>
-        a.salePrice > b.salePrice ? 1 : -1
-      );
-      setItems(sorted);
-      setState("DESC");
-    } else if (state === "DESC") {
-      const sorted = [...Items].sort((a, b) =>
-        a.salePrice < b.salePrice ? 1 : -1
-      );
-      setItems(sorted);
-      setState("ASC");
-    }
-  };
-  const handleSale = () => {
-    setSSorting(!sortingS);
-    if (sale === "w") {
-      const sortedS = [...Items].sort((a) =>
-        a.promoType == "danger" ? 1 : -1
-      );
-      setItems(sortedS);
-      setSale("w/o");
-    } else if (sale === "w/o") {
-      const sortedS = [...Items].sort((a) =>
-        a.promoType !== "danger" ? 1 : -1
-      );
-      setItems(sortedS);
-      setSale("w");
-    }
-  };
+  const location = useLocation();
+  const category = location.pathname.split("/")[2];
+  useEffect(() => {
+    const getItems = async () => {
+      try {
+        const res = await publicRequest.get(
+          category ? `/api/items/find?category=${category}` : `/api/items/find`
+        );
+        setItems(res.data);
+      } catch (e) {}
+    };
+    getItems();
+  }, [category]);
 
   const handlePop = () => {
     setPSorting(!sortingP);
@@ -102,23 +82,20 @@ const CatalogClass = ({
   const handleInput = (e) => {
     setValue(e.target.value);
   };
-  const location = useLocation();
-  const category = location.pathname.split("/")[2];
+  const handleInputChange = (event) => {
+    setValue(event.target.value === "" ? "" : Number(event.target.value));
+  };
+  const [myLocalStorageData, setMyLocalStorageData] = useState({});
   useEffect(() => {
-    const getItems = async () => {
-      try {
-        const res = await publicRequest.get(
-          category ? `/api/items/find?category=${category}` : `/api/items/find`
-        );
-        setItems(res.data);
-      } catch (e) {}
-    };
-    getItems();
-  }, [category]);
+    const lng = localStorage.getItem("i18nextLng");
+    setMyLocalStorageData(lng);
+  }, []);
   useEffect(() => {
     if (newBrands.length === 0) {
       setFilteredBrands(Items);
-    } else {
+      console.log(filteredBrands);
+    }
+    else if (newBrands.length > 0) {
       setFilteredBrands(
         Items.filter((Items) =>
           newBrands.some((cat) => [Items.brand].flat().includes(cat))
@@ -126,12 +103,38 @@ const CatalogClass = ({
       );
     }
   }, [newBrands]);
-
-  const [myLocalStorageData, setMyLocalStorageData] = useState({});
-  useEffect(() => {
-    const lng = localStorage.getItem("i18nextLng");
-    setMyLocalStorageData(lng);
-  }, []);
+  const handleSort = () => {
+    setSorting(!sorting);
+    if (state === false) {
+      const sorted = [...filteredBrands].sort((a, b) =>
+        a.salePrice > b.salePrice ? 1 : -1
+      );
+      setFilteredBrands(sorted);
+      setState(true);
+    } else if (state === true) {
+      const sorted = [...filteredBrands].sort((a, b) =>
+        a.salePrice < b.salePrice ? 1 : -1
+      );
+      setFilteredBrands(sorted);
+      setState(false);
+    }
+  };
+  const handleSale = () => {
+    setSSorting(!sortingS);
+    if (sale === false) {
+      const sortedS = [...filteredBrands].sort((a) =>
+        a.promoType == "danger" ? 1 : -1
+      );
+      setFilteredBrands(sortedS);
+      setSale(true);
+    } else if (sale === true) {
+      const sortedS = [...filteredBrands].sort((a) =>
+        a.promoType !== "danger" ? 1 : -1
+      );
+      setFilteredBrands(sortedS);
+      setSale(false);
+    }
+  };
   return (
     <>
       <Container className="d-flex align-items-start mb-3 sprodhandle1 justify-content-center">
@@ -142,6 +145,7 @@ const CatalogClass = ({
           setValue={setValue}
           handleInput={handleInput}
           handleChange={handleChange}
+          handleInputChange={handleInputChange}
           //Clear={Clear}
         ></CatalogMenu>
         <Container id="flex2" className="d-flex flex-wrap fluke">
@@ -202,7 +206,7 @@ const CatalogClass = ({
 
           <Container className="d-flex flex-wrap justify-content-start items-list-handle cataloghandle">
             {filteredBrands
-              ?.filter((Items) => Items.lng === myLocalStorageData)
+              //?.filter((Items) => Items.lng === myLocalStorageData)
               ?.filter((Items) => Items.name.toLowerCase().includes(query))
               ?.filter((Items) => Items.salePrice > parseInt(value[0], 10))
               ?.filter((Items) => Items.salePrice < parseInt(value[1], 10))

@@ -43,32 +43,32 @@ import {
   addCategoryFailure,
 } from "./categoryRedux";
 import {
-  getSubCategoryStart,
-  getSubCategorySuccess,
-  getSubCategoryFailure,
-  deleteSubCategoryStart,
-  deleteSubCategorySuccess,
-  deleteSubCategoryFailure,
-  updateSubCategoryStart,
-  updateSubCategorySuccess,
-  updateSubCategoryFailure,
-  addSubCategoryStart,
-  addSubCategorySuccess,
-  addSubCategoryFailure,
+  getSubcategoryStart,
+  getSubcategorySuccess,
+  getSubcategoryFailure,
+  deleteSubcategoryStart,
+  deleteSubcategorySuccess,
+  deleteSubcategoryFailure,
+  updateSubcategoryStart,
+  updateSubcategorySuccess,
+  updateSubcategoryFailure,
+  addSubcategoryStart,
+  addSubcategorySuccess,
+  addSubcategoryFailure,
 } from "./subcategoryRedux";
 import {
-  getSubSubCategoryStart,
-  getSubSubCategorySuccess,
-  getSubSubCategoryFailure,
-  deleteSubSubCategoryStart,
-  deleteSubSubCategorySuccess,
-  deleteSubSubCategoryFailure,
-  updateSubSubCategoryStart,
-  updateSubSubCategorySuccess,
-  updateSubSubCategoryFailure,
-  addSubSubCategoryStart,
-  addSubSubCategorySuccess,
-  addSubSubCategoryFailure,
+  getSubsubcategoryStart,
+  getSubsubcategorySuccess,
+  getSubsubcategoryFailure,
+  deleteSubsubcategoryStart,
+  deleteSubsubcategorySuccess,
+  deleteSubsubcategoryFailure,
+  updateSubsubcategoryStart,
+  updateSubsubcategorySuccess,
+  updateSubsubcategoryFailure,
+  addSubsubcategoryStart,
+  addSubsubcategorySuccess,
+  addSubsubcategoryFailure,
 } from "./subsubcategoryRedux";
 import {
   getBrandsIconStart,
@@ -304,22 +304,22 @@ export const getCategory = async (dispatch) => {
     dispatch(getCategoryFailure());
   }
 };
-export const getSubCategory = async (dispatch) => {
-  dispatch(getSubCategoryStart());
+export const getSubcategory = async (dispatch) => {
+  dispatch(getSubcategoryStart());
   try {
     const res = await publicRequest.get("/api/subcat/find/");
-    dispatch(getSubCategorySuccess(res.data));
+    dispatch(getSubcategorySuccess(res.data));
   } catch (err) {
-    dispatch(getSubCategoryFailure());
+    dispatch(getSubcategoryFailure());
   }
 };
-export const getSubSubCategory = async (dispatch) => {
-  dispatch(getSubSubCategoryStart());
+export const getSubsubcategory = async (dispatch) => {
+  dispatch(getSubsubcategoryStart());
   try {
     const res = await publicRequest.get("/api/subsubcat/find/");
-    dispatch(getSubSubCategorySuccess(res.data));
+    dispatch(getSubsubcategorySuccess(res.data));
   } catch (err) {
-    dispatch(getSubSubCategoryFailure());
+    dispatch(getSubsubcategoryFailure());
   }
 };
 export const getSlider = async (dispatch) => {
@@ -386,22 +386,22 @@ export const deleteCategory = async (id, dispatch) => {
     dispatch(deleteCategoryFailure());
   }
 };
-export const deleteSubCategory = async (id, dispatch) => {
-  dispatch(deleteSubCategoryStart());
+export const deleteSubcategory = async (id, dispatch) => {
+  dispatch(deleteSubcategoryStart());
   try {
     const res = await userRequest.delete(`/api/subcat/${id}`);
-    dispatch(deleteSubCategorySuccess(id));
+    dispatch(deleteSubcategorySuccess(id));
   } catch (err) {
-    dispatch(deleteSubCategoryFailure());
+    dispatch(deleteSubcategoryFailure());
   }
 };
-export const deleteSubSubCategory = async (id, dispatch) => {
-  dispatch(deleteSubSubCategoryStart());
+export const deleteSubsubcategory = async (id, dispatch) => {
+  dispatch(deleteSubsubcategoryStart());
   try {
     const res = await userRequest.delete(`/api/subsubcat/${id}`);
-    dispatch(deleteSubSubCategorySuccess(id));
+    dispatch(deleteSubsubcategorySuccess(id));
   } catch (err) {
-    dispatch(deleteSubSubCategoryFailure());
+    dispatch(deleteSubsubcategoryFailure());
   }
 };
 export const deleteSlider = async (id, dispatch) => {
@@ -468,22 +468,22 @@ export const updateCategory = async (id, category, dispatch) => {
     dispatch(updateCategoryFailure(err));
   }
 };
-export const updateSubCategory = async (id, subCategory, dispatch) => {
-  dispatch(updateSubCategoryStart());
+export const updateSubcategory = async (id, subcategory, dispatch) => {
+  dispatch(updateSubcategoryStart());
   try {
-    const res = await userRequest.put(`/api/subcat/${id}`, subCategory);
-    dispatch(updateSubCategorySuccess(res.data));
+    const res = await userRequest.put(`/api/subcat/${id}`, subcategory);
+    dispatch(updateSubcategorySuccess(res.data));
   } catch (err) {
-    dispatch(updateSubCategoryFailure(err));
+    dispatch(updateSubcategoryFailure(err));
   }
 };
-export const updateSubSubCategory = async (id, subSubCategory, dispatch) => {
-  dispatch(updateSubSubCategoryStart());
+export const updateSubsubcategory = async (id, subsubcategory, dispatch) => {
+  dispatch(updateSubsubcategoryStart());
   try {
-    const res = await userRequest.put(`/api/subsubcat/${id}`, subSubCategory);
-    dispatch(updateSubSubCategorySuccess(res.data));
+    const res = await userRequest.put(`/api/subsubcat/${id}`, subsubcategory);
+    dispatch(updateSubsubcategorySuccess(res.data));
   } catch (err) {
-    dispatch(updateSubSubCategoryFailure(err));
+    dispatch(updateSubsubcategoryFailure(err));
   }
 };
 export const updateSlider = async (id, slider, dispatch) => {
@@ -549,22 +549,22 @@ export const addCategory = async (category, dispatch) => {
     dispatch(addCategoryFailure());
   }
 };
-export const addSubCategory = async (subCategory, dispatch) => {
-  dispatch(addSubCategoryStart());
+export const addSubcategory = async (subcategory, dispatch) => {
+  dispatch(addSubcategoryStart());
   try {
-    const res = await userRequest.post(`/api/subcat/`, subCategory);
-    dispatch(addSubCategorySuccess(res.data));
+    const res = await userRequest.post(`/api/subcat/`, subcategory);
+    dispatch(addSubcategorySuccess(res.data));
   } catch (err) {
-    dispatch(addSubCategoryFailure());
+    dispatch(addSubcategoryFailure());
   }
 };
-export const addSubSubCategory = async (subSubCategory, dispatch) => {
-  dispatch(addSubSubCategoryStart());
+export const addSubsubcategory = async (subsubcategory, dispatch) => {
+  dispatch(addSubsubcategoryStart());
   try {
-    const res = await userRequest.post(`/api/subsubcat/`, subSubCategory);
-    dispatch(addSubSubCategorySuccess(res.data));
+    const res = await userRequest.post(`/api/subsubcat/`, subsubcategory);
+    dispatch(addSubsubcategorySuccess(res.data));
   } catch (err) {
-    dispatch(addSubSubCategoryFailure());
+    dispatch(addSubsubcategoryFailure());
   }
 };
 export const addSlider = async (slider, dispatch) => {

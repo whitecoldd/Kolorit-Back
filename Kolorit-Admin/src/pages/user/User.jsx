@@ -11,7 +11,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useMemo, useState } from "react";
 import { updateUser } from "../../redux/apiCalls";
 import "./user.css";
-
+import { ToastContainer, toast } from "react-toastify";
+import { injectStyle } from "react-toastify/dist/inject-style";
 export default function User() {
   const dispatch = useDispatch();
   const location = useLocation();
@@ -20,7 +21,9 @@ export default function User() {
   const product = useSelector((state) =>
     state.users.userslist.find((product) => product._id === productId)
   );
-
+  if (typeof window !== "undefined") {
+    injectStyle();
+  }
   const [inputs, setInputs] = useState({});
   const [address, setAddress] = useState([]);
 
@@ -36,6 +39,7 @@ export default function User() {
     e.preventDefault();
     const product = { ...inputs };
     updateUser(productId, product, dispatch);
+    toast("User updated!");
   };
   return (
     <div className="user">
@@ -139,6 +143,7 @@ export default function User() {
               <button className="userUpdateButton" onClick={handleClick}>
                 Update
               </button>
+              <ToastContainer />
             </div>
           </form>
         </div>

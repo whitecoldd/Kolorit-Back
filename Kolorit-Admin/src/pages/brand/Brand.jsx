@@ -14,6 +14,8 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
+import { ToastContainer, toast } from "react-toastify";
+import { injectStyle } from "react-toastify/dist/inject-style";
 export default function Product({productData}) {
   const dispatch = useDispatch();
   const location = useLocation();
@@ -22,7 +24,9 @@ export default function Product({productData}) {
   const product = useSelector((state) =>
     state.brand.brands.find((product) => product._id === productId)
     );  
-
+    if (typeof window !== "undefined") {
+      injectStyle();
+    }
   const [inputs, setInputs] = useState({});
 
   const handleChange = (e) => {
@@ -34,6 +38,8 @@ export default function Product({productData}) {
     e.preventDefault();
     const product = { ...inputs };
     updateBrand(productId, product, dispatch);
+    toast("Product updated!");
+
   };
   
   return (
@@ -64,6 +70,7 @@ export default function Product({productData}) {
           <div className="productFormRight">
             <button onClick={handleClick} className="productButton">Update</button>
           </div>
+          <ToastContainer/>
         </form>
       </div>
     </div>

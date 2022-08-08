@@ -14,6 +14,8 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
+import { ToastContainer, toast } from "react-toastify";
+import { injectStyle } from "react-toastify/dist/inject-style";
 export default function Product({ productData }) {
   const dispatch = useDispatch();
   const location = useLocation();
@@ -32,6 +34,9 @@ export default function Product({ productData }) {
       return { ...prev, [e.target.name]: e.target.value };
     });
   };
+  if (typeof window !== "undefined") {
+    injectStyle();
+  }
   const handleCat = (e) => {
     setCat(e.target.value.split(","));
   };
@@ -71,6 +76,7 @@ export default function Product({ productData }) {
           console.log({ ...inputs, img: downloadURL });
           const product = { ...inputs, img: downloadURL };
           updateContact(productId, product, dispatch);
+          toast("Product updated!");
         });
       }
     );
@@ -156,6 +162,7 @@ export default function Product({ productData }) {
             <button onClick={handleClick} className="productButton">
               Update
             </button>
+            <ToastContainer/>
           </div>
         </form>
       </div>

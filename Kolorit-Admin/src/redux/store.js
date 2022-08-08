@@ -3,8 +3,8 @@ import userReducer from "./userRedux";
 import usersReducer from "./usersRedux";
 import productReducer from "./productRedux";
 import categoryReducer from "./categoryRedux";
-import subCategoryReducer from "./subcategoryRedux";
-import subSubCategoryReducer from "./subsubcategoryRedux";
+import subcategoryReducer from "./subcategoryRedux";
+import subsubcategoryReducer from "./subsubcategoryRedux";
 import brandsIconReducer from "./brandsIconRedux";
 import brandReducer from "./brandRedux";
 import sliderReducer from "./sliderRedux";
@@ -40,8 +40,8 @@ const rootReducer = combineReducers({
   users: usersReducer,
   product: productReducer,
   category: categoryReducer,
-  subcategory: subCategoryReducer,
-  subsubcategory: subSubCategoryReducer,
+  subcategory: subcategoryReducer,
+  subsubcategory: subsubcategoryReducer,
   slider: sliderReducer,
   contact: contactReducer,
   about: aboutReducer,

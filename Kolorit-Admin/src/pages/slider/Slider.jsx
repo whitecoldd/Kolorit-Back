@@ -1,27 +1,29 @@
 import { Link, useLocation } from "react-router-dom";
 import "../product/product.css";
-import Chart from "../../comps/chart/Chart"
+import Chart from "../../comps/chart/Chart";
 import { Publish } from "@material-ui/icons";
 import { productData } from "../../dummyData";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useMemo, useState } from "react";
 import { userRequest } from "../../requestMethods";
 import { updateSlider } from "../../redux/apiCalls";
-import app from '../../firebase'
+import app from "../../firebase";
 import {
   getStorage,
   ref,
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
-export default function Slider({productData}) {
+import { ToastContainer, toast } from "react-toastify";
+import { injectStyle } from "react-toastify/dist/inject-style";
+export default function Slider({ productData }) {
   const dispatch = useDispatch();
   const location = useLocation();
   const productId = location.pathname.split("/")[2];
 
   const product = useSelector((state) =>
     state.slider.sliders.find((product) => product._id === productId)
-    );  
+  );
 
   const [inputs, setInputs] = useState({});
   const [file, setFile] = useState(null);
@@ -31,6 +33,9 @@ export default function Slider({productData}) {
       return { ...prev, [e.target.name]: e.target.value };
     });
   };
+  if (typeof window !== "undefined") {
+    injectStyle();
+  }
   const handleClick = (e) => {
     e.preventDefault();
     const fileName = new Date().getTime() + file.name;
@@ -60,19 +65,19 @@ export default function Slider({productData}) {
         }
       },
       (error) => {
-        console.log(error)
+        console.log(error);
       },
       () => {
-
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           console.log({ ...inputs, img: downloadURL });
           const product = { ...inputs, img: downloadURL };
           updateSlider(productId, product, dispatch);
+          toast("Product updated!");
         });
       }
     );
   };
-  
+
   return (
     <div className="product">
       <div className="productTitleContainer">
@@ -99,9 +104,19 @@ export default function Slider({productData}) {
         <form className="productForm">
           <div className="productFormLeft">
             <label>Product Name</label>
-            <input type="text" name="header" value={inputs.header} onChange={handleChange}/>
+            <input
+              type="text"
+              name="header"
+              value={inputs.header}
+              onChange={handleChange}
+            />
             <label>Product Description</label>
-            <input type="text" name="text" value={inputs.text} onChange={handleChange}/>
+            <input
+              type="text"
+              name="text"
+              value={inputs.text}
+              onChange={handleChange}
+            />
             <label>Language</label>
             <select name="lng" onChange={handleChange}>
               <option value="ru">ru</option>
@@ -111,13 +126,21 @@ export default function Slider({productData}) {
           </div>
           <div className="productFormRight">
             <div className="productUpload">
-              <img src={product.img} alt="" className="productUploadImg"/>
+              <img src={product.img} alt="" className="productUploadImg" />
               <label for="file">
                 <Publish />
               </label>
-              <input type="file" id="file" style={{ display: "none" }}  onChange={(e) => setFile(e.target.files[0])} />
+              <input
+                type="file"
+                id="file"
+                style={{ display: "none" }}
+                onChange={(e) => setFile(e.target.files[0])}
+              />
             </div>
-            <button onClick={handleClick} className="productButton">Update</button>
+            <button onClick={handleClick} className="productButton">
+              Update
+            </button>
+            <ToastContainer />
           </div>
         </form>
       </div>

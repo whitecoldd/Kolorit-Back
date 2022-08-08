@@ -15,7 +15,8 @@ import { useSelector } from "react-redux";
 import { userRequest, publicRequest } from "../requests/request";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { useTranslation } from "react-i18next";
-
+import { ToastContainer, toast } from "react-toastify";
+import { injectStyle } from "react-toastify/dist/inject-style";
 const ProcessOrder = ({ cartItems }) => {
   const [inputs, setInputs] = useState({});
   const handleChange = (e) => {
@@ -23,19 +24,22 @@ const ProcessOrder = ({ cartItems }) => {
       return { ...prev, [e.target.name]: e.target.value };
     });
   };
-
+  if (typeof window !== "undefined") {
+    injectStyle();
+  }
   const admin = useSelector((state) => state.user?.currentUser);
   const userName = useSelector((state) => state.user?.currentUser?.username);
   const phone = useSelector((state) => state.user?.currentUser?.phone);
   const email = useSelector((state) => state.user?.currentUser?.email);
   const productId = cartItems;
   const quantity = cartItems.length;
-
+  const { t } = useTranslation();
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const res = await userRequest.post(`/api/order/`, order);
       console.log(res.data);
+      toast(t("ordpend"));
     } catch (e) {
       console.log(e);
     }
@@ -43,7 +47,7 @@ const ProcessOrder = ({ cartItems }) => {
   const [select, setSelect] = useState("---");
   const [text, setText] = useState();
   const [Items, setItems] = useState([]);
-  const { t } = useTranslation();
+  
   useEffect(() => {
     const getItems = async () => {
       try {
@@ -300,6 +304,7 @@ const ProcessOrder = ({ cartItems }) => {
           <button onClick={handleSubmit} className="bttn-cart mb-3">
             {t("sendit")}
           </button>
+          <ToastContainer/>
         </Form>
         <p className="black">{t("conf")}</p>
       </Container>

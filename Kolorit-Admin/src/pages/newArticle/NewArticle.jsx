@@ -3,6 +3,8 @@ import { addArticle } from "../../redux/apiCalls";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import app from "../../firebase";
+import { ToastContainer, toast } from "react-toastify";
+import { injectStyle } from "react-toastify/dist/inject-style";
 import {
   getStorage,
   ref,
@@ -19,6 +21,9 @@ export default function NewArticle() {
       return { ...prev, [e.target.name]: e.target.value };
     });
   };
+  if (typeof window !== "undefined") {
+    injectStyle();
+  }
   const handleClick = (e) => {
     e.preventDefault();
     const fileName = new Date().getTime() + file.name;
@@ -57,6 +62,7 @@ export default function NewArticle() {
           console.log({ ...inputs, img: downloadURL });
           const product = { ...inputs, img: downloadURL };
           addArticle(product, dispatch);
+          toast("Product added!");
         });
       }
     );
@@ -102,6 +108,7 @@ export default function NewArticle() {
         <button onClick={handleClick} className="addProductButton">
           Create
         </button>
+        <ToastContainer />
       </form>
     </div>
   );

@@ -3,7 +3,7 @@ import {
   NavDropdown,
   Nav,
   DropdownButton,
-  ButtonGroup,
+  Container,
   Dropdown,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -19,12 +19,22 @@ const MenuItemsDisplay = () => {
     };
     getItems();
   }, []);
-  const [item, setItem] = useState([]);
+  const [subcat, setSubcat] = useState([]);
   useEffect(() => {
     const getItems = async () => {
       try {
-        const res = await publicRequest.get(`api/items/find`);
-        setItem(res.data);
+        const res = await publicRequest.get(`api/subcat/find`);
+        setSubcat(res.data);
+      } catch (e) {}
+    };
+    getItems();
+  }, []);
+  const [subsubcat, setSubsubcat] = useState([]);
+  useEffect(() => {
+    const getItems = async () => {
+      try {
+        const res = await publicRequest.get(`api/subsubcat/find`);
+        setSubsubcat(res.data);
       } catch (e) {}
     };
     getItems();
@@ -36,10 +46,10 @@ const MenuItemsDisplay = () => {
     setMyLocalStorageData(lng);
   }, []);
   return (
-    <>
+    <div className="hovwhite">
       {Cat?.map((Cat) => (
-        <NavDropdown.Item
-          className="d-flex align-items-center position-relative"
+        <div
+          className="d-flex align-items-center position-relative dropdown1"
           type="button"
         >
           <img width={20} height={20} src={Cat.img} />
@@ -47,35 +57,45 @@ const MenuItemsDisplay = () => {
             className="nav-fix d-flex align-items-center"
             eventKey={Cat._id}
           >
-            <span>
-              <DropdownButton
-                key={"end"}
-                id={`dropdown-button-drop-end`}
-                drop={"end"}
-                variant="secondary"
-                title={` ${Cat.name} `}
-              >
-                {item
-                  //?.filter((item) => item.lng === myLocalStorageData)
-                  .map((item) => {
-                    if (
-                      Cat.name[0] === item.category[0] ||
-                      Cat.name[1] === item.category[1]
-                    )
-                      return (
-                        <Dropdown.Item eventKey={item._id}>
-                          <Link to={`/catalog/category/${item._id}`}>
-                            {item.name}
-                          </Link>
-                        </Dropdown.Item>
-                      );
-                  })}
-              </DropdownButton>
-            </span>
+            <span className='hovwhite'>{Cat.name}</span>
+            <div className="dropdown-content-menu">
+              {subcat
+                .filter(
+                  (subcat) =>
+                    subcat.cat[0].toLowerCase() === Cat.name.toLowerCase()
+                )
+                //?.filter((item) => item.lng === myLocalStorageData)
+                .map((subcat) => {
+                  return (
+                    <div>
+                      <Link to={`/catalog/${subcat.name}`}>
+                        <h4>{subcat.name}</h4>
+                      </Link>
+                      {subsubcat
+                        .filter(
+                          (subsubcat) =>
+                            subsubcat?.subcat[0]?.toLowerCase() ===
+                            subcat.name.toLowerCase() ||
+                            subsubcat?.subcat[1]?.toLowerCase() ===
+                            subcat.name.toLowerCase()
+                        )
+                        .map((subsubcat) => {
+                          return (
+                            <Container>
+                              <Link to={`/catalog/${subsubcat.name}`}>
+                                <p className="mb-0">{subsubcat.name}</p>
+                              </Link>
+                            </Container>
+                          );
+                        })}
+                    </div>
+                  );
+                })}
+            </div>
           </Nav.Link>
-        </NavDropdown.Item>
+        </div>
       ))}
-    </>
+    </div>
   );
 };
 

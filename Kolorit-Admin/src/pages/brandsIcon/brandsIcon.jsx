@@ -14,6 +14,8 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
+import { ToastContainer, toast } from "react-toastify";
+import { injectStyle } from "react-toastify/dist/inject-style";
 export default function Product({ productData }) {
   const dispatch = useDispatch();
   const location = useLocation();
@@ -22,7 +24,9 @@ export default function Product({ productData }) {
   const product = useSelector((state) =>
     state.brandsIcon.brandsIcons.find((product) => product._id === productId)
   );
-
+  if (typeof window !== "undefined") {
+    injectStyle();
+  }
   const [file, setFile] = useState(null);
 
   const handleClick = (e) => {
@@ -61,6 +65,7 @@ export default function Product({ productData }) {
           console.log({img: downloadURL});
           const product = { img: downloadURL};
           updateBrandsIcon(productId, product, dispatch);
+          toast("Product updated!");
         });
       }
     );
@@ -102,6 +107,7 @@ export default function Product({ productData }) {
             <button onClick={handleClick} className="productButton">
               Update
             </button>
+            <ToastContainer/>
           </div>
         </form>
       </div>

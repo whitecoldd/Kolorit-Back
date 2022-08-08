@@ -32,18 +32,17 @@ const ItemOfDay = (props) => {
             addToCompare(Items);
         }
     }
-    //    useEffect(() => {
     const SetPromoType = async () => {
         if (Items.promo === "Скидка") {
-            Items.promoType = "danger"
+          Items.promoType = "danger";
         } else if (Items.promo === "Новое") {
-            Items.promoType = "warning"
-        } else if (Items.promo === ' ') {
-            Items.promoType = "transparent"
+          Items.promoType = "warning";
+        } else if (Items.promo === " ") {
+          Items.promoType = "transparent";
         } else {
-            Items.promoType = "secondary"
+          Items.promoType = "secondary";
         }
-    }
+      };
 
     return (
         <>

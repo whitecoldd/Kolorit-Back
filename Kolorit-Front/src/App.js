@@ -25,6 +25,7 @@ import Orders from './pages/Orders';
 import Order from './pages/Order';
 import BrandCatalog from './pages/BrandCatalog';
 import { useSelector } from 'react-redux'
+import SingleArticle from './pages/SingleArticle';
 
 
 
@@ -81,6 +82,7 @@ function App() {
         <Navigation  addToCompare={addToCompare} removeFromCompare={removeFromCompare} selectedItems={selectedItems} cartItems={cartItems} onAdd={onAdd} onRemoveFromPage={onRemoveFromPage} />
         <Routes>
           <Route exact path={`/catalog/category/:id`} element={<SingleProduct onAdd={onAdd} decreaseQty={decreaseQty} onRemoveFromPage={onRemoveFromPage} />}></Route>
+          <Route exact path={`/promotions/:id`} element={<SingleArticle  />}></Route>
           <Route exact path="/about" element={<About />}></Route>
           <Route exact path="/contacts" element={<Contacts />}></Route>
           <Route exact path="/catalog" element={<Catalog />}></Route>

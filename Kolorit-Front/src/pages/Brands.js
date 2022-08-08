@@ -35,7 +35,22 @@ function Brands({ placeholder, data }) {
     };
     getItems();
   }, []);
-  
+  const brand = BrandsItem.name;
+  const [Items, setItems] = useState([]);
+  useEffect(() => {
+    const getItems = async () => {
+      try {
+        const res = await publicRequest.get(
+          brand
+            ? `/api/items/find?brand=${brand}`
+            : `/api/items/find`
+        );
+        setItems(res.data);
+      } catch (e) {}
+    };
+    getItems();
+  }, [brand]);
+
   const clearInput = () => {
     setFilteredData([]);
     setWordEntered("");
@@ -86,15 +101,15 @@ function Brands({ placeholder, data }) {
           <Container className="d-flex align-items-center mb-5">
             <h1 id={alphabet[i]}>{alpha}</h1>
             <Container className="d-flex flex-wrap justify-content-around">
-              {BrandsItem.filter((item)=> item.name[0].includes(alpha))
-              .filter((item) =>
-                item.name.toLowerCase().includes(wordEntered)
-              ).map((item) => (
-                <BrandsItemDisplay
-                  item={item}
-                  key={item.id}
-                ></BrandsItemDisplay>
-              ))}
+              {BrandsItem.filter((item) => item.name[0].includes(alpha))
+                .filter((item) => item.name.toLowerCase().includes(wordEntered))
+                .map((item) => (
+                  <BrandsItemDisplay
+                    Items={Items.qty}
+                    item={item}
+                    key={item.id}
+                  ></BrandsItemDisplay>
+                ))}
             </Container>
             {/* <Container className="d-flex flex-column align-items-center">
               {BrandsItem.filter((item) =>

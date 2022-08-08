@@ -32,7 +32,7 @@ const ItemModel = (props) => {
       addToCompare(Items);
     }
   };
-  //    useEffect(() => {
+  // useEffect(() => {
   const SetPromoType = async () => {
     if (Items.promo === "Скидка") {
       Items.promoType = "danger";
@@ -44,6 +44,7 @@ const ItemModel = (props) => {
       Items.promoType = "secondary";
     }
   };
+  // },[]);
 
   //     SetPromoType()
   //    }, [])
@@ -56,9 +57,7 @@ const ItemModel = (props) => {
         key={Items.id}
         className="d-flex flex-wrap align-content-between mt-2 mb-2 sales-prod1 m-1 p-2"
       >
-        <Badge onMouseEnter={SetPromoType()} bg={Items.promoType}>
-          {Items.promo}
-        </Badge>
+        <Badge onMouseEnter={SetPromoType()} bg={Items.promoType}>{Items.promo}</Badge>
         <Container className="d-flex flex-column align-items-center justify-content-between img-on-hover">
           <Container>
             <Link

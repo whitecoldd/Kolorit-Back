@@ -14,11 +14,15 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
+import { ToastContainer, toast } from "react-toastify";
+import { injectStyle } from "react-toastify/dist/inject-style";
 export default function Order({ productData }) {
   const dispatch = useDispatch();
   const location = useLocation();
   const productId = location.pathname.split("/")[2];
-
+  if (typeof window !== "undefined") {
+    injectStyle();
+  }
   const product = useSelector((state) =>
     state.order.orders.find((product) => product._id === productId)
   );
@@ -34,6 +38,7 @@ export default function Order({ productData }) {
     e.preventDefault();
     const product = { ...inputs };
     updateOrder(productId, product, dispatch);
+    toast("Order updated!");
   };
 
   return (
@@ -145,6 +150,7 @@ export default function Order({ productData }) {
               Update
             </button>
           </div>
+          <ToastContainer/>
           <div className="productFormRight1">
             <label>User Status</label>
             <select name="status" value={inputs.status} onChange={handleChange}>

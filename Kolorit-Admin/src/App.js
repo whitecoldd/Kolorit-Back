@@ -13,9 +13,13 @@ import User from "./pages/user/User";
 import { userRows, productRows, userData, productData } from "./dummyData";
 import NewUser from "./pages/newUser/NewUser";
 import NewCategory from "./pages/newCategory/NewCategory";
+import NewSubCategory from "./pages/newSubCategory/NewSubCategory";
+import NewSubSubCategory from "./pages/newSubSubCategory/NewSubSubCategory";
 import ProductList from "./pages/productList/ProductList";
 import SliderList from "./pages/sliderList/SliderList";
 import CategoryList from "./pages/categoryList/CategoryList";
+import SubCategoryList from "./pages/subCategoryList/SubCategoryList";
+import SubSubCategoryList from "./pages/subSubCategoryList/SubSubCategoryList";
 import ContactList from "./pages/contactsList/ContactsList";
 import AboutList from "./pages/aboutList/AboutList";
 import ArticleList from "./pages/articleList/ArticleList";
@@ -26,6 +30,8 @@ import Product from "./pages/product/Product";
 import Brand from "./pages/brand/Brand";
 import BrandsIcon from "./pages/brandsIcon/brandsIcon";
 import Category from "./pages/category/category";
+import SubCategory from "./pages/subcategory/subcategory";
+import SubSubCategory from "./pages/subsubcategory/subsubcategory";
 import Slider from "./pages/slider/Slider";
 import Contact from "./pages/contacts/Contacts";
 import About from "./pages/about/about";
@@ -75,6 +81,16 @@ function App() {
                 ></Route>
                 <Route
                   exact
+                  path="/newSubCategory"
+                  element={<NewSubCategory />}
+                ></Route>
+                <Route
+                  exact
+                  path="/newSubSubCategory"
+                  element={<NewSubSubCategory />}
+                ></Route>
+                <Route
+                  exact
                   path="/newBrandsIcon"
                   element={<NewBrandsIcon />}
                 ></Route>
@@ -100,6 +116,16 @@ function App() {
                   exact
                   path="/brandsIcon/:brandsIconId"
                   element={<BrandsIcon/>}
+                ></Route>
+                <Route
+                  exact
+                  path="/subcategory/:subcategoryId"
+                  element={<SubCategory />}
+                ></Route>
+                <Route
+                  exact
+                  path="/subsubcategory/:subsubcategoryId"
+                  element={<SubSubCategory />}
                 ></Route>
                 <Route
                   exact
@@ -138,6 +164,16 @@ function App() {
                   exact
                   path="/categories"
                   element={<CategoryList />}
+                ></Route>
+                <Route
+                  exact
+                  path="/subcategories"
+                  element={<SubCategoryList />}
+                ></Route>
+                <Route
+                  exact
+                  path="/subsubcategories"
+                  element={<SubSubCategoryList />}
                 ></Route>
                 <Route
                   exact

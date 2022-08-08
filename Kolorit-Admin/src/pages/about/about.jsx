@@ -7,6 +7,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useMemo, useState } from "react";
 import { userRequest } from "../../requestMethods";
 import { updateAbout } from "../../redux/apiCalls";
+import { ToastContainer, toast } from "react-toastify";
+import { injectStyle } from "react-toastify/dist/inject-style";
 import app from "../../firebase";
 import {
   getStorage,
@@ -22,7 +24,9 @@ export default function Product({ productData }) {
   const product = useSelector((state) =>
     state.about.abouts.find((product) => product._id === productId)
   );
-
+  if (typeof window !== "undefined") {
+    injectStyle();
+  }
   const [inputs, setInputs] = useState({});
   const [file, setFile] = useState(null);
   const [cat, setCat] = useState([]);
@@ -71,6 +75,8 @@ export default function Product({ productData }) {
           console.log({ ...inputs, img: downloadURL });
           const product = { ...inputs, img: downloadURL };
           updateAbout(productId, product, dispatch);
+          toast("Product updated!");
+
         });
       }
     );
@@ -157,6 +163,7 @@ export default function Product({ productData }) {
             <button onClick={handleClick} className="productButton">
               Update
             </button>
+            <ToastContainer/>
           </div>
         </form>
       </div>

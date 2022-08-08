@@ -378,7 +378,7 @@ b {
 
 .bulb-text {
   color: #f5f5f5 !important;
-  font-size: 24px !important;
+  font-size: 22px !important;
   font-weight: 700 !important;
 }
 
@@ -613,6 +613,7 @@ b {
   .promo-table {
     display: flex !important;
     flex-wrap: wrap !important;
+    justify-content: space-between !important;
   }
 
   .promo-table .promos {
@@ -715,7 +716,7 @@ a.nav-fix.nav-link {
   transition: 0.7s;
   color: #fff !important;
 }
-.menu-space:hover a a span div button {
+.menu-space:hover div div span {
   transition: 0.7s;
   color: #fff !important;
 }
@@ -1596,6 +1597,22 @@ center {
   right: -5px;
 }
 
+.ls-0{
+  letter-spacing: -2px !important;
+}
+
+.noborder{
+  border: none;
+}
+
+.pricebox{
+  border: 1px orange solid;
+  padding: 5px;
+  width: 80px;
+  text-align: center;
+  border-radius: 8px;
+}
+
 select {
   /* styling */
   background-color: white;
@@ -1733,6 +1750,18 @@ select .classic:focus {
 .dropdown-search-content:last-child {
   border-radius: 0px 0px 50px 50px;
 }
+.dropdown-content-menu {
+  display: none;
+  position: absolute;
+  left: 260px;
+  top: -10px;
+  padding: 10px;
+  background-color: transparent !important;
+  border: none !important;
+  border-radius: 20px;
+  min-width: 160px;
+  z-index: 100 !important;
+}
 .dropdown-content1 {
   display: none;
   position: absolute;
@@ -1751,14 +1780,29 @@ select .classic:focus {
   border: none !important;
   background-color: #fcfcfc !important;
 }
+.dropdown-content-menu p {
+  color: black;
+  text-decoration: none !important;
+  display: block;
+  z-index: 100 !important;
+  border: none !important;
+  background-color: transparent!important;
+}
 
 .dropdown-content1 button:hover {
   background-color: #ff820e !important;
 }
 
+.hovwhite:hover{
+  color: #c2c2c2;
+}
+
 .br-50 {
   border-radius: 50% !important;
   left: 165px;
+}
+.br-1{
+  border-radius: 25px;
 }
 @media screen and (max-width: 1000px) {
   .br-50 {
@@ -1787,6 +1831,13 @@ select .classic:focus {
   z-index: 100 !important;
   border: none !important;
   background-color: transparent !important;
+}
+.dropdown1:hover .dropdown-content-menu {
+  display: flex;
+  justify-content: flex-start;
+  z-index: 100 !important;
+  border: none !important;
+  background-color: #444444 !important;
 }
 
 .dropdown1:hover .dropbtn1 {
