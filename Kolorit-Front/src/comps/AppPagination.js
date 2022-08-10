@@ -3,7 +3,7 @@ import Pagination from '@mui/material/Pagination'
 import dataService  from '../services/dataService'
 
 
-const pageSize = 5
+const pageSize = 10
 const AppPagination = ({setFilteredBrands, filteredBrands}) => {
 
     const [page, setPage] = useState(

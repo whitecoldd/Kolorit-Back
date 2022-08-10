@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import {
-  Accordion,
+  Breadcrumb,
   Container,
   Row,
   Col,
@@ -18,9 +18,15 @@ import AppPagination from "../comps/AppPagination";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import axios from "axios";
+import NewPagination from '../comps/NewPagination'
 import { publicRequest } from "../requests/request";
 import { useTranslation } from "react-i18next";
-
+const checklist = [
+  { inStock: "В наличии" },
+  { inStock: "Под заказ : сегодня" },
+  { inStock: "Под заказ : завтра" },
+  { inStock: "Под заказ : позже" },
+];
 const CatalogClass = ({
   onAdd,
   onRemoveFromPage,
@@ -31,7 +37,6 @@ const CatalogClass = ({
   const items = [...Array(90).keys()];
   const [Items, setItems] = useState([]);
   const [query, setQuery] = useState("");
-  const [inStock, setInStock] = useState(true);
   const [sorting, setSorting] = useState();
   const [sortingS, setSSorting] = useState();
   const [sortingP, setPSorting] = useState();
@@ -39,7 +44,7 @@ const CatalogClass = ({
   const [sale, setSale] = useState(false);
   const { t } = useTranslation();
   const location = useLocation();
-  const category = location.pathname.split("/")[2];
+  const category = location.pathname.split("/")[4];
   useEffect(() => {
     const getItems = async () => {
       try {
@@ -47,7 +52,9 @@ const CatalogClass = ({
           category ? `/api/items/find?category=${category}` : `/api/items/find`
         );
         setItems(res.data);
-      } catch (e) {}
+      } catch (e) {
+        console.log(e);
+      }
     };
     getItems();
   }, [category]);
@@ -90,19 +97,60 @@ const CatalogClass = ({
     const lng = localStorage.getItem("i18nextLng");
     setMyLocalStorageData(lng);
   }, []);
+  const [Check, setCheck] = useState([]);
+  const handleCheck = (e) => {
+    if (e.target.checked) {
+      setCheck([...Check, e.target.value]);
+      console.log(Check);
+    } else {
+      setCheck(Check.filter((id) => id !== e.target.value));
+    }
+  };
   useEffect(() => {
-    if (newBrands.length === 0) {
-      setFilteredBrands(Items);
-      console.log(filteredBrands);
-    }
-    else if (newBrands.length > 0) {
-      setFilteredBrands(
-        Items.filter((Items) =>
-          newBrands.some((cat) => [Items.brand].flat().includes(cat))
-        )
-      );
-    }
-  }, [newBrands]);
+    const getFilter = async () => {
+      if (newBrands.length === 0 && Check.length === 0) {
+        const getItems = async () => {
+          try {
+            const res = await publicRequest.get(
+              category
+                ? `/api/items/find?category=${category}`
+                : `/api/items/find`
+            );
+            setFilteredBrands(res.data);
+          } catch (e) {
+            console.log(e);
+          }
+        };
+        getItems();
+        console.log(filteredBrands);
+      } else if (newBrands.length > 0 && Check.length === 0) {
+        setFilteredBrands(
+          Items.filter((Items) =>
+            newBrands.some((cat) => [Items.brand].flat().includes(cat))
+          )
+        );
+        console.log(Items);
+      } else if (Check.length > 0 && newBrands.length === 0) {
+        setFilteredBrands(
+          Items.filter((Items) =>
+            Check.some((ch) => [Items.inStock].flat().includes(ch))
+          )
+        );
+        console.log(Items);
+      } else {
+        setFilteredBrands(
+          Items.filter((Items) =>
+            Check.some((ch) => [Items.inStock].flat().includes(ch))
+          ).filter((Items) =>
+            newBrands.some((cat) => [Items.brand].flat().includes(cat))
+          )
+        );
+        console.log(Items);
+      }
+    };
+    getFilter();
+    console.log(Check);
+  }, [category, newBrands, Check]);
   const handleSort = () => {
     setSorting(!sorting);
     if (state === false) {
@@ -123,7 +171,7 @@ const CatalogClass = ({
     setSSorting(!sortingS);
     if (sale === false) {
       const sortedS = [...filteredBrands].sort((a) =>
-        a.promoType == "danger" ? 1 : -1
+        a.promoType === "danger" ? 1 : -1
       );
       setFilteredBrands(sortedS);
       setSale(true);
@@ -135,8 +183,26 @@ const CatalogClass = ({
       setSale(false);
     }
   };
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(16);
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = filteredBrands.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
   return (
     <>
+      <Container>
+        <Breadcrumb className="mt-3">
+          <Breadcrumb.Item href="/">{t("main")}</Breadcrumb.Item>
+          <Breadcrumb.Item href="/catalog">
+            <mark>{t("foot4")}</mark>
+          </Breadcrumb.Item>
+          <Breadcrumb.Item active>
+            <mark>{decodeURIComponent(category)}</mark>
+          </Breadcrumb.Item>
+        </Breadcrumb>
+        <h1 className="bold mb-5">{decodeURIComponent(category)}</h1>
+      </Container>
       <Container className="d-flex align-items-start mb-3 sprodhandle1 justify-content-center">
         <CatalogMenu
           query={query}
@@ -146,7 +212,11 @@ const CatalogClass = ({
           handleInput={handleInput}
           handleChange={handleChange}
           handleInputChange={handleInputChange}
-          //Clear={Clear}
+          checklist={checklist}
+          handleCheck={handleCheck}
+          Items={Items}
+          newBrands={newBrands}
+          Check={Check}
         ></CatalogMenu>
         <Container id="flex2" className="d-flex flex-wrap fluke">
           <Container>
@@ -205,29 +275,36 @@ const CatalogClass = ({
           </Container>
 
           <Container className="d-flex flex-wrap justify-content-start items-list-handle cataloghandle">
-            {filteredBrands
+            {currentPosts
               //?.filter((Items) => Items.lng === myLocalStorageData)
-              ?.filter((Items) => Items.name.toLowerCase().includes(query))
-              ?.filter((Items) => Items.salePrice > parseInt(value[0], 10))
-              ?.filter((Items) => Items.salePrice < parseInt(value[1], 10))
-              ?.map((Items) => (
+              ?.filter((filtered) =>
+                filtered.name.toLowerCase().includes(query)
+              )
+              ?.filter(
+                (filtered) => filtered.salePrice > parseInt(value[0], 10)
+              )
+              ?.filter(
+                (filtered) => filtered.salePrice < parseInt(value[1], 10)
+              )
+              ?.map((filtered) => (
                 <ItemModelForCat
-                  Items={Items}
-                  key={Items._id}
+                  Items={filtered}
+                  key={filtered._id}
                   addToCompare={addToCompare}
                   removeFromCompare={removeFromCompare}
                   selectedItems={selectedItems}
-                  onAdd={() => onAdd(Items)}
-                  onRemoveFromPage={() => onRemoveFromPage(Items._id)}
+                  onAdd={() => onAdd(filtered)}
+                  onRemoveFromPage={() => onRemoveFromPage(filtered._id)}
                 ></ItemModelForCat>
               ))}
           </Container>
 
           <Container className="d-flex justify-content-center">
-            <AppPagination
-              setFilteredBrands={(item) => setFilteredBrands(item)}
-              filteredBrands={filteredBrands}
-            ></AppPagination>
+            <NewPagination
+              postsPerPage={postsPerPage}
+              totalPosts={filteredBrands.length}
+              paginate={paginate}
+            />
           </Container>
         </Container>
       </Container>

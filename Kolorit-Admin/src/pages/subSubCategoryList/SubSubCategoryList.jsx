@@ -32,7 +32,7 @@ export default function CategoryList() {
         );
       },
     },
-    { field: "subcat", headerName: "Subcats", width: 220 },
+    { field: "subcat", headerName: "Subcats", width: 400 },
     {
       field: "action",
       headerName: "Action",

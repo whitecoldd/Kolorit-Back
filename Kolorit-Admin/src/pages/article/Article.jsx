@@ -1,13 +1,13 @@
 import { Link, useLocation } from "react-router-dom";
 import "../product/product.css";
-import Chart from "../../comps/chart/Chart"
+import Chart from "../../comps/chart/Chart";
 import { Publish } from "@material-ui/icons";
 import { productData } from "../../dummyData";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useMemo, useState } from "react";
-import { userRequest } from "../../requestMethods";
-import { updateArticle } from "../../redux/apiCalls";
-import app from '../../firebase'
+import { userRequest, publicRequest } from "../../requestMethods";
+import { updateArticle, getProducts } from "../../redux/apiCalls";
+import app from "../../firebase";
 import {
   getStorage,
   ref,
@@ -16,15 +16,26 @@ import {
 } from "firebase/storage";
 import { ToastContainer, toast } from "react-toastify";
 import { injectStyle } from "react-toastify/dist/inject-style";
-export default function Product({productData}) {
+export default function Product({ productData }) {
   const dispatch = useDispatch();
   const location = useLocation();
   const productId = location.pathname.split("/")[2];
 
   const product = useSelector((state) =>
     state.article.articles.find((product) => product._id === productId)
-    );  
-
+  );
+  const [prods, setProds] = useState([]);
+  useEffect(() => {
+    const getItems = async () => {
+      try {
+        const res = await publicRequest.get(`/api/items/find`);
+        setProds(res.data);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    getItems();
+  }, []);
   const [inputs, setInputs] = useState({});
   const [file, setFile] = useState(null);
   const [cat, setCat] = useState([]);
@@ -69,12 +80,11 @@ export default function Product({productData}) {
         }
       },
       (error) => {
-        console.log(error)
+        console.log(error);
       },
       () => {
-
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          console.log({ ...inputs, img: downloadURL});
+          console.log({ ...inputs, img: downloadURL });
           const product = { ...inputs, img: downloadURL };
           updateArticle(productId, product, dispatch);
           toast("Product updated!");
@@ -82,7 +92,7 @@ export default function Product({productData}) {
       }
     );
   };
-  
+
   return (
     <div className="product">
       <div className="productTitleContainer">
@@ -106,30 +116,57 @@ export default function Product({productData}) {
         <form className="productForm">
           <div className="productFormLeft">
             <label>Article Header</label>
-            <input type="text" name="header" value={inputs.name} onChange={handleChange}/>
+            <input
+              type="text"
+              name="header"
+              value={inputs.name}
+              onChange={handleChange}
+            />
           </div>
           <div className="productFormLeft">
             <label>Article Text</label>
-            <textarea type="text" name="text" value={inputs.text} onChange={handleChange}/>
+            <textarea
+              type="text"
+              name="text"
+              value={inputs.text}
+              onChange={handleChange}
+            />
           </div>
           <div className="productFormLeft">
-          <label>Language</label>
+            <label>Language</label>
             <select name="lng" onChange={handleChange}>
               <option value="ru">ru</option>
               <option value="ro">ro</option>
               <option value="en">en</option>
             </select>
           </div>
+          <div className="productFormLeft">
+            <label>Products</label>
+            <select name="productId" onChange={handleChange}>
+              {prods.map((prod) => (
+                <>
+                  <option value={[prod]}>{prod.name}</option>
+                </>
+              ))}
+            </select>
+          </div>
           <div className="productFormRight">
             <div className="productUpload">
-              <img src={product.img} alt="" className="productUploadImg"/>
+              <img src={product.img} alt="" className="productUploadImg" />
               <label for="file">
                 <Publish />
               </label>
-              <input type="file" id="file" style={{ display: "none" }}  onChange={(e) => setFile(e.target.files[0])} />
+              <input
+                type="file"
+                id="file"
+                style={{ display: "none" }}
+                onChange={(e) => setFile(e.target.files[0])}
+              />
             </div>
-            <button onClick={handleClick} className="productButton">Update</button>
-            <ToastContainer/>
+            <button onClick={handleClick} className="productButton">
+              Update
+            </button>
+            <ToastContainer />
           </div>
         </form>
       </div>

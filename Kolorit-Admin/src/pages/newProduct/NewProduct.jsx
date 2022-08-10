@@ -307,7 +307,7 @@ export default function NewProduct() {
               <label>Stock</label>
               <select name="inStock" onChange={handleChange}>
                 <option value="В наличии">В наличии</option>
-                <option value="Наличие в магазинах">Наличие в магазинах</option>
+                <option value="Под заказ : сегодня">Под заказ : сегодня</option>
                 <option value="Под заказ : завтра">Под заказ : завтра</option>
                 <option value="Под заказ : позже">Под заказ : позже</option>
               </select>

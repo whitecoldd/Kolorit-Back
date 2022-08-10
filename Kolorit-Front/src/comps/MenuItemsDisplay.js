@@ -35,6 +35,7 @@ const MenuItemsDisplay = () => {
       try {
         const res = await publicRequest.get(`api/subsubcat/find`);
         setSubsubcat(res.data);
+        console.log(res.data);
       } catch (e) {}
     };
     getItems();
@@ -46,55 +47,58 @@ const MenuItemsDisplay = () => {
     setMyLocalStorageData(lng);
   }, []);
   return (
-    <div className="hovwhite">
-      {Cat?.map((Cat) => (
-        <div
-          className="d-flex align-items-center position-relative dropdown1"
-          type="button"
-        >
-          <img width={20} height={20} src={Cat.img} />
-          <Nav.Link
-            className="nav-fix d-flex align-items-center"
-            eventKey={Cat._id}
-          >
-            <span className='hovwhite'>{Cat.name}</span>
-            <div className="dropdown-content-menu">
-              {subcat
-                .filter(
-                  (subcat) =>
-                    subcat.cat[0].toLowerCase() === Cat.name.toLowerCase()
-                )
-                //?.filter((item) => item.lng === myLocalStorageData)
-                .map((subcat) => {
-                  return (
-                    <div>
-                      <Link to={`/catalog/${subcat.name}`}>
-                        <h4>{subcat.name}</h4>
-                      </Link>
-                      {subsubcat
-                        .filter(
-                          (subsubcat) =>
-                            subsubcat?.subcat[0]?.toLowerCase() ===
-                            subcat.name.toLowerCase() ||
-                            subsubcat?.subcat[1]?.toLowerCase() ===
-                            subcat.name.toLowerCase()
-                        )
-                        .map((subsubcat) => {
-                          return (
-                            <Container>
-                              <Link to={`/catalog/${subsubcat.name}`}>
-                                <p className="mb-0">{subsubcat.name}</p>
-                              </Link>
-                            </Container>
-                          );
-                        })}
-                    </div>
-                  );
-                })}
-            </div>
-          </Nav.Link>
-        </div>
-      ))}
+    <div className="hovwhite position-relative">
+      <div className="scrollable-div-menu">
+        {Cat?.map((Cat) => (
+          <div className="d-flex align-items-center dropdown2 mt-0 mb-0 pt-1 pb-1" type="button">
+            <img width={20} height={20} src={Cat.img} />
+            <Nav.Link
+              className="nav-fix d-flex align-items-center"
+              eventKey={Cat._id}
+            >
+              <Link to={`/catalog/${Cat.name}`} className="real-no-dec">
+                <span>{Cat.name}</span>
+              </Link>
+              <div className="dropdown-content-menu">
+                <h1 className="pt-1 ps-1">{Cat.name}</h1>
+                <div className="dropdown-content-all">
+                  {subcat
+                    .filter((subcat) =>
+                      [Cat.name].some((catname) =>
+                        [subcat.cat].flat().includes(catname)
+                      )
+                    )
+                    //?.filter((item) => item.lng === myLocalStorageData)
+                    .map((subcat) => {
+                      return (
+                        <div>
+                          <Link to={`/catalog/${Cat.name}/${subcat.name}`}>
+                            <h4>{subcat.name}</h4>
+                          </Link>
+                          {subsubcat
+                            .filter((subsubcat) =>
+                              [subcat.name].some((subname) =>
+                                [subsubcat.subcat].flat().includes(subname)
+                              )
+                            )
+                            .map((subsubcat) => {
+                              return (
+                                <Container>
+                                  <Link to={`/catalog/${Cat.name}/${subcat.name}/${subsubcat.name}`}>
+                                    <p className="mb-0">{subsubcat.name}</p>
+                                  </Link>
+                                </Container>
+                              );
+                            })}
+                        </div>
+                      );
+                    })}
+                </div>
+              </div>
+            </Nav.Link>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

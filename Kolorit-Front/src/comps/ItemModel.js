@@ -34,7 +34,7 @@ const ItemModel = (props) => {
   };
   // useEffect(() => {
   const SetPromoType = async () => {
-    if (Items.promo === "Скидка") {
+    if (Items.promo === "Скидка" || Items.promo === "Sale") {
       Items.promoType = "danger";
     } else if (Items.promo === "Новое") {
       Items.promoType = "warning";
@@ -57,7 +57,9 @@ const ItemModel = (props) => {
         key={Items.id}
         className="d-flex flex-wrap align-content-between mt-2 mb-2 sales-prod1 m-1 p-2"
       >
-        <Badge onMouseEnter={SetPromoType()} bg={Items.promoType}>{Items.promo}</Badge>
+        <Badge onMouseEnter={SetPromoType()} bg={Items.promoType}>
+          {Items.promo}
+        </Badge>
         <Container className="d-flex flex-column align-items-center justify-content-between img-on-hover">
           <Container>
             <Link
@@ -84,12 +86,22 @@ const ItemModel = (props) => {
               fluid
               className="d-flex flex-column text-float align-items-start ps-0"
             >
-              <del style={{ fontSize: "15px" }}>
+              <del
+                className="grey fs-12"
+                style={{ fontSize: "11px", fontWeight: "300" }}
+              >
                 {Items.price}
-                <small> {Items.currency}</small>
+                <small
+                  className="grey fs-10"
+                  style={{ fontSize: "17px", fontWeight: "300" }}
+                >
+                  {" "}
+                  {Items.currency}
+                </small>
               </del>
-              <h4 className="orange">
-                {Items.salePrice} <small> {Items.currency}</small>
+              <h4 className="fs-12 orange">
+                {Items.salePrice}{" "}
+                <small className="fs-10"> {Items.currency}</small>
               </h4>
             </Container>
             <Button variant="warning" className="bttnbuy" onClick={onClickBuy}>

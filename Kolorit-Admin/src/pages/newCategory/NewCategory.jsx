@@ -16,6 +16,7 @@ export default function NewCategory() {
   const [subcat, setSubcat] = useState([]);
   const [cat, setCat] = useState([]);
   const [file, setFile] = useState(null);
+  const [icon, setIcon] = useState(null);
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
@@ -60,15 +61,17 @@ export default function NewCategory() {
       () => {
         // Handle successful uploads on complete
         // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          console.log({ ...inputs, img: downloadURL });
-          const product = {
-            ...inputs,
-            img: downloadURL,
-          };
-          addCategory(product, dispatch);
-          toast("Product added!");
-        });
+        getDownloadURL(uploadTask.snapshot.ref).then(
+          (downloadURL) => {
+            console.log({ ...inputs, img: downloadURL });
+            const product = {
+              ...inputs,
+              img: downloadURL,
+            };
+            addCategory(product, dispatch);
+            toast("Product added!");
+          }
+        );
       }
     );
   };

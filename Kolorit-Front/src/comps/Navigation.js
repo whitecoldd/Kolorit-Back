@@ -175,9 +175,9 @@ export default function Navigation({
             <Navbar.Collapse id="responsive-navbar-nav">
               {isVisible && (
                 <NavDropdown
-                  className="navdrop me-0"
+                  className="navdrop me-0 position-relative"
                   aria-expanded="true"
-                  title={`${t("head0")}`}
+                  title={`X ${t("head0")}`}
                   id="basic-nav-dropdown"
                 >
                   <Container className="menu">

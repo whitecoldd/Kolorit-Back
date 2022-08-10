@@ -1,9 +1,11 @@
-import React, { Component } from 'react'
-
+import React, { Component } from "react";
+import MenuOpenItemsDisplay from "../comps/MenuOpenItemsDisplay";
 export default class Partnership extends Component {
   render() {
     return (
-      <div>Partnership</div>
-    )
+      <>
+        {/* <MenuOpenItemsDisplay></MenuOpenItemsDisplay> */}
+      </>
+    );
   }
 }

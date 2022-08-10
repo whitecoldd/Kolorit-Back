@@ -5,6 +5,10 @@ const ArticlesSchema = new mongoose.Schema(
     img: { type: String, required: true },
     header: { type: String, required: true },
     lng: { type: String, required: true, default: "ru" },
+    productId: {
+      type: Array,
+      unique: false,
+    },
   },
   { timestamps: true }
 );

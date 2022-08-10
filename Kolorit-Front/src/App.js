@@ -85,8 +85,10 @@ function App() {
           <Route exact path={`/promotions/:id`} element={<SingleArticle  />}></Route>
           <Route exact path="/about" element={<About />}></Route>
           <Route exact path="/contacts" element={<Contacts />}></Route>
-          <Route exact path="/catalog" element={<Catalog />}></Route>
-          <Route exact path={`/catalog/:title`} element={<CatalogClass addToCompare={addToCompare} removeFromCompare={removeFromCompare} selectedItems={selectedItems} cartItems={cartItems} onAdd={onAdd} onRemoveFromPage={onRemoveFromPage} />}></Route>
+          <Route exact path={`/catalog/:title/:title`} element={<Catalog />}></Route>
+          <Route exact path={`/catalog/:title`} element={<Catalog />}></Route>
+          <Route exact path={`/catalog`} element={<Catalog />}></Route>
+          <Route exact path={`/catalog/:title/:title/:title`} element={<CatalogClass addToCompare={addToCompare} removeFromCompare={removeFromCompare} selectedItems={selectedItems} cartItems={cartItems} onAdd={onAdd} onRemoveFromPage={onRemoveFromPage} />}></Route>
           <Route exact path="/partnership" element={<Partnership />}></Route>
           <Route exact path="/brands" element={<Brands />}></Route>
           <Route exact path={`/brandscatalog/:title`} element={<BrandCatalog addToCompare={addToCompare} removeFromCompare={removeFromCompare} selectedItems={selectedItems} cartItems={cartItems} onAdd={onAdd} onRemoveFromPage={onRemoveFromPage} />}></Route>

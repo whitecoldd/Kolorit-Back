@@ -26,7 +26,6 @@ import ItemModel from "../comps/ItemModel";
 import ProductDisplay from "../comps/ProductDisplay";
 import Marquee from "react-fast-marquee";
 import CardsItem from "../comps/CardsItem";
-import MenuOpenItemDisplay from "../comps/MenuOpenItemDisplay";
 import Countdown from "react-countdown";
 import PromosDisplay from "../comps/PromosDisplay";
 import axios from "axios";
@@ -85,10 +84,10 @@ export default function Home(props) {
   return (
     <>
       <Container className="d-flex">
-        <Container className="menu-space mt-3">
+        <Container className="menu-space mt-3 p-0">
           <MenuItemsDisplay></MenuItemsDisplay>
         </Container>
-        <Container className="me-1 mt-3 carousel-mine">
+         <Container className="me-1 mt-3 carousel-mine">
           <Slider />
         </Container>
       </Container>
@@ -146,7 +145,8 @@ export default function Home(props) {
                 );
               }}
             >
-              {Items?.filter((Items) => Items.lng === myLocalStorageData)
+              {Items
+              //?.filter((Items) => Items.lng === myLocalStorageData)
                 .filter((item) => item.promo.includes("Скидка"))
                 ?.map((Items) => (
                   <ItemModel
@@ -217,7 +217,9 @@ export default function Home(props) {
                 );
               }}
             >
-              {Items.filter((Items) => Items.lng === myLocalStorageData).map(
+              {Items
+              //.filter((Items) => Items.lng === myLocalStorageData)
+              .map(
                 (Items) => (
                   <ItemModel
                     addToCompare={addToCompare}
@@ -281,7 +283,9 @@ export default function Home(props) {
                 );
               }}
             >
-              {Items?.filter((Items) => Items.lng === myLocalStorageData).map(
+              {Items
+              //?.filter((Items) => Items.lng === myLocalStorageData)
+              .map(
                 (Items) => {
                   return (
                     <ItemModel

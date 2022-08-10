@@ -42,6 +42,7 @@ export default function Product({ productData }) {
     setCat(e.target.value.split(","));
   };
   const handleClick = (e) => {
+    e.preventDefault();
     const product = {
       ...inputs,
       subcat: cat,

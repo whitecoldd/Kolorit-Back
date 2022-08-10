@@ -29,23 +29,23 @@ const CatalogMenu = ({
   value,
   setValue,
   handleCheck,
-  inStock,
+  checklist,
   handleFilter,
   handleInputChange,
   handleChange,
   handleInput,
   Clear,
-  brands,
+  newBrands,
   handleBrands,
-  checked,
+  Check,
 }) => {
   const { t } = useTranslation();
-  const [Items, setItems] = useState([]);
+  const [Brands, setBrands] = useState([]);
   useEffect(() => {
     const getItems = async () => {
       try {
         const res = await publicRequest.get(`/api/brand/find`);
-        setItems(res.data);
+        setBrands(res.data);
       } catch (e) {
         console.log(e);
       }
@@ -58,23 +58,24 @@ const CatalogMenu = ({
         <Accordion className="catalog-acc">
           <Accordion.Item>
             <Accordion.Header>{t("avail")}</Accordion.Header>
-            <Accordion.Body name="inStock" onChange={handleCheck}>
-              <InputGroup>
-                <InputGroup.Checkbox></InputGroup.Checkbox>
-                <InputGroup.Text>{t("inuse")}</InputGroup.Text>
-              </InputGroup>
-              <InputGroup>
-                <InputGroup.Checkbox></InputGroup.Checkbox>
-                <InputGroup.Text>{t("avail")}</InputGroup.Text>
-              </InputGroup>
-              <InputGroup>
-                <InputGroup.Checkbox></InputGroup.Checkbox>
-                <InputGroup.Text>{t("ordertom")}</InputGroup.Text>
-              </InputGroup>
-              <InputGroup>
-                <InputGroup.Checkbox></InputGroup.Checkbox>
-                <InputGroup.Text>{t("later")}</InputGroup.Text>
-              </InputGroup>
+            <Accordion.Body>
+              <FormControl>
+                {/* <TextField value={newBrands} fullWidth onChange={handleChange} /> */}
+                <FormGroup className="d-flex justify-content-start">
+                  <div className="d-flex flex-column justify-content-start p-0 ms-0   ">
+                    {checklist.map((check) => (
+                      <FormControlLabel
+                      key={check.inStock}
+                        control={
+                          <Checkbox size="small" onChange={handleCheck} />
+                        }
+                        label={check.inStock}
+                        value={check.inStock}
+                      />
+                    ))}
+                  </div>
+                </FormGroup>
+              </FormControl>
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>
@@ -87,15 +88,15 @@ const CatalogMenu = ({
                   <input
                     type="text"
                     className="pricebox me-3"
-                    defaultValue={value[0]}
-                    onChange={(e)=>handleInputChange(e)}
+                    value={value[0]}
+                    //onChange={(e) => handleInputChange(e)}
                   ></input>{" "}
                   <span className="ls-0 orange">---</span>{" "}
                   <input
                     type="text"
                     className="pricebox ms-3"
-                    defaultValue={value[1]}
-                    onChange={(e)=>handleInputChange(e)}
+                    value={value[1]}
+                    //onChange={(e) => handleInputChange(e)}
                   ></input>
                 </Typography>
                 <Slider
@@ -133,9 +134,10 @@ const CatalogMenu = ({
               </InputGroup>
 
               <FormControl>
+                {/* <TextField value={newBrands} fullWidth onChange={handleChange} /> */}
                 <FormGroup className="d-flex justify-content-start">
                   <div className="scrollable-div d-flex flex-column justify-content-start p-0 ms-0   ">
-                    {Items.map((item) => (
+                    {Brands.map((item) => (
                       <FormControlLabel
                         key={item._id}
                         control={

@@ -73,13 +73,13 @@ export default function About() {
       <Container fluid className="tabs-cont mt-3 pt-3 pb-5">
         <Container>
           <h1 className="story-text">{t("story")}</h1>
-          <Tab.Container className="tabs" defaultActiveKey="2008">
+          <Tab.Container className="tabs" defaultActiveKey="0">
             <Nav variant="tabs" className="mt-2">
               {items
                 .filter((Items) => Items.lng === myLocalStorageData)
-                .map((item) => (
+                .map((item, i) => (
                   <Nav.Item key={item._id}>
-                    <Nav.Link type="button" eventKey={item.year}>
+                    <Nav.Link type="button" eventKey={i}>
                       {item.year}
                     </Nav.Link>
                   </Nav.Item>
@@ -88,8 +88,8 @@ export default function About() {
             <Tab.Content className="mt-3">
               {items
                 ?.filter((Items) => Items.lng === myLocalStorageData)
-                .map((item) => (
-                  <Tab.Pane key={item._id} eventKey={item.year}>
+                .map((item, i) => (
+                  <Tab.Pane key={i} eventKey={i}>
                     <Container className="d-flex tabs-about">
                       <img height="90%" width="80%" src={item.img} />
                       <Container>

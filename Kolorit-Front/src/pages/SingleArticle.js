@@ -9,8 +9,10 @@ import {
   Button,
   Badge,
 } from "react-bootstrap";
+import Countdown from 'react-countdown'
 import { useLocation, Link } from "react-router-dom";
-import dayjs from 'dayjs';
+import dayjs from "dayjs";
+import ItemModel from '../comps/ItemModel'
 const SingleArticle = () => {
   const { t } = useTranslation();
 
@@ -37,12 +39,15 @@ const SingleArticle = () => {
             <mark>{items.header}</mark>
           </Breadcrumb.Item>
         </Breadcrumb>
-        <h1 className="bold mb-5">{items.header}</h1>
-        <h3>{dayjs(items.createdAt).format('YYYY MMMM DD')}</h3>
       </Container>
-      <Container>
-        <Image className="br-1" src={items.img} width='100%'/>
+      <Container className="article">
+        <h1 className="bold mb-5 pt-3 ps-4">{items.header}</h1>
+        <Image fluid className="br-1" src={items.img} width="100%" />
+      </Container>
+      <Container className=' mt-5 d-flex flex-column align-items-center' >
+        <button disabled className="mb-3 bttn-cart">Акция продлится еще <Countdown date={dayjs(items.createdAt)+3000000000 } /></button>
         <p className="black">{items.text}</p>
+        <p>{items.productId}</p>
       </Container>
     </>
   );
