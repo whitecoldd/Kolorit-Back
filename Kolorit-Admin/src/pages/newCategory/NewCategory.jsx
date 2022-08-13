@@ -61,17 +61,15 @@ export default function NewCategory() {
       () => {
         // Handle successful uploads on complete
         // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-        getDownloadURL(uploadTask.snapshot.ref).then(
-          (downloadURL) => {
-            console.log({ ...inputs, img: downloadURL });
-            const product = {
-              ...inputs,
-              img: downloadURL,
-            };
-            addCategory(product, dispatch);
-            toast("Product added!");
-          }
-        );
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          console.log({ ...inputs, img: downloadURL });
+          const product = {
+            ...inputs,
+            img: downloadURL,
+          };
+          addCategory(product, dispatch);
+          toast("Product added!");
+        });
       }
     );
   };
@@ -99,6 +97,8 @@ export default function NewCategory() {
         <div className="addProductItem">
           <label>Language</label>
           <select name="lng" onChange={handleChange}>
+            <option value={null}>---</option>
+
             <option value="ru">ru</option>
             <option value="ro">ro</option>
             <option value="en">en</option>

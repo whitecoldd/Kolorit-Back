@@ -71,7 +71,12 @@ export default function Product({ productData }) {
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           console.log({ ...inputs, img: downloadURL });
-          const product = { ...inputs, img: downloadURL, name: cat, subcat: subcat };
+          const product = {
+            ...inputs,
+            img: downloadURL,
+            name: cat,
+            subcat: subcat,
+          };
           updateCategory(productId, product, dispatch);
           toast("Product updated!");
         });
@@ -108,6 +113,15 @@ export default function Product({ productData }) {
               value={inputs.name}
               onChange={handleChange}
             />
+            <label>Language</label>
+
+            <select name="lng" onChange={handleChange}>
+              <option value={null}>---</option>
+
+              <option value="ru">ru</option>
+              <option value="ro">ro</option>
+              <option value="en">en</option>
+            </select>
           </div>
           <div className="productFormRight">
             <div className="productUpload">
@@ -125,7 +139,7 @@ export default function Product({ productData }) {
             <button onClick={handleClick} className="productButton">
               Update
             </button>
-            <ToastContainer/>
+            <ToastContainer />
           </div>
         </form>
       </div>

@@ -2,9 +2,9 @@ const mongoose = require('mongoose')
 const SubCategoriesSchema = new mongoose.Schema(
     {
         name: {type: String, required: true},
-        img: {type: String},
+        img: {type: String, required: true},
         lng: {type: String, required: true, default: "ru"},
-        cat: {type: Array, required: true}
+        cat: {type: String, required: true}
 
     },
     { timestamps: true }

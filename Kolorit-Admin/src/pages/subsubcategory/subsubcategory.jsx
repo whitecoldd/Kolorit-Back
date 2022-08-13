@@ -5,8 +5,8 @@ import { Publish } from "@material-ui/icons";
 import { productData } from "../../dummyData";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useMemo, useState } from "react";
-import { userRequest } from "../../requestMethods";
-import { updateSubsubcategory } from "../../redux/apiCalls";
+import { publicRequest, userRequest } from "../../requestMethods";
+import { updateSubsubcategory, getSubcategory } from "../../redux/apiCalls";
 import app from "../../firebase";
 import {
   getStorage,
@@ -38,17 +38,59 @@ export default function Product({ productData }) {
       return { ...prev, [e.target.name]: e.target.value };
     });
   };
-  const handleCat = (e) => {
-    setCat(e.target.value.split(","));
-  };
+  useEffect(() => {
+    const getItems = async () => {
+      try {
+        const res = await publicRequest.get(`/api/subcat/find`);
+        setCat(res.data);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    getItems();
+  }, []);
   const handleClick = (e) => {
     e.preventDefault();
-    const product = {
-      ...inputs,
-      subcat: cat,
-    };
-    updateSubsubcategory(productId, product, dispatch);
-    toast("Product updated!");
+    const fileName = new Date().getTime() + file.name;
+    const storage = getStorage(app);
+    const storageRef = ref(storage, fileName);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    // Register three observers:
+    // 1. 'state_changed' observer, called any time the state changes
+    // 2. Error observer, called on failure
+    // 3. Completion observer, called on successful completion
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        // Observe state change events such as progress, pause, and resume
+        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log("Upload is " + progress + "% done");
+        switch (snapshot.state) {
+          case "paused":
+            console.log("Upload is paused");
+            break;
+          case "running":
+            console.log("Upload is running");
+            break;
+        }
+      },
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        // Handle successful uploads on complete
+        // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          console.log({ ...inputs, img: downloadURL });
+          const product = { ...inputs, img: downloadURL };
+          updateSubsubcategory(productId, product, dispatch);
+          toast("Product added!");
+        });
+      }
+    );
   };
 
   return (
@@ -81,20 +123,35 @@ export default function Product({ productData }) {
               onChange={handleChange}
             />
             <label>SubCategory</label>
-            <input
-              type="text"
-              name="subcat"
-              value={inputs.subcat}
-              onChange={handleCat}
-            />
+            <select name="subcat" onChange={handleChange}>
+              <option value={null}>---</option>
+
+              {cat.map((cat) => (
+                <option value={cat.name}>{cat.name}</option>
+              ))}
+            </select>
             <label>Language</label>
             <select name="lng" onChange={handleChange}>
+              <option value={null}>---</option>
+
               <option value="ru">ru</option>
               <option value="ro">ro</option>
               <option value="en">en</option>
             </select>
           </div>
           <div className="productFormRight">
+            <div className="productUpload">
+              <img src={product.img} alt="" className="productUploadImg" />
+              <label for="file">
+                <Publish />
+              </label>
+              <input
+                type="file"
+                id="file"
+                style={{ display: "none" }}
+                onChange={(e) => setFile(e.target.files[0])}
+              />
+            </div>
             <button onClick={handleClick} className="productButton">
               Update
             </button>

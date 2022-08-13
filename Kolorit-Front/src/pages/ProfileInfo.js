@@ -192,7 +192,7 @@ const Profile = () => {
                         </button>
                       </Container>
                     ) : (
-                      <Container className="d-flex align-items-baseline p-0 me-0">
+                      <Container className="d-flex align-items-baseline profdata p-0 me-0">
                         <input
                           type="text"
                           className="form-control w-auto"
@@ -269,7 +269,7 @@ const Profile = () => {
                     <Form>
                       <p className="gray">{t("changepw")}</p>
                       <Container className="d-flex flex-wrap p-0">
-                        <Container className="d-flex p-0">
+                        <Container className="d-flex p-0 psw">
                           <Form.Group>
                             <Form.Control
                               className="w-auto"

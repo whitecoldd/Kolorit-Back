@@ -51,7 +51,7 @@ export default function Promotions() {
           {currentPosts.map((items) => (
             <Container className="promos mb-4 d-flex flex-wrap align-content-start  me-3">
               <Link to={`/promotions/${items._id}`} className="real-no-dec">
-                <Image fluid src={items.img}></Image>
+                <Image fluid className="cut" src={items.img}></Image>
                 <Container>
                   <h1 className="pt-1">{items.header}</h1>
                   <p>{truncate(items.text)}</p>

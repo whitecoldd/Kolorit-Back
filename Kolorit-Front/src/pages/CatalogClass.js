@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import {
   Breadcrumb,
   Container,
-  Row,
+  Button,
   Col,
   Nav,
   Navbar,
@@ -14,6 +14,7 @@ import type1 from "../assets/type1.png";
 import type2 from "../assets/type2.png";
 import CatalogMenu from "../comps/CatalogMenu";
 import ItemModelForCat from "../comps/ItemModelForCat";
+import ItemsModelUnfold from "../comps/ItemsModelUnfold";
 import AppPagination from "../comps/AppPagination";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
@@ -189,6 +190,7 @@ const CatalogClass = ({
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = filteredBrands.slice(indexOfFirstPost, indexOfLastPost);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const [Fold, setFold] = useState(true)
   return (
     <>
       <Container>
@@ -262,11 +264,10 @@ const CatalogClass = ({
                   </Nav>
                   <Nav className="">
                     <Nav.Link>
-                      {" "}
-                      <Image src={type1}></Image>
+                      <Button variant="transparent" onClick={()=>setFold(true)}><Image src={type1}></Image></Button>
                     </Nav.Link>
                     <Nav.Link>
-                      <Image src={type2}></Image>
+                    <Button variant="transparent" onClick={()=>setFold(false)}><Image src={type2}></Image></Button>
                     </Nav.Link>
                   </Nav>
                 </Navbar.Collapse>
@@ -286,7 +287,7 @@ const CatalogClass = ({
               ?.filter(
                 (filtered) => filtered.salePrice < parseInt(value[1], 10)
               )
-              ?.map((filtered) => (
+              ?.map((filtered) => (Fold ?
                 <ItemModelForCat
                   Items={filtered}
                   key={filtered._id}
@@ -295,7 +296,15 @@ const CatalogClass = ({
                   selectedItems={selectedItems}
                   onAdd={() => onAdd(filtered)}
                   onRemoveFromPage={() => onRemoveFromPage(filtered._id)}
-                ></ItemModelForCat>
+                ></ItemModelForCat> : <ItemsModelUnfold
+                Items={filtered}
+                key={filtered._id}
+                addToCompare={addToCompare}
+                removeFromCompare={removeFromCompare}
+                selectedItems={selectedItems}
+                onAdd={() => onAdd(filtered)}
+                onRemoveFromPage={() => onRemoveFromPage(filtered._id)}
+              ></ItemsModelUnfold> 
               ))}
           </Container>
 

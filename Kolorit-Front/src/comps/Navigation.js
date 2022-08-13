@@ -133,7 +133,7 @@ export default function Navigation({
 
               <Nav className="me-2 d-flex align-items-center position relative">
                 <Link
-                  to="/"
+                  to="/contacts"
                   className="font-fix nav-link d-flex align-items-center justify-content-between"
                 >
                   <img className="me-2" src={qIcon} /> {t("nav7")}

@@ -44,6 +44,11 @@ strong {
   text-decoration: none;
 }
 
+.cut{
+  height: 90px !important;
+  width: 100% !important;
+}
+
 .breadcrumb mark {
   background-color: transparent;
   font-weight: 700;
@@ -445,6 +450,22 @@ b {
     z-index: 1000 !important;
   }
 
+  .psw{
+    flex-wrap: wrap;
+  }
+
+  .profdata{
+    flex-wrap: wrap;
+  }
+
+  .sliderbtn{
+    text-align: center;
+  }
+
+  .addressbox{
+    width: 100% !important;
+  }
+
   .menu{
     position: absolute;
     left: 235px;
@@ -494,6 +515,13 @@ b {
 
   .orderhandle h1 {
     font-size: medium;
+  }
+
+  .fleximg{
+    margin-top: 50px;
+    padding: 0px;
+    width: 50px ;
+    height: 100px ;
   }
 
   .orderhandle {
@@ -1536,6 +1564,9 @@ center {
 }
 .fs-10{
   font-size: 14px !important;
+}
+.fs-11{
+  font-size: 16px !important;
 }
 .single-prod-img .light {
   font-weight: 700;

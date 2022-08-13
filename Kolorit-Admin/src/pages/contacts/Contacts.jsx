@@ -141,6 +141,8 @@ export default function Product({ productData }) {
             />
             <label>Language</label>
             <select name="lng" onChange={handleChange}>
+              <option value={null}>---</option>
+
               <option value="ru">ru</option>
               <option value="ro">ro</option>
               <option value="en">en</option>
@@ -162,7 +164,7 @@ export default function Product({ productData }) {
             <button onClick={handleClick} className="productButton">
               Update
             </button>
-            <ToastContainer/>
+            <ToastContainer />
           </div>
         </form>
       </div>

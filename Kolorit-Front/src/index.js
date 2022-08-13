@@ -12,9 +12,7 @@ root.render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
       <Suspense fallback="Loading...">
-        <React.StrictMode>
-          <App />
-        </React.StrictMode>
+        <App />
       </Suspense>
     </PersistGate>
   </Provider>

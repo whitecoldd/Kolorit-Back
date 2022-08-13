@@ -50,7 +50,7 @@ const MenuItemsDisplay = () => {
     <div className="hovwhite position-relative">
       <div className="scrollable-div-menu">
         {Cat?.map((Cat) => (
-          <div className="d-flex align-items-center dropdown2 mt-0 mb-0 pt-1 pb-1" type="button">
+          <div className="d-flex align-items-end dropdown2 mt-0 mb-0 pt-1 pb-1" type="button">
             <img width={20} height={20} src={Cat.img} />
             <Nav.Link
               className="nav-fix d-flex align-items-center"
@@ -84,7 +84,7 @@ const MenuItemsDisplay = () => {
                             .map((subsubcat) => {
                               return (
                                 <Container>
-                                  <Link to={`/catalog/${Cat.name}/${subcat.name}/${subsubcat.name}`}>
+                                  <Link to={`/catalog/title/${subcat.name}/${subsubcat.name}`}>
                                     <p className="mb-0">{subsubcat.name}</p>
                                   </Link>
                                 </Container>
