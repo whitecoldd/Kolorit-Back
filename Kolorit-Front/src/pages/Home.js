@@ -95,7 +95,7 @@ export default function Home(props) {
         <Container className="d-flex flex-wrap justify-content-between prod-cont">
           <ProductDisplay></ProductDisplay>
         </Container>
-        <Container className="d-flex flex-wrap align-content-between justify-content-center sales-prod p-3 w-auto mb-4">
+        <Container className="d-flex flex-wrap align-content-between justify-content-center sales-prod ps-1 pe-1 pt-2 pb-2 w-auto mb-4">
           {Items?.filter((Items) => Items.lng === myLocalStorageData)
             .slice(0, 1)
             .map((Items) => (

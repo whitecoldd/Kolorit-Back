@@ -47,7 +47,7 @@ const ProcessOrder = ({ cartItems }) => {
   const [select, setSelect] = useState("---");
   const [text, setText] = useState();
   const [Items, setItems] = useState([]);
-  
+
   useEffect(() => {
     const getItems = async () => {
       try {
@@ -85,7 +85,7 @@ const ProcessOrder = ({ cartItems }) => {
             className="classic mt-3"
             onChange={handleChange}
           >
-            {Items.filter((Items)=> Items.lng === myLocalStorageData).map(
+            {Items.filter((Items) => Items.lng === myLocalStorageData).map(
               (item) => (
                 <option value={item.address}>
                   {item.name}, {item.address}
@@ -93,53 +93,6 @@ const ProcessOrder = ({ cartItems }) => {
               )
             )}
           </select>
-          {/* {Items?.filter((item) => item.lng === myLocalStorageData)
-            .map((Items) => (
-              <Container>
-                <Container className="content-cont d-flex mt-5">
-                  <Image fluid src={Items.img}></Image>
-                  <Container className="p-4">
-                    <h1 className="p-3">{Items.name}</h1>
-                    <Container className="d-flex align-items-start">
-                      <Image width="auto" height="auto" src={phonep}></Image>
-                      <Container className="d-flex flex-column align-items-start">
-                        <h3>{t("phone")}</h3>
-                        <p>{Items.phone}</p>
-                      </Container>
-                    </Container>
-                    <Container className="d-flex align-items-start">
-                      <Image width="auto" height="auto" src={address}></Image>
-                      <Container
-                        name="address"
-                        className="d-flex flex-column align-items-start mb-3"
-                      >
-                        <h3>{t("address")}</h3>
-                        <p name="address">{Items.address}</p>
-                        <a href="#map" type="button" className="bttn-map">
-                          {t("map-btn")}
-                        </a>
-                      </Container>
-                    </Container>
-                    <Container className="d-flex align-items-start">
-                      <Image width="auto" height="auto" src={clock}></Image>
-                      <Container className="d-flex flex-column align-items-start">
-                        <h3>{t("nav7")}</h3>
-                        <Container className="d-flex align-items-start">
-                          <Container className="text-center linevert">
-                            <p>{t("days")}</p>
-                            <p>{Items.workHours} </p>
-                          </Container>
-                          <Container className="text-center">
-                            <p>{t("day")}</p>
-                            <p> {Items.workHoursH} </p>
-                          </Container>
-                        </Container>
-                      </Container>
-                    </Container>
-                  </Container>
-                </Container>
-              </Container>
-            ))} */}
         </>
       );
       return text;
@@ -181,17 +134,17 @@ const ProcessOrder = ({ cartItems }) => {
   };
   return (
     <>
-      <Container>
+      <Container className="mar-ins">
         <Form>
           <Container className="d-flex align-items-baseline p-0">
             <h1>{t("procorder")}</h1> {cartItems.length} {t("prod")}
           </Container>
 
-          <Container className="d-flex align-items-center">
+          <Container className="d-flex align-items-center position-relative">
             <Button variant="warning" className="br-50 position-absolute">
               1
             </Button>
-            <h2 className="position-relative ms-3">{t("userdet")}</h2>
+            <h2 className=" ms-3">{t("userdet")}</h2>
           </Container>
           <Container className="b-left">
             <Container className="d-flex justify-content-start forming w-30 m-0">
@@ -222,7 +175,7 @@ const ProcessOrder = ({ cartItems }) => {
                   </Link>{" "}
                   <ArrowForwardIosIcon />{" "}
                 </h4>
-                <Container className="d-flex ">
+                <Container className="form-control-process">
                   <Form.Group
                     className="mb-3 pe-3 "
                     id="formprocess"
@@ -263,48 +216,52 @@ const ProcessOrder = ({ cartItems }) => {
               </>
             )}
           </Container>
-          <Button variant="warning" className="br-50 position-absolute mt-1">
-            2
-          </Button>
-          <h2 className="position-relative ms-4">{t("deltype")}</h2>
-          <Container className="b-left">
-            <Form.Select
-              name="delType"
-              value={select}
-              aria-label="Default select example"
-              onChange={(e) => {
-                handleSelect(e);
-                handleChange(e);
-              }}
-            >
-              <option>---</option>
-              <option value="pick-up">{t("pickup")}</option>
-              <option value="delivery">{t("del")}</option>
-            </Form.Select>
-            <Container className="mt-4">{text}</Container>
+          <Container className="p-0 m-0 position-relative">
+            <Button variant="warning" className="br-50 position-absolute mt-1">
+              2
+            </Button>
+            <h2 className=" ms-4">{t("deltype")}</h2>
+            <Container className="b-left">
+              <Form.Select
+                name="delType"
+                value={select}
+                aria-label="Default select example"
+                onChange={(e) => {
+                  handleSelect(e);
+                  handleChange(e);
+                }}
+              >
+                <option>---</option>
+                <option value="pick-up">{t("pickup")}</option>
+                <option value="delivery">{t("del")}</option>
+              </Form.Select>
+              <Container className="mt-4">{text}</Container>
+            </Container>
           </Container>
 
-          <Button variant="warning" className="br-50 position-absolute mt-2">
-            3
-          </Button>
-          <h2 className=" position-relative ms-4 mt-2">{t("paytype")}</h2>
-          <Container className="b-left">
-            <Form.Select
-              name="payment"
-              className="mb-3"
-              aria-label="Default select example"
-              onChange={handleChange}
-            >
-              <option value="transaction">{t("trans")}</option>
-              <option value="online-payment">{t("online")}</option>
-              <option value="credit">{t("cred")}</option>
-              <option value="cash">{t("cash")}</option>
-            </Form.Select>
+          <Container className="p-0 m-0 position-relative">
+            <Button variant="warning" className="br-50 position-absolute mt-2">
+              3
+            </Button>
+            <h2 className="  ms-4 mt-2">{t("paytype")}</h2>
+            <Container className="b-left">
+              <Form.Select
+                name="payment"
+                className="mb-3"
+                aria-label="Default select example"
+                onChange={handleChange}
+              >
+                <option value="transaction">{t("trans")}</option>
+                <option value="online-payment">{t("online")}</option>
+                <option value="credit">{t("cred")}</option>
+                <option value="cash">{t("cash")}</option>
+              </Form.Select>
+            </Container>
+            <button onClick={handleSubmit} className="bttn-cart mb-3">
+              {t("sendit")}
+            </button>
           </Container>
-          <button onClick={handleSubmit} className="bttn-cart mb-3">
-            {t("sendit")}
-          </button>
-          <ToastContainer/>
+          <ToastContainer />
         </Form>
         <p className="black">{t("conf")}</p>
       </Container>

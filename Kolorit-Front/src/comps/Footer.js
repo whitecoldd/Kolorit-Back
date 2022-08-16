@@ -14,10 +14,10 @@ export function Footer (props) {
       <>
         <Container fluid className='footer mt-2'>
           <Container className='d-flex footer-no' sticky='bottom'>
-            <Container className='d-flex flex-column align-items-start pt-3 pb-5 me-5'>
+            <Container className='d-flex flex-column align-items-start pad-handle'>
               <a href='/'><Image src={logo} ></Image></a>
               <h4 className='mt-4 '>{t('foot1')}</h4>
-              <h5 className='mt-3 lineup pt-3'>+373-79-559-663 , +373-68-112-889</h5>
+              <h5 className='mt-3 pt-3 lineup'><a href="tel: +37379559663" className='real-no-dec white'>+373&#x2212;79&#x2212;559&#x2212;663 </a>, <a className='real-no-dec white' href="tel: +37368112889">+373&#x2212;68&#x2212;112&#x2212;889</a></h5>
               <p>{t('foot2')}</p>
               <input placeholder={`${t('foot26')}`} className='mt-3 mb-4 input-fix' id='e-mail'></input>
               <Container className='d-flex'>

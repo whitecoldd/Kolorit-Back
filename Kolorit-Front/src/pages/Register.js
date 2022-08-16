@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import {publicRequest} from '../requests/request'
 import { useTranslation } from 'react-i18next'
 
-const Register = () => {
+const Register = ({Log, setLog}) => {
     const [username, setUsername] = useState("");
     const [fname, setFname] = useState("");
     const [lname, setLname] = useState("");
@@ -29,7 +29,7 @@ const Register = () => {
         try {
             const res = await publicRequest.post(`/api/auth/register`, user)
             console.log(res.data)
-            history('/login')
+            setLog(false)
         } catch (e) {
             console.log(e)
         }
@@ -39,7 +39,6 @@ const Register = () => {
     return (
         <>
             <Container>
-                <h1>{t('reg')}</h1>
                 <Form className="d-flex flex-column align-items-center">
                     <Form.Group className="mb-3 d-flex flex-wrap  w-50" controlId="exampleForm.ControlInput1">
                         <Form.Label>E-mail {t('address')}</Form.Label>
@@ -52,14 +51,6 @@ const Register = () => {
                     <Form.Group className="mb-3 d-flex flex-wrap  w-50" controlId="exampleForm.ControlInput2">
                         <Form.Label>{t('uname')}</Form.Label>
                         <Form.Control type="text" name='username' placeholder="имяФамилия" onChange={handleChange} />
-                    </Form.Group>
-                    <Form.Group className="mb-3 d-flex flex-wrap  w-50" controlId="exampleForm.ControlInput3">
-                        <Form.Label>{t('uname')}</Form.Label>
-                        <Form.Control type="text" name='fname' placeholder="Имя" onChange={handleChange} />
-                    </Form.Group>
-                    <Form.Group className="mb-3 d-flex flex-wrap  w-50" controlId="exampleForm.ControlInput4">
-                        <Form.Label>{t('sname')}</Form.Label>
-                        <Form.Control type="text" name='lname' placeholder="Фамилия" onChange={handleChange} />
                     </Form.Group>
                     <Form.Group className="mb-3 d-flex flex-wrap  w-50" controlId="exampleForm.ControlInput5">
                         <Form.Label>{t('pw')}</Form.Label>

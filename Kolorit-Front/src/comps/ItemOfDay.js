@@ -7,7 +7,7 @@ import bought from "../assets/bought.png";
 import com from "../assets/com.png";
 import heart from "../assets/heart-sm.png";
 import { useTranslation } from "react-i18next";
-import dayjs from 'dayjs'
+import dayjs from "dayjs";
 const ItemOfDay = (props) => {
   const { Items, onAdd, onRemoveFromPage, addToCompare, removeFromCompare } =
     props;
@@ -53,10 +53,11 @@ const ItemOfDay = (props) => {
         key={Items.id}
         className="w-100"
       >
-        <h3 className="text-center">{t("itemofday")}:</h3>
         <Badge onMouseEnter={SetPromoType()} bg={Items.promoType}>
           {Items.promo}
         </Badge>
+        <h3 className="text-center">{t("itemofday")}:</h3>
+
         <Container className="d-flex flex-column align-items-center justify-content-between img-on-hover">
           <Container>
             <Link to={`/catalog/category/${Items._id}`}>

@@ -49,7 +49,7 @@ export default function Promotions() {
       <Container>
         <Container className="d-flex flex-wrap justify-content-between promo-table p-0 mb-3">
           {currentPosts.map((items) => (
-            <Container className="promos mb-4 d-flex flex-wrap align-content-start  me-3">
+            <Container className="promos1 mb-4 d-flex flex-wrap align-content-start  me-3">
               <Link to={`/promotions/${items._id}`} className="real-no-dec">
                 <Image fluid className="cut" src={items.img}></Image>
                 <Container>

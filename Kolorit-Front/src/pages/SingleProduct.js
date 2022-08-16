@@ -139,7 +139,7 @@ const SingleProduct = ({
                     </Badge>
                   </span>
                 </Container>
-                <Container className="d-flex smth p-2 pb-5">
+                <Container className="buy-box-btns smth p-2 pb-5">
                   <Button
                     variant="outline-warning"
                     onClick={() => {
@@ -151,7 +151,7 @@ const SingleProduct = ({
                   </Button>
                   <Container className="d-flex scale">
                     <button
-                      className="desCart me-2"
+                      className="desCart me-2 mb-1"
                       onClick={() => {
                         decreaseQty(items);
                         setfirst(first - 1);
@@ -159,11 +159,11 @@ const SingleProduct = ({
                     >
                       <Image src={minus}></Image>
                     </button>
-                    <Container className="qtyCart d-flex me-2">
+                    <Container className="qtyCart d-flex me-2 ps-3 pe-2">
                       <h1 className="qtyCartText">{first}</h1>
                     </Container>
                     <button
-                      className="incCart"
+                      className="incCart mb-1"
                       onClick={() => {
                         onAdd(items);
                         setfirst(first + 1);

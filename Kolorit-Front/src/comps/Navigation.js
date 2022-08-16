@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Nav, Navbar, Form, NavDropdown } from "react-bootstrap";
+import { Container, Nav, Navbar, Form, NavDropdown, Button } from "react-bootstrap";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
 import { Link } from "react-router-dom";
@@ -27,6 +27,8 @@ export default function Navigation({
   onRemoveFromPage,
   removeFromCompare,
   addToCompare,
+  Open,
+  setOpen
 }) {
   const [Items, setItems] = useState([]);
   useEffect(() => {
@@ -105,7 +107,7 @@ export default function Navigation({
           expand="lg"
           bg="dark"
           variant="dark"
-          className="nav-fix1 sticky-top"
+          className="nav-fix1 sticky-top inv-nav"
         >
           <Container className="nav-fix">
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -230,7 +232,7 @@ export default function Navigation({
                   </div>
                 )}
               </Container>
-              <Nav>
+              <Nav className="main-nav-inv">
                 <Link
                   to="/compare"
                   className="d-flex justify-content-center flex-wrap nav-link text-center"
@@ -258,12 +260,32 @@ export default function Navigation({
                   )}{" "}
                   {t("head2")}
                 </Link>
-                <Link
-                  to={user ? `/profile` : `/login`}
+                {user ? <Link
+                  to={`/profile`}
                   className="d-flex justify-content-center flex-wrap nav-link"
                 >
                   <img src={prof} />
-                  {user ? <>{t("head3/1")}</> : <>{t("head3/2")}</>}
+                   {t("head3/1")}
+                </Link> : <Button variant="transparent" className=" d-flex justify-content-center flex-wrap nav-link" onClick={()=>setOpen(!Open)}> <img src={prof} /> {t("head3/2")}</Button>}
+              </Nav>
+              <Nav className="me-auto vis-inv">
+                <Link className="nav-link white" to="/about">
+                  {t("nav1")}
+                </Link>
+                <Link className="nav-link white" to="/contacts">
+                  {t("nav2")}
+                </Link>
+                <Link className="nav-link gold" to="/sales">
+                  {t("nav3")}
+                </Link>
+                <Link className="nav-link white" to="/partnership">
+                  {t("nav4")}
+                </Link>
+                <Link className="nav-link white" to="/brands">
+                  {t("nav5")}
+                </Link>
+                <Link className="nav-link gold" to="/promotions">
+                  {t("nav6")}
                 </Link>
               </Nav>
             </Navbar.Collapse>

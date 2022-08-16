@@ -5,7 +5,7 @@ import { login } from '../redux/apiCalls'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-const Login = () => {
+const Login = ({setOpen}) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const dispatch = useDispatch();
@@ -17,6 +17,7 @@ const Login = () => {
         try {
             login(dispatch, { username, password });
             history('/profile')
+            setOpen(false)
         }
         catch (e) {
             console.log(e)
@@ -26,7 +27,6 @@ const Login = () => {
     return (
         <>
             <Container>
-                <h1>{t('enter')}</h1>
                 <Form className="d-flex flex-column align-items-center">
                     <Form.Group className="mb-3 d-flex flex-wrap  w-50" controlId="exampleForm.ControlInput1">
                         <Form.Label>{t('name')}</Form.Label>
@@ -37,7 +37,6 @@ const Login = () => {
                         <Form.Control type="password" placeholder="********" onChange={(e) => setPassword(e.target.value)} />
                     </Form.Group>
                     <Button onClick={handleClick} disabled={isFetching} className='bttn-cart mb-3'>{t('auth')}</Button>
-                    <Link to='/register'><h2 className='black real-no-dec'>{t('reg')}</h2></Link>
                 </Form>
                 {error && <h2>{t('err')}</h2>}
                 

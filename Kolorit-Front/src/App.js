@@ -28,8 +28,9 @@ import Order from "./pages/Order";
 import BrandCatalog from "./pages/BrandCatalog";
 import { useSelector } from "react-redux";
 import SingleArticle from "./pages/SingleArticle";
-
+import ModalComp from "./comps/ModalComp";
 function App() {
+  const [Open, setOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const onAdd = (product) => {
     const productExit = cartItems.find((item) => item._id === product._id);
@@ -69,6 +70,7 @@ function App() {
   };
 
   const [selectedItems, setSelectedItems] = useState([]);
+  const [Log, setLog] = useState(false);
 
   const addToCompare = (item) => {
     setSelectedItems((selectedItems) => [...selectedItems, item]);
@@ -94,7 +96,10 @@ function App() {
           cartItems={cartItems}
           onAdd={onAdd}
           onRemoveFromPage={onRemoveFromPage}
+          Open={Open}
+          setOpen={setOpen}
         />
+        <ModalComp Log={Log} setLog={setLog} Open={Open} setOpen={setOpen} />
         <Routes>
           <Route
             exact
@@ -166,7 +171,7 @@ function App() {
               />
             }
           ></Route>
-          <Route exact path="/register" element={<Register />}></Route>
+
           <Route
             exact
             path="/login"
