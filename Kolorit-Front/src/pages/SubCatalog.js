@@ -42,7 +42,8 @@ export default function Catalog() {
       </Container>
       <Container className="d-flex flex-wrap justify-content-center no-pad mb-5">
         {Items?.map((item) => (
-          <Container className="big-margin mt-2 mb-3 w-21 ">
+          
+          <Container key={item._id} className="big-margin mt-2 mb-3 w-21 ">
             <Link
               className="real-no-dec "
               to={`/catalog/${item.cat}/${item.name}`}
@@ -56,10 +57,10 @@ export default function Catalog() {
         ))}
       </Container>
 
-      <Container>
+      {/* <Container>
         <h2 className="bold pt-4 pb-4">Акции и предложения</h2>
         <PromosDisplay></PromosDisplay>
-      </Container>
+      </Container> */}
     </>
   );
 }
