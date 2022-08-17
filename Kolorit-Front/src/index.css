@@ -283,6 +283,7 @@ b {
   width: auto;
   overflow-y: scroll;
   overflow-x: hidden;
+  padding-right: 0px;
 }
 
 .addressbox {
@@ -1997,8 +1998,9 @@ select .classic:focus {
   display: inline-block;
   z-index: 100 !important;
   border: none !important;
-  width: 260px;
+  width: 250px !important;
   margin: 10px 0px 10px 10px;
+  transition: 10s 10s !important;
 }
 .dropdown-search {
   position: relative;
@@ -2023,15 +2025,15 @@ select .classic:focus {
   display: none;
   position: absolute;
   top: 0px;
-  left: 280px;
+  left: 15px !important;
   width: 1000px;
   height: 600px;
   padding: 10px;
   background-color: transparent !important;
-  border: none !important;
   border-radius: 15px;
   box-shadow: -6px 6px 4px rgba(0, 0, 0, 0.25);
   z-index: 100 !important;
+  transition: 0s 130s !important;
 }
 .dropdown-content1 {
   display: none;
@@ -2039,6 +2041,17 @@ select .classic:focus {
   background-color: transparent !important;
   border: none !important;
   min-width: 160px;
+  z-index: 100 !important;
+}
+.wrapper{
+  display: none;
+  background: transparent !important;
+  position: absolute;
+  top: 0px;
+  left: 257px;
+  width: 20px !important;
+  height: 600px;
+  border-radius: 15px;
   z-index: 100 !important;
 }
 
@@ -2289,11 +2302,16 @@ select .classic:focus {
 }
 
 .dropdown2:hover .dropdown-content-menu {
+  transition: 180s 180s !important;
   display: block;
   z-index: 100 !important;
   border: none !important;
   background-color: #444444 !important;
-  transition: 10ms ease;
+}
+.dropdown2:hover .wrapper {
+  display: flex;
+  padding: 0px !important;
+  margin: 0px !important;
 }
 .dropdown2:hover .dropdown-content-menu .dropdown-content-all {
   display: flex !important;
@@ -2301,6 +2319,7 @@ select .classic:focus {
   flex-wrap: wrap !important;
   justify-content: start !important;
   align-content: baseline !important;
+
 }
 .dropdown2:hover .dropdown-content-menu .dropdown-content-all p {
   font-weight: 300 !important;
@@ -2309,9 +2328,7 @@ select .classic:focus {
 .dropdown2:hover .dropdown-content-menu a {
   padding: 0px 10px;
 }
-.dropdown2:hover {
-  transition: all 1s ease !important;
-}
+
 
 .dropdown1:hover .dropbtn1 {
   background-color: transparent !important;
