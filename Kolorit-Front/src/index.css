@@ -657,6 +657,18 @@ b {
     margin: 10px 10px !important;
   }
 
+  /* .my-modal-window1{
+    position: absolute;
+    top: 50% !important;
+    right: 10% !important;
+    width: 100% !important;
+    height: auto !important;
+    padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  } */
+
   .about-text {
     z-index: 100 !important;
   }

@@ -26,7 +26,7 @@ const ModalComp = ({ Open, setOpen, Log, setLog }) => {
   const { t, i18n } = useTranslation();
 
   return (
-    <Modal isOpen={Open} style={customStyles}>
+    <Modal isOpen={Open} className="my-modal-window1" style={customStyles}>
       {Log ? (
         <Container className="d-flex justify-content-around">
           <button className="nobr-bttn" onClick={() => setLog(true)}>

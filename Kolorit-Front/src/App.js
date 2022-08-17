@@ -172,12 +172,12 @@ function App() {
             }
           ></Route>
 
-          <Route
+          {/* <Route
             exact
             path="/login"
             {...(admin ? <Navigate to="/profile" /> : <Navigate to="/login" />)}
             element={<Login />}
-          ></Route>
+          ></Route> */}
           {admin && (
             <>
               <Route exact path="/profile" element={<Profile />}></Route>

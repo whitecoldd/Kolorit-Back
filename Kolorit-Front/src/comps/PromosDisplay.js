@@ -55,9 +55,9 @@ const PromosDisplay = () => {
       >
         {items
           ?.filter((items) => items.lng === myLocalStorageData)
-          .slice(0, 4)
-          .map((items) => (
-            <Container className="promos mb-4 d-flex flex-wrap align-content-start">
+          ?.slice(0, 4)
+          ?.map((items) => (
+            <Container key={items._id} className="promos mb-4 d-flex flex-wrap align-content-start">
               <Link to={`/promotions/${items._id}`} className="real-no-dec">
                 <Image fluid className="cut" src={items.img}></Image>
                 <Container>
