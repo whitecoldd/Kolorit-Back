@@ -56,7 +56,7 @@ function App() {
   return (
     <>
       <Router>
-        <Topbar />
+        <Topbar admin={admin} />
         <div className="container">
           <Sidebar />
           <Routes>

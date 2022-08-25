@@ -1,70 +1,118 @@
-import React, { useState } from 'react'
-import { Container, Form, Button } from 'react-bootstrap'
-import { register } from '../redux/apiCalls'
+import React, { useState } from "react";
+import { Container, Form, Button } from "react-bootstrap";
+import { register } from "../redux/apiCalls";
 import { useRef } from "react";
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import {publicRequest} from '../requests/request'
-import { useTranslation } from 'react-i18next'
-
-const Register = ({Log, setLog}) => {
-    const [username, setUsername] = useState("");
-    const [fname, setFname] = useState("");
-    const [lname, setLname] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [error, setError] = useState({})
-    const dispatch = useDispatch();
-    const history = useNavigate()
-    const [inputs, setInputs] = useState({})
-    const handleChange = (e) => {
-        setInputs((prev) => {
-            return { ...prev, [e.target.name]: e.target.value };
-        });
-    };
-    const admin = useSelector((state) => state.user.currentUser);
-    const user = { ...inputs }
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        try {
-            const res = await publicRequest.post(`/api/auth/register`, user)
-            console.log(res.data)
-            setLog(false)
-        } catch (e) {
-            console.log(e)
-        }
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { publicRequest } from "../requests/request";
+import { useTranslation } from "react-i18next";
+import { ToastContainer, toast } from "react-toastify";
+import { injectStyle } from "react-toastify/dist/inject-style";
+const Register = ({ Log, setLog }) => {
+  const [username, setUsername] = useState("");
+  const [fname, setFname] = useState("");
+  const [lname, setLname] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState({});
+  const dispatch = useDispatch();
+  const history = useNavigate();
+  const [inputs, setInputs] = useState({});
+  if (typeof window !== "undefined") {
+    injectStyle();
+  }
+  const handleChange = (e) => {
+    setInputs((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
+    });
+  };
+  const admin = useSelector((state) => state.user.currentUser);
+  const user = { ...inputs };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await publicRequest.post(`/api/auth/register`, user);
+      console.log(res.data);
+      toast.success(t("regsuc"), {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    } catch (e) {
+      console.log(e);
+      toast.error(t("err"), {
+        position: toast.POSITION.TOP_RIGHT,
+      });
     }
-    const {t} = useTranslation()
+  };
+  const { t } = useTranslation();
 
-    return (
-        <>
-            <Container>
-                <Form className="d-flex flex-column align-items-center">
-                    <Form.Group className="mb-3 d-flex flex-wrap  w-50" controlId="exampleForm.ControlInput1">
-                        <Form.Label>E-mail {t('address')}</Form.Label>
-                        <Form.Control type="email" name='email' placeholder="name@example.com" onChange={handleChange} />
-                    </Form.Group>
-                    <Form.Group className="mb-3 d-flex flex-wrap  w-50" controlId="exampleForm.ControlInput1">
-                        <Form.Label>{t('phone')}</Form.Label>
-                        <Form.Control type="phone" name='phone' placeholder="+373xxxxxxxx" onChange={handleChange} />
-                    </Form.Group>
-                    <Form.Group className="mb-3 d-flex flex-wrap  w-50" controlId="exampleForm.ControlInput2">
-                        <Form.Label>{t('uname')}</Form.Label>
-                        <Form.Control type="text" name='username' placeholder="имяФамилия" onChange={handleChange} />
-                    </Form.Group>
-                    <Form.Group className="mb-3 d-flex flex-wrap  w-50" controlId="exampleForm.ControlInput5">
-                        <Form.Label>{t('pw')}</Form.Label>
-                        <Form.Control type="password" name='password' placeholder="********" onChange={handleChange}/>
-                    </Form.Group>
-                    {/* <Form.Group className="mb-3 d-flex flex-wrap  w-50" controlId="exampleForm.ControlInput6">
+  return (
+    <>
+      <Container>
+        <Form className="d-flex form-alter1 flex-column align-items-center">
+          <Form.Group
+            className="mb-3 d-flex flex-wrap form-div w-50"
+            controlId="exampleForm.ControlInput1"
+          >
+            <Form.Label>E-mail {t("address")}</Form.Label>
+            <Form.Control
+              type="email"
+              name="email"
+              placeholder="name@example.com"
+              onChange={handleChange}
+            />
+          </Form.Group>
+          <Form.Group
+            className="mb-3 d-flex flex-wrap form-div w-50"
+            controlId="exampleForm.ControlInput1"
+          >
+            <Form.Label>{t("phone")}</Form.Label>
+            <Form.Control
+              type="phone"
+              name="phone"
+              placeholder="+373xxxxxxxx"
+              onChange={handleChange}
+            />
+          </Form.Group>
+          <Form.Group
+            className="mb-3 d-flex flex-wrap form-div w-50"
+            controlId="exampleForm.ControlInput2"
+          >
+            <Form.Label>{t("name")}</Form.Label>
+            <Form.Control
+              type="text"
+              name="username"
+              placeholder="имяФамилия"
+              onChange={handleChange}
+            />
+          </Form.Group>
+          <Form.Group
+            className="mb-3 d-flex flex-wrap form-div w-50"
+            controlId="exampleForm.ControlInput5"
+          >
+            <Form.Label>{t("pw")}</Form.Label>
+            <Form.Control
+              type="password"
+              name="password"
+              placeholder="********"
+              onChange={handleChange}
+            />
+          </Form.Group>
+          {/* <Form.Group className="mb-3 d-flex flex-wrap  w-50" controlId="exampleForm.ControlInput6">
                         <Form.Label>Подтвердите пароль</Form.Label>
                         <Form.Control type="password" placeholder="********" onChange={(e) => setPassword(e.target.value)} />
                     </Form.Group> */}
-                    <Button type='submit' onClick={handleSubmit} className='bttn-cart mb-3'>{t('create')}</Button>
-                </Form>
-            </Container>
-        </>
-    )
-}
+          <Button
+            type="submit"
+            onClick={handleSubmit}
+            className="bttn-cart mb-3"
+          >
+            {t("create")}
+          </Button>
+          <ToastContainer />
+        </Form>
+      </Container>
+    </>
+  );
+};
 
-export default Register
+export default Register;

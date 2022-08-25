@@ -6,11 +6,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import redact from "../assets/redact.svg";
-import { deleteUser, updateUser } from "../redux/apiCalls";
+import { deleteUser, updateUser, logoutFunc } from "../redux/apiCalls";
 import home from "../assets/home.png";
 import shop from "../assets/shop.png";
 import profile from "../assets/profile.png";
 import cart from "../assets/cart1.png";
+import Modal from "react-modal";
 const Profile = () => {
   const [Items, setItems] = useState({});
   const user = useSelector((state) => state.user.currentUser);
@@ -36,18 +37,8 @@ const Profile = () => {
   const handleDelete = (e) => {
     e.preventDefault();
     deleteUser(id, dispatch);
-    localStorage.clear();
+    logoutFunc(dispatch);
     history("/");
-    // useEffect(() => {
-    //     const getItems = async () => {
-    //         try {
-    //             const res = await userRequest.delete(`/user/find/${id}`)
-    //         } catch (e) {
-    //             console.log(e)
-    //         }
-    //     }
-    //     getItems()
-    // }, [id])
   };
 
   const [inputs, setInputs] = useState([]);
@@ -79,6 +70,31 @@ const Profile = () => {
     e.preventDefault();
     setShowP(!showP);
   };
+  const customStyles = {
+    content: {
+      top: "35%",
+      left: "50%",
+      right: "50%",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      width: "400px",
+      height: "200px",
+      color: "white",
+      background:
+        "radial-gradient(circle, rgba(250,190,77,1) 20%, rgba(213,213,213,1) 81%) ",
+      borderRadius: "20px",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
+      alignItems: "center",
+    },
+    overlay: {
+      zIndex: 1000,
+    },
+  };
+
+  const [Open1, setOpen1] = useState(false);
 
   return (
     <>
@@ -301,11 +317,25 @@ const Profile = () => {
                     <Container className="mt-5">
                       <Button
                         variant="transparent"
-                        onClick={handleDelete}
+                        onClick={() => setOpen1(true)}
                         className="gray"
                       >
                         &#10060; {t("delacc")}
                       </Button>
+                      <Modal isOpen={Open1} style={customStyles}>
+                        <h2 className="text-center mb-2">{t("confdel")}</h2>
+                        <div className="d-flex justify-content-around w-100">
+                          <button className="bttn-more" onClick={handleDelete}>
+                            {t("yes")}
+                          </button>
+                          <button
+                            className="bttn-more"
+                            onClick={() => setOpen1(false)}
+                          >
+                            {t("no")}
+                          </button>
+                        </div>
+                      </Modal>
                     </Container>
                   </Container>
                 </Container>

@@ -16,7 +16,7 @@ const ModalComp = ({ Open, setOpen, Log, setLog }) => {
       transform: "translate(-50%, -50%)",
       width: "auto",
       color: "white",
-      background: "orange",
+      background: "radial-gradient(circle, rgba(250,190,77,1) 20%, rgba(213,213,213,1) 81%) ",
       borderRadius: "20px",
     },
     overlay: {
@@ -27,6 +27,11 @@ const ModalComp = ({ Open, setOpen, Log, setLog }) => {
 
   return (
     <Modal isOpen={Open} className="my-modal-window1" style={customStyles}>
+      <div className="d-flex justify-content-end">
+        <button onClick={() => setOpen(false)} className="bttn-x">
+          X
+        </button>
+      </div>
       {Log ? (
         <Container className="d-flex justify-content-around">
           <button className="nobr-bttn" onClick={() => setLog(true)}>
@@ -46,7 +51,11 @@ const ModalComp = ({ Open, setOpen, Log, setLog }) => {
           </button>
         </Container>
       )}
-      {Log ? <Register Log={Log} setLog={setLog} /> : <Login Open={Open} setOpen={setOpen} />}
+      {Log ? (
+        <Register Log={Log} setLog={setLog} />
+      ) : (
+        <Login Open={Open} setOpen={setOpen} />
+      )}
     </Modal>
   );
 };

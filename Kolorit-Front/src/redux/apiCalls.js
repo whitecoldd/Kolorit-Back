@@ -2,6 +2,7 @@ import {
   loginFailure,
   loginStart,
   loginSuccess,
+  logout,
   registerStart,
   registerSuccess,
   registerFailure,
@@ -29,10 +30,10 @@ export const login = async (dispatch, user) => {
     dispatch(loginFailure());
   }
 };
-export const logout = async (dispatch) => {
+export const logoutFunc = (dispatch) => {
   dispatch(loginStart());
   try {
-    const res = await userRequest.delete("/api/auth/logout");
+    // const res = await userRequest.get("/api/auth/logout");
     dispatch(logout());
   } catch (err) {
     dispatch(loginFailure());

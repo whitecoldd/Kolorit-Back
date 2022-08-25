@@ -55,7 +55,7 @@ const ItemModel = (props) => {
         onMouseEnter={() => setIsShown(true)}
         onMouseLeave={() => setIsShown(false)}
         key={Items.id}
-        className="d-flex flex-wrap align-content-between mt-2 mb-2 sales-prod1 m-1 p-2"
+        className="d-flex flex-wrap align-content-between justify-content-between mt-2 mb-2 sales-prod1 m-1 p-2"
       >
         <Badge onMouseEnter={SetPromoType()} bg={Items.promoType}>
           {Items.promo}

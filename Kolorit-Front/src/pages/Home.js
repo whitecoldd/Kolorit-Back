@@ -166,7 +166,7 @@ export default function Home(props) {
               <AppPagination Items={Items} setItems={(item) => setItems(item)} ></AppPagination>
             </Container> */}
         </Container>
-        <Container className="d-flex flex-wrap justify-content-center mt-5 mb-3">
+        <Container className="d-flex flex-wrap justify-content-center mt-1 mb-3">
           <Link type="button" to="/catalog" className="bttn-more">
             {t("more1")}
           </Link>
@@ -176,7 +176,7 @@ export default function Home(props) {
         <h1 className="pt-4 pb-4">{t("car2")}</h1>
         <Container>
           <PromosDisplay></PromosDisplay>
-          <Container className="d-flex flex-wrap justify-content-center mt-5 mb-3">
+          <Container className="d-flex flex-wrap justify-content-center mt-1 mb-3">
             <Link type='button' to='/promotions' className="bttn-more">
               {t("more2")}
             </Link>
@@ -238,7 +238,7 @@ export default function Home(props) {
               <AppPagination Items={Items} setItems={(item) => setItems(item)}  ></AppPagination>
             </Container> */}
         </Container>
-        <Container className="d-flex flex-wrap justify-content-center mt-5 mb-3">
+        <Container className="d-flex flex-wrap justify-content-center mt-1 mb-3">
           <Link type="button" to="/catalog" className="bttn-more">
             {t("more1")}
           </Link>
@@ -306,7 +306,7 @@ export default function Home(props) {
               <AppPagination Items={Items} setItems={(Items) => setItems(Items)} ></AppPagination>
             </Container> */}
         </Container>
-        <Container className="d-flex flex-wrap justify-content-center mt-5 mb-3">
+        <Container className="d-flex flex-wrap justify-content-center mt-1 mb-3">
           <Link type="button" to="/catalog" className="bttn-more">
             {t("more1")}
           </Link>

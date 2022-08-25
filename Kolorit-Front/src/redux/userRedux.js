@@ -98,6 +98,7 @@ export const {
   loginStart,
   loginSuccess,
   loginFailure,
+  logout,
   registerStart,
   registerSuccess,
   registerFailure,

@@ -10,12 +10,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { logout } from "../redux/apiCalls";
+import { logoutFunc } from "../redux/apiCalls";
 import home from "../assets/home.png";
 import shop from "../assets/shop.png";
 import profile from "../assets/profile.png";
 import cart from "../assets/cart1.png";
-
 const Profile = () => {
   const [Items, setItems] = useState([]);
   const user = useSelector((state) => state.user.currentUser);
@@ -31,7 +30,7 @@ const Profile = () => {
   const handleClick = (e) => {
     e.preventDefault();
     try {
-      localStorage.clear();
+      logoutFunc(dispatch)
       history("/");
     } catch (e) {
       console.log(e);

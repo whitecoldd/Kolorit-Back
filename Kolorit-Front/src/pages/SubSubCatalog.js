@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Col, Image, Breadcrumb } from "react-bootstrap";
 import { Categories } from "../comps/Categories";
-import PromosDisplay from "../comps/PromosDisplay";
+import PromosDisplayForCat from "../comps/PromosDisplayForCat";
 import { Link } from "react-router-dom";
 import CatalogClass from "./CatalogClass";
 import { publicRequest } from "../requests/request";
@@ -40,7 +40,7 @@ export default function Catalog() {
 
         <h1 className="bold mb-5">{decodeURIComponent(category)}</h1>
       </Container>
-      <Container className="d-flex flex-wrap justify-content-center no-pad mb-5">
+      <Container className="d-flex flex-wrap justify-content-center scrolldiv-cat no-pad mb-5">
         {Items?.map((item) => (
           <Container key={item._id} className="big-margin mt-2 mb-3 w-21 ">
             <Link
@@ -56,10 +56,10 @@ export default function Catalog() {
         ))}
       </Container>
 
-      {/* <Container>
+      <Container>
         <h2 className="bold pt-4 pb-4">Акции и предложения</h2>
-        <PromosDisplay></PromosDisplay>
-      </Container> */}
+        <PromosDisplayForCat></PromosDisplayForCat>
+      </Container> 
     </>
   );
 }
