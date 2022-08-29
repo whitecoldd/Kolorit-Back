@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ItemsModelUnfold from "../comps/ItemsModelUnfold";
+import MobileMenu from "../comps/MobileMenu";
+import NewMobileMenu from "../comps/NewMobileMenu";
 import { publicRequest } from "../requests/request";
 export default function Partnership({
   onAdd,
@@ -29,6 +31,7 @@ export default function Partnership({
           removeFromCompare={removeFromCompare}
         ></ItemsModelUnfold>
       ))} */}
+      <NewMobileMenu/>
     </>
   );
 }

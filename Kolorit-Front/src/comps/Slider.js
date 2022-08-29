@@ -46,7 +46,7 @@ const Slider = () => {
           </Link>
           <Carousel.Caption>
             <h2 className="pic-text position-absolute white">{items.header}</h2>
-            <p className="pic-text-lower position-absolute">{items.text}</p>
+            <p className="pic-text-lower position-absolute pe-5">{items.text}</p>
           </Carousel.Caption>
         </Carousel.Item>
       ))}

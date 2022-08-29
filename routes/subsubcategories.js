@@ -46,8 +46,19 @@ router.get('/find/:id', async (req, res) => {
 
 
 router.get('/find', async (req, res) => {
-    try{
-        const Cat = await SubSubCategories.find();
+    const qCat = req.query.subcat;
+
+  try {
+    let Cat;
+    if (qCat) {
+      Cat = await SubSubCategories.find({
+        subcat: {
+          $in: [qCat],
+        },
+      });
+    } else {
+      Cat = await SubSubCategories.find();
+    }
         res.status(200).json(Cat)
     } catch (e) {
         res.status(500).json(e)

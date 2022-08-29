@@ -191,6 +191,11 @@ b {
   padding-top: 10px !important;
 }
 
+.promo-table {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .dropdown2 a.nav-fix {
   padding: 0px 10px !important;
 }
@@ -214,18 +219,22 @@ b {
 .leftbtn {
   top: 125px;
   right: -35px;
+  cursor: pointer;
 }
 .leftbtn1 {
   top: 75px;
   right: -35px;
+  cursor: pointer;
 }
 .rightbtn {
   top: 125px;
   left: -35px;
+  cursor: pointer;
 }
 .rightbtn1 {
   top: 75px;
   left: -35px;
+  cursor: pointer;
 }
 
 .single-prod-img {
@@ -479,6 +488,35 @@ b {
     z-index: 1000 !important;
   }
 
+  .prod-cont .stuff {
+    width: 47% !important;
+  }
+
+  .prod-cont {
+    margin: 0px !important;
+    width: 90vw !important;
+  }
+
+  .bulb-text {
+    font-size: 4vw !important;
+  }
+
+  .bttn {
+    left: 30px !important;
+  }
+
+  .mobile-menu-div {
+    position: absolute;
+    left: 224px;
+    top: -12px;
+    width: 97vw !important;
+    height: 67vh;
+    z-index: 2000 !important;
+  }
+  .main-nav .smth {
+    z-index: 1 !important;
+  }
+
   .cart-card {
     display: flex;
     flex-wrap: wrap;
@@ -588,12 +626,13 @@ b {
   .menu-space {
     display: none;
   }
-  .carousel-mine {
+  .container .carousel-mine {
     display: flex;
     justify-content: flex-start;
-    width: 100% !important;
+    width: 120vw !important;
     flex: 3 !important;
     height: 400px !important;
+    margin: 20px 0px !important;
   }
 
   .items {
@@ -686,7 +725,7 @@ b {
     justify-content: center;
   }
 
-  .form-alter1{
+  .form-alter1 {
     width: 100% !important;
   }
 
@@ -766,10 +805,20 @@ b {
     padding-top: 40px !important;
   }
 
-  .promo-table {
+  /* .promo-table {
+    height: 270px;
+    overflow-x: scroll;
+    overflow-y: hidden;
     display: flex !important;
-    flex-wrap: wrap !important;
-    justify-content: center !important;
+    flex-wrap: nowrap !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+  } */
+
+  .promo-table{
+    display: flex;
+    flex-direction: row !important;
+    flex-wrap: wrap;
   }
 
   .promo-table .promos {
@@ -777,7 +826,7 @@ b {
     margin-top: 15px !important;
   }
   .promo-table .promos1 {
-    width: 100% !important;
+    width: 43% !important;
     margin-top: 15px !important;
     margin-right: 30px;
   }
@@ -994,7 +1043,7 @@ h4 small {
   color: black !important;
 }
 
-.bttn-x{
+.bttn-x {
   border-radius: 30px;
   margin: 10px;
   background-color: #fff;
@@ -1174,6 +1223,13 @@ h4 {
   border-radius: 46px;
 }
 
+.gray-bttn {
+  border-radius: 50%;
+  padding: 5px 13px;
+  background-color: rgb(184, 175, 175);
+  border: none;
+}
+
 input::placeholder {
   color: #979797;
   padding-left: 5px;
@@ -1208,6 +1264,11 @@ input::placeholder {
 
 .linedown {
   border-bottom: 1px solid #f1f1f1;
+}
+
+.br-10 {
+  border-radius: 20px;
+  padding: 10px;
 }
 
 .fix-right {
@@ -2066,7 +2127,7 @@ select .classic:focus {
   min-width: 160px;
   z-index: 100 !important;
 }
-.wrapper{
+.wrapper {
   display: none;
   background: transparent !important;
   position: absolute;
@@ -2183,11 +2244,9 @@ select .classic:focus {
   display: flex;
   align-items: center;
 }
-.form-pos1{
+.form-pos1 {
   margin-top: 100px;
 }
-
-
 
 @media screen and (max-width: 550px) {
   .br-50 {
@@ -2203,9 +2262,9 @@ select .classic:focus {
   }
 
   .catalog-card img {
-    width: 100% ;
+    width: 100%;
   }
-  .real-no-dec .catalog-card  {
+  .real-no-dec .catalog-card {
     width: 250px !important;
     margin: 10px 5px;
     padding: 0px;
@@ -2214,25 +2273,28 @@ select .classic:focus {
     font-size: 14px;
   }
 
-  .no-pad .big-margin{
+  .no-pad .big-margin {
     width: 300px !important;
   }
 
-  #root .scrolldiv-cat{
+  #root .scrolldiv-cat {
     height: 270px;
     overflow-x: scroll;
     overflow-y: hidden;
     display: flex !important;
     flex-wrap: nowrap !important;
     flex-direction: row !important;
-    justify-content: space-between !important; 
+    justify-content: space-between !important;
   }
 
+  div#flex3.container {
+    margin-top: 20px;
+  }
 
-  .form-control{
+  .form-control {
     width: 100%;
   }
-  .container .form-alter1 .form-div{
+  .container .form-alter1 .form-div {
     width: 300px !important;
   }
 
@@ -2382,7 +2444,6 @@ select .classic:focus {
   flex-wrap: wrap !important;
   justify-content: start !important;
   align-content: baseline !important;
-
 }
 .dropdown2:hover .dropdown-content-menu .dropdown-content-all p {
   font-weight: 300 !important;
@@ -2391,7 +2452,6 @@ select .classic:focus {
 .dropdown2:hover .dropdown-content-menu a {
   padding: 0px 10px;
 }
-
 
 .dropdown1:hover .dropbtn1 {
   background-color: transparent !important;

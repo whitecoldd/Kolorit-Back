@@ -16,7 +16,7 @@ export default function Catalog() {
       try {
         const res = await publicRequest.get(
           category
-            ? `/api/subcat/find?category=${category}`
+            ? `/api/subcat/find?cat=${category}`
             : `/api/subcat/find`
         );
         setItems(res.data);

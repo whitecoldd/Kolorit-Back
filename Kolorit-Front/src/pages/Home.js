@@ -312,7 +312,7 @@ export default function Home(props) {
           </Link>
         </Container>
       </Container>
-      <Container fluid>
+      <Container fluid className="p-0">
         <Marquee className="track mt-4 mb-5">
           {Brands.map((Brands) => (
             <Image width="80%" height="80%" src={Brands.img}></Image>

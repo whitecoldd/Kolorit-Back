@@ -27,7 +27,7 @@ const PromosDisplayForCat = () => {
   const truncate = (input) =>
     input?.length > 150 ? `${input.substring(0, 124)}...` : input;
   return (
-    <Container className="d-flex flex-wrap justify-content-between promo-table p-0 mb-3">
+    <Container className="promo-table p-0 mb-3">
       {items
         ?.filter((items) => items.lng === myLocalStorageData)
         ?.slice(0, 4)

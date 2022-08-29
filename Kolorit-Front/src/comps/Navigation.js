@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Container, Nav, Navbar, Form, NavDropdown, Button } from "react-bootstrap";
+import {
+  Container,
+  Nav,
+  Navbar,
+  Form,
+  NavDropdown,
+  Button,
+} from "react-bootstrap";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
 import { Link } from "react-router-dom";
@@ -19,6 +26,7 @@ import i18n from "../i18";
 import { publicRequest } from "../requests/request";
 import { useTranslation } from "react-i18next";
 import SearchComp from "./SearchComp";
+import MobileMenu from "./MobileMenu";
 
 export default function Navigation({
   cartItems,
@@ -28,7 +36,7 @@ export default function Navigation({
   removeFromCompare,
   addToCompare,
   Open,
-  setOpen
+  setOpen,
 }) {
   const [Items, setItems] = useState([]);
   useEffect(() => {
@@ -95,6 +103,29 @@ export default function Navigation({
     setMyLocalStorageData(lng);
   }, []);
 
+  const [Width, setWidth] = useState(true);
+
+  useEffect(() => {
+    const handleWidth = () => {
+      let widthToHideFrom = 650;
+      if (window.innerWidth < widthToHideFrom) {
+        setWidth(false);
+      } else {
+        setWidth(true);
+      }
+    };
+
+    handleWidth();
+  }, [window.innerWidth]);
+  const [Vision, setVision] = useState(true);
+  const Close = (e) => {
+    e.preventDefault();
+    setVision(false);
+  };
+  const OpenIt = (e) => {
+    e.preventDefault();
+    setVision(true);
+  };
   return (
     <>
       <Navbar
@@ -175,17 +206,33 @@ export default function Navigation({
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
-              {isVisible && (
-                <NavDropdown
-                  className="navdrop me-0 position-relative"
-                  aria-expanded="true"
-                  title={`X ${t("head0")}`}
-                  id="basic-nav-dropdown"
-                >
-                  <Container className="menu">
-                    <MenuItemsDisplay></MenuItemsDisplay>
-                  </Container>
-                </NavDropdown>
+              {Width ? (
+                <div>
+                  {isVisible && (
+                    <NavDropdown
+                      className="navdrop me-0 position-relative"
+                      aria-expanded="true"
+                      title={`X ${t("head0")}`}
+                      id="basic-nav-dropdown"
+                    >
+                      <Container className="menu">
+                        <MenuItemsDisplay></MenuItemsDisplay>
+                      </Container>
+                    </NavDropdown>
+                  )}
+                </div>
+              ) : (
+                <div>
+                  <NavDropdown
+                    className="navdrop me-0 position-relative"
+                    aria-expanded="true"
+                    title={`X ${t("head0")}`}
+                    id="basic-nav-dropdown"
+                    onClick={OpenIt}
+                  >
+                    <MobileMenu Width={Width} Vision={Vision} setVision={setVision} Close={Close}></MobileMenu>
+                  </NavDropdown>
+                </div>
               )}
               <Nav>
                 <Nav.Item className="d-flex align-items-center m-2">
@@ -260,13 +307,24 @@ export default function Navigation({
                   )}{" "}
                   {t("head2")}
                 </Link>
-                {user ? <Link
-                  to={`/profile`}
-                  className="d-flex justify-content-center flex-wrap nav-link"
-                >
-                  <img src={prof} />
-                   {t("head3/1")}
-                </Link> : <Button variant="transparent" className=" d-flex justify-content-center flex-wrap nav-link" onClick={()=>setOpen(!Open)}> <img src={prof} /> {t("head3/2")}</Button>}
+                {user ? (
+                  <Link
+                    to={`/profile`}
+                    className="d-flex justify-content-center flex-wrap nav-link"
+                  >
+                    <img src={prof} />
+                    {t("head3/1")}
+                  </Link>
+                ) : (
+                  <Button
+                    variant="transparent"
+                    className=" d-flex justify-content-center flex-wrap nav-link"
+                    onClick={() => setOpen(!Open)}
+                  >
+                    {" "}
+                    <img src={prof} /> {t("head3/2")}
+                  </Button>
+                )}
               </Nav>
               <Nav className="me-auto vis-inv">
                 <Link className="nav-link white" to="/about">

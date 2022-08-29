@@ -104,19 +104,19 @@ const SingleProduct = ({
                   {items?.inStock?.toString()}
                 </p>
                 <Container className="">
-                  <p className="smth d-flex justify-content-between">
+                  <p className="smth d-flex justify-content-between flex-nowrap">
                     {items.char1}
                     <span className="orange">{items.char1a}</span>
                   </p>
-                  <p className="smth d-flex justify-content-between">
+                  <p className="smth d-flex justify-content-between flex-nowrap">
                     {items.char2}
                     <span className="orange">{items.char2a}</span>
                   </p>
-                  <p className="smth d-flex justify-content-between">
+                  <p className="smth d-flex justify-content-between flex-nowrap">
                     {items.char3}
                     <span className="orange">{items.char3a}</span>
                   </p>
-                  <p className="d-flex justify-content-between">
+                  <p className="d-flex justify-content-between flex-nowrap">
                     {items.char4}
                     <span className="orange">{items.char4a}</span>
                   </p>

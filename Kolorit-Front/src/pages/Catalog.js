@@ -46,10 +46,10 @@ export default function Catalog() {
         ))}
       </Container>
 
-       <Container>
-        <h2 className="bold pt-4 pb-4">Акции и предложения</h2>
+      <Container className="">
+        <h2 className="bold p-3">Акции и предложения</h2>
         <PromosDisplayForCat></PromosDisplayForCat>
-      </Container> 
+      </Container>
     </>
   );
 }
