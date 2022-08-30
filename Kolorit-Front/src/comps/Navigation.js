@@ -282,14 +282,14 @@ export default function Navigation({
               <Nav className="main-nav-inv">
                 <Link
                   to="/compare"
-                  className="d-flex justify-content-center flex-wrap nav-link text-center"
+                  className="d-flex justify-content-center flex-wrap nav-link text-center ps-1"
                 >
                   {selectedItems.length !== 0 ? (
                     <Badge badgeContent={selectedItems.length} color="warning">
-                      <img src={com} />
+                      <img className='pe-2' src={com} />
                     </Badge>
                   ) : (
-                    <img src={com} />
+                    <img className='pe-2' src={com} />
                   )}
                   {t("head1")}
                 </Link>
@@ -300,29 +300,29 @@ export default function Navigation({
                   {" "}
                   {cartItems.length !== 0 ? (
                     <Badge badgeContent={cartItems.length} color="warning">
-                      <img src={cart} />
+                      <img className='pe-2' src={cart} />
                     </Badge>
                   ) : (
-                    <img src={cart} />
+                    <img className='pe-2' src={cart} />
                   )}{" "}
                   {t("head2")}
                 </Link>
                 {user ? (
                   <Link
                     to={`/profile`}
-                    className="d-flex justify-content-center flex-wrap nav-link"
+                    className="d-flex justify-content-center flex-wrap nav-link ps-1"
                   >
-                    <img src={prof} />
+                    <img className='pe-2' src={prof} />
                     {t("head3/1")}
                   </Link>
                 ) : (
                   <Button
                     variant="transparent"
-                    className=" d-flex justify-content-center flex-wrap nav-link"
+                    className=" d-flex justify-content-center flex-wrap nav-link ps-1"
                     onClick={() => setOpen(!Open)}
                   >
                     {" "}
-                    <img src={prof} /> {t("head3/2")}
+                    <img className='pe-2' src={prof} /> {t("head3/2")}
                   </Button>
                 )}
               </Nav>

@@ -49,7 +49,7 @@ export default function Catalog() {
             >
               <Container className=" h-50p catalog-card d-flex flex-column align-items-center pt-4 mb-3">
                 <Image width="80%" height="80%" src={item.img}></Image>
-                <h6 className="bold text-uppercase black mt-2">{item.name}</h6>
+                <h6 className="bold text-uppercase text-center black mt-2">{item.name}</h6>
               </Container>
             </Link>
           </Container>

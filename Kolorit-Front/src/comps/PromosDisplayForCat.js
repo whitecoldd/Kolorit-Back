@@ -46,7 +46,7 @@ const PromosDisplayForCat = () => {
           </Container>
         ))}
     </Container>
-  );
+  )
 };
 
 export default PromosDisplayForCat;
