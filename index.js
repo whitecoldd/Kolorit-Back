@@ -20,7 +20,7 @@ const brandRoute = require("./routes/brand");
 const brandsIconRoute = require("./routes/brandsIcon");
 dotenv.config();
 mongoose
-  .connect(process.env.MONGODB_URI)
+  .connect(process.env.MONGODB_URI || process.env.MONGO_URL)
   .then(() => console.log("Connection Successful"))
   .catch((err) => {
     console.log(err);
@@ -51,10 +51,10 @@ app.use("/api/brandsIcon", brandsIconRoute);
 //     res.sendFile(path.join(__dirname, 'build', 'index.html'))
 // })
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("Kolorit-Admin/build"));
+  app.use(express.static("Kolorit-Front/build"));
 
   app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "Kolorit-Admin", "build", "index.html"));
+    res.sendFile(path.resolve(__dirname, "Kolorit-Front", "build", "index.html"));
   });
 }
 

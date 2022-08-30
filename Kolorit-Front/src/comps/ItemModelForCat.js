@@ -7,10 +7,13 @@ import com from '../assets/com.png'
 import heart from '../assets/heart-sm.png'
 import { useLocation } from 'react-router-dom'
 import { publicRequest } from '../requests/request'
+import { useTranslation } from "react-i18next";
+
 const ItemModel = (props) => {
     const { Items, onAdd, onRemoveFromPage, addToCompare, removeFromCompare } = props;
     const [isAdded, setIsAdded] = useState(false);
     const [isAddedC, setIsAddedC] = useState(false);
+    const { t, i18n } = useTranslation();
 
     const onClickBuy = () => {
         setIsAdded(!isAdded);
@@ -31,9 +34,9 @@ const ItemModel = (props) => {
         }
     }
     const SetPromoType = async () => {
-        if (Items.promo === "Скидка") {
+        if (Items.promo === t("sale")) {
           Items.promoType = "danger";
-        } else if (Items.promo === "Новое") {
+        } else if (Items.promo === t("new")) {
           Items.promoType = "warning";
         } else if (Items.promo === " ") {
           Items.promoType = "transparent";

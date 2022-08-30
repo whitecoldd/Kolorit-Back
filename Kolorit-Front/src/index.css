@@ -171,7 +171,8 @@ b {
   background: #f5f5f5;
   box-shadow: -6px 6px 4px rgba(0, 0, 0, 0.25);
   border-radius: 9px;
-  padding-left: 0px !important;
+  padding: 0px 0px !important;
+  margin-top: 5px;
 }
 
 .catalog-menu {
@@ -2134,7 +2135,7 @@ select .classic:focus {
   top: 0px;
   left: 257px;
   width: 20px !important;
-  height: 600px;
+  height: 3600px;
   border-radius: 15px;
   z-index: 100 !important;
 }
@@ -2434,7 +2435,7 @@ select .classic:focus {
   background-color: #444444 !important;
 }
 .dropdown2:hover .wrapper {
-  display: flex;
+  display: block;
   padding: 0px !important;
   margin: 0px !important;
 }

@@ -2,8 +2,18 @@ import React from "react";
 import "./topbar.css";
 import { NotificationsNone, Language, Settings } from "@material-ui/icons";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useNavigate } from 'react-router-dom'
+import { loggingOut } from "../../redux/apiCalls";
 
-export default function Topbar(admin) {
+export default function Topbar({admin}) {
+  const dispatch = useDispatch()
+  const history = useNavigate()
+
+  const LogOuting = () =>{
+    loggingOut(dispatch)
+    history('/')
+  }
   return (
     <div className="topbar">
       <div className="topbarWrapper">
@@ -23,7 +33,7 @@ export default function Topbar(admin) {
             <Settings />
           </div>
           <img src="https://crowd-literature.eu/wp-content/uploads/2015/01/no-avatar.gif" alt="" className="topAvatar" /> */}
-          {!admin && <Link to="/login">Log In</Link>}
+          {!admin ? <Link to="/login">Log In</Link> : <button onClick={LogOuting} className="nobr-bttn">Log Out</button>}
         </div>
       </div>
     </div>

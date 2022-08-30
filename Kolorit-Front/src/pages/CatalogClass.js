@@ -60,10 +60,6 @@ const CatalogClass = ({
     getItems();
   }, [category]);
 
-  const handlePop = () => {
-    setPSorting(!sortingP);
-  };
-
   const [value, setValue] = useState([0, 40000]);
   const [brands, setBrands] = useState([]);
   const [newBrands, setNewBrands] = useState([]);
@@ -165,6 +161,22 @@ const CatalogClass = ({
         a.salePrice < b.salePrice ? 1 : -1
       );
       setFilteredBrands(sorted);
+      setState(false);
+    }
+  };
+  const handlePop = () => {
+    setPSorting(!sortingP);
+    if (state === false) {
+      const sortedP = [...filteredBrands].sort((a, b) =>
+        a.popularity > b.popularity ? 1 : -1
+      );
+      setFilteredBrands(sortedP);
+      setState(true);
+    } else if (state === true) {
+      const sortedP = [...filteredBrands].sort((a, b) =>
+        a.popularity < b.popularity ? 1 : -1
+      );
+      setFilteredBrands(sortedP);
       setState(false);
     }
   };

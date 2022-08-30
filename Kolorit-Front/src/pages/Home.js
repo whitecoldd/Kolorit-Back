@@ -146,8 +146,8 @@ export default function Home(props) {
               }}
             >
               {Items
-              //?.filter((Items) => Items.lng === myLocalStorageData)
-                .filter((item) => item.promo.includes("Скидка"))
+                ?.filter((Items) => Items.lng === myLocalStorageData)
+                ?.filter((item) => item.promo.includes(t("sale")))
                 ?.map((Items) => (
                   <ItemModel
                     onDragStart={handleDragStart}
@@ -218,7 +218,8 @@ export default function Home(props) {
               }}
             >
               {Items
-              //.filter((Items) => Items.lng === myLocalStorageData)
+              .filter((Items) => Items.lng === myLocalStorageData)
+              .sort((a, b)=> a.popularity > b.popularity ? 1: -1)
               .map(
                 (Items) => (
                   <ItemModel
@@ -284,7 +285,7 @@ export default function Home(props) {
               }}
             >
               {Items
-              //?.filter((Items) => Items.lng === myLocalStorageData)
+              ?.filter((Items) => Items.lng === myLocalStorageData)
               .map(
                 (Items) => {
                   return (

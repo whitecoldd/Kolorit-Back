@@ -15,6 +15,14 @@
     justify-content: space-between;
   }
   
+  .nobr-bttn{
+    border: none;
+    background-color: transparent ;
+    font-size: large;
+    color: darkblue;
+    text-decoration: underline;
+  }
+
   .logo {
     font-weight: bold;
     font-size: 30px;

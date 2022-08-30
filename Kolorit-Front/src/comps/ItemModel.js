@@ -7,6 +7,7 @@ import com from "../assets/com.png";
 import heart from "../assets/heart-sm.png";
 import { useLocation } from "react-router-dom";
 import { publicRequest } from "../requests/request";
+import { useTranslation } from "react-i18next";
 const ItemModel = (props) => {
   const { Items, onAdd, onRemoveFromPage, addToCompare, removeFromCompare } =
     props;
@@ -23,6 +24,7 @@ const ItemModel = (props) => {
     }
   };
   const [isShown, setIsShown] = useState(false);
+  const { t, i18n } = useTranslation();
 
   const Compare = () => {
     setIsAddedC(!isAddedC);
@@ -33,17 +35,17 @@ const ItemModel = (props) => {
     }
   };
   // useEffect(() => {
-  const SetPromoType = async () => {
-    if (Items.promo === "Скидка" || Items.promo === "Sale") {
-      Items.promoType = "danger";
-    } else if (Items.promo === "Новое") {
-      Items.promoType = "warning";
-    } else if (Items.promo === " ") {
-      Items.promoType = "transparent";
-    } else {
-      Items.promoType = "secondary";
-    }
-  };
+    const SetPromoType = async () => {
+      if (Items.promo === t("sale")) {
+        Items.promoType = "danger";
+      } else if (Items.promo === t("new")) {
+        Items.promoType = "warning";
+      } else if (Items.promo === " ") {
+        Items.promoType = "transparent";
+      } else {
+        Items.promoType = "secondary";
+      }
+    };
   // },[]);
 
   //     SetPromoType()

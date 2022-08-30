@@ -33,10 +33,11 @@ const ItemOfDay = (props) => {
       addToCompare(Items);
     }
   };
+
   const SetPromoType = async () => {
-    if (Items.promo === "Скидка") {
+    if (Items.promo === t("sale")) {
       Items.promoType = "danger";
-    } else if (Items.promo === "Новое") {
+    } else if (Items.promo === t("new")) {
       Items.promoType = "warning";
     } else if (Items.promo === " ") {
       Items.promoType = "transparent";
