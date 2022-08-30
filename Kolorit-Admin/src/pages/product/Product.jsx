@@ -325,6 +325,15 @@ export default function Product({ productData }) {
               <option value="Под заказ : завтра">Под заказ : завтра</option>
               <option value="Под заказ : позже">Под заказ : позже</option>
             </select>
+            <label>Popularity Rating</label>
+            <select name="popularity" onChange={handleChange}>
+              <option value={0}>0</option>
+              <option value={1}>1</option>
+              <option value={2}>2</option>
+              <option value={3}>3</option>
+              <option value={4}>4</option>
+              <option value={5}>5</option>
+            </select>
             <label>Language</label>
             <select name="lng" onChange={handleChange}>
               <option value={null}>---</option>

@@ -334,10 +334,20 @@ export default function NewProduct() {
                 </select>
               </div>
               <div className="addProductItem">
+                <label>Popularity Rating</label>
+                <select name="popularity" onChange={handleChange}>
+                  <option value={0}>0</option>
+                  <option value={1}>1</option>
+                  <option value={2}>2</option>
+                  <option value={3}>3</option>
+                  <option value={4}>4</option>
+                  <option value={5}>5</option>
+                </select>
+              </div>
+              <div className="addProductItem">
                 <label>Language</label>
                 <select name="lng" onChange={handleChange}>
                   <option value={null}>---</option>
-
                   <option value="ru">ru</option>
                   <option value="ro">ro</option>
                   <option value="en">en</option>
