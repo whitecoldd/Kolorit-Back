@@ -1,7 +1,7 @@
 import "./widget.css";
 import { Visibility } from "@material-ui/icons";
 import { useEffect, useState } from "react";
-import { userRequest } from "../../requestMethods";
+import { userRequest, publicRequest } from "../../requestMethods";
 import { Link } from 'react-router-dom' 
 export default function WidgetSm() {
   const [users, setUsers] = useState([]);
@@ -9,7 +9,7 @@ export default function WidgetSm() {
   useEffect(() => {
     const getUsers = async () => {
       try {
-        const res = await userRequest.get("/api/user/find/?new=true");
+        const res = await userRequest.get("/api/user/find?new=new");
         setUsers(res.data);
       } catch (e) {
         console.log(e);

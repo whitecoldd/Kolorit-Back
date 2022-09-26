@@ -27,7 +27,8 @@ export default function BrandList() {
       renderCell: (params) => {
         return (
           <div className="productListItem">
-            {params.row.name}
+            <img className="productListImg" src={params.row.img} alt=""/>
+            {params.row.name} 
           </div>
         );
       },
@@ -39,7 +40,7 @@ export default function BrandList() {
       renderCell: (params) => {
         return (
           <>
-            <Link to={"/brand/" + params.row._id}>
+            <Link to={"/brands/" + params.row._id}>
               <button className="productListEdit">Edit</button>
             </Link>
             <DeleteOutline

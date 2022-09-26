@@ -67,7 +67,7 @@ export default function Home(props) {
   useEffect(() => {
     const getItems = async () => {
       try {
-        const res = await publicRequest.get(`/api/brandsIcon/find`);
+        const res = await publicRequest.get(`/api/brand/find`);
         setBrands(res.data);
       } catch (e) {
         console.log(e);
@@ -87,7 +87,7 @@ export default function Home(props) {
         <Container className="menu-space mt-3 p-0">
           <MenuItemsDisplay></MenuItemsDisplay>
         </Container>
-         <Container className="me-1 mt-3 carousel-mine">
+        <Container className="me-1 mt-3 carousel-mine">
           <Slider />
         </Container>
       </Container>
@@ -145,8 +145,7 @@ export default function Home(props) {
                 );
               }}
             >
-              {Items
-                ?.filter((Items) => Items.lng === myLocalStorageData)
+              {Items?.filter((Items) => Items.lng === myLocalStorageData)
                 ?.filter((item) => item.promo.includes(t("sale")))
                 ?.map((Items) => (
                   <ItemModel
@@ -177,7 +176,7 @@ export default function Home(props) {
         <Container>
           <PromosDisplay></PromosDisplay>
           <Container className="d-flex flex-wrap justify-content-center mt-1 mb-3">
-            <Link type='button' to='/promotions' className="bttn-more">
+            <Link type="button" to="/promotions" className="bttn-more">
               {t("more2")}
             </Link>
           </Container>
@@ -218,11 +217,9 @@ export default function Home(props) {
                 );
               }}
             >
-              {Items
-              .filter((Items) => Items.lng === myLocalStorageData)
-              .sort((a, b)=> a.popularity > b.popularity ? 1: -1)
-              .map(
-                (Items) => (
+              {Items.filter((Items) => Items.lng === myLocalStorageData)
+                .sort((a, b) => (a.popularity > b.popularity ? 1 : -1))
+                .map((Items) => (
                   <ItemModel
                     addToCompare={addToCompare}
                     removeFromCompare={removeFromCompare}
@@ -232,8 +229,7 @@ export default function Home(props) {
                     onAdd={() => onAdd(Items)}
                     onRemoveFromPage={() => onRemoveFromPage(Items._id)}
                   ></ItemModel>
-                )
-              )}
+                ))}
             </AliceCarousel>
           </Container>
           {/* <Container className='d-flex justify-content-center'>
@@ -285,9 +281,7 @@ export default function Home(props) {
                 );
               }}
             >
-              {Items
-              ?.filter((Items) => Items.lng === myLocalStorageData)
-              .map(
+              {Items?.filter((Items) => Items.lng === myLocalStorageData).map(
                 (Items) => {
                   return (
                     <ItemModel
@@ -317,7 +311,9 @@ export default function Home(props) {
       <Container fluid className="p-0">
         <Marquee className="track mt-4 mb-5">
           {Brands.map((Brands) => (
-            <Image width="80%" height="80%" src={Brands.img}></Image>
+            <Link to={`/brandscatalog/${Brands.name}`}>
+              <Image width="120vw" height="80vw" src={Brands.img}></Image>
+            </Link>
           ))}
         </Marquee>
       </Container>

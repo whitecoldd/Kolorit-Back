@@ -19,7 +19,7 @@ export function Footer (props) {
               <h4 className='mt-4 '>{t('foot1')}</h4>
               <h5 className='mt-3 pt-3 lineup'><a href="tel: +37379559663" className='real-no-dec white'>+373&#x2212;79&#x2212;559&#x2212;663 </a>, <a className='real-no-dec white' href="tel: +37368112889">+373&#x2212;68&#x2212;112&#x2212;889</a></h5>
               <p>{t('foot2')}</p>
-              <input placeholder={`${t('foot26')}`} className='mt-3 mb-4 input-fix' id='e-mail'></input>
+              <input placeholder={`${t('foot26')}`} className='mt-3 mb-4 pb-1 input-fix' id='e-mail'></input>
               <Container className='d-flex'>
                 <Image className='icons-fix' src={fb}></Image>
                 <Image className='icons-fix' src={inst}></Image>

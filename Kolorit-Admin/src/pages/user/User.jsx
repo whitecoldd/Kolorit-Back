@@ -53,7 +53,7 @@ export default function User() {
               <span className="userShowUsername">
                 {product.fname} {product.lname}
               </span>
-              <span className="userShowUserTitle">{product.userName}</span>
+              <span className="userShowUserTitle">{product.username}</span>
             </div>
           </div>
           <div className="userShowBottom">

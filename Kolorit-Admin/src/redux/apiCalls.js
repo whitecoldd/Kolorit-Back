@@ -269,7 +269,7 @@ export const getBrand = async (dispatch) => {
 export const deleteBrand = async (id, dispatch) => {
   dispatch(deleteBrandStart());
   try {
-    const res = await userrRequest.delete(`/api/brand/${id}`);
+    const res = await userRequest.delete(`/api/brand/${id}`);
     dispatch(deleteBrandSuccess(id));
   } catch (err) {
     dispatch(deleteBrandFailure());
