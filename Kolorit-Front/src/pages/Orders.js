@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import home from "../assets/home.png";
 import shop from "../assets/shop.png";
 import profile from "../assets/profile.png";
+import arroworder from "../assets/arroworder.svg";
 import cart from "../assets/cart1.png";
 import { useTranslation } from "react-i18next";
 import { format } from "date-fns";
@@ -163,7 +164,7 @@ const Orders = () => {
                               className="real-no-dec"
                               to={`/order/${item._id}`}
                             >
-                              <th className="noborder">&#8594;</th>
+                              <th className="noborder"><img src={arroworder}/></th>
                             </Link>
                           </tbody>
                         </>

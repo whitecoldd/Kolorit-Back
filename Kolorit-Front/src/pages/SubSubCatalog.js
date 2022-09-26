@@ -31,7 +31,7 @@ export default function Catalog() {
         <Breadcrumb className="mt-3">
           <Breadcrumb.Item href="/">{t("main")}</Breadcrumb.Item>
           <Breadcrumb.Item href="/catalog">
-            <mark>{t("foot4")}</mark>
+            {t("foot4")}
           </Breadcrumb.Item>
           <Breadcrumb.Item active>
             <mark>{decodeURIComponent(category)}</mark>

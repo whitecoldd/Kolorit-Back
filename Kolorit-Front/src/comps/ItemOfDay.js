@@ -54,9 +54,19 @@ const ItemOfDay = (props) => {
         key={Items.id}
         className="w-100"
       >
-        <Badge onMouseEnter={SetPromoType()} bg={Items.promoType}>
-          {Items.promo}
-        </Badge>
+        <Container className="p-0 m-0 d-flex align-items-start justify-content-between itemofday-top">
+          <Badge onMouseEnter={SetPromoType()} bg={Items.promoType}>
+            {Items.promo}
+          </Badge>
+          {isShown && (
+            <Container className="d-flex justify-content-end">
+              <button className="nobr-bttn" onClick={Compare}>
+                <Image src={com}></Image>
+              </button>
+              <Image className="" src={heart}></Image>{" "}
+            </Container>
+          )}
+        </Container>
         <h3 className="text-center">{t("itemofday")}:</h3>
 
         <Container className="d-flex flex-column align-items-center justify-content-between img-on-hover">
@@ -64,15 +74,6 @@ const ItemOfDay = (props) => {
             <Link to={`/catalog/category/${Items._id}`}>
               <Image width="90%" height="100%" src={Items.img}></Image>
             </Link>
-
-            {isShown && (
-              <Container>
-                <button className="nobr-bttn img-hover2" onClick={Compare}>
-                  <Image src={com}></Image>
-                </button>
-                <Image className="img-hover3" src={heart}></Image>{" "}
-              </Container>
-            )}
           </Container>
           <b>{Items.name}</b>
           <Container className="d-flex flex-nowrap align-items-end low-item p-0">

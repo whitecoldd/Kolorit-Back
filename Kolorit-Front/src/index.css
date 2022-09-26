@@ -49,6 +49,10 @@ strong {
   width: 100% !important;
 }
 
+.form-label{
+  color: white !important;
+}
+
 .breadcrumb mark {
   background-color: transparent;
   font-weight: 700;
@@ -132,6 +136,10 @@ b {
 
 .form-control {
   border-radius: 32px !important;
+}
+
+#exampleForm.ControlInput5{
+  background-color: gray;
 }
 
 .smth {
@@ -726,6 +734,11 @@ b {
     justify-content: center;
   }
 
+  .my-modal-window1 .pic-reg{
+    display: none;
+  }
+
+
   .form-alter1 {
     width: 100% !important;
   }
@@ -955,6 +968,13 @@ a.nav-fix.nav-link {
   border-radius: 20px !important;
   border: 5px solid #fcc15e;
   width: 18% !important;
+  height: 380px;
+}
+.sales-prod2 {
+  border-radius: 20px !important;
+  border: 5px solid #fcc15e;
+  width: 18% !important;
+  height: 440px;
 }
 
 .sales-prod1 {
@@ -962,6 +982,18 @@ a.nav-fix.nav-link {
   border: 5px solid #fcc15e;
   width: auto !important;
   height: 380px;
+}
+
+.itemofday-top 
+{
+  height: 30px;
+}
+
+.img-cat{
+  position: absolute;
+  top: 9px;
+  left: 20px;
+  z-index: 1000;
 }
 
 .img-on-hover .container a {
@@ -982,9 +1014,19 @@ small {
   color: black !important;
   font-weight: 700;
 }
+.sales-prod2 p,
+h3,
+del,
+small {
+  color: black !important;
+  font-weight: 700;
+}
 
 @media screen and (max-width: 1200px) {
   .sales-prod h3 b {
+    font-size: 25px !important;
+  }
+  .sales-prod2 h3 b {
     font-size: 25px !important;
   }
 
@@ -1000,8 +1042,17 @@ small {
 .sales-prod h3 b {
   font-size: 28px !important;
 }
+.sales-prod2 h3 b {
+  font-size: 28px !important;
+}
 
 .sales-prod h4,
+h4 small {
+  color: #ff820e !important;
+  font-size: 20px;
+  font-weight: 700;
+}
+.sales-prod2 h4,
 h4 small {
   color: #ff820e !important;
   font-size: 20px;
@@ -1047,8 +1098,8 @@ h4 small {
 .bttn-x {
   border-radius: 30px;
   margin: 10px;
-  background-color: #fff;
-  color: orange;
+  background-color: transparent;
+  color: white;
   border: none;
 }
 
@@ -1242,6 +1293,10 @@ input::placeholder {
   border-top: 1px solid #f1f1f1;
 }
 
+.lineup a:hover {
+  color: orange !important;
+}
+
 .input-fix {
   margin-left: 0 !important;
   margin-right: 0 !important;
@@ -1276,9 +1331,15 @@ input::placeholder {
   padding-top: 1px;
 }
 
-.footer-nav p {
+.footer-nav a {
   font-size: 14px;
   font-weight: 400;
+  text-decoration: none;
+  color: white;
+  padding-bottom: 7px;
+}
+.footer-nav a:hover {
+  color: orange;
 }
 
 .stick-2.affix-top {
@@ -1437,7 +1498,11 @@ input::placeholder {
 .cart-cont {
   background: #f9f9f9;
   border-radius: 25px;
-  box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 15px 7px rgba(0, 0, 0, 0.25);
+}
+
+.h-new{
+  height: 25vh;
 }
 
 .main-nav {
@@ -1628,7 +1693,7 @@ center {
 .catalog-card {
   background-color: #ffefd3;
   border-radius: 20px;
-  padding: 15px !important;
+  padding: 25px !important;
   cursor: pointer;
   width: auto;
 }
@@ -1700,13 +1765,17 @@ center {
   color: #000 !important;
   font-weight: 400 !important;
   font-size: 16px !important;
-  border: #ff820e 1px solid !important;
+  border: #FCC15E 3px solid !important;
   text-decoration: none;
   border-radius: 5px !important;
 }
 .bttn-more:hover {
-  background-color: #ff820e !important;
+  background-color: #FCC15E !important;
   transition: 0.5s;
+}
+
+.profhandle .box .container a:hover{
+  color: orange !important;
 }
 
 .nodec {
@@ -1909,8 +1978,11 @@ center {
 .sales-prod b {
   font-size: 16px !important;
 }
+.sales-prod2 b {
+  font-size: 16px !important;
+}
 
-.img-hover {
+/* .img-hover {
   position: absolute;
   top: 0px;
   right: 1px;
@@ -1920,7 +1992,7 @@ center {
   position: absolute;
   top: 30px;
   right: 5px;
-}
+} */
 .img-hover2 {
   position: absolute;
   top: 0px;
@@ -2021,7 +2093,15 @@ select .classic:focus {
 }
 
 .bline {
-  border-bottom: 3px white solid;
+  border-bottom: 3px orange solid;
+}
+
+.btn-reg{
+  right: 10px;
+}
+
+.pic-reg img{
+  border-radius: 0px 43px 0px 43px !important;
 }
 
 .w-21 {
@@ -2388,7 +2468,7 @@ select .classic:focus {
 }
 
 .cart-card .cartimgntext {
-  margin: 10px 20px 20px 30px !important;
+  margin: 20px 0px 20px !important;
   display: flex;
   align-items: center;
 }
@@ -2458,4 +2538,20 @@ select .classic:focus {
   background-color: transparent !important;
   z-index: 100 !important;
   border: none !important;
+}
+
+.tab-content{
+  background-color: white;
+  border-radius: 25px 25px 25px 25px;
+  box-shadow: 0px 0px 15px 10px rgba(0, 0, 0, 0.25);
+  z-index: 1000 !important;
+}
+.tab-content:last-child{
+  border-radius: 0px 0px 25px 25px;
+}
+.nav-tabs .nav-item .active{
+  box-shadow: 0px -20px 15px 10px rgba(0, 0, 0, 0.25) !important;
+  z-index: 0 !important;
+  border-top: 6px solid #FF820E !important;
+  border-radius: 10px 10px 0px 0px;
 }

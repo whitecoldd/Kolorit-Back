@@ -48,52 +48,50 @@ const Register = ({ Log, setLog }) => {
   return (
     <>
       <Container>
+        <h2 className="white ps-4">{t('welcome')}</h2>
+        <h6 className="white ps-4 pb-3">{t('welcome-reg')}</h6>
         <Form className="d-flex form-alter1 flex-column align-items-center">
           <Form.Group
-            className="mb-3 d-flex flex-wrap form-div w-50"
+            className="mb-3 d-flex flex-wrap form-div w-75"
             controlId="exampleForm.ControlInput1"
           >
-            <Form.Label>E-mail {t("address")}</Form.Label>
             <Form.Control
               type="email"
               name="email"
-              placeholder="name@example.com"
+              placeholder={`E-mail ${t("address")}`}
               onChange={handleChange}
             />
           </Form.Group>
           <Form.Group
-            className="mb-3 d-flex flex-wrap form-div w-50"
+            className="mb-3 d-flex flex-wrap form-div w-75"
             controlId="exampleForm.ControlInput1"
           >
-            <Form.Label>{t("phone")}</Form.Label>
             <Form.Control
               type="phone"
               name="phone"
-              placeholder="+373xxxxxxxx"
+              placeholder={t("phone")}
               onChange={handleChange}
             />
           </Form.Group>
           <Form.Group
-            className="mb-3 d-flex flex-wrap form-div w-50"
+            className="mb-3 d-flex flex-wrap form-div w-75"
             controlId="exampleForm.ControlInput2"
           >
-            <Form.Label>{t("name")}</Form.Label>
             <Form.Control
               type="text"
               name="username"
-              placeholder="имяФамилия"
+              placeholder={t("name")}
               onChange={handleChange}
             />
           </Form.Group>
           <Form.Group
-            className="mb-3 d-flex flex-wrap form-div w-50"
+            className="mb-3 d-flex flex-wrap form-div w-75"
             controlId="exampleForm.ControlInput5"
           >
-            <Form.Label>{t("pw")}</Form.Label>
             <Form.Control
               type="password"
               name="password"
-              placeholder="********"
+              placeholder={t("pw")}
               onChange={handleChange}
             />
           </Form.Group>
@@ -104,7 +102,7 @@ const Register = ({ Log, setLog }) => {
           <Button
             type="submit"
             onClick={handleSubmit}
-            className="bttn-cart mb-3"
+            className="bttn-cart mb-3 mt-3"
           >
             {t("create")}
           </Button>

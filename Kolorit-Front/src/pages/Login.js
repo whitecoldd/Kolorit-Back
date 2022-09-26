@@ -42,27 +42,27 @@ const Login = ({ setOpen }) => {
   };
   return (
     <>
-      <Container>
+      <Container className="">
+        <h2 className="white ps-4">{t('missed')}</h2>
+        <h6 className="white ps-4">{t('welcome-log')}</h6>
         <Form className="d-flex flex-column align-items-center form-alter1 form-pos1">
           <Form.Group
-            className="mb-3 d-flex flex-wrap form-div w-50"
+            className="mb-3 d-flex flex-wrap form-div w-75"
             controlId="exampleForm.ControlInput1"
           >
-            <Form.Label>{t("name")}</Form.Label>
             <Form.Control
               type="text"
-              placeholder="имяФамилия"
+              placeholder={t("name")}
               onChange={(e) => setUsername(e.target.value)}
             />
           </Form.Group>
           <Form.Group
-            className="mb-3 d-flex flex-wrap form-div w-50"
+            className="mb-3 d-flex flex-wrap form-div w-75"
             controlId="exampleForm.ControlInput122"
           >
-            <Form.Label>{t("pw")}</Form.Label>
             <Form.Control
               type="password"
-              placeholder="********"
+              placeholder={t("pw")}
               onChange={(e) => setPassword(e.target.value)}
             />
           </Form.Group>

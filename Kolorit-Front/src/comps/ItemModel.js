@@ -35,17 +35,17 @@ const ItemModel = (props) => {
     }
   };
   // useEffect(() => {
-    const SetPromoType = async () => {
-      if (Items.promo === t("sale")) {
-        Items.promoType = "danger";
-      } else if (Items.promo === t("new")) {
-        Items.promoType = "warning";
-      } else if (Items.promo === " ") {
-        Items.promoType = "transparent";
-      } else {
-        Items.promoType = "secondary";
-      }
-    };
+  const SetPromoType = async () => {
+    if (Items.promo === t("sale")) {
+      Items.promoType = "danger";
+    } else if (Items.promo === t("new")) {
+      Items.promoType = "warning";
+    } else if (Items.promo === " ") {
+      Items.promoType = "transparent";
+    } else {
+      Items.promoType = "secondary";
+    }
+  };
   // },[]);
 
   //     SetPromoType()
@@ -57,11 +57,21 @@ const ItemModel = (props) => {
         onMouseEnter={() => setIsShown(true)}
         onMouseLeave={() => setIsShown(false)}
         key={Items.id}
-        className="d-flex flex-wrap align-content-between justify-content-between mt-2 mb-2 sales-prod1 m-1 p-2"
+        className="d-flex flex-wrap align-content-between justify-content-between align-items-center mt-2 mb-2 sales-prod1 m-1 p-2"
       >
-        <Badge onMouseEnter={SetPromoType()} bg={Items.promoType}>
-          {Items.promo}
-        </Badge>
+        <Container className="d-flex align-items-start justify-content-between m-0 p-0">
+          <Badge onMouseEnter={SetPromoType()} bg={Items.promoType}>
+            {Items.promo}
+          </Badge>
+          {isShown && (
+            <Container className="p-0 m-0 d-flex justify-content-end">
+              <button className="nobr-bttn " onClick={Compare}>
+                <Image src={com}></Image>
+              </button>
+              <Image className="" src={heart}></Image>{" "}
+            </Container>
+          )}
+        </Container>
         <Container className="d-flex flex-column align-items-center justify-content-between img-on-hover">
           <Container>
             <Link
@@ -72,15 +82,6 @@ const ItemModel = (props) => {
             >
               <Image width="90%" height={150} src={Items.img}></Image>
             </Link>
-
-            {isShown && (
-              <Container>
-                <button className="nobr-bttn img-hover" onClick={Compare}>
-                  <Image src={com}></Image>
-                </button>
-                <Image className="img-hover1" src={heart}></Image>{" "}
-              </Container>
-            )}
           </Container>
           <b>{Items.name}</b>
           <Container className="d-flex flex-nowrap align-items-end low-item p-0">

@@ -36,7 +36,7 @@ export default function Cart(props) {
     (salePrice, item) => salePrice + item.qty * item.salePrice,
     0
   );
-  const delivery = totalPrice*1/40;
+  const delivery = (totalPrice * 1) / 40;
   const { t } = useTranslation();
   const handleDragStart = (e) => e.preventDefault();
   useEffect(() => {
@@ -84,30 +84,32 @@ export default function Cart(props) {
                             key={item.id}
                           >
                             <Container className="cartimgntext p-0 m-0">
-                              <div className="img">
-                                <img
-                                  width={100}
-                                  height={100}
-                                  src={item.img}
-                                  alt=""
-                                />
-                              </div>
-                              <Container className="d-flex p-0 flex-column justify-content-between">
+                              <Link to={`/catalog/category/${item._id}`}>
+                                <div className="img">
+                                  <img
+                                    width={100}
+                                    height={100}
+                                    src={item.img}
+                                    alt=""
+                                  />
+                                </div>
+                              </Link>
+                              <Container className="d-flex p-0 flex-column justify-content-between h-new">
                                 <div className="cart-details">
                                   <h3>{item.name}</h3>
                                 </div>
                                 <div className="cart-details">
-                                  <h5 className="black">
+                                  <h5 className="gray">
                                     {t("code")} {item.code}
                                   </h5>
                                 </div>
                               </Container>
                             </Container>
-                            <Container className="d-flex check align-items-baseline p-0 m-0">
+                            <Container className="d-flex check align-items-baseline p-0 m-0 mt-5">
                               <Container className="count p-0 m-0">
                                 <Container className="d-flex scale p-0 m-0">
                                   <button
-                                    className="desCart me-2"
+                                    className="desCart me-2 pt-1"
                                     onClick={() => decreaseQty(item)}
                                   >
                                     <Image src={minus}></Image>
@@ -116,13 +118,13 @@ export default function Cart(props) {
                                     <h1 className="qtyCartText">{item.qty}</h1>
                                   </Container>
                                   <button
-                                    className="incCart"
+                                    className="incCart pt-1"
                                     onClick={() => onAdd(item)}
                                   >
                                     <Image src={plus}></Image>
                                   </button>
                                 </Container>
-                                <Container className="per-one m-0 p-0">
+                                <Container className="per-one m-0 p-0 pt-2 text-center">
                                   <h5 className="black">
                                     {item.salePrice} mdl/шт.
                                   </h5>
@@ -158,11 +160,17 @@ export default function Cart(props) {
           <Col sm={4}>
             <Container className="cart-total p-4 d-flex flex-column align-items-start">
               <h2 className="total-price">
-                {t("chose")} <span  className="total-price1">{totalPrice} MDL</span>
+                {t("chose")}{" "}
+                <span className="total-price1">{totalPrice} MDL</span>
               </h2>
-              <h2 className="total-price">{t("del")} <span  className="total-price1">{delivery} MDL</span></h2>
               <h2 className="total-price">
-                {t("all")} <span  className="total-price1">{totalPrice+delivery} MDL</span>
+                {t("del")} <span className="total-price1">{delivery} MDL</span>
+              </h2>
+              <h2 className="total-price">
+                {t("all")}{" "}
+                <span className="total-price1">
+                  {totalPrice + delivery} MDL
+                </span>
               </h2>
               <Container className="smth"></Container>
               <Container className="d-flex flex-column p-3">

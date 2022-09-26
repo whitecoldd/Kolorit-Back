@@ -85,7 +85,7 @@ export default function About() {
                   </Nav.Item>
                 ))}
             </Nav>
-            <Tab.Content className="mt-3">
+            <Tab.Content className="pt-3">
               {items
                 ?.filter((Items) => Items.lng === myLocalStorageData)
                 .map((item, i) => (

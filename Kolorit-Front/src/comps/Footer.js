@@ -4,8 +4,8 @@ import fb from '../assets/fb.png'
 import inst from '../assets/inst.png'
 import tg from '../assets/tg.png'
 import wa from '../assets/wa.png'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { Container, Image } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import Home from '../pages/Home'
 import { useTranslation } from 'react-i18next'
 export function Footer (props) {
@@ -30,36 +30,36 @@ export function Footer (props) {
             <Container className='footer-nav me-5'>
               <h4 className='linedown pb-4'>{t('foot3')}</h4>
               <Container className='d-flex p-0 m-0'>
-                <Container className=' p-0 m-0'>
-                  <p>{t('foot4')}</p>
-                  <p>{t('foot5')}</p>
-                  <p>{t('foot6')}</p>
-                  <p>{t('foot7')}</p>
-                  <p>{t('foot8')}</p>
-                  <p>{t('foot9')}</p>
-                  <p>{t('foot10')}</p>
+                <Container className=' p-0 m-0 d-flex flex-column'>
+                  <Link to="/">{t('foot4')}</Link>
+                  <Link to="/">{t('foot5')}</Link>
+                  <Link to="/">{t('foot6')}</Link>
+                  <Link to="/">{t('foot7')}</Link>
+                  <Link to="/">{t('foot8')}</Link>
+                  <Link to="/">{t('foot9')}</Link>
+                  <Link to="/">{t('foot10')}</Link>
                 </Container>
-                <Container>
-                  <p>{t('foot11')}</p>
-                  <p>{t('foot12')}</p>
-                  <p>{t('foot13')}</p>
-                  <p>{t('foot14')}</p>
-                  <p>{t('foot15')}</p>
-                  <p>{t('foot16')} </p>
-                  <p>{t('foot17')}</p>
+                <Container className='d-flex flex-column'>
+                  <Link to="/">{t('foot11')}</Link>
+                  <Link to="/">{t('foot12')}</Link>
+                  <Link to="/">{t('foot13')}</Link>
+                  <Link to="/">{t('foot14')}</Link>
+                  <Link to="/">{t('foot15')}</Link>
+                  <Link to="/">{t('foot16')} </Link>
+                  <Link to="/">{t('foot17')}</Link>
                 </Container>
               </Container>
             </Container>
             <Container className='footer-nav'>
               <h4 className='linedown pb-4'>{t('foot18')}</h4>
-              <Container className='fix-right' >
-                <p>{t('foot19')}</p>
-                <p>{t('foot20')}</p>
-                <p>{t('foot21')}</p>
-                <p>{t('foot22')}</p>
-                <p>{t('foot23')}</p>
-                <p>{t('foot24')}</p>
-                <p className='heh'>{t('foot25')}</p>
+              <Container className='fix-right d-flex flex-column' >
+                <Link to="/">{t('foot19')}</Link>
+                <Link to="/">{t('foot20')}</Link>
+                <Link to="/">{t('foot21')}</Link>
+                <Link to="/">{t('foot22')}</Link>
+                <Link to="/">{t('foot23')}</Link>
+                <Link to="/">{t('foot24')}</Link>
+                <Link to="/" className='heh'>{t('foot25')}</Link>
               </Container>
             </Container>
           </Container>

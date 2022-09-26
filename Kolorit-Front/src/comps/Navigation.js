@@ -19,6 +19,7 @@ import phone from "../assets/phone.png";
 import com from "../assets/com.png";
 import prof from "../assets/prof.png";
 import cart from "../assets/cart.png";
+import catnav from "../assets/catnav.svg";
 import Badge from "@mui/material/Badge";
 import MenuItemsDisplay from "./MenuItemsDisplay";
 import { useSelector } from "react-redux";
@@ -174,15 +175,15 @@ export default function Navigation({
                 <div className="dropdown1">
                   <button className="dropbtn1">{t("lang")}</button>
                   <div className="dropdown-content1">
-                    <button onClick={() => changeLanguage("ru")}>
+                    <button className="d-flex align-items-center" onClick={() => changeLanguage("ru")}>
                       <img width={12} height={12} src={flagR} />
                       Ru
                     </button>
-                    <button onClick={() => changeLanguage("ro")}>
+                    <button className="d-flex align-items-center" onClick={() => changeLanguage("ro")}>
                       <img width={12} height={12} src={flagRo} />
                       Ro
                     </button>
-                    <button onClick={() => changeLanguage("en")}>
+                    <button className="d-flex align-items-center" onClick={() => changeLanguage("en")}>
                       <img width={12} height={12} src={flagEn} />
                       En
                     </button>
@@ -207,18 +208,21 @@ export default function Navigation({
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               {Width ? (
-                <div>
+                <div className="position-relative">
                   {isVisible && (
-                    <NavDropdown
-                      className="navdrop me-0 position-relative"
-                      aria-expanded="true"
-                      title={`X ${t("head0")}`}
-                      id="basic-nav-dropdown"
-                    >
-                      <Container className="menu">
-                        <MenuItemsDisplay></MenuItemsDisplay>
-                      </Container>
-                    </NavDropdown>
+                    <div>
+                      <img className="img-cat" src={catnav} />
+                      <NavDropdown
+                        className="navdrop me-0 position-relative"
+                        aria-expanded="true"
+                        title={`   ${t("head0")}`}
+                        id="basic-nav-dropdown"
+                      >
+                        <Container className="menu">
+                          <MenuItemsDisplay></MenuItemsDisplay>
+                        </Container>
+                      </NavDropdown>
+                    </div>
                   )}
                 </div>
               ) : (
@@ -230,7 +234,12 @@ export default function Navigation({
                     id="basic-nav-dropdown"
                     onClick={OpenIt}
                   >
-                    <MobileMenu Width={Width} Vision={Vision} setVision={setVision} Close={Close}></MobileMenu>
+                    <MobileMenu
+                      Width={Width}
+                      Vision={Vision}
+                      setVision={setVision}
+                      Close={Close}
+                    ></MobileMenu>
                   </NavDropdown>
                 </div>
               )}
@@ -286,10 +295,10 @@ export default function Navigation({
                 >
                   {selectedItems.length !== 0 ? (
                     <Badge badgeContent={selectedItems.length} color="warning">
-                      <img className='pe-2' src={com} />
+                      <img className="pe-2" src={com} />
                     </Badge>
                   ) : (
-                    <img className='pe-2' src={com} />
+                    <img className="pe-2" src={com} />
                   )}
                   {t("head1")}
                 </Link>
@@ -300,10 +309,10 @@ export default function Navigation({
                   {" "}
                   {cartItems.length !== 0 ? (
                     <Badge badgeContent={cartItems.length} color="warning">
-                      <img className='pe-2' src={cart} />
+                      <img className="pe-2" src={cart} />
                     </Badge>
                   ) : (
-                    <img className='pe-2' src={cart} />
+                    <img className="pe-2" src={cart} />
                   )}{" "}
                   {t("head2")}
                 </Link>
@@ -312,7 +321,7 @@ export default function Navigation({
                     to={`/profile`}
                     className="d-flex justify-content-center flex-wrap nav-link ps-1"
                   >
-                    <img className='pe-2' src={prof} />
+                    <img className="" src={prof} />
                     {t("head3/1")}
                   </Link>
                 ) : (
@@ -322,7 +331,7 @@ export default function Navigation({
                     onClick={() => setOpen(!Open)}
                   >
                     {" "}
-                    <img className='pe-2' src={prof} /> {t("head3/2")}
+                    <img className="" src={prof} /> {t("head3/2")}
                   </Button>
                 )}
               </Nav>

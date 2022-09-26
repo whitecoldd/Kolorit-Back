@@ -9,6 +9,7 @@ import redact from "../assets/redact.svg";
 import { deleteUser, updateUser, logoutFunc } from "../redux/apiCalls";
 import home from "../assets/home.png";
 import shop from "../assets/shop.png";
+import cross from "../assets/cross.svg";
 import profile from "../assets/profile.png";
 import cart from "../assets/cart1.png";
 import Modal from "react-modal";
@@ -16,7 +17,7 @@ const Profile = () => {
   const [Items, setItems] = useState({});
   const user = useSelector((state) => state.user.currentUser);
   const email = useSelector((state) => state.user.currentUser.email);
-  const phone = useSelector((state) => state.user.currentUser.phone);
+  const phoney = useSelector((state) => state.user.currentUser.phone);
   const firstname = useSelector((state) => state.user.currentUser.fname);
   const lastname = useSelector((state) => state.user.currentUser.lname);
   const username = useSelector((state) => state.user.currentUser.username);
@@ -195,12 +196,12 @@ const Profile = () => {
                 <Container className="menu-profile-ext ps-3">
                   <h1 className="ps-3">{t("selfdata")}</h1>
                   <Container>
-                    <p className="gray">{t("init")}</p>
+                    <p className="gray mb-0">{t("init")}</p>
 
                     {show ? (
                       <Container className="d-flex justify-content-start align-items-baseline p-0">
-                        <h5 className="black">
-                          {Items.fname} {Items.lname}
+                        <h5 className="black mb-4">
+                          {firstname} {lastname}
                         </h5>
 
                         <button className="removeCart" onClick={ShowClick}>
@@ -219,7 +220,7 @@ const Profile = () => {
                         />
                         <input
                           type="text"
-                          className="form-control w-auto"
+                          className="form-control w-auto mb-4"
                           name="lname"
                           value={inputs.lname}
                           onChange={handleChange}
@@ -232,10 +233,10 @@ const Profile = () => {
                     )}
                   </Container>
                   <Container>
-                    <p className="gray">E-mail</p>
+                    <p className="gray mb-0">E-mail</p>
                     {showE ? (
                       <Container className="d-flex align-items-baseline p-0 me-0">
-                        <h5 className="black">{Items.email}</h5>
+                        <h5 className="black mb-4">{email}</h5>
                         <button className="removeCart" onClick={ShowClickE}>
                           <img src={redact}></img>
                         </button>
@@ -244,7 +245,7 @@ const Profile = () => {
                       <Container className="d-flex align-items-baseline p-0 me-0">
                         <input
                           type="text"
-                          className="form-control w-auto"
+                          className="form-control w-auto mb-4"
                           name="email"
                           value={inputs.email}
                           onChange={handleChange}
@@ -257,10 +258,10 @@ const Profile = () => {
                     )}
                   </Container>
                   <Container>
-                    <p className="gray">{t("phone")}</p>
+                    <p className="gray mb-0">{t("phone")}</p>
                     {showP ? (
                       <Container className="d-flex align-items-baseline p-0 me-0">
-                        <h5 className="black">{Items.phone}</h5>
+                        <h5 className="black mb-4">{phoney}</h5>
                         <button className="removeCart" onClick={ShowClickP}>
                           <img src={redact}></img>
                         </button>
@@ -269,7 +270,7 @@ const Profile = () => {
                       <Container className="d-flex align-items-baseline p-0 me-0">
                         <input
                           type="text"
-                          className="form-control w-auto"
+                          className="form-control w-auto mb-4"
                           name="phone"
                           value={inputs.phone}
                           onChange={handleChange}
@@ -283,7 +284,7 @@ const Profile = () => {
                   </Container>
                   <Container>
                     <Form>
-                      <p className="gray">{t("changepw")}</p>
+                      <p className="gray mb-0">{t("changepw")}</p>
                       <Container className="d-flex flex-wrap p-0">
                         <Container className="d-flex p-0 psw">
                           <Form.Group>
@@ -318,9 +319,9 @@ const Profile = () => {
                       <Button
                         variant="transparent"
                         onClick={() => setOpen1(true)}
-                        className="gray"
+                        className="gray d-flex align-items-center"
                       >
-                        &#10060; {t("delacc")}
+                        <img src={cross}></img> {t("delacc")}
                       </Button>
                       <Modal isOpen={Open1} style={customStyles}>
                         <h2 className="text-center mb-2">{t("confdel")}</h2>
