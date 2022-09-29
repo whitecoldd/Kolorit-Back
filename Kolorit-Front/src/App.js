@@ -29,6 +29,7 @@ import BrandCatalog from "./pages/BrandCatalog";
 import { useSelector } from "react-redux";
 import SingleArticle from "./pages/SingleArticle";
 import ModalComp from "./comps/ModalComp";
+import Sales from "./pages/Sales";
 function App() {
   const [Open, setOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]);
@@ -119,6 +120,7 @@ function App() {
           ></Route>
           <Route exact path="/about" element={<About />}></Route>
           <Route exact path="/contacts" element={<Contacts />}></Route>
+          <Route exact path="/sales" element={<Sales />}></Route>
           <Route
             exact
             path={`/catalog/:title/:title`}

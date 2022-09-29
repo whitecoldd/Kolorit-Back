@@ -48,7 +48,7 @@ export default function About() {
         </Breadcrumb>
       </Container>
       <Container className="d-flex flex-column">
-        <Container className="d-flex">
+        <Container className="d-flex aboutusheader">
           {Items?.filter((Items) => Items.lng === myLocalStorageData)
             .slice(0, 1)
             .map((Items) => (
@@ -58,7 +58,7 @@ export default function About() {
                   <h3>{Items.header}</h3>
                   <p>{Items.text}</p>
                 </Container>
-                <Container>
+                <Container className="imagecont">
                   <Image className="about-img" src={Items.img}></Image>
                 </Container>
               </>

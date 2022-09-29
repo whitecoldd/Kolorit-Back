@@ -309,7 +309,7 @@ export default function Navigation({
                   {" "}
                   {cartItems.length !== 0 ? (
                     <Badge badgeContent={cartItems.length} color="warning">
-                      <img className="pe-2" src={cart} />
+                      <img className="pe-1" src={cart} />
                     </Badge>
                   ) : (
                     <img className="pe-2" src={cart} />

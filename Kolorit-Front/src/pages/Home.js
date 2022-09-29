@@ -83,11 +83,11 @@ export default function Home(props) {
   }, []);
   return (
     <>
-      <Container className="d-flex">
+      <Container className="d-flex adapt">
         <Container className="menu-space mt-3 p-0">
           <MenuItemsDisplay></MenuItemsDisplay>
         </Container>
-        <Container className="me-1 mt-3 carousel-mine">
+        <Container className="me-1 mt-3 carousel-mine adapt">
           <Slider />
         </Container>
       </Container>

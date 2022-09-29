@@ -18,8 +18,8 @@ const ProductDisplay = () => {
     <>
       {
         Items?.slice(0,8).map(Items =>
-          <Link to={`/catalog/${Items.name}`} className='stuff d-flex flex-wrap justify-content-center mb-4 nav-link me-1 pb-0' eventKey='1'>
-            <Image width='100%' height='auto' src={Items.img}></Image>
+          <Link to={`/catalog/${Items.name}`} className='stuff d-flex flex-wrap justify-content-center mb-4 nav-link me-1 pb-0 pt-2' eventKey='1'>
+            <Image width='100%' height='70vh' src={Items.img}></Image>
             <p className='bulb-text text-center d-flex flex-wrap'>{Items.name}</p>
           </Link>
         )

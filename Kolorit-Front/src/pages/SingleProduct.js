@@ -97,9 +97,7 @@ const SingleProduct = ({
                   {t("cat")}{" "}
                   <span className="orange fatund">{items.category}</span>
                 </p>
-                <p
-                  className="d-flex align-items-center"
-                >
+                <p className="d-flex align-items-center">
                   <img src={checked} className="me-2" />{" "}
                   {items?.inStock?.toString()}
                 </p>
@@ -223,7 +221,7 @@ const SingleProduct = ({
           <Container>
             <Container className="single-prod-img p-2 sell-board mt-3">
               <h2 className="ps-4 bold">{t("additinfo")}</h2>
-              <Container className="d-flex sprodhandle">
+              <Container className="d-flex sprodhandle pt-4 ps-4">
                 <Container id="flex3">
                   <h6 className="bold">{t("producer")} </h6>
                   <p className="gray">
@@ -245,22 +243,26 @@ const SingleProduct = ({
                 </Container>
                 <Container id="flex3">
                   <h6 className="bold">{t("info")}</h6>
-                  <Container className="">
-                    <p className="gray">
-                      {t("piece")} {items.singleProd}{" "}
-                    </p>
-                    <p className="gray">
-                      {t("wt")} : {items.weight}{" "}
-                    </p>
-                    <p className="gray">
-                      {t("lt")} : {items.length}{" "}
-                    </p>
-                    <p className="gray">
-                      {t("wdt")} : {items.width}{" "}
-                    </p>
-                    <p className="gray">
-                      {t("ht")} : {items.height}{" "}
-                    </p>
+                  <Container className="d-flex">
+                    <div>
+                      <p className="gray size-adj">
+                        {t("piece")} {items.singleProd}{" "}
+                      </p>
+                      <p className="gray size-adj">
+                        {t("wt")} : {items.weight}{" "}
+                      </p>
+                      <p className="gray size-adj">
+                        {t("lt")} : {items.length}{" "}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="gray size-adj">
+                        {t("wdt")} : {items.width}{" "}
+                      </p>
+                      <p className="gray size-adj">
+                        {t("ht")} : {items.height}{" "}
+                      </p>
+                    </div>
                   </Container>
                 </Container>
               </Container>
@@ -299,19 +301,21 @@ const SingleProduct = ({
                 );
               }}
             >
-              {Items?.filter((Items)=> Items.lng === myLocalStorageData).map((Items) => {
-                return (
-                  <ItemModel
-                    addToCompare={addToCompare}
-                    removeFromCompare={removeFromCompare}
-                    selectedItems={selectedItems}
-                    Items={Items}
-                    key={Items.id}
-                    onAdd={() => onAdd(Items)}
-                    onRemoveFromPage={() => onRemoveFromPage(Items._id)}
-                  ></ItemModel>
-                );
-              })}
+              {Items?.filter((Items) => Items.lng === myLocalStorageData).map(
+                (Items) => {
+                  return (
+                    <ItemModel
+                      addToCompare={addToCompare}
+                      removeFromCompare={removeFromCompare}
+                      selectedItems={selectedItems}
+                      Items={Items}
+                      key={Items.id}
+                      onAdd={() => onAdd(Items)}
+                      onRemoveFromPage={() => onRemoveFromPage(Items._id)}
+                    ></ItemModel>
+                  );
+                }
+              )}
             </AliceCarousel>
           </Container>
         </Container>
