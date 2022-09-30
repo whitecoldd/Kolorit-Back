@@ -147,8 +147,8 @@ const Profile = () => {
               </Navbar.Collapse>
             </Navbar>
           </Container>
-          <Container>
-            <Container>
+          <Container className="np">
+            <Container className="np">
               <Container className="menu-profile-ext">
                 <Container className="d-flex justify-content-between">
                   <h1 className="pad">{t("self")}</h1>
@@ -160,14 +160,14 @@ const Profile = () => {
                     Выйти
                   </Button>
                 </Container>
-                <Container className="d-flex profhandle">
+                <Container className="d-flex profhandle until-650">
                   <Container>
                     <Container className="box d-flex flex-wrap align-content-between">
                       <Container>
                         <h3>{t("acorder")}</h3>
                         <h5 className="gray">{t("noorder")}</h5>
                       </Container>
-                      <Container className="d-flex justify-content-between align-items-baseline">
+                      <Container className="d-flex justify-content-between align-items-baseline ins-box">
                         <Link className="no-dec" to="/orders">
                           {t("more")} &gt;{" "}
                         </Link>
@@ -176,8 +176,8 @@ const Profile = () => {
                     </Container>
                     <Container className="box d-flex flex-wrap ">
                       <h3 className="mb-0">{t("self")}</h3>
-                      <Container className="d-flex justify-content-between p-0">
-                        <Container className="d-flex flex-column p-0 justify-content-between">
+                      <Container className="d-flex justify-content-between p-0 ins-box">
+                        <Container className="d-flex flex-column p-0 justify-content-between ">
                           <Container className="no-pad d-flex flex-column w-50 me-0 ms-0">
                             <p className="black">{Items.username}</p>
                             <p className="black">{Items.phone}</p>
@@ -187,7 +187,7 @@ const Profile = () => {
                             {t("change")} &gt;{" "}
                           </Link>
                         </Container>
-                        <Container className="d-flex justify-content-end align-items-end">
+                        <Container className="d-flex justify-content-end align-items-end ins-box-img">
                           <Image className="box-pic" src={bigprof}></Image>
                         </Container>
                       </Container>
@@ -199,7 +199,7 @@ const Profile = () => {
                         <h3>{t("mycart")}</h3>
                         <h5 className="gray">{t("emptycart")}</h5>
                       </Container>
-                      <Container className="d-flex justify-content-between align-items-baseline">
+                      <Container className="d-flex justify-content-between align-items-baseline ins-box">
                         <Link className="no-dec" to="/cart">
                           {t("tocart")} &gt;{" "}
                         </Link>
@@ -212,7 +212,7 @@ const Profile = () => {
                         <h5 className="gray">{t("noprod")}</h5>
                       </Container>
                       <Container className="no-pad"></Container>
-                      <Container className="d-flex justify-content-between align-items-baseline">
+                      <Container className="d-flex justify-content-between align-items-baseline ins-box">
                         <a className="no-dec" href="/">
                           {t("gofav")} &gt;{" "}
                         </a>

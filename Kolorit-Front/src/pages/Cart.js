@@ -109,7 +109,7 @@ export default function Cart(props) {
                               <Container className="count p-0 m-0">
                                 <Container className="d-flex scale p-0 m-0">
                                   <button
-                                    className="desCart me-2 pt-1"
+                                    className="desCart me-2 pb-1"
                                     onClick={() => decreaseQty(item)}
                                   >
                                     <Image src={minus}></Image>
@@ -118,7 +118,7 @@ export default function Cart(props) {
                                     <h1 className="qtyCartText">{item.qty}</h1>
                                   </Container>
                                   <button
-                                    className="incCart pt-1"
+                                    className="incCart pb-1"
                                     onClick={() => onAdd(item)}
                                   >
                                     <Image src={plus}></Image>

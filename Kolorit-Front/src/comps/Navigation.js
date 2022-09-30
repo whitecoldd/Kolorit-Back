@@ -127,6 +127,7 @@ export default function Navigation({
     e.preventDefault();
     setVision(true);
   };
+  const total = cartItems.reduce((accum, item) => accum + item.qty, 0);
   return (
     <>
       <Navbar
@@ -175,15 +176,24 @@ export default function Navigation({
                 <div className="dropdown1">
                   <button className="dropbtn1">{t("lang")}</button>
                   <div className="dropdown-content1">
-                    <button className="d-flex align-items-center" onClick={() => changeLanguage("ru")}>
+                    <button
+                      className="d-flex align-items-center"
+                      onClick={() => changeLanguage("ru")}
+                    >
                       <img width={12} height={12} src={flagR} />
                       Ru
                     </button>
-                    <button className="d-flex align-items-center" onClick={() => changeLanguage("ro")}>
+                    <button
+                      className="d-flex align-items-center"
+                      onClick={() => changeLanguage("ro")}
+                    >
                       <img width={12} height={12} src={flagRo} />
                       Ro
                     </button>
-                    <button className="d-flex align-items-center" onClick={() => changeLanguage("en")}>
+                    <button
+                      className="d-flex align-items-center"
+                      onClick={() => changeLanguage("en")}
+                    >
                       <img width={12} height={12} src={flagEn} />
                       En
                     </button>
@@ -307,8 +317,8 @@ export default function Navigation({
                   className="d-flex justify-content-center flex-wrap nav-link"
                 >
                   {" "}
-                  {cartItems.length !== 0 ? (
-                    <Badge badgeContent={cartItems.length} color="warning">
+                  {total !== 0 ? (
+                    <Badge badgeContent={Number(total)} color="warning">
                       <img className="pe-1" src={cart} />
                     </Badge>
                   ) : (

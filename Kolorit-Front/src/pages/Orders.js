@@ -29,7 +29,9 @@ const Orders = () => {
   useEffect(() => {
     const getItems = async () => {
       try {
-        const res = await userRequest.get(`/api/order/find/${username}`);
+        const res = await userRequest.get(
+          `/api/order/find/${username}?new=new`
+        );
         setItems(res.data);
       } catch (e) {
         console.log(e);
@@ -37,6 +39,20 @@ const Orders = () => {
     };
     getItems();
   }, [username]);
+
+  const [Del, setDel] = useState("");
+
+  useEffect(() => {
+    const getType = () => {
+      if (Items.delType === "pick-up") {
+        Items.delType = t("pick-up");
+      } else if (Items.delType === "delivery") {
+        Items.delType = t("delivery");
+      }
+    };
+     getType();
+  }, [Items.delType]);
+
   return (
     <>
       <Container className="profile d-flex mb-3">
@@ -132,11 +148,12 @@ const Orders = () => {
           </Container>
           <Container>
             <Container>
-              <Container className="menu-profile-ext ps-3">
+              <Container className="menu-profile-ext p-3">
+                <h1>{t("acorder")}</h1>
                 <Table striped hover className="tablenew p-3">
-                  <thead>
+                  <thead className="tablehead">
                     <tr>
-                      <th className="hid">#</th>
+                      <th className="hid">№</th>
                       <th>{t("deltype")}</th>
                       <th>{t("date")}</th>
                       <th>{t("price")}</th>
@@ -149,23 +166,26 @@ const Orders = () => {
                     if (item.userName === username) {
                       return (
                         <>
-                          <tbody>
-                            <th className="hid">{item._id}</th>
-                            <th>{item.delType}</th>
-                            <th>
+                          <tbody className="tablerow">
+                            <th className="hid text-center">{item._id}</th>
+                            <th className="text-center">{item.delType}</th>
+                            <th className="text-center">
                               {format(new Date(item.createdAt), "dd-MM-yyyy")}
                             </th>
-                            <th>
+                            <th className="text-center">
                               {item?.sum}
                               <span>MDL</span>
                             </th>
-                            <th>{item.status}</th>
-                            <Link
-                              className="real-no-dec"
-                              to={`/order/${item._id}`}
-                            >
-                              <th className="noborder"><img src={arroworder}/></th>
-                            </Link>
+                            <th className="text-center">{item.status}</th>
+
+                            <th className="noborder ">
+                              <Link
+                                className="real-no-dec"
+                                to={`/order/${item._id}`}
+                              >
+                                <img className="d-flex" src={arroworder} />
+                              </Link>
+                            </th>
                           </tbody>
                         </>
                       );

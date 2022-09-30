@@ -23,8 +23,24 @@ router.post("/register", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
+  const { userEmailPhone } = req.body;
   try {
-    const user = await User.findOne({ username: req.body.username });
+    // const user = await User.findOne({
+    //   $or: [
+    //     {
+    //       email: userEmailPhone.email,
+    //     },
+    //     {
+    //       phone: userEmailPhone.phone,
+    //     },
+    //     {
+    //       username: userEmailPhone.username,
+    //     },
+    //   ],
+    // });
+    const user = await User.findOne({
+      username: req.body.username
+    });
     if (!user) {
       res.status(401).json("User does not exist in the DB");
       return;
@@ -54,6 +70,5 @@ router.post("/login", async (req, res) => {
     res.status(500).json(e);
   }
 });
-
 
 module.exports = router;

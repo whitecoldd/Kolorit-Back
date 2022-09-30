@@ -36,8 +36,14 @@ router.delete('/:id', verifyTokenAndAdmin, async (req, res) => {
 
 
 router.get('/find/:userName', async (req, res) => {
+    const qNew = req.query.new
     try {
-        const orders = await Order.find({ userName: req.params.userName })
+        let orders
+        if(qNew){
+            orders = await Order.find({ userName: req.params.userName }).sort({createdAt: -1}).limit(10)
+        }else{
+            orders = await Order.find({ userName: req.params.userName })
+        }
         res.status(200).json(orders)
     } catch (e) {
         res.status(500).json(e)
