@@ -70,7 +70,7 @@ export default function Cart(props) {
               <h1>{t("head2")}</h1>
               <Container className="mt-4 cart-cont">
                 {cartItems.length === 0 && (
-                  <h1 className=" product p-3">{t("empty")}</h1>
+                  <h1 className=" product p-3">{t("emtycart")}</h1>
                 )}
                 {cartItems.map((item) => {
                   const productQty = item.salePrice * item.qty;

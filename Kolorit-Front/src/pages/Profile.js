@@ -30,7 +30,7 @@ const Profile = () => {
   const handleClick = (e) => {
     e.preventDefault();
     try {
-      logoutFunc(dispatch)
+      logoutFunc(dispatch);
       history("/");
     } catch (e) {
       console.log(e);
@@ -129,16 +129,10 @@ const Profile = () => {
                       >
                         Избранное
                       </Link>
-                      <Link
-                        to="/"
-                        className="menu-profile-text nav-link"
-                      >
+                      <Link to="/" className="menu-profile-text nav-link">
                         Просмотренные товары
                       </Link>
-                      <Link
-                        to="/cart"
-                        className="menu-profile-text nav-link"
-                      >
+                      <Link to="/cart" className="menu-profile-text nav-link">
                         Корзина
                       </Link>
                     </Container>

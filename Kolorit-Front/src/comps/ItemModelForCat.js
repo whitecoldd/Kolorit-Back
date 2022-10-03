@@ -79,19 +79,21 @@ const ItemModel = (props) => {
               fluid
               className="d-flex flex-column text-float align-items-start ps-0"
             >
-              <del
-                className="grey fs-12"
-                style={{ fontSize: "11px", fontWeight: "300" }}
-              >
-                {Items.price}
-                <small
-                  className="grey fs-10"
-                  style={{ fontSize: "17px", fontWeight: "300" }}
+              <span>
+                <del
+                  className="grey fs-12"
+                  style={{ fontSize: "11px", fontWeight: "300" }}
+                >
+                  {Items.price}
+                </del>
+                <del
+                  className="grey"
+                  style={{ fontSize: "10px", fontWeight: "300" }}
                 >
                   {" "}
                   {Items.currency}
-                </small>
-              </del>
+                </del>
+              </span>
               <h4 className="fs-12">
                 {Items.salePrice}{" "}
                 <small className="fs-10"> {Items.currency}</small>

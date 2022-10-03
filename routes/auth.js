@@ -22,25 +22,24 @@ router.post("/register", async (req, res) => {
   }
 });
 
+const isEmail = (email) => {
+  var emailFormat = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+    if (email !== '' && email.match(emailFormat)) { return true; }
+    
+    return false;
+};
+
+
 router.post("/login", async (req, res) => {
-  const { userEmailPhone } = req.body;
+  const { email, phone } = req.body;
   try {
-    // const user = await User.findOne({
-    //   $or: [
-    //     {
-    //       email: userEmailPhone.email,
-    //     },
-    //     {
-    //       phone: userEmailPhone.phone,
-    //     },
-    //     {
-    //       username: userEmailPhone.username,
-    //     },
-    //   ],
-    // });
-    const user = await User.findOne({
-      username: req.body.username
-    });
+    let user;
+    if (isEmail(email)) {
+      user = await User.findOne({email: email});
+    } else {
+      user = await User.findOne({phone: email});
+    }
+    //TODO MULTILOGIN SYSTEM
     if (!user) {
       res.status(401).json("User does not exist in the DB");
       return;

@@ -7,6 +7,7 @@ import {
   Button,
   Image,
 } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import phonep from "../assets/phone.png";
 import address from "../assets/address.png";
@@ -18,6 +19,7 @@ import { useTranslation } from "react-i18next";
 import { ToastContainer, toast } from "react-toastify";
 import { injectStyle } from "react-toastify/dist/inject-style";
 const ProcessOrder = ({ cartItems }) => {
+  const history = useNavigate()
   const [inputs, setInputs] = useState({});
   const handleChange = (e) => {
     setInputs((prev) => {
@@ -39,9 +41,10 @@ const ProcessOrder = ({ cartItems }) => {
     try {
       const res = await userRequest.post(`/api/order/`, order);
       console.log(res.data);
-      toast(t("ordpend"));
+      history('/success')
     } catch (e) {
       console.log(e);
+      toast.error(t("err"))
     }
   };
   const [select, setSelect] = useState("---");

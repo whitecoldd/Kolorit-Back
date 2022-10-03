@@ -7,14 +7,17 @@ import { useNavigate } from "react-router-dom";
 import { publicRequest } from "../requests/request";
 import { useTranslation } from "react-i18next";
 import { ToastContainer, toast } from "react-toastify";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { injectStyle } from "react-toastify/dist/inject-style";
-const Register = ({ Log, setLog }) => {
+const Register = () => {
   const [username, setUsername] = useState("");
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState({});
+  const [vis, setVis] = useState(false);
   const dispatch = useDispatch();
   const history = useNavigate();
   const [inputs, setInputs] = useState({});
@@ -25,6 +28,10 @@ const Register = ({ Log, setLog }) => {
     setInputs((prev) => {
       return { ...prev, [e.target.name]: e.target.value };
     });
+  };
+  const handleVis = (e) => {
+    e.preventDefault();
+    setVis(!vis);
   };
   const admin = useSelector((state) => state.user.currentUser);
   const user = { ...inputs };
@@ -85,15 +92,18 @@ const Register = ({ Log, setLog }) => {
             />
           </Form.Group>
           <Form.Group
-            className="mb-3 d-flex flex-wrap form-div w-75"
+            className="mb-3 d-flex flex-wrap form-div w-75 position-relative"
             controlId="exampleForm.ControlInput5"
           >
             <Form.Control
-              type="password"
+              type={!vis ? "password": "text"}
               name="password"
               placeholder={t("pw")}
               onChange={handleChange}
             />
+            <button onClick={handleVis} className="vispass">
+              {!vis ? <VisibilityIcon /> : <VisibilityOffIcon />}
+            </button>
           </Form.Group>
           {/* <Form.Group className="mb-3 d-flex flex-wrap  w-50" controlId="exampleForm.ControlInput6">
                         <Form.Label>Подтвердите пароль</Form.Label>

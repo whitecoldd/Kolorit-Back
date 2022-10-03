@@ -32,7 +32,7 @@ export function Footer (props) {
               <Container className='d-flex p-0 m-0'>
                 <Container className=' p-0 m-0 d-flex flex-column'>
                   <Link to="/">{t('foot4')}</Link>
-                  <Link to="/">{t('foot5')}</Link>
+                  <Link to="/">{t('nav3')}</Link>
                   <Link to="/">{t('foot6')}</Link>
                   <Link to="/">{t('foot7')}</Link>
                   <Link to="/">{t('foot8')}</Link>
@@ -56,7 +56,7 @@ export function Footer (props) {
                 <Link to="/">{t('foot19')}</Link>
                 <Link to="/">{t('foot20')}</Link>
                 <Link to="/">{t('foot21')}</Link>
-                <Link to="/">{t('foot22')}</Link>
+                <Link to="/">{t('nav4')}</Link>
                 <Link to="/">{t('foot23')}</Link>
                 <Link to="/">{t('foot24')}</Link>
                 <Link to="/" className='heh'>{t('foot25')}</Link>

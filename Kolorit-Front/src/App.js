@@ -30,6 +30,7 @@ import { useSelector } from "react-redux";
 import SingleArticle from "./pages/SingleArticle";
 import ModalComp from "./comps/ModalComp";
 import Sales from "./pages/Sales";
+import Success from "./pages/Success";
 function App() {
   const [Open, setOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]);
@@ -132,6 +133,7 @@ function App() {
             element={<SubCatalog />}
           ></Route>
           <Route exact path={`/catalog`} element={<Catalog />}></Route>
+          <Route exact path={`/success`} element={<Success />}></Route>
           <Route
             exact
             path={`/catalog/title/:title/:title`}
