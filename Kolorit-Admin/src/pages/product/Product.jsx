@@ -246,6 +246,56 @@ export default function Product({ productData }) {
               value={inputs.char4a}
               onChange={handleChange}
             />
+            <label>char5</label>
+            <input
+              type="text"
+              name="char5"
+              value={inputs.char5}
+              onChange={handleChange}
+            />
+            <label>char5a</label>
+            <input
+              type="text"
+              name="char5a"
+              value={inputs.char5a}
+              onChange={handleChange}
+            />
+            <label>char6</label>
+            <input
+              type="text"
+              name="char6"
+              value={inputs.char6}
+              onChange={handleChange}
+            />
+            <label>char6a</label>
+            <input
+              type="text"
+              name="char6a"
+              value={inputs.char6a}
+              onChange={handleChange}
+            />
+          
+            <label>guarantee</label>
+            <input
+              type="text"
+              name="guarantee"
+              value={inputs.guarantee}
+              onChange={handleChange}
+            />
+            <label>weight netto</label>
+            <input
+              type="text"
+              name="wNetto"
+              value={inputs.wNetto}
+              onChange={handleChange}
+            />
+            <label>dimensions without package</label>
+            <input
+              type="text"
+              name="dimensions"
+              value={inputs.dimensions}
+              onChange={handleChange}
+            />
           </div>
           <div className="productFormLeft flex1">
             <label>brandCountry</label>
