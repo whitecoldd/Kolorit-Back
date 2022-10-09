@@ -19,7 +19,7 @@ import AppPagination from "../comps/AppPagination";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import axios from "axios";
-import NewPagination from '../comps/NewPagination'
+import NewPagination from "../comps/NewPagination";
 import { publicRequest } from "../requests/request";
 import { useTranslation } from "react-i18next";
 const checklist = [
@@ -202,15 +202,13 @@ const CatalogClass = ({
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = filteredBrands.slice(indexOfFirstPost, indexOfLastPost);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  const [Fold, setFold] = useState(true)
+  const [Fold, setFold] = useState(true);
   return (
     <>
       <Container>
         <Breadcrumb className="mt-3">
           <Breadcrumb.Item href="/">{t("main")}</Breadcrumb.Item>
-          <Breadcrumb.Item href="/catalog">
-            <mark>{t("foot4")}</mark>
-          </Breadcrumb.Item>
+          <Breadcrumb.Item href="/catalog">{t("foot4")}</Breadcrumb.Item>
           <Breadcrumb.Item active>
             <mark>{decodeURIComponent(category)}</mark>
           </Breadcrumb.Item>
@@ -276,10 +274,20 @@ const CatalogClass = ({
                   </Nav>
                   <Nav className="">
                     <Nav.Link>
-                      <Button variant="transparent" onClick={()=>setFold(true)}><Image src={type1}></Image></Button>
+                      <Button
+                        variant="transparent"
+                        onClick={() => setFold(true)}
+                      >
+                        <Image src={type1}></Image>
+                      </Button>
                     </Nav.Link>
                     <Nav.Link>
-                    <Button variant="transparent" onClick={()=>setFold(false)}><Image src={type2}></Image></Button>
+                      <Button
+                        variant="transparent"
+                        onClick={() => setFold(false)}
+                      >
+                        <Image src={type2}></Image>
+                      </Button>
                     </Nav.Link>
                   </Nav>
                 </Navbar.Collapse>
@@ -299,25 +307,29 @@ const CatalogClass = ({
               ?.filter(
                 (filtered) => filtered.salePrice < parseInt(value[1], 10)
               )
-              ?.map((filtered) => (Fold ?
-                <ItemModelForCat
-                  Items={filtered}
-                  key={filtered._id}
-                  addToCompare={addToCompare}
-                  removeFromCompare={removeFromCompare}
-                  selectedItems={selectedItems}
-                  onAdd={() => onAdd(filtered)}
-                  onRemoveFromPage={() => onRemoveFromPage(filtered._id)}
-                ></ItemModelForCat> : <ItemsModelUnfold
-                Items={filtered}
-                key={filtered._id}
-                addToCompare={addToCompare}
-                removeFromCompare={removeFromCompare}
-                selectedItems={selectedItems}
-                onAdd={() => onAdd(filtered)}
-                onRemoveFromPage={() => onRemoveFromPage(filtered._id)}
-              ></ItemsModelUnfold> 
-              ))}
+              ?.map((filtered) =>
+                Fold ? (
+                  <ItemModelForCat
+                    Items={filtered}
+                    key={filtered._id}
+                    addToCompare={addToCompare}
+                    removeFromCompare={removeFromCompare}
+                    selectedItems={selectedItems}
+                    onAdd={() => onAdd(filtered)}
+                    onRemoveFromPage={() => onRemoveFromPage(filtered._id)}
+                  ></ItemModelForCat>
+                ) : (
+                  <ItemsModelUnfold
+                    Items={filtered}
+                    key={filtered._id}
+                    addToCompare={addToCompare}
+                    removeFromCompare={removeFromCompare}
+                    selectedItems={selectedItems}
+                    onAdd={() => onAdd(filtered)}
+                    onRemoveFromPage={() => onRemoveFromPage(filtered._id)}
+                  ></ItemsModelUnfold>
+                )
+              )}
           </Container>
 
           <Container className="d-flex justify-content-center">

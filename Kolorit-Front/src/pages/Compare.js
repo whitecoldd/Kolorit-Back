@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Container } from "react-bootstrap";
+import { Container, Button, Breadcrumb } from "react-bootstrap";
 import { Header, Grid, Item, Table, Label } from "semantic-ui-react";
 import ItemModelForCat from "../comps/ItemModelForCat";
 import { publicRequest } from "../requests/request";
 import { useTranslation } from "react-i18next";
+import ItemModel from "../comps/ItemModelForComp";
 
 const Compare = ({
   selectedItems,
@@ -28,18 +29,53 @@ const Compare = ({
     const lng = localStorage.getItem("i18nextLng");
     setMyLocalStorageData(lng);
   }, []);
+
+  useEffect(() => {
+    const color = async () => {
+      if (Items.inStock.includes(t("inuse"))) {
+        setColor(false);
+      } else {
+        setColor(true);
+      }
+    };
+
+    color();
+  }, [Items]);
+  const [color, setColor] = useState(false);
   return (
     <Container>
+      <Breadcrumb className="pt-3">
+        <Breadcrumb.Item href="/">{t("main")}</Breadcrumb.Item>
+        <Breadcrumb.Item active>
+          <mark>{t("head1")}</mark>
+        </Breadcrumb.Item>
+      </Breadcrumb>
       <div>
         <Header as="h1" content={t("comp")} textAlign="center" />
         {selectedItems.length > 0 && (
           <Table definition>
             <Table.Header>
               <Table.Row>
-                <Table.HeaderCell></Table.HeaderCell>
+                <Table.HeaderCell>
+                  <Label color="orange" ribbon>
+                    <div className="d-flex flex-column h-50v align-items-start">
+                      <Button className="mb-4 gray-bg ps-5 pe-5">{t("chars")}</Button>
+                      <Button className="mb-4 gray-bg ps-5 pe-5">{t("sims")}</Button>
+                      <Button className="mb-4 gray-bg ps-5 pe-5">{t("difs")}</Button>
+                    </div>
+                  </Label>
+                </Table.HeaderCell>
                 {selectedItems.map((Items) => (
-                  <Table.HeaderCell key={Items.id}>
-                    {Items.name}
+                  <Table.HeaderCell key={Items.id} width={100}>
+                    <ItemModel
+                      key={Items.id}
+                      Items={Items}
+                      selected={selectedItems}
+                      addToCompare={addToCompare}
+                      removeFromCompare={removeFromCompare}
+                      onAdd={onAdd}
+                      onRemoveFromPage={() => onRemoveFromPage(Items._id)}
+                    />
                   </Table.HeaderCell>
                 ))}
               </Table.Row>
@@ -52,30 +88,45 @@ const Compare = ({
                   </Label>
                 </Table.Cell>
                 {selectedItems.map((Items) => (
-                  <Table.Cell key={Items.id}>{Items.salePrice}</Table.Cell>
+                  <Table.Cell className="text-center" key={Items.id}>{Items.salePrice}</Table.Cell>
+                ))}
+              </Table.Row>
+              <Table.Row>
+                <Table.Cell>
+                  <Label ribbon>
+                    {t("car2")}
+                  </Label>
+                </Table.Cell>
+                {selectedItems.map((Items) => (
+                  <Table.Cell className="text-center red" key={Items.id} >{Items.promo}</Table.Cell>
                 ))}
               </Table.Row>
               <Table.Row>
                 <Table.Cell>
                   <Label color="teal" ribbon>
-                    {t("desc")}
+                    {t("inuse")}
                   </Label>
                 </Table.Cell>
                 {selectedItems.map((Items) => (
-                  <Table.Cell key={Items.id}>{Items.description}</Table.Cell>
+                  <Table.Cell
+                    key={Items.id}
+                    className={color ? "green text-center" : "gold text-center"}
+                  >
+                    {Items.inStock}
+                  </Table.Cell>
                 ))}
               </Table.Row>
 
               <Table.Row>
-                <Table.Cell>
+                <Table.Cell width={100}>
                   {selectedItems.slice(0, 1).map((Items) => (
-                    <Label color="pink" ribbon>
+                    <Label  color="pink" ribbon width={100}>
                       {Items.char1}
                     </Label>
                   ))}
                 </Table.Cell>
                 {selectedItems.map((Items) => (
-                  <Table.Cell key={Items.id}>{Items.char1a}</Table.Cell>
+                  <Table.Cell className="text-center" key={Items.id}>{Items.char1a}</Table.Cell>
                 ))}
               </Table.Row>
 
@@ -88,7 +139,7 @@ const Compare = ({
                   ))}
                 </Table.Cell>
                 {selectedItems.map((Items) => (
-                  <Table.Cell key={Items.id}>{Items.char2a}</Table.Cell>
+                  <Table.Cell className="text-center" key={Items.id}>{Items.char2a}</Table.Cell>
                 ))}
               </Table.Row>
               <Table.Row>
@@ -100,7 +151,7 @@ const Compare = ({
                   ))}
                 </Table.Cell>
                 {selectedItems.map((Items) => (
-                  <Table.Cell key={Items.id}>{Items.char3a}</Table.Cell>
+                  <Table.Cell className="text-center" key={Items.id}>{Items.char3a}</Table.Cell>
                 ))}
               </Table.Row>
               <Table.Row>
@@ -112,13 +163,13 @@ const Compare = ({
                   ))}
                 </Table.Cell>
                 {selectedItems.map((Items) => (
-                  <Table.Cell key={Items.id}>{Items.char4a}</Table.Cell>
+                  <Table.Cell className="text-center" key={Items.id}>{Items.char4a}</Table.Cell>
                 ))}
               </Table.Row>
             </Table.Body>
           </Table>
         )}
-        <Grid columns={selectedItems.length} stackable padded divided>
+        {/* <Grid columns={selectedItems.length} stackable padded divided>
           <Item.Group className="d-flex flex-wrap">
             {Items.filter((Items) => Items.lng === myLocalStorageData).map(
               (Items) => (
@@ -134,7 +185,7 @@ const Compare = ({
               )
             )}
           </Item.Group>
-        </Grid>
+        </Grid> */}
       </div>
     </Container>
   );

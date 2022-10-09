@@ -142,6 +142,10 @@ b {
   background-color: gray;
 }
 
+.green{
+  color: green !important;
+}
+
 .smth {
   border-bottom: 1px #c2c2c2 solid;
   z-index: 0 !important;
@@ -154,8 +158,15 @@ b {
   color: #ffffff !important;
 }
 
+.red{
+  color: red;
+}
+
 .gold {
   color: #ff820e !important;
+}
+.h-50v{
+  height: 53vh !important;
 }
 
 .page-link {
@@ -313,6 +324,11 @@ b {
 .d-flex .size-adj {
   font-size: 16px !important;
   font-weight: 300;
+  padding: 0px !important;
+}
+.d-flex .size-adj span {
+  font-size: 16px !important;
+  font-weight: 700;
   padding: 0px !important;
 }
 
@@ -513,6 +529,10 @@ b {
     left: 80px;
     width: 450px !important;
     z-index: 1000 !important;
+  }
+
+  .tabs-about h1{
+    font-size: larger !important;
   }
 
   .prod-cont .stuff {
@@ -1044,6 +1064,12 @@ a.nav-fix.nav-link {
   width: 18% !important;
   height: 380px;
 }
+.sales-prod4 {
+  border-radius: 20px !important;
+  border: 5px solid #fcc15e;
+  width: 290px !important;
+  height: 380px;
+}
 .sales-prod2 {
   border-radius: 20px !important;
   border: 5px solid #fcc15e;
@@ -1087,6 +1113,13 @@ small {
   color: black !important;
   font-weight: 700;
 }
+.sales-prod4 p,
+h3,
+del,
+small {
+  color: black !important;
+  font-weight: 700;
+}
 .sales-prod2 p,
 h3,
 del,
@@ -1097,6 +1130,9 @@ small {
 
 @media screen and (max-width: 1200px) {
   .sales-prod h3 b {
+    font-size: 25px !important;
+  }
+  .sales-prod4 h3 b {
     font-size: 25px !important;
   }
   .sales-prod2 h3 b {
@@ -1115,11 +1151,20 @@ small {
 .sales-prod h3 b {
   font-size: 28px !important;
 }
+.sales-prod4 h3 b {
+  font-size: 28px !important;
+}
 .sales-prod2 h3 b {
   font-size: 28px !important;
 }
 
 .sales-prod h4,
+h4 small {
+  color: #ff820e !important;
+  font-size: 20px;
+  font-weight: 700;
+}
+.sales-prod4 h4,
 h4 small {
   color: #ff820e !important;
   font-size: 20px;
@@ -2129,11 +2174,23 @@ center {
   background-color: #ebebeb !important;
 }
 
+.gray-bg{
+  background-color: #565656 !important;
+  border: none !important;
+  border-radius: 10px !important;
+}
+.gray-bg:focus{
+  background-color: #ff820e !important;
+}
+
 .br-3 {
   border-radius: 20px !important;
 }
 
 .sales-prod b {
+  font-size: 16px !important;
+}
+.sales-prod4 b {
   font-size: 16px !important;
 }
 .sales-prod2 b {

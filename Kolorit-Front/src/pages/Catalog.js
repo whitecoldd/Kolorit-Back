@@ -6,10 +6,12 @@ import { Link } from "react-router-dom";
 import CatalogClass from "./CatalogClass";
 import { publicRequest } from "../requests/request";
 import { useTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import back from "../assets/back.svg";
 export default function Catalog() {
   const location = useLocation();
   const category = location.pathname.split("/")[2];
+  const navigate = useNavigate()
   const [Items, setItems] = useState([]);
   useEffect(() => {
     const getItems = async () => {
@@ -31,7 +33,12 @@ export default function Catalog() {
           </Breadcrumb.Item>
         </Breadcrumb>
 
-        <h1 className="bold mb-5">{t("foot4")}</h1>
+        <div className="d-flex align-items-start">
+          <button className="nobr-bttn pt-2 mt-1 pe-4" onClick={() => navigate(-1)}>
+            <img src={back} />
+          </button>
+          <h1 className="bold mb-5 ">{t("foot4")}</h1>
+        </div>
       </Container>
       <Container className="d-flex flex-wrap justify-content-center no-pad scrolldiv-cat mb-5">
         {Items?.map((item) => (

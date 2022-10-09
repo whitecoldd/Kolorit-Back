@@ -234,6 +234,69 @@ export default function NewProduct() {
                 />
               </div>
               <div className="addProductItem">
+                <label>Char #5</label>
+                <input
+                  name="char5"
+                  type="text"
+                  placeholder="Название Характеристики"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="addProductItem">
+                <label>Char #5 Answer</label>
+                <input
+                  name="char5a"
+                  type="text"
+                  placeholder="Характеристика"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="addProductItem">
+                <label>Char #6</label>
+                <input
+                  name="char6"
+                  type="text"
+                  placeholder="Название Характеристики"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="addProductItem">
+                <label>Char #6 Answer</label>
+                <input
+                  name="char6a"
+                  type="text"
+                  placeholder="Характеристика"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="addProductItem">
+                <label>Guarantee</label>
+                <input
+                  name="gurantee"
+                  type="text"
+                  placeholder="2 года"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="addProductItem">
+                <label>Weight Netto</label>
+                <input
+                  name="wNetto"
+                  type="text"
+                  placeholder="2кг"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="addProductItem">
+                <label>Dimension without a package</label>
+                <input
+                  name="dimensions"
+                  type="text"
+                  placeholder="600x300x200"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="addProductItem">
                 <label>Brand Country</label>
                 <input
                   name="brandCountry"

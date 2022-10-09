@@ -54,11 +54,11 @@ export function Footer (props) {
               <h4 className='linedown pb-4'>{t('foot18')}</h4>
               <Container className='fix-right d-flex flex-column' >
                 <Link to="/">{t('foot19')}</Link>
-                <Link to="/">{t('foot20')}</Link>
-                <Link to="/">{t('foot21')}</Link>
+                <Link to="/">{t('nav2')}</Link>
+                <Link to="/">{t('nav1')}</Link>
                 <Link to="/">{t('nav4')}</Link>
                 <Link to="/">{t('foot23')}</Link>
-                <Link to="/">{t('foot24')}</Link>
+                <Link to="/">{t('nav5')}</Link>
                 <Link to="/" className='heh'>{t('foot25')}</Link>
               </Container>
             </Container>

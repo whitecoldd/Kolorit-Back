@@ -241,26 +241,26 @@ const SingleProduct = ({
                     ))}
                   </ul>
                 </Container>
-                <Container id="flex3">
+                <Container id="flex2">
                   <h6 className="bold">{t("info")}</h6>
-                  <Container className="d-flex">
-                    <div>
+                  <Container className="d-flex p-0">
+                    <div className="pe-2">
                       <p className="gray size-adj">
-                        {t("piece")} {items.singleProd}{" "}
+                        {t("piece")} <span>{items.singleProd}</span>
                       </p>
                       <p className="gray size-adj">
-                        {t("wt")} : {items.weight}{" "}
+                        {t("wt")} : <span>{items.weight}</span>{" "}
                       </p>
                       <p className="gray size-adj">
-                        {t("lt")} : {items.length}{" "}
+                        {t("lt")} : <span>{items.length}</span>{" "}
                       </p>
                     </div>
                     <div>
                       <p className="gray size-adj">
-                        {t("wdt")} : {items.width}{" "}
+                        {t("wdt")} : <span>{items.width}</span>{" "}
                       </p>
                       <p className="gray size-adj">
-                        {t("ht")} : {items.height}{" "}
+                        {t("ht")} : <span>{items.height}</span>{" "}
                       </p>
                     </div>
                   </Container>
