@@ -22,7 +22,7 @@ export default function CardsItem (){
                     </Container>
                     <Container className="card me-2">
                         <Image width='20%' height='auto' className='pb-3' src={card3}></Image>
-                        <h1>{t('card3')}</h1>
+                        <h1>{t('del')}</h1>
                         <p className='black'>{t('card3/1')}</p>
                     </Container>
                     <Container className="card me-2">

@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { logoutFunc } from "../redux/apiCalls";
 import home from "../assets/home.png";
+import home1 from "../assets/home1.svg";
 import shop from "../assets/shop.png";
 import profile from "../assets/profile.png";
 import cart from "../assets/cart1.png";
@@ -52,20 +53,20 @@ const Profile = () => {
     <>
       <Container className="profile d-flex mb-3">
         <Container className="d-flex profhandle">
-          <Container className="menu-profile pt-3 mb-3">
+          <Container className="menu-profile pt-3 mb-3 ps-0">
             <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
               <Navbar.Toggle aria-controls="responsive-navbar-nav" />
               <Navbar.Collapse id="responsive-navbar-nav">
-                <Nav collapseOnSelect className="d-flex flex-wrap">
+                <Nav collapseOnSelect className="d-flex flex-wrap ">
                   <Nav.Item>
-                    <Link to="/profile" className="black nav-link">
-                      <Container className="d-flex align-items-center prof-item">
+                    <Link to="/profile" className="black nav-link ps-0">
+                      <Container className="d-flex align-items-center prof-item lineleft">
                         <Image src={home}></Image>
                         <Link
                           to="/profile"
-                          className="black nav-link real-no-dec"
+                          className="gold nav-link real-no-dec"
                         >
-                          Личный Кабинет
+                          {t('self')}
                         </Link>
                       </Container>
                     </Link>
@@ -73,23 +74,23 @@ const Profile = () => {
                       <Container className="d-flex align-items-center prof-item">
                         <Image src={shop}></Image>
                         <Link to="/orders" className="black nav-link">
-                          Заказы
+                          {t("ord")}
                         </Link>
                       </Container>
                     </Link>
                     <Container className="d-flex flex-column prof-item">
                       <Link to="/orders" className="menu-profile-text nav-link">
-                        Все заказы
+                      {t("ord")}
                       </Link>
                       <Link to="/orders" className="menu-profile-text nav-link">
-                        Активные заказы
+                      {t("acorder")}
                       </Link>
                     </Container>
-                    <Link to="/profile" className="black nav-link">
+                    <Link to="/profileinfo" className="black nav-link">
                       <Container className="d-flex align-items-center prof-item">
                         <Image src={profile}></Image>
-                        <Link to="/profile" className="black nav-link">
-                          Профиль
+                        <Link to="/profileinfo" className="black nav-link">
+                          {t("head3/1")}
                         </Link>
                       </Container>
                     </Link>
@@ -98,13 +99,13 @@ const Profile = () => {
                         to="/profileinfo"
                         className="menu-profile-text nav-link"
                       >
-                        Личные данные
+                        {t("selfdata")}
                       </Link>
                       <Link
                         to="/addresses"
                         className="menu-profile-text nav-link"
                       >
-                        Мои адресса
+                        {t("addresses")}
                       </Link>
                       <Link
                         to="/profile"
@@ -117,23 +118,23 @@ const Profile = () => {
                       <Container className="d-flex align-items-center prof-item">
                         <Image src={cart}></Image>
                         <Link to="/orders" className="black nav-link">
-                          Товары
+                          {t("prod")}
                         </Link>
                       </Container>
                     </Link>
                     <Container className="d-flex flex-column prof-item">
                       <Link
                         disabled
-                        to="/"
+                        to=""
                         className="menu-profile-text nav-link"
                       >
-                        Избранное
+                        {t('fav')}
                       </Link>
-                      <Link to="/" className="menu-profile-text nav-link">
-                        Просмотренные товары
+                      <Link to="" className="menu-profile-text nav-link">
+                        {t("more1")}
                       </Link>
                       <Link to="/cart" className="menu-profile-text nav-link">
-                        Корзина
+                        {t("head2")}
                       </Link>
                     </Container>
                   </Nav.Item>

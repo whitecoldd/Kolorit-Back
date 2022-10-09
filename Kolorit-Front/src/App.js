@@ -85,6 +85,9 @@ function App() {
     );
     setSelectedItems((selectedItems) => filteredItems);
   };
+  const clearCompare = (item) => {
+    setSelectedItems([]);
+  };
 
   const admin = useSelector((state) => state.user.currentUser);
 
@@ -213,6 +216,7 @@ function App() {
                 onAdd={onAdd}
                 onRemoveFromPage={onRemoveFromPage}
                 decreaseQty={decreaseQty}
+                clearCompare={clearCompare}
               />
             }
           ></Route>

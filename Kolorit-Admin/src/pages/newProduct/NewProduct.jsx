@@ -272,7 +272,7 @@ export default function NewProduct() {
               <div className="addProductItem">
                 <label>Guarantee</label>
                 <input
-                  name="gurantee"
+                  name="guarantee"
                   type="text"
                   placeholder="2 года"
                   onChange={handleChange}
