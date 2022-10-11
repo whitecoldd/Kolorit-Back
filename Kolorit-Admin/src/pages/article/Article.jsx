@@ -133,6 +133,15 @@ export default function Product({ productData }) {
             />
           </div>
           <div className="productFormLeft">
+            <label>Article Category</label>
+            <textarea
+              type="text"
+              name="cat"
+              value={inputs.text}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="productFormLeft">
           <label>Language</label>
 
             <select name="lng" onChange={handleChange}>

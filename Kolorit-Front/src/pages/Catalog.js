@@ -29,7 +29,7 @@ export default function Catalog() {
         <Breadcrumb className="mt-3">
           <Breadcrumb.Item href="/">{t("main")}</Breadcrumb.Item>
           <Breadcrumb.Item href="/catalog">
-            <mark>{t("foot4")}</mark>
+            <mark>{t("head0")}</mark>
           </Breadcrumb.Item>
         </Breadcrumb>
 
@@ -37,7 +37,7 @@ export default function Catalog() {
           <button className="nobr-bttn pt-2 mt-1 pe-4" onClick={() => navigate(-1)}>
             <img src={back} />
           </button>
-          <h1 className="bold mb-5 ">{t("foot4")}</h1>
+          <h1 className="bold mb-5 ">{t("head0")}</h1>
         </div>
       </Container>
       <Container className="d-flex flex-wrap justify-content-center no-pad scrolldiv-cat mb-5">

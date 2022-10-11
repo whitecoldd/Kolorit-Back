@@ -48,7 +48,7 @@ import Login from "./pages/login/Login";
 import { useContext } from "react";
 import { AuthContext } from "../src/contexts/authContext";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function App() {
   //const admin = JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser.isAdmin
@@ -57,8 +57,8 @@ function App() {
     <>
       <Router>
         <Topbar admin={admin} />
-        <div className="container">
-          <Sidebar />
+        <div className={admin ? "container" : "container1"}>
+          {admin ? <Sidebar /> : <div className="cin"><Link to="/login">Please Log In!</Link></div> }
           <Routes>
             {admin ? (
               <>

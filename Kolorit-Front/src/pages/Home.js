@@ -311,7 +311,7 @@ export default function Home(props) {
       <Container fluid className="p-0">
         <Marquee className="track mt-4 mb-5">
           {Brands.map((Brands) => (
-            <Link to={`/brandscatalog/${Brands.name}`}>
+            <Link to={`/brandscatalog/${Brands.name}`} className='pe-2 pt-2 pb-2'>
               <Image width="120vw" height="80vw" src={Brands.img}></Image>
             </Link>
           ))}

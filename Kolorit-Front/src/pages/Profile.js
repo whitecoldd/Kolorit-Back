@@ -74,7 +74,7 @@ const Profile = () => {
                       <Container className="d-flex align-items-center prof-item">
                         <Image src={shop}></Image>
                         <Link to="/orders" className="black nav-link">
-                          {t("ord")}
+                          {t("ord_plural")}
                         </Link>
                       </Container>
                     </Link>

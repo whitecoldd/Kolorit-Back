@@ -93,6 +93,9 @@ const SingleProduct = ({
               className="sell-board ms-3 mb-4 single-prod-img d-flex pb-5 pt-5 sprodhandle"
             >
               <Container>
+                <h5 className="gray">
+                  {t("code")} {items.code}
+                </h5> 
                 <p>
                   {t("cat")}{" "}
                   <span className="orange fatund">{items.category}</span>
@@ -171,7 +174,12 @@ const SingleProduct = ({
                     </button>
                   </Container>
                 </Container>
-                <Container className="d-flex align-items-center justify-content-around pt-5 ">
+                <div className="d-flex justify-content-center pt-3">
+                  <p>
+                    {t("card1")}: {items.guarantee}
+                  </p>
+                </div>
+                <Container className="d-flex align-items-center justify-content-around">
                   <span className="small pe-3">
                     {" "}
                     {items.salePrice / 10} {items.currency} / {t("amonth")}
@@ -204,9 +212,18 @@ const SingleProduct = ({
                   {items.char3}
                   <span className="orange">{items.char3a}</span>
                 </p>
-                <p className=" d-flex justify-content-between flex-nowrap flex-row">
+                <p className=" d-flex justify-content-between flex-nowrap flex-row smth">
                   {items.char4}
                   <span className="orange">{items.char4a}</span>
+                </p>
+                <p className="smth d-flex justify-content-between">
+                  {items.char5}:<span className="orange">{items.char5a}</span>
+                </p>
+                <p className=" d-flex justify-content-between flex-nowrap flex-row smth">
+                  {items.char6}:<span className="orange">{items.char6a}</span>
+                </p>
+                <p className=" d-flex justify-content-between flex-nowrap flex-row">
+                  {t("dims")}:<span className="orange ">{items.dimensions}</span>
                 </p>
               </Container>
             </Container>

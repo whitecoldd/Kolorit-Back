@@ -34,6 +34,7 @@ export default function ArticleList() {
       },
     },
     { field: "lng", headerName: "Language", width: 100 },
+    { field: "cat", headerName: "Category", width: 150 },
     {
       field: "action",
       headerName: "Action",

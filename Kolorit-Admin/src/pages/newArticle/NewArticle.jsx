@@ -98,6 +98,15 @@ export default function NewArticle() {
           />
         </div>
         <div className="addProductItem">
+          <label>Category</label>
+          <textarea
+            name="cat"
+            type="text"
+            placeholder="promos"
+            onChange={handleChange}
+          />
+        </div>
+        <div className="addProductItem">
           <label>Language</label>
           <select name="lng" onChange={handleChange}>
             <option value={null}>---</option>

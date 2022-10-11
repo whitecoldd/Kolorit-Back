@@ -43,6 +43,14 @@ router.get('/find/:id', async (req, res) => {
         res.status(500).json(e)
     }
 })
+router.get('/findby/:id', async (req, res) => {
+    try {
+        const con = await Contacts.find({ address: req.params.address})
+        res.status(200).json(con)
+    } catch (e) {
+        res.status(500).json(e)
+    }
+})
 
 
 router.get('/find', async (req, res) => {

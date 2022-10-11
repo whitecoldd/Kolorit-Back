@@ -4,6 +4,7 @@ const OrderSchema = new mongoose.Schema(
         userName: { type: String,required: true, unique: false },
         phone : {type: String},
         email : {type: String},
+        buyer: {type: String},
         productId: {
             type: Array,
             unique: false

@@ -11,7 +11,9 @@ import {
 import { useLocation } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import type1 from "../assets/type1.png";
+import type1g from "../assets/typ1g.svg";
 import type2 from "../assets/type2.png";
+import type2g from "../assets/typ2g.svg";
 import CatalogMenu from "../comps/CatalogMenu";
 import ItemModelForCat from "../comps/ItemModelForCat";
 import ItemsModelUnfold from "../comps/ItemsModelUnfold";
@@ -208,7 +210,7 @@ const CatalogClass = ({
       <Container>
         <Breadcrumb className="mt-3">
           <Breadcrumb.Item href="/">{t("main")}</Breadcrumb.Item>
-          <Breadcrumb.Item href="/catalog">{t("foot4")}</Breadcrumb.Item>
+          <Breadcrumb.Item href="/catalog">{t("head0")}</Breadcrumb.Item>
           <Breadcrumb.Item active>
             <mark>{decodeURIComponent(category)}</mark>
           </Breadcrumb.Item>
@@ -278,7 +280,7 @@ const CatalogClass = ({
                         variant="transparent"
                         onClick={() => setFold(true)}
                       >
-                        <Image src={type1}></Image>
+                        <Image src={!Fold ? type1 : type1g}></Image>
                       </Button>
                     </Nav.Link>
                     <Nav.Link>
@@ -286,7 +288,7 @@ const CatalogClass = ({
                         variant="transparent"
                         onClick={() => setFold(false)}
                       >
-                        <Image src={type2}></Image>
+                        <Image src={!Fold ? type2g : type2}></Image>
                       </Button>
                     </Nav.Link>
                   </Nav>

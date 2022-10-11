@@ -105,7 +105,7 @@ const Profile = () => {
             <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
               <Navbar.Toggle aria-controls="responsive-navbar-nav" />
               <Navbar.Collapse id="responsive-navbar-nav">
-              <Nav collapseOnSelect className="d-flex flex-wrap">
+                <Nav collapseOnSelect className="d-flex flex-wrap">
                   <Nav.Item>
                     <Link to="/profile" className="black nav-link ">
                       <Container className="d-flex align-items-center  prof-item">
@@ -114,7 +114,7 @@ const Profile = () => {
                           to="/profile"
                           className="black nav-link real-no-dec"
                         >
-                          {t('self')}
+                          {t("self")}
                         </Link>
                       </Container>
                     </Link>
@@ -122,16 +122,16 @@ const Profile = () => {
                       <Container className="d-flex align-items-center prof-item">
                         <Image src={shop}></Image>
                         <Link to="/orders" className="black nav-link">
-                          {t("ord")}
+                          {t("ord_plural")}{" "}
                         </Link>
                       </Container>
                     </Link>
                     <Container className="d-flex flex-column prof-item">
                       <Link to="/orders" className="menu-profile-text nav-link">
-                      {t("ord")}
+                        {t("ord")}
                       </Link>
                       <Link to="/orders" className="menu-profile-text nav-link">
-                      {t("acorder")}
+                        {t("acorder")}
                       </Link>
                     </Container>
                     <Link to="/profileinfo" className="black nav-link lineleft">
@@ -176,7 +176,7 @@ const Profile = () => {
                         to=""
                         className="menu-profile-text nav-link"
                       >
-                        {t('fav')}
+                        {t("fav")}
                       </Link>
                       <Link to="" className="menu-profile-text nav-link">
                         {t("more1")}

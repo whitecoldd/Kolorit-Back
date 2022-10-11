@@ -12,7 +12,7 @@ import plus from "../assets/plus.png";
 import right from "../assets/right.svg";
 import left from "../assets/left.svg";
 import trash from "../assets/trash.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ProcessOrder from "./ProcessOrder";
 import { useTranslation } from "react-i18next";
 import ItemModel from "../comps/ItemModel";
@@ -20,6 +20,8 @@ import { publicRequest } from "../requests/request";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 import "react-alice-carousel/lib/scss/alice-carousel.scss";
+import { toast, ToastContainer } from "react-toastify";
+import { injectStyle } from "react-toastify/dist/inject-style";
 export default function Cart(props) {
   const [Items, setItems] = useState([]);
   const {
@@ -38,6 +40,10 @@ export default function Cart(props) {
   );
   const delivery = (totalPrice * 1) / 40;
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  if (typeof window !== "undefined") {
+    injectStyle();
+  }
   const handleDragStart = (e) => e.preventDefault();
   useEffect(() => {
     const getItems = async () => {
@@ -50,6 +56,14 @@ export default function Cart(props) {
     };
     getItems();
   }, []);
+
+  const handleOrder = () => {
+    if (cartItems.length > 0) navigate("/process");
+    else {
+      toast.error("Fill up the cart first")
+    }
+  };
+
   const [myLocalStorageData, setMyLocalStorageData] = useState({});
   useEffect(() => {
     const lng = localStorage.getItem("i18nextLng");
@@ -173,15 +187,17 @@ export default function Cart(props) {
                 </span>
               </h2>
               <Container className="smth"></Container>
-              <Container className="d-flex flex-column p-3">
-                <Link to="/process">
-                  {" "}
-                  <Button variant="warning" className="bttn-cart">
-                    {t("order")}
-                  </Button>
-                </Link>
+              <Container className="d-flex flex-column align-items-center p-3">
+                <Button
+                  variant="warning"
+                  onClick={handleOrder}
+                  className="bttn-cart"
+                >
+                  {t("order")}
+                </Button>
+
                 <input
-                  className="mt-4"
+                  className="mt-4 w-100"
                   id="cartsearch"
                   placeholder="Введите промокод"
                 ></input>
@@ -232,6 +248,7 @@ export default function Cart(props) {
             }
           )}
         </AliceCarousel>
+        <ToastContainer />
       </Container>
     </>
   );

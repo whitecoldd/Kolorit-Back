@@ -47,7 +47,7 @@ const Order = () => {
     "-" +
     today.getFullYear();
   const orderBox = [
-    [t("newe"),1],
+    [t("newe"), 1],
     [t("ordpend"), 2],
     [t("ordtaken"), 3],
     [t("ordsent"), 4],
@@ -124,7 +124,7 @@ const Order = () => {
                       <Container className="d-flex align-items-center prof-item ">
                         <Image src={shop}></Image>
                         <Link to="/orders" className="black nav-link">
-                          {t("ord")}
+                          {t("ord_plural")}{" "}
                         </Link>
                       </Container>
                     </Link>
@@ -205,23 +205,21 @@ const Order = () => {
                   </h1>
                 </Link>
                 <Container className="d-flex justify-content-around">
-                  
-                    <p className={order1 ? "smth black" : "smthg green"}>
-                      {t("ord")}: {t("newe")}
-                    </p>
-                    <p className={order2 ? "smth black" : "smthg green"}>
-                      {t("ord")}: {t("ordpend")}
-                    </p>
-                    <p className={order3 ? "smth black" : "smthg green"}>
-                      {t("ord")}: {t("ordtaken")}
-                    </p>
-                    <p className={order4 ? "smth black" : "smthg green"}>
-                      {t("ord")}: {t("ordsent")}
-                    </p>
-                    <p className={order5 ? "smth black" : "smthg green"}>
-                      {t("ord")}: {t("ordgot")}
-                    </p>
-                  
+                  <p className={order1 ? "smth black" : "smthg green"}>
+                    {t("ord")}: {t("newe")}
+                  </p>
+                  <p className={order2 ? "smth black" : "smthg green"}>
+                    {t("ord")}: {t("ordpend")}
+                  </p>
+                  <p className={order3 ? "smth black" : "smthg green"}>
+                    {t("ord")}: {t("ordtaken")}
+                  </p>
+                  <p className={order4 ? "smth black" : "smthg green"}>
+                    {t("ord")}: {t("ordsent")}
+                  </p>
+                  <p className={order5 ? "smth black" : "smthg green"}>
+                    {t("ord")}: {t("ordgot")}
+                  </p>
                 </Container>
                 <Container className="d-flex">
                   <Container className="p-0">

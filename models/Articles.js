@@ -9,6 +9,7 @@ const ArticlesSchema = new mongoose.Schema(
       type: Array,
       unique: false,
     },
+    cat: { type: String, required: true },
   },
   { timestamps: true }
 );

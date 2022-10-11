@@ -35,21 +35,7 @@ function Brands({ placeholder, data }) {
     };
     getItems();
   }, []);
-  const brand = BrandsItem.name;
-  const [Items, setItems] = useState([]);
-  useEffect(() => {
-    const getItems = async () => {
-      try {
-        const res = await publicRequest.get(
-          brand
-            ? `/api/items/find?brand=${brand}`
-            : `/api/items/find`
-        );
-        setItems(res.data);
-      } catch (e) {}
-    };
-    getItems();
-  }, [brand]);
+  
 
   const clearInput = () => {
     setFilteredData([]);
@@ -105,32 +91,11 @@ function Brands({ placeholder, data }) {
                 .filter((item) => item.name.toLowerCase().includes(wordEntered))
                 .map((item) => (
                   <BrandsItemDisplay
-                    Items={Items.qty}
                     item={item}
                     key={item.id}
                   ></BrandsItemDisplay>
                 ))}
             </Container>
-            {/* <Container className="d-flex flex-column align-items-center">
-              {BrandsItem.filter((item) =>
-                item.name.toLowerCase().includes(wordEntered)
-              ).map((item) => (
-                <BrandsItemDisplay
-                  item={item}
-                  key={item.id}
-                ></BrandsItemDisplay>
-              ))}
-            </Container>
-            <Container className="d-flex flex-column align-items-center">
-              {BrandsItem.filter((item) =>
-                item.name.toLowerCase().includes(wordEntered)
-              ).map((item) => (
-                <BrandsItemDisplay
-                  item={item}
-                  key={item.id}
-                ></BrandsItemDisplay>
-              ))}
-            </Container> */}
           </Container>
         ))}
       </Container>

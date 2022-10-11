@@ -169,6 +169,10 @@ b {
   height: 53vh !important;
 }
 
+.h-95 {
+  height: 95% !important;
+}
+
 .page-link {
   border-radius: 50% !important;
   margin-right: 5px;
@@ -263,6 +267,7 @@ b {
   background: #f3f3f3;
   box-shadow: 5px 5px 20px 15px #e5e5e5;
   border-radius: 9px;
+  padding: 20px 0px;
 }
 
 .menu-profile {
@@ -296,6 +301,42 @@ b {
 .scrollable-div-menu::-webkit-scrollbar-thumb {
   background: gray;
   border-radius: 15px;
+}
+
+.react-tabs__tab-list {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0px !important;
+  padding-bottom: 0px !important;
+}
+
+hr {
+  margin-top: 0px !important;
+}
+
+.react-tabs__tab-list .react-tabs__tab {
+  cursor: pointer;
+  display: flex;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.19em;
+  color: #444444;
+  margin-right: 25px;
+}
+.react-tabs__tab-list .react-tabs__tab--selected {
+  cursor: pointer;
+  display: flex;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.19em;
+  color: #ff820e;
+  border-bottom: 2px solid #565656;
+}
+
+.form-check-input {
+  background-color: #ff820e !important;
+  border: none !important;
+  background-image: url("./assets/bdot.png") !important;
 }
 
 .scrollable-div {
@@ -421,6 +462,11 @@ b {
   color: #ffffff !important;
 }
 
+.cards-handle1 {
+  display: flex !important;
+  width: 100px !important;
+}
+
 .nav-fix {
   color: #282828 !important;
   font-size: 14px;
@@ -529,6 +575,14 @@ b {
     left: 80px;
     width: 450px !important;
     z-index: 1000 !important;
+  }
+
+  .react-tabs__tab-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 0px !important;
+    padding-bottom: 0px !important;
   }
 
   .tabs-about h1 {
@@ -907,6 +961,7 @@ b {
     display: flex !important;
     flex-wrap: wrap !important;
   }
+  
   .cards-handle .card {
     width: 90% !important;
     margin-top: 15px;
@@ -1016,6 +1071,7 @@ b {
   border: none !important;
   color: #444444 !important;
   padding: 0px !important;
+  letter-spacing: 0.065em;
 }
 
 .dropdown-toggle:focus {
@@ -1084,6 +1140,19 @@ a.nav-fix.nav-link {
   height: 380px;
 }
 
+.bttn-empty {
+  border: 1px solid #000000;
+  border-radius: 21px;
+  background-color: transparent;
+  padding: 5px 30px;
+}
+.bttn-empty:hover {
+  color: orange;
+}
+.bttn-empty:focus {
+  color: orange;
+}
+
 .itemofday-top {
   height: 30px;
 }
@@ -1091,7 +1160,7 @@ a.nav-fix.nav-link {
 .img-cat {
   position: absolute;
   top: 9px;
-  left: 20px;
+  left: 18px;
   z-index: 1000;
 }
 
@@ -1283,13 +1352,28 @@ h4 {
   width: 18% !important;
   padding: 20px 10px 0 20px !important;
 }
+.card1 {
+  background: #f9f9f9;
+  box-shadow: -4px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  width: 30% !important;
+  padding: 20px 10px 0 20px !important;
+  margin-bottom: 10px;
+}
 
 .card h1 {
   font-size: 22px;
   font-weight: 700;
 }
+.card1 h1 {
+  font-size: 22px;
+  font-weight: 700;
+}
 
 .card p {
+  font-size: 15px;
+}
+.card1 p {
   font-size: 15px;
 }
 
@@ -2372,7 +2456,7 @@ select .classic:focus {
 .dropbtn1 {
   background-color: transparent !important;
   color: white;
-  padding: 16px;
+  padding: 0px 16px;
   font-size: 16px;
   border: none !important;
   cursor: pointer;
@@ -2521,7 +2605,21 @@ select .classic:focus {
 
 .br-50 {
   border-radius: 50% !important;
-  left: -20px;
+  left: -16px;
+  background-color: #ff820e;
+  border: none;
+  padding: 1px 11px;
+  color: white;
+  font-size: larger;
+}
+.br-50-1 {
+  border-radius: 50% !important;
+  left: -16px;
+  background-color: #ff820e;
+  border: none;
+  padding: 1px 13px;
+  color: white;
+  font-size: larger;
 }
 .br-1 {
   border-radius: 25px;
