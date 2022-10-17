@@ -29,13 +29,13 @@ const ItemModel = (props) => {
     return (
         <>
             <Container key={Items.id} className='d-flex align-items-center justify-content-start list-group-item list-group-item-action search-items'>
-                <Container className='d-flex justify-content-start'>
-                    <Link to={`/catalog/category/${Items._id}`}><Image width='90%' height='100%' src={Items.img} ></Image></Link>
+                <Container className='d-flex justify-content-start align-items-center   '>
+                    <Link to={`/catalog/category/${Items._id}`}><Image width='90%' height='100%' className='search-img' src={Items.img} ></Image></Link>
+                    <b>{Items.name}</b>
                 </Container>
-                <b>{Items.name}</b>
                 <Container className='d-flex flex-nowrap align-items-end justify-content-end low-item p-0'>
-                    <Container className='d-flex flex-column align-items-end'>
-                        <h4 className='black'>{Items.salePrice} </h4><small> {Items.currency}</small>
+                    <Container className='d-flex flex-column align-items-end search-price'>
+                        <h4 className='black'>{Items.salePrice} </h4><small className='orange'> {Items.currency}</small>
                     </Container>
 
 

@@ -7,18 +7,28 @@ const UserSchema = new mongoose.Schema(
     fname: { type: String },
     lname: { type: String },
     password: { type: String, required: true },
-    address: { type: Array },
+    discountcard: [
+      {
+        discountId: { type: String },
+        discountPercent: { type: Number },
+      },
+    ],
+    address: [
+      {
+        name: { type: String },
+        phone: { type: String },
+        email: { type: String },
+        city: { type: String },
+        street: { type: String },
+        house: { type: String },
+        app: { type: String },
+        comm: { type: String },
+      },
+    ],
     isAdmin: {
       type: Boolean,
       default: false,
     },
-    userEmailPhone: [
-      {
-        username: { type: String },
-        email: { type: String },
-        phone: { type: String },
-      },
-    ],
   },
   { timestamps: true }
 );

@@ -70,7 +70,7 @@ const ItemModel = (props) => {
         <Container className="d-flex flex-column align-items-start img-on-hover">
           <Container>
             <Link to={`/catalog/category/${Items._id}`}>
-              <Image width="90%" height="100%" src={Items.img}></Image>
+              <img className="img-cat-adapt-1" src={Items.img}/>
             </Link>
           </Container>
           <b>{Items.name}</b>

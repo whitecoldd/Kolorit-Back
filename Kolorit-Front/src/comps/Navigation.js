@@ -93,9 +93,8 @@ export default function Navigation({
     }
   };
 
-  const clearInput = () => {
-    setFilteredData([]);
-    setWordEntered("");
+  const nonRef = (e) => {
+    e.preventDefault();
   };
 
   const [myLocalStorageData, setMyLocalStorageData] = useState({});
@@ -166,7 +165,7 @@ export default function Navigation({
                 </Link>
               </Nav>
 
-              <Nav className="me-2 d-flex align-items-center position relative">
+              <Nav className="me-2 d-flex align-items-center position-relative">
                 <Link
                   to="/contacts"
                   className="font-fix nav-link d-flex align-items-center justify-content-between"
@@ -237,12 +236,13 @@ export default function Navigation({
                 </div>
               ) : (
                 <div>
+                  <img className="img-cat-adapt" src={catnav} />
                   <NavDropdown
                     className="navdrop me-0 position-relative"
                     aria-expanded="true"
-                    title={`X ${t("head0")}`}
                     id="basic-nav-dropdown"
                     onClick={OpenIt}
+                    title={`   ${t("head0")}`}
                   >
                     <MobileMenu
                       Width={Width}
@@ -253,13 +253,38 @@ export default function Navigation({
                   </NavDropdown>
                 </div>
               )}
-              <Nav>
+              <Nav className="d-flex flex-row flex-wrap justify-content-center">
                 <Nav.Item className="d-flex align-items-center m-2">
                   <img src={phone} />
                   <a className="black real-no-dec" href="tel:+37379559663">
                     +373&#x2212;79&#x2212;559&#x2212;663
                   </a>
                 </Nav.Item>
+                <div className="vis-inv p-0 mt-2">
+                  <div className="d-flex flex-row">
+                    <button
+                      className="d-flex align-items-center nobr-bttn"
+                      onClick={() => changeLanguage("ru")}
+                    >
+                      <img width={12} height={12} src={flagR} />
+                      Ru
+                    </button>
+                    <button
+                      className="d-flex align-items-center nobr-bttn"
+                      onClick={() => changeLanguage("ro")}
+                    >
+                      <img width={12} height={12} src={flagRo} />
+                      Ro
+                    </button>
+                    <button
+                      className="d-flex align-items-center nobr-bttn"
+                      onClick={() => changeLanguage("en")}
+                    >
+                      <img width={12} height={12} src={flagEn} />
+                      En
+                    </button>
+                  </div>{" "}
+                </div>
               </Nav>
               <Container className="d-flex flex-wrap ">
                 {/* <div class="dropdown1"> */}
@@ -329,19 +354,19 @@ export default function Navigation({
                 {user ? (
                   <Link
                     to={`/profile`}
-                    className="d-flex justify-content-center flex-wrap nav-link ps-1"
+                    className="d-flex justify-content-center flex-wrap nav-link ps-1 "
                   >
-                    <img className="" src={prof} />
+                    <img className="nav-adapt" src={prof} />
                     {t("head3/1")}
                   </Link>
                 ) : (
                   <Button
                     variant="transparent"
-                    className=" d-flex justify-content-center flex-wrap nav-link ps-1"
+                    className=" d-flex justify-content-center flex-wrap nav-link ps-1 "
                     onClick={() => setOpen(!Open)}
                   >
                     {" "}
-                    <img className="" src={prof} /> {t("head3/2")}
+                    <img className="nav-adapt" src={prof} /> {t("head3/2")}
                   </Button>
                 )}
               </Nav>

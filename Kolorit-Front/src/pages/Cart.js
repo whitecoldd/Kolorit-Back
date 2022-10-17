@@ -16,12 +16,13 @@ import { Link, useNavigate } from "react-router-dom";
 import ProcessOrder from "./ProcessOrder";
 import { useTranslation } from "react-i18next";
 import ItemModel from "../comps/ItemModel";
-import { publicRequest } from "../requests/request";
+import { publicRequest, userRequest } from "../requests/request";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 import "react-alice-carousel/lib/scss/alice-carousel.scss";
 import { toast, ToastContainer } from "react-toastify";
 import { injectStyle } from "react-toastify/dist/inject-style";
+import { useSelector } from "react-redux";
 export default function Cart(props) {
   const [Items, setItems] = useState([]);
   const {
@@ -34,17 +35,25 @@ export default function Cart(props) {
     selectedItems,
     onRemoveFromPage,
   } = props;
-  const totalPrice = cartItems.reduce(
-    (salePrice, item) => salePrice + item.qty * item.salePrice,
-    0
-  );
-  const delivery = (totalPrice * 1) / 40;
+
   const { t } = useTranslation();
   const navigate = useNavigate();
   if (typeof window !== "undefined") {
     injectStyle();
   }
   const handleDragStart = (e) => e.preventDefault();
+  const discounted = useSelector(
+    (state) => state?.user?.currentUser?.discountcard[0].discountPercent
+  );
+
+  const user = useSelector((state) => state?.user?.currentUser);
+  const discount = user ? JSON.parse(discounted) : null;
+  const totalPrice = cartItems.reduce(
+    (salePrice, item) =>
+      salePrice + item.qty * (item.salePrice - discount * item.salePrice),
+    0
+  );
+  const delivery = (totalPrice * 1) / 40;
   useEffect(() => {
     const getItems = async () => {
       try {
@@ -60,7 +69,7 @@ export default function Cart(props) {
   const handleOrder = () => {
     if (cartItems.length > 0) navigate("/process");
     else {
-      toast.error("Fill up the cart first")
+      toast.error("Fill up the cart first");
     }
   };
 
@@ -69,6 +78,7 @@ export default function Cart(props) {
     const lng = localStorage.getItem("i18nextLng");
     setMyLocalStorageData(lng);
   }, []);
+  console.log(discounted);
   return (
     <>
       <Container>
@@ -87,7 +97,8 @@ export default function Cart(props) {
                   <h1 className=" product p-3">{t("emtycart")}</h1>
                 )}
                 {cartItems.map((item) => {
-                  const productQty = item.salePrice * item.qty;
+                  const disc = item.salePrice - discount * item.salePrice;
+                  const productQty = user ? disc : item.salePrice * item.qty;
 
                   return (
                     <>
@@ -140,7 +151,7 @@ export default function Cart(props) {
                                 </Container>
                                 <Container className="per-one m-0 p-0 pt-2 text-center">
                                   <h5 className="black">
-                                    {item.salePrice} mdl/шт.
+                                    {user ? disc : item.salePrice} mdl/шт.
                                   </h5>
                                 </Container>
                               </Container>
@@ -240,7 +251,7 @@ export default function Cart(props) {
                   removeFromCompare={removeFromCompare}
                   selectedItems={selectedItems}
                   Items={Items}
-                  key={Items.id}
+                  key={Items._id}
                   onAdd={() => onAdd(Items)}
                   onRemoveFromPage={() => onRemoveFromPage(Items._id)}
                 ></ItemModel>

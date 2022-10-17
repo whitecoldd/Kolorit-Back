@@ -50,56 +50,72 @@ const ItemsModelUnfold = (props) => {
         onMouseEnter={() => setIsShown(true)}
         onMouseLeave={() => setIsShown(false)}
         key={Items.id}
-        className="d-flex flex-wrap align-content-between mt-2 mb-2 sales-prod w-100 h-95 m-1 p-2"
+        className="d-flex flex-wrap align-content-between mt-2 mb-2 sales-prod w-100 h-95 m-1 p-2 model-adapt"
       >
         <Badge onMouseEnter={SetPromoType()} bg={Items.promoType}>
           {Items.promo}
         </Badge>
-        <Container className="d-flex align-items-start justify-content-start">
-          <Container className="d-flex ">
-            <Link to={`/catalog/category/${Items._id}`}>
-              <Image width="90%" className="fleximg " height="100%" src={Items.img}></Image>
-            </Link>
-          </Container>
-          <Container className="d-flex flex-column justify-content-between h-75">
-            <b>{Items.name}</b>
-            <Container className="ps-0 ms-0">
-              <span className="fs-11 d-flex justify-content-between grey">
-                {t("producer")} <b>{Items.brand}</b>
-              </span>
-              <span className="fs-11 d-flex justify-content-between grey">
-                {Items.char1} <b>{Items.char1a}</b>
-              </span>
-              <span className="fs-11 d-flex justify-content-between grey">
-                {Items.char2} <b>{Items.char2a}</b>
-              </span>
+        <Container className="d-flex align-items-start justify-content-start adapt-content">
+          <div className="adapt-text-model">
+            <Container className="d-flex ">
+              <Link to={`/catalog/category/${Items._id}`}>
+                <Image
+                  width="90%"
+                  className="fleximg "
+                  height="100%"
+                  src={Items.img}
+                ></Image>
+              </Link>
             </Container>
-          </Container>
+            <Container className="d-flex flex-column justify-content-between h-75 ">
+              <b>{Items.name}</b>
+              <Container
+                fluid
+                className="d-flex flex-column text-float align-items-end ps-0 adapt-price-hide"
+              >
+                <del
+                  className="grey fs-12"
+                  style={{ fontSize: "11px", fontWeight: "300" }}
+                >
+                  {Items.price}
+                  <small
+                    className="grey fs-10"
+                    style={{ fontSize: "17px", fontWeight: "300" }}
+                  >
+                    {" "}
+                    {Items.currency}
+                  </small>
+                </del>
+                <h4 className="fs-12">
+                  {Items.salePrice}{" "}
+                  <small className="fs-10"> {Items.currency}</small>
+                </h4>
+              </Container>
+              <Container className="ps-0 ms-0 item-info-adapt">
+                <span className="fs-11 d-flex justify-content-between grey mb-2">
+                  {t("producer")} <b>{Items.brand}</b>
+                </span>
+                <span className="fs-11 d-flex justify-content-between grey mb-2">
+                  {Items.char1} <b>{Items.char1a}</b>
+                </span>
+                <span className="fs-11 d-flex justify-content-between grey">
+                  {Items.char2} <b>{Items.char2a}</b>
+                </span>
+              </Container>
+            </Container>
+          </div>
 
           <Container className="d-flex flex-nowrap align-items-end low-item p-0">
             <Container
               fluid
-              className="d-flex flex-column text-float align-items-end ps-0"
+              className="d-flex flex-column text-float align-items-end ps-0 adapt-price-model"
             >
-              <del
-                className="grey fs-12"
-                style={{ fontSize: "11px", fontWeight: "300" }}
-              >
-                {Items.price}
-                <small
-                  className="grey fs-10"
-                  style={{ fontSize: "17px", fontWeight: "300" }}
-                >
-                  {" "}
-                  {Items.currency}
-                </small>
-              </del>
               <h4 className="fs-12">
                 {Items.salePrice}{" "}
                 <small className="fs-10"> {Items.currency}</small>
               </h4>
             </Container>
-            <Container className="d-flex flex-column align-items-center">
+            <Container className="d-flex flex-column align-items-center btns-model-adapt">
               <button className="nobr-bttn" onClick={Compare}>
                 <Image src={com}></Image>
                 <br />

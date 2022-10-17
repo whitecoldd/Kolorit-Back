@@ -55,7 +55,7 @@ const Login = ({ setOpen }) => {
 
   return (
     <>
-      <Container className="">
+      <Container className="w-98">
         <h2 className="white ps-4">{t("missed")}</h2>
         <h6 className="white ps-4">{t("welcome-log")}</h6>
         <Form className="d-flex flex-column align-items-center form-alter1 form-pos1">

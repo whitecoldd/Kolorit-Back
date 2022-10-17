@@ -98,7 +98,20 @@ const Order = () => {
 
     handleOrder();
   }, [Items.status]);
+  const [Width, setWidth] = useState(true);
 
+  useEffect(() => {
+    const handleWidth = () => {
+      let widthToHideFrom = 650;
+      if (window.innerWidth < widthToHideFrom) {
+        setWidth(false);
+      } else {
+        setWidth(true);
+      }
+    };
+
+    handleWidth();
+  }, [window.innerWidth]);
   return (
     <>
       <Container className="profile d-flex mb-5">
@@ -109,7 +122,7 @@ const Order = () => {
               <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav collapseOnSelect className="d-flex flex-wrap ">
                   <Nav.Item>
-                    <Link to="/profile" className="black nav-link ps-0">
+                    <Link to="/profile" className="black nav-link">
                       <Container className="d-flex align-items-center prof-item ">
                         <Image src={home}></Image>
                         <Link
@@ -161,10 +174,10 @@ const Order = () => {
                         {t("addresses")}
                       </Link>
                       <Link
-                        to="/profile"
+                        to="/discount"
                         className="menu-profile-text nav-link"
                       >
-                        Накопительная карта
+                        {t("disc")}
                       </Link>
                     </Container>
                     <Link to="/orders" className="black nav-link">
@@ -195,38 +208,58 @@ const Order = () => {
               </Navbar.Collapse>
             </Navbar>
           </Container>
-          <Container>
-            <Container>
+          <Container className="p-0">
+            <Container className="p-0">
               <Container className="menu-profile-ext ps-3 orderhandle">
                 <Link to="/orders" className="no-dec">
-                  <h1 className="ps-3 d-flex align-items-center">
+                  <h1 className="ps-3 d-flex align-items-center order-name">
                     {" "}
                     <h3 className="m-0 p-0">&#60;</h3> {t("ord")} №{Items._id}
                   </h1>
                 </Link>
-                <Container className="d-flex justify-content-around">
-                  <p className={order1 ? "smth black" : "smthg green"}>
-                    {t("ord")}: {t("newe")}
-                  </p>
-                  <p className={order2 ? "smth black" : "smthg green"}>
-                    {t("ord")}: {t("ordpend")}
-                  </p>
-                  <p className={order3 ? "smth black" : "smthg green"}>
-                    {t("ord")}: {t("ordtaken")}
-                  </p>
-                  <p className={order4 ? "smth black" : "smthg green"}>
-                    {t("ord")}: {t("ordsent")}
-                  </p>
-                  <p className={order5 ? "smth black" : "smthg green"}>
-                    {t("ord")}: {t("ordgot")}
-                  </p>
-                </Container>
-                <Container className="d-flex">
-                  <Container className="p-0">
-                    <Container className="smth p-0">
+                {Width ? (
+                  <Container className="d-flex justify-content-around">
+                    <p className={order1 ? "smth black" : "smthg green"}>
+                      {t("ord")}: {t("newe")}
+                    </p>
+                    <p className={order2 ? "smth black" : "smthg green"}>
+                      {t("ord")}: {t("ordpend")}
+                    </p>
+                    <p className={order3 ? "smth black" : "smthg green"}>
+                      {t("ord")}: {t("ordtaken")}
+                    </p>
+                    <p className={order4 ? "smth black" : "smthg green"}>
+                      {t("ord")}: {t("ordsent")}
+                    </p>
+                    <p className={order5 ? "smth black" : "smthg green"}>
+                      {t("ord")}: {t("ordgot")}
+                    </p>
+                  </Container>
+                ) : (
+                  <Container className="d-flex justify-content-around">
+                    <p className={order1 ? "d-none" : "smthg green"}>
+                      {t("ord")}: {t("newe")}
+                    </p>
+                    <p className={order2 ? "d-none" : "smthg green"}>
+                      {t("ord")}: {t("ordpend")}
+                    </p>
+                    <p className={order3 ? "d-none" : "smthg green"}>
+                      {t("ord")}: {t("ordtaken")}
+                    </p>
+                    <p className={order4 ? "d-none" : "smthg green"}>
+                      {t("ord")}: {t("ordsent")}
+                    </p>
+                    <p className={order5 ? "d-none" : "smthg green"}>
+                      {t("ord")}: {t("ordgot")}
+                    </p>
+                  </Container>
+                )}
+                <Container className="d-flex order-adapt-single-fix">
+                  <Container className="profile-menu-pads">
+                    <Container className="smth profile-menu-pads">
                       {Items?.productId?.map((item) => (
                         <>
-                          <Container className="d-flex justify-content-between align-items-center w-100 me-2">
+                          <Container className="d-flex justify-content-between align-items-center w-100 me-2 order-single-products-list">
                             <img
                               className=""
                               width={60}

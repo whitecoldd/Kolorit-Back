@@ -29,6 +29,7 @@ export default function WidgetLg() {
           <th className="widgetLgTh">Customer</th>
           <th className="widgetLgTh">Date</th>
           <th className="widgetLgTh">Contact</th>
+          <th className="widgetLgTh">Delivery</th>
           <th className="widgetLgTh">Address</th>
           <th className="widgetLgTh">Status</th>
           <th className="widgetLgTh">Details</th>
@@ -40,7 +41,8 @@ export default function WidgetLg() {
             </td>
             <td className="widgetLgDate">{format(order.createdAt)}</td>
             <td className="widgetLgAmount">{order.phone || order.email}</td>
-            <td className="widgetLgAmount">{order.address}</td>
+            <td className="widgetLgAmount">{order.delType}</td>
+            <td className="widgetLgAmount">{order.address[0]?.city}, {order.address[0]?.street}, {order.address[0]?.house || order.address[0]?.app}</td>
             <td className="widgetLgStatus">
               <Button type={order.status} />
             </td>

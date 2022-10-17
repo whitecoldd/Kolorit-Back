@@ -36,11 +36,14 @@ export default function Catalog() {
           </Breadcrumb.Item>
         </Breadcrumb>
 
-        <div className="d-flex align-items-start">
-          <button className="nobr-bttn pt-2 mt-1 pe-4" onClick={() => navigate(-1)}>
+        <div className="d-flex align-items-start mb-2">
+          <button
+            className="nobr-bttn pt-2 mt-1 me-0 pe-0 d-flex align-items-center"
+            onClick={() => navigate(-1)}
+          >
             <img src={back} />
+            <h1 className="bold ms-4 pt-1">{decodeURIComponent(category)}</h1>
           </button>
-          <h1 className="bold mb-5 ">{decodeURIComponent(category)}</h1>
         </div>
       </Container>
       <Container className="d-flex flex-wrap justify-content-center scrolldiv-cat no-pad mb-5">

@@ -24,6 +24,7 @@
     "kolorit-back": "file:..",
     "react": "^18.2.0",
     "react-alice-carousel": "^2.6.1",
+    "react-barcode": "^1.4.5",
     "react-bootstrap": "^2.4.0",
     "react-countdown": "^2.3.2",
     "react-datepicker": "^4.8.0",

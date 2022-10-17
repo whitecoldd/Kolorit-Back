@@ -108,10 +108,10 @@ const Profile = () => {
                         {t("addresses")}
                       </Link>
                       <Link
-                        to="/profile"
+                        to="/discount"
                         className="menu-profile-text nav-link"
                       >
-                        Накопительная карта
+                        {t("disc")}
                       </Link>
                     </Container>
                     <Link to="/orders" className="black nav-link">

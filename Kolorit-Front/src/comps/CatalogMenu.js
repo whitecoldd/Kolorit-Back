@@ -38,6 +38,7 @@ const CatalogMenu = ({
   newBrands,
   handleBrands,
   Check,
+  Width,
 }) => {
   const { t } = useTranslation();
   const [Brands, setBrands] = useState([]);
@@ -54,69 +55,70 @@ const CatalogMenu = ({
   }, []);
   return (
     <>
-      <Container id="flex1" className="catalog-menu m-0">
-        <Accordion className="catalog-acc">
-          <Accordion.Item>
-            <Accordion.Header>{t("avail")}</Accordion.Header>
-            <Accordion.Body>
-              <FormControl>
-                {/* <TextField value={newBrands} fullWidth onChange={handleChange} /> */}
-                <FormGroup className="d-flex justify-content-start">
-                  <div className="d-flex flex-column justify-content-start p-0 ms-0   ">
-                    {checklist.map((check) => (
-                      <FormControlLabel
-                      key={check.inStock}
-                        control={
-                          <Checkbox size="small" onChange={handleCheck} />
-                        }
-                        label={check.inStock}
-                        value={check.inStock}
-                      />
-                    ))}
-                  </div>
-                </FormGroup>
-              </FormControl>
-            </Accordion.Body>
-          </Accordion.Item>
-        </Accordion>
-        <Accordion>
-          <Accordion.Item>
-            <Accordion.Header>{t("price")}</Accordion.Header>
-            <Accordion.Body>
-              <Box sx={{ width: 300 }}>
-                <Typography className="d-flex align-items-center">
-                  <input
-                    type="text"
-                    className="pricebox me-3"
-                    value={value[0]}
-                    //onChange={(e) => handleInputChange(e)}
-                  ></input>{" "}
-                  <span className="ls-0 orange">---</span>{" "}
-                  <input
-                    type="text"
-                    className="pricebox ms-3"
-                    value={value[1]}
-                    //onChange={(e) => handleInputChange(e)}
-                  ></input>
-                </Typography>
-                <Slider
-                  sx={{ width: 200, backgroundColor: "warning" }}
-                  //valueLabelDisplay="auto"
-                  value={value}
-                  onChange={handleInput}
-                  min={0}
-                  max={40000}
-                  getAriaValueText={valuetext}
-                />
-              </Box>
-            </Accordion.Body>
-          </Accordion.Item>
-        </Accordion>
-        <Accordion>
-          <Accordion.Item>
-            <Accordion.Header>{t("prods")}</Accordion.Header>
-            <Accordion.Body className="d-flex flex-wrap justify-content-start">
-              {/* <InputGroup>
+      {Width ? (
+        <Container id="flex1" className="catalog-menu m-0">
+          <Accordion className="catalog-acc">
+            <Accordion.Item>
+              <Accordion.Header>{t("avail")}</Accordion.Header>
+              <Accordion.Body>
+                <FormControl>
+                  {/* <TextField value={newBrands} fullWidth onChange={handleChange} /> */}
+                  <FormGroup className="d-flex justify-content-start">
+                    <div className="d-flex flex-column justify-content-start p-0 ms-0   ">
+                      {checklist.map((check) => (
+                        <FormControlLabel
+                          key={check.inStock}
+                          control={
+                            <Checkbox size="small" onChange={handleCheck} />
+                          }
+                          label={check.inStock}
+                          value={check.inStock}
+                        />
+                      ))}
+                    </div>
+                  </FormGroup>
+                </FormControl>
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
+          <Accordion>
+            <Accordion.Item>
+              <Accordion.Header>{t("price")}</Accordion.Header>
+              <Accordion.Body>
+                <Box sx={{ width: 300 }}>
+                  <Typography className="d-flex align-items-center">
+                    <input
+                      type="text"
+                      className="pricebox me-3"
+                      value={value[0]}
+                      //onChange={(e) => handleInputChange(e)}
+                    ></input>{" "}
+                    <span className="ls-0 orange">---</span>{" "}
+                    <input
+                      type="text"
+                      className="pricebox ms-3"
+                      value={value[1]}
+                      //onChange={(e) => handleInputChange(e)}
+                    ></input>
+                  </Typography>
+                  <Slider
+                    sx={{ width: 200, backgroundColor: "warning" }}
+                    //valueLabelDisplay="auto"
+                    value={value}
+                    onChange={handleInput}
+                    min={0}
+                    max={40000}
+                    getAriaValueText={valuetext}
+                  />
+                </Box>
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
+          <Accordion>
+            <Accordion.Item>
+              <Accordion.Header>{t("prods")}</Accordion.Header>
+              <Accordion.Body className="d-flex flex-wrap justify-content-start">
+                {/* <InputGroup>
               <FormControlLabel
                       className=""
                       control={<Checkbox size="small" onChange={handleChange} />}
@@ -124,70 +126,215 @@ const CatalogMenu = ({
                       value={t('allprods')}
                     />
               </InputGroup> */}
-              <InputGroup>
-                <Form.Control
-                  placeholder="Поиск..."
-                  id="search"
-                  aria-label="Search"
-                  onChange={(e) => setQuery(e.target.value)}
-                />
-              </InputGroup>
+                <InputGroup>
+                  <Form.Control
+                    placeholder="Поиск..."
+                    id="search"
+                    aria-label="Search"
+                    onChange={(e) => setQuery(e.target.value)}
+                  />
+                </InputGroup>
 
-              <FormControl>
-                {/* <TextField value={newBrands} fullWidth onChange={handleChange} /> */}
-                <FormGroup className="d-flex justify-content-start">
-                  <div className="scrollable-div d-flex flex-column justify-content-start p-0 ms-0   ">
-                    {Brands.map((item) => (
-                      <FormControlLabel
-                        key={item._id}
-                        control={
-                          <Checkbox size="small" onChange={handleChange} />
-                        }
-                        label={item.name}
-                        value={item.name}
-                      />
-                    ))}
-                  </div>
-                </FormGroup>
-              </FormControl>
-            </Accordion.Body>
-          </Accordion.Item>
-        </Accordion>
-        <Accordion>
-          <Accordion.Item>
-            <Accordion.Header>{t("wdt")}</Accordion.Header>
-          </Accordion.Item>
-        </Accordion>
-        <Accordion>
-          <Accordion.Item>
-            <Accordion.Header>{t("model")}</Accordion.Header>
-          </Accordion.Item>
-        </Accordion>
-        <Accordion>
-          <Accordion.Item>
-            <Accordion.Header>{t("wt")}</Accordion.Header>
-          </Accordion.Item>
-        </Accordion>
-        <Accordion>
-          <Accordion.Item>
-            <Accordion.Header>{t("el")}</Accordion.Header>
-          </Accordion.Item>
-        </Accordion>
-        <Accordion>
-          <Accordion.Item>
-            <Accordion.Header>{t("chargetype")}</Accordion.Header>
-          </Accordion.Item>
-        </Accordion>
-        <Container className="d-flex justify-content-center pt-1 pb-3">
-          <Button
-            variant="outline-dark"
-            onClick={Clear}
-            className="catalog-menu-bttn"
-          >
-            Сбросить
-          </Button>
+                <FormControl>
+                  {/* <TextField value={newBrands} fullWidth onChange={handleChange} /> */}
+                  <FormGroup className="d-flex justify-content-start">
+                    <div className="scrollable-div d-flex flex-column justify-content-start p-0 ms-0   ">
+                      {Brands.map((item) => (
+                        <FormControlLabel
+                          key={item._id}
+                          control={
+                            <Checkbox size="small" onChange={handleChange} />
+                          }
+                          label={item.name}
+                          value={item.name}
+                        />
+                      ))}
+                    </div>
+                  </FormGroup>
+                </FormControl>
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
+          <Accordion>
+            <Accordion.Item>
+              <Accordion.Header>{t("wdt")}</Accordion.Header>
+            </Accordion.Item>
+          </Accordion>
+          <Accordion>
+            <Accordion.Item>
+              <Accordion.Header>{t("model")}</Accordion.Header>
+            </Accordion.Item>
+          </Accordion>
+          <Accordion>
+            <Accordion.Item>
+              <Accordion.Header>{t("wt")}</Accordion.Header>
+            </Accordion.Item>
+          </Accordion>
+          <Accordion>
+            <Accordion.Item>
+              <Accordion.Header>{t("el")}</Accordion.Header>
+            </Accordion.Item>
+          </Accordion>
+          <Accordion>
+            <Accordion.Item>
+              <Accordion.Header>{t("chargetype")}</Accordion.Header>
+            </Accordion.Item>
+          </Accordion>
+          <Container className="d-flex justify-content-center pt-1 pb-3">
+            <Button
+              variant="outline-dark"
+              onClick={Clear}
+              className="catalog-menu-bttn"
+            >
+              Сбросить
+            </Button>
+          </Container>
         </Container>
-      </Container>
+      ) : (
+        <Navbar
+          expand="lg"
+          collapseOnSelect
+          id="flex1"
+          className="catalog-menu mb-2 d-flex flex-column flex-nowrap align-content-start"
+        >
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          {t("Filters")}
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Accordion className="catalog-acc">
+              <Accordion.Item>
+                <Accordion.Header>{t("avail")}</Accordion.Header>
+                <Accordion.Body>
+                  <FormControl>
+                    {/* <TextField value={newBrands} fullWidth onChange={handleChange} /> */}
+                    <FormGroup className="d-flex justify-content-start">
+                      <div className="d-flex flex-column justify-content-start p-0 ms-0   ">
+                        {checklist.map((check) => (
+                          <FormControlLabel
+                            key={check.inStock}
+                            control={
+                              <Checkbox size="small" onChange={handleCheck} />
+                            }
+                            label={check.inStock}
+                            value={check.inStock}
+                          />
+                        ))}
+                      </div>
+                    </FormGroup>
+                  </FormControl>
+                </Accordion.Body>
+              </Accordion.Item>
+            </Accordion>
+            <Accordion>
+              <Accordion.Item>
+                <Accordion.Header>{t("price")}</Accordion.Header>
+                <Accordion.Body>
+                  <Box sx={{ width: 250 }}>
+                    <Typography className="d-flex align-items-center">
+                      <input
+                        type="text"
+                        className="pricebox me-3"
+                        value={value[0]}
+                        //onChange={(e) => handleInputChange(e)}
+                      ></input>{" "}
+                      <span className="ls-0 orange">---</span>{" "}
+                      <input
+                        type="text"
+                        className="pricebox ms-3"
+                        value={value[1]}
+                        //onChange={(e) => handleInputChange(e)}
+                      ></input>
+                    </Typography>
+                    <Slider
+                      sx={{ width: 200, backgroundColor: "warning" }}
+                      //valueLabelDisplay="auto"
+                      value={value}
+                      onChange={handleInput}
+                      min={0}
+                      max={40000}
+                      getAriaValueText={valuetext}
+                    />
+                  </Box>
+                </Accordion.Body>
+              </Accordion.Item>
+            </Accordion>
+            <Accordion className="w-75">
+              <Accordion.Item>
+                <Accordion.Header>{t("prods")}</Accordion.Header>
+                <Accordion.Body className="d-flex flex-wrap justify-content-start">
+                  {/* <InputGroup>
+              <FormControlLabel
+                      className=""
+                      control={<Checkbox size="small" onChange={handleChange} />}
+                      label={t('allprods')}
+                      value={t('allprods')}
+                    />
+              </InputGroup> */}
+                  <InputGroup>
+                    <Form.Control
+                      placeholder="Поиск..."
+                      id="search"
+                      aria-label="Search"
+                      onChange={(e) => setQuery(e.target.value)}
+                    />
+                  </InputGroup>
+
+                  <FormControl>
+                    {/* <TextField value={newBrands} fullWidth onChange={handleChange} /> */}
+                    <FormGroup className="d-flex justify-content-start">
+                      <div className="scrollable-div d-flex flex-column justify-content-start p-0 ms-0   ">
+                        {Brands.map((item) => (
+                          <FormControlLabel
+                            key={item._id}
+                            control={
+                              <Checkbox size="small" onChange={handleChange} />
+                            }
+                            label={item.name}
+                            value={item.name}
+                          />
+                        ))}
+                      </div>
+                    </FormGroup>
+                  </FormControl>
+                </Accordion.Body>
+              </Accordion.Item>
+            </Accordion>
+            <Accordion>
+              <Accordion.Item>
+                <Accordion.Header>{t("wdt")}</Accordion.Header>
+              </Accordion.Item>
+            </Accordion>
+            <Accordion>
+              <Accordion.Item>
+                <Accordion.Header>{t("model")}</Accordion.Header>
+              </Accordion.Item>
+            </Accordion>
+            <Accordion>
+              <Accordion.Item>
+                <Accordion.Header>{t("wt")}</Accordion.Header>
+              </Accordion.Item>
+            </Accordion>
+            <Accordion>
+              <Accordion.Item>
+                <Accordion.Header>{t("el")}</Accordion.Header>
+              </Accordion.Item>
+            </Accordion>
+            <Accordion>
+              <Accordion.Item>
+                <Accordion.Header>{t("chargetype")}</Accordion.Header>
+              </Accordion.Item>
+            </Accordion>
+            <Container className="d-flex justify-content-center pt-1 pb-3">
+              <Button
+                variant="outline-dark"
+                onClick={Clear}
+                className="catalog-menu-bttn"
+              >
+                Сбросить
+              </Button>
+            </Container>
+          </Navbar.Collapse>
+        </Navbar>
+      )}
     </>
   );
 };

@@ -3,6 +3,7 @@ import { publicRequest } from "../requests/request";
 import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import enter from "../assets/enter.png";
+import arrowcatalog from "../assets/arrowcatalog.svg";
 import { useTranslation } from "react-i18next";
 
 const MobileMenu = ({ Vision, setVision, Close }) => {
@@ -15,7 +16,7 @@ const MobileMenu = ({ Vision, setVision, Close }) => {
     setVis(!Vis);
     setVis2(!Vis2);
     setBtn(true);
-    setButton1(e.target.innerHTML);
+    setButton1(e.target.innerText);
     console.log(Button1);
   };
   const { t, i18n } = useTranslation();
@@ -25,7 +26,7 @@ const MobileMenu = ({ Vision, setVision, Close }) => {
     setVis1(true);
     setVis(false);
     setBack(true);
-    setButton2(e.target.innerHTML);
+    setButton2(e.target.innerText);
     console.log(Button2);
   };
   const [Vis2, setVis2] = useState(false);
@@ -86,9 +87,9 @@ const MobileMenu = ({ Vision, setVision, Close }) => {
   return (
     <>
       {Vision && (
-        <Container className="bg-gray br-10 mobile-menu-div">
-          <Container className="mob-menu-wrap d-flex flex-column align-items-start ">
-            <h2 className={!Vis2 ? "d-block" : "d-none"}>{t("cat")}</h2>
+        <Container className="bg-gray mobile-menu-div p-0 ">
+          <Container className="mob-menu-wrap d-flex flex-column scrollbar-cat align-items-start p-0">
+            <h2 className={!Vis2 ? "d-block ps-2" : "d-none"}>{t("cat")}</h2>
             <Container className="d-flex justify-content-start ms-0 me-0 mt-0 mb-3 p-0 smth">
               <Container className={Btn ? "d-block m-0 p-0" : "d-none m-0 p-0"}>
                 {Back ? (
@@ -113,12 +114,25 @@ const MobileMenu = ({ Vision, setVision, Close }) => {
             {Cat.map((cat) => (
               <div>
                 <button
-                  className={!Vis2 ? "d-block nobr-bttn d-flex align-items-baseline" : "d-none nobr-bttn"}
+                  className={
+                    !Vis2
+                      ? "d-block nobr-bttn d-flex align-items-center justify-content-between w-100v "
+                      : "d-none nobr-bttn"
+                  }
                   onClick={handleCats}
                 >
-                  <img width={40} className="me-2" src={cat.img}/>
-                  <h4 className="black">{cat.name}</h4>
+                  <div className="d-flex align-items-center">
+                    <img
+                      width={40}
+                      height={30}
+                      className="me-2"
+                      src={cat.img}
+                    />
+                    <h4 className="black fs-12">{cat.name}</h4>
+                  </div>
+                  <img src={arrowcatalog} className="mb-2" />
                 </button>
+
                 <div>
                   {subcat
                     .filter((subcats) => subcats.cat === cat.name)
@@ -130,12 +144,19 @@ const MobileMenu = ({ Vision, setVision, Close }) => {
                           onClick={handleCats1}
                           className={
                             Vis
-                              ? "nobr-bttn black d-block d-flex align-items-baseline m-0 p-0"
+                              ? "nobr-bttn black d-flex align-items-center justify-content-between w-100v"
                               : "nobr-bttn black d-none"
                           }
                         >
-                          <img width={40} className="me-2" src={subcats.img}/>
-                          <h4 className="black">{subcats.name}</h4>
+                          <div className="d-flex align-items-center">
+                            <img
+                              width={40}
+                              className="me-2"
+                              src={subcats.img}
+                            />
+                            <h4 className="black">{subcats.name}</h4>
+                          </div>
+                          <img src={arrowcatalog} className="mb-2" />
                         </button>
                         <div>
                           {subsubcat
@@ -146,12 +167,24 @@ const MobileMenu = ({ Vision, setVision, Close }) => {
                             )
                             .map((subsubcats) => (
                               <Container
-                                className={Vis1 ? "d-block d-flex align-items-baseline m-0 p-0" : "d-none "}
+                                className={
+                                  Vis1
+                                    ? "d-flex align-items-center justify-content-between w-100v"
+                                    : "d-none"
+                                }
                               >
-                                <img width={40} className="me-2" src={subsubcats.img}/>
-                                <Link to={`/catalog/title/${subsubcats.subcat}/${subsubcats.name}`} className="mb-0 black real-no-dec">
+                                <Link
+                                  to={`/catalog/title/${subsubcats.subcat}/${subsubcats.name}`}
+                                  className="mb-0 black real-no-dec d-flex align-items-center"
+                                >
+                                  <img
+                                    width={40}
+                                    className="me-2"
+                                    src={subsubcats.img}
+                                  />
                                   <h4 className="black">{subsubcats.name}</h4>
                                 </Link>
+                                <img src={arrowcatalog} className="mb-2" />
                               </Container>
                             ))}
                         </div>

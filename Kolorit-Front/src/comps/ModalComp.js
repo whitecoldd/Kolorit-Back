@@ -34,21 +34,21 @@ const ModalComp = ({ Open, setOpen, Log, setLog }) => {
 
       <div>
         {Log ? (
-          <Container className="d-flex justify-content-around p-3 me-2 pe-5">
+          <Container className="d-flex justify-content-around p-3 w-100 me-2 pe-5">
             <button className="nobr-bttn" onClick={() => setLog(true)}>
               <h4 className="bline ps-1 pe-1 pb-1 white">{t("reg")}</h4>
             </button>
             <button className="nobr-bttn" onClick={() => setLog(false)}>
-              <h4 className=" ps-1 pe-1 pb-1 white">{t("enter")}</h4>
+              <h4 className=" ps-1 pe-1 pb-1 white">{t("head3/2")}</h4>
             </button>
           </Container>
         ) : (
-          <Container className="d-flex justify-content-around p-3 me-2 pe-5">
+          <Container className="d-flex justify-content-around w-100 p-3 me-2 pe-5">
             <button className="nobr-bttn" onClick={() => setLog(true)}>
               <h4 className=" ps-1 pe-1 pb-1 white">{t("reg")}</h4>
             </button>
             <button className="nobr-bttn" onClick={() => setLog(false)}>
-              <h4 className="bline ps-1 pe-1 pb-1 white">{t("enter")}</h4>
+              <h4 className="bline ps-1 pe-1 pb-1 white">{t("head3/2")}</h4>
             </button>
           </Container>
         )}

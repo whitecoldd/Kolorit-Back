@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Nav, Container, Image, Tab, Breadcrumb } from "react-bootstrap";
 import about from "../assets/about.png";
 import playb from "../assets/playb.png";
-import tab1 from "../assets/tab1.png";
+import video from "../assets/video.png";
 import CardsItem from "../comps/CardsItem";
 import { publicRequest } from "../requests/request";
 import { useTranslation } from "react-i18next";
@@ -68,6 +68,11 @@ export default function About() {
         <Container className="video-el">
           <button className="play-upper">{t("watch")}</button>
           <Image className="play-button" src={playb} type="button"></Image>
+        </Container>
+        <Container className="video-el-sm mt-3">
+          <img src={video} width={250}/>
+          <button className="play-upper-1">{t("watch")}</button>
+          <Image className="play-button-1" src={playb} type="button"></Image>
         </Container>
       </Container>
       <Container fluid className="tabs-cont mt-3 pt-3 pb-5">

@@ -73,7 +73,7 @@ export default function Order({ productData }) {
           </div>
           <div className="productInfoTop">
             <span className="productInfoKey">address:</span>
-            <span className="productName">{product.address}</span>
+            <span className="productName">{product.address[0]?.city}, {product.address[0]?.street}, {product.address[0]?.house || product.address[0]?.app} </span>
           </div>
           <div className="productInfoTop">
             <span className="productInfoKey">status:</span>

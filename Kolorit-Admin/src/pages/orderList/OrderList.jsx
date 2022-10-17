@@ -44,11 +44,6 @@ export default function OrderList() {
       width: 150,
     },
     {
-      field: "address",
-      headerName: "Address",
-      width: 200,
-    },
-    {
       field: "action",
       headerName: "Action",
       width: 150,

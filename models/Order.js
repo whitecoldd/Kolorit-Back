@@ -15,7 +15,15 @@ const OrderSchema = new mongoose.Schema(
         },
         payment: { type: String, required: true },
         delType: { type: String, required: true },
-        address: { type: String },
+        address: [
+            {
+              city: { type: String },
+              street: { type: String },
+              house: { type: String },
+              app: { type: String },
+              comm: { type: String },
+            },
+          ],
         sum: {type: Number},
         status: { type: String, default: 'Новый' },
 

@@ -1,58 +1,58 @@
-import { Container, Navbar, Nav, Image, Table } from "react-bootstrap";
+import { Container, Navbar, Nav, Image, Form } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
-import orderbox from "../assets/orderbox.png";
-import bigprof from "../assets/bigprof.png";
-import heart from "../assets/heart.png";
-import profcart from "../assets/profcart.png";
 import { ProfileMenu } from "../comps/ProfileMenu";
+import disclogo from "../assets/disc-logo.svg";
 import { userRequest } from "../requests/request";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { logout, updateUser } from "../redux/apiCalls";
 import home from "../assets/home.png";
 import shop from "../assets/shop.png";
 import profile from "../assets/profile.png";
-import arroworder from "../assets/arroworder.svg";
 import cart from "../assets/cart1.png";
-import { useTranslation } from "react-i18next";
-import { format } from "date-fns";
-
-const Orders = () => {
+import Barcode from "react-barcode";
+const DiscountCard = () => {
   const [Items, setItems] = useState([]);
-  const user = useSelector((state) => state.user.currentUser);
-  const email = useSelector((state) => state.user.currentUser.email);
-  const phone = useSelector((state) => state.user.currentUser.phone);
-  const firstname = useSelector((state) => state.user.currentUser.fname);
-  const lastname = useSelector((state) => state.user.currentUser.lname);
-  const username = useSelector((state) => state.user.currentUser.username);
   const id = useSelector((state) => state.user.currentUser._id);
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const [inputs, setInputs] = useState([]);
+  const history = useNavigate();
+  const handleChange = (e) => {
+    setInputs((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
+    });
+  };
+
   useEffect(() => {
     const getItems = async () => {
       try {
-        const res = await userRequest.get(
-          `/api/order/find/${username}?new=new`
-        );
+        const res = await userRequest.get(`/api/user/find/${id}`);
         setItems(res.data);
+        console.log(res.data);
       } catch (e) {
         console.log(e);
       }
     };
     getItems();
-  }, [username]);
-
-  const [Del, setDel] = useState("");
-
-  useEffect(() => {
-    const getType = () => {
-      if (Items.delType === "pick-up") {
-        Items.delType = t("pick-up");
-      } else if (Items.delType === "delivery") {
-        Items.delType = t("delivery");
-      }
-    };
-     getType();
-  }, [Items.delType]);
-
+  }, [id]);
+  const [show, setShow] = useState(true);
+  const ShowClick = (e) => {
+    e.preventDefault();
+    setShow(!show);
+  };
+  const [showS, setShowS] = useState(true);
+  const ShowClickS = (e) => {
+    e.preventDefault();
+    setShowS(!showS);
+  };
+  const handleClick = (e) => {
+    e.preventDefault();
+    const product = { ...inputs };
+    updateUser(id, product, dispatch);
+  };
   return (
     <>
       <Container className="profile d-flex mb-3">
@@ -61,7 +61,7 @@ const Orders = () => {
             <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
               <Navbar.Toggle aria-controls="responsive-navbar-nav" />
               <Navbar.Collapse id="responsive-navbar-nav">
-              <Nav collapseOnSelect className="d-flex flex-wrap ">
+                <Nav collapseOnSelect className="d-flex flex-wrap ">
                   <Nav.Item>
                     <Link to="/profile" className="black nav-link">
                       <Container className="d-flex align-items-center prof-item ">
@@ -70,27 +70,27 @@ const Orders = () => {
                           to="/profile"
                           className="black nav-link real-no-dec"
                         >
-                          {t('self')}
+                          {t("self")}
                         </Link>
                       </Container>
                     </Link>
-                    <Link to="/orders" className="black nav-link lineleft">
+                    <Link to="/orders" className="black nav-link ">
                       <Container className="d-flex align-items-center prof-item ">
                         <Image src={shop}></Image>
-                        <Link to="/orders" className="gold nav-link">
-                        {t("ord_plural")}
+                        <Link to="/orders" className="black nav-link">
+                          {t("ord_plural")}
                         </Link>
                       </Container>
                     </Link>
                     <Container className="d-flex flex-column prof-item">
                       <Link to="/orders" className="menu-profile-text nav-link">
-                      {t("ord")}
+                        {t("ord_plural")}
                       </Link>
                       <Link to="/orders" className="menu-profile-text nav-link">
-                      {t("acorder")}
+                        {t("acorder")}
                       </Link>
                     </Container>
-                    <Link to="/profileinfo" className="black nav-link">
+                    <Link to="/profileinfo" className="black nav-link lineleft">
                       <Container className="d-flex align-items-center prof-item">
                         <Image src={profile}></Image>
                         <Link to="/profileinfo" className="black nav-link">
@@ -112,10 +112,10 @@ const Orders = () => {
                         {t("addresses")}
                       </Link>
                       <Link
-                        to="/discount"
-                        className="menu-profile-text nav-link"
+                        to="/profile"
+                        className="menu-profile-text gold nav-link"
                       >
-                       {t("disc")}
+                        {t("disc")}
                       </Link>
                     </Container>
                     <Link to="/orders" className="black nav-link">
@@ -132,7 +132,7 @@ const Orders = () => {
                         to=""
                         className="menu-profile-text nav-link"
                       >
-                        {t('fav')}
+                        {t("fav")}
                       </Link>
                       <Link to="" className="menu-profile-text nav-link">
                         {t("more1")}
@@ -148,50 +148,28 @@ const Orders = () => {
           </Container>
           <Container className="profile-menu-pads">
             <Container className="profile-menu-pads">
-              <Container className="menu-profile-ext p-3 menu-orders-list">
-                <h1>{t("acorder")}</h1>
-                <Table striped hover className="tablenew p-3">
-                  <thead className="tablehead">
-                    <tr>
-                      <th className="hid">№</th>
-                      <th className="hid">{t("deltype")}</th>
-                      <th>{t("date")}</th>
-                      <th>{t("price")}</th>
-                      <th>{t("status")}</th>
-                      <th>.</th>
-                    </tr>
-                  </thead>
-
-                  {Items.map((item) => {
-                    if (item.userName === username) {
-                      return (
-                        <>
-                          <tbody className="tablerow">
-                            <th className="hid text-center">{item._id}</th>
-                            <th className="hid text-center">{item.delType}</th>
-                            <th className="text-center">
-                              {format(new Date(item.createdAt), "dd-MM-yyyy")}
-                            </th>
-                            <th className="text-center">
-                              {item?.sum}
-                              <span>MDL</span>
-                            </th>
-                            <th className="text-center">{item.status}</th>
-
-                            <th className="noborder ">
-                              <Link
-                                className="real-no-dec"
-                                to={`/order/${item._id}`}
-                              >
-                                <img className="d-flex" src={arroworder} />
-                              </Link>
-                            </th>
-                          </tbody>
-                        </>
-                      );
-                    }
-                  })}
-                </Table>
+              <Container className="menu-profile-ext ps-4">
+                <h1>{t("disc")}</h1>
+                <Container className="d-flex justify-content-start pt-4 pb-4 ps-0">
+                  {Items.discountcard?.map((disc) => (
+                    <>
+                      <Container className="discountbox">
+                        <div className="d-flex justify-content-between ps-4 pe-3 discounttop">
+                          <img src={disclogo} />
+                          <h1>{disc.discountPercent * 100}%</h1>
+                        </div>
+                        <p className="ps-4 pt-5">{disc.discountId}</p>
+                        <div className="d-flex justify-content-center pt-3">
+                          <Barcode
+                            value={disc.discountId}
+                            background="transparent"
+                            displayValue={false}
+                          />
+                        </div>
+                      </Container>
+                    </>
+                  ))}
+                </Container>
               </Container>
             </Container>
           </Container>
@@ -201,4 +179,4 @@ const Orders = () => {
   );
 };
 
-export default Orders;
+export default DiscountCard;

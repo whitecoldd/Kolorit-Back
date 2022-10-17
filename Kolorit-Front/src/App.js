@@ -31,6 +31,7 @@ import SingleArticle from "./pages/SingleArticle";
 import ModalComp from "./comps/ModalComp";
 import Sales from "./pages/Sales";
 import Success from "./pages/Success";
+import DiscountCard from "./pages/DiscountCard";
 function App() {
   const [Open, setOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]);
@@ -137,6 +138,7 @@ function App() {
           ></Route>
           <Route exact path={`/catalog`} element={<Catalog />}></Route>
           <Route exact path={`/success`} element={<Success />}></Route>
+          <Route exact path={`/discount`} element={<DiscountCard />}></Route>
           <Route
             exact
             path={`/catalog/title/:title/:title`}

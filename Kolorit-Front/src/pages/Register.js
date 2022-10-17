@@ -54,7 +54,7 @@ const Register = () => {
 
   return (
     <>
-      <Container>
+      <Container className="w-98">
         <h2 className="white ps-4">{t('welcome')}</h2>
         <h6 className="white ps-4 pb-3">{t('welcome-reg')}</h6>
         <Form className="d-flex form-alter1 flex-column align-items-center">

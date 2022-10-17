@@ -8,12 +8,13 @@ import {
   Navbar,
   Image,
 } from "react-bootstrap";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import type1 from "../assets/type1.png";
 import type1g from "../assets/typ1g.svg";
 import type2 from "../assets/type2.png";
 import type2g from "../assets/typ2g.svg";
+import back from "../assets/back.svg";
 import CatalogMenu from "../comps/CatalogMenu";
 import ItemModelForCat from "../comps/ItemModelForCat";
 import ItemsModelUnfold from "../comps/ItemsModelUnfold";
@@ -47,6 +48,7 @@ const CatalogClass = ({
   const [sale, setSale] = useState(false);
   const { t } = useTranslation();
   const location = useLocation();
+  const [Width, setWidth] = useState(true);
   const category = location.pathname.split("/")[4];
   useEffect(() => {
     const getItems = async () => {
@@ -61,6 +63,8 @@ const CatalogClass = ({
     };
     getItems();
   }, [category]);
+
+  const navigate = useNavigate();
 
   const [value, setValue] = useState([0, 40000]);
   const [brands, setBrands] = useState([]);
@@ -198,6 +202,18 @@ const CatalogClass = ({
       setSale(false);
     }
   };
+  useEffect(() => {
+    const handleWidth = () => {
+      let widthToHideFrom = 650;
+      if (window.innerWidth < widthToHideFrom) {
+        setWidth(false);
+      } else {
+        setWidth(true);
+      }
+    };
+
+    handleWidth();
+  }, [window.innerWidth]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(16);
   const indexOfLastPost = currentPage * postsPerPage;
@@ -215,30 +231,64 @@ const CatalogClass = ({
             <mark>{decodeURIComponent(category)}</mark>
           </Breadcrumb.Item>
         </Breadcrumb>
-        <h1 className="bold mb-5">{decodeURIComponent(category)}</h1>
+        <div className="d-flex align-items-start">
+          <button
+            className="nobr-bttn pt-2 mt-1 pe-4"
+            onClick={() => navigate(-1)}
+          >
+            <img src={back} />
+          </button>
+          <h1 className="bold mb-5 ">
+            {decodeURIComponent(category)}
+            <span className="ps-2 grey">
+              {" "}
+              - {currentPosts.length} {t("prod")}
+            </span>
+          </h1>
+        </div>
       </Container>
       <Container className="d-flex align-items-start mb-3 sprodhandle1 justify-content-center">
-        <CatalogMenu
-          query={query}
-          setQuery={setQuery}
-          value={value}
-          setValue={setValue}
-          handleInput={handleInput}
-          handleChange={handleChange}
-          handleInputChange={handleInputChange}
-          checklist={checklist}
-          handleCheck={handleCheck}
-          Items={Items}
-          newBrands={newBrands}
-          Check={Check}
-        ></CatalogMenu>
-        <Container id="flex2" className="d-flex flex-wrap fluke">
-          <Container>
+        {Width && (
+          <CatalogMenu
+            query={query}
+            setQuery={setQuery}
+            value={value}
+            setValue={setValue}
+            handleInput={handleInput}
+            handleChange={handleChange}
+            handleInputChange={handleInputChange}
+            checklist={checklist}
+            handleCheck={handleCheck}
+            Items={Items}
+            newBrands={newBrands}
+            Check={Check}
+            Width={Width}
+          ></CatalogMenu>
+        )}
+        <Container id="flex2" className="d-flex flex-wrap fluke p-0">
+          <Container className="m-0 p-0">
+            {!Width && (
+              <CatalogMenu
+                query={query}
+                setQuery={setQuery}
+                value={value}
+                setValue={setValue}
+                handleInput={handleInput}
+                handleChange={handleChange}
+                handleInputChange={handleInputChange}
+                checklist={checklist}
+                handleCheck={handleCheck}
+                Items={Items}
+                newBrands={newBrands}
+                Check={Check}
+                Width={Width}
+              ></CatalogMenu>
+            )}
             <Navbar
               collapseOnSelect
               expand="lg"
               bg="light"
-              className="d-flex flex-column align-items-stretch low-nav"
+              className="d-flex flex-column align-items-stretch low-nav ms-3"
               variant="dark"
             >
               <Container className="nav-fix">

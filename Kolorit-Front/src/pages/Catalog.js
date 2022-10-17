@@ -11,7 +11,7 @@ import back from "../assets/back.svg";
 export default function Catalog() {
   const location = useLocation();
   const category = location.pathname.split("/")[2];
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [Items, setItems] = useState([]);
   useEffect(() => {
     const getItems = async () => {
@@ -34,10 +34,13 @@ export default function Catalog() {
         </Breadcrumb>
 
         <div className="d-flex align-items-start">
-          <button className="nobr-bttn pt-2 mt-1 pe-4" onClick={() => navigate(-1)}>
+          <button
+            className="nobr-bttn pt-2 mt-1 pe-4 d-flex align-items-center"
+            onClick={() => navigate(-1)}
+          >
             <img src={back} />
+            <h1 className="bold ms-4 pt-1">{t("head0")}</h1>
           </button>
-          <h1 className="bold mb-5 ">{t("head0")}</h1>
         </div>
       </Container>
       <Container className="d-flex flex-wrap justify-content-center no-pad scrolldiv-cat mb-5">
@@ -46,7 +49,9 @@ export default function Catalog() {
             <Link className="real-no-dec " to={`/catalog/${item.name}`}>
               <Container className=" h-50p catalog-card d-flex flex-column align-items-center pt-4 mb-3">
                 <Image width="80%" height="80%" src={item.img}></Image>
-                <h6 className="bold text-uppercase text-center black mt-2">{item.name}</h6>
+                <h6 className="bold text-uppercase text-center black mt-2">
+                  {item.name}
+                </h6>
               </Container>
             </Link>
           </Container>

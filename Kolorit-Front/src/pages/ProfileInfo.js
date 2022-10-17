@@ -156,10 +156,10 @@ const Profile = () => {
                         {t("addresses")}
                       </Link>
                       <Link
-                        to="/profile"
+                        to="/discount"
                         className="menu-profile-text nav-link"
                       >
-                        Накопительная карта
+                        {t("disc")}
                       </Link>
                     </Container>
                     <Link to="/orders" className="black nav-link">
@@ -190,8 +190,8 @@ const Profile = () => {
               </Navbar.Collapse>
             </Navbar>
           </Container>
-          <Container>
-            <Container>
+          <Container className="profile-menu-pads">
+            <Container className="profile-menu-pads">
               <Form>
                 <Container className="menu-profile-ext ps-3">
                   <h1 className="ps-3">{t("selfdata")}</h1>
