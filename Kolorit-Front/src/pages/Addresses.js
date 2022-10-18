@@ -20,6 +20,8 @@ import home from "../assets/home.png";
 import shop from "../assets/shop.png";
 import profile from "../assets/profile.png";
 import cart from "../assets/cart1.png";
+import { toast, ToastContainer } from "react-toastify";
+import { injectStyle } from "react-toastify/dist/inject-style";
 const Addresses = () => {
   const [Items, setItems] = useState([]);
   const user = useSelector((state) => state.user.currentUser);
@@ -33,6 +35,9 @@ const Addresses = () => {
   const dispatch = useDispatch();
   const [inputs, setInputs] = useState([]);
   const history = useNavigate();
+  if (typeof window !== "undefined") {
+    injectStyle();
+  }
   const handleChange = (e) => {
     setInputs((prev) => {
       return { ...prev, [e.target.name]: e.target.value };
@@ -44,6 +49,18 @@ const Addresses = () => {
     });
   };
 
+  useEffect(() => {
+    const getItems = async () => {
+      try {
+        const res = await userRequest.get(`/api/user/find/${id}`);
+        setItems(res.data);
+        console.log(res.data);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    getItems();
+  }, [id]);
   useEffect(() => {
     const getItems = async () => {
       try {
@@ -77,6 +94,19 @@ const Addresses = () => {
       dispatch(updateUserSuccess(res.data));
     } catch (err) {
       dispatch(updateUserFailure());
+    }
+  };
+  const handleUpdateClick = async (e, addressid) => {
+    e.preventDefault();
+    const product = { ...inputs, address: newAddress };
+    dispatch(updateUserStart());
+    try {
+      const res = await userRequest.put(`/api/user/${id}/address/${addressid}`, product);
+      dispatch(updateUserSuccess(res.data));
+      toast.success("Address has been updated");
+    } catch (err) {
+      dispatch(updateUserFailure());
+      toast.error("Invalid Data");
     }
   };
 
@@ -211,105 +241,111 @@ const Addresses = () => {
                     </>
                   ) : (
                     <>
-                      {" "}
-                      <Container className="d-flex justify-content-between">
-                        <h3 className="gold">{t("address")}</h3>
+                      {Items.address?.map((address, i) => (
+                        <>
+                          <Container className="d-flex justify-content-between">
+                            <h3 className="gold">{t("address")} {i+1}</h3>
 
-                        <button className="removeCart" onClick={ShowClickS}>
-                          <img src={redact}></img>
-                        </button>
-                      </Container>
-                      <ul className="ps-4 ">
-                        <li>
-                          <div>
-                            {address.name} {address.phone}, {address.email}
-                          </div>
-                          <div>
-                            {address.city} {address.street}, {address.house}
-                            {address.app}
-                          </div>
-                          <div>{address.comm}</div>
-                        </li>
-                        <li>
-                          <Container className="d-flex flex-wrap p-0">
-                            <div className="d-flex justify-content-between w-90 mb-2">
-                              <input
-                                type="text"
-                                id="addressform"
-                                className="form-control w-auto "
-                                name="name"
-                                onChange={handleAddress}
-                                placeholder={t("uname")}
-                              ></input>
-                              <input
-                                type="text"
-                                id="addressform"
-                                className="form-control w-auto "
-                                name="phone"
-                                onChange={handleAddress}
-                                placeholder={t("phone")}
-                              ></input>
-                              <input
-                                type="text"
-                                id="addressform"
-                                className="form-control w-auto "
-                                name="email"
-                                onChange={handleAddress}
-                                placeholder="E-mail"
-                              ></input>
-                            </div>
-                            <div className="d-flex justify-content-between w-90 mb-2">
-                              <input
-                                type="text"
-                                id="addressform"
-                                className="form-control w-auto "
-                                name="city"
-                                onChange={handleAddress}
-                                placeholder={t("city")}
-                              ></input>
-                              <input
-                                type="text"
-                                id="addressform"
-                                className="form-control w-auto "
-                                name="street"
-                                onChange={handleAddress}
-                                placeholder={t("street")}
-                              ></input>
-                              <input
-                                type="text"
-                                id="addressform"
-                                className="form-control w-auto "
-                                name="house"
-                                onChange={handleAddress}
-                                placeholder={t("house")}
-                              ></input>
-                            </div>
-                            <div className="d-flex justify-content-between align-items-start w-90 ">
-                              <input
-                                type="text"
-                                id="addressform"
-                                className="form-control w-auto "
-                                name="app"
-                                onChange={handleAddress}
-                                placeholder={t("app")}
-                              ></input>
-                              <textarea
-                                type="text"
-                                id="addressform1"
-                                className="form-control w-auto "
-                                name="comm"
-                                rows={5}
-                                cols={60}
-                                onChange={handleAddress}
-                                placeholder={t("comm")}
-                              ></textarea>
-                            </div>
-                            <button className="bttn-cart" onClick={handleClick}>
-                              {t("update")}
+                            <button className="removeCart" onClick={ShowClickS}>
+                              <img src={redact}></img>
                             </button>
                           </Container>
-                        </li>
-                      </ul>
+                          <ul className="ps-4 ">
+                            <li>
+                              <div>
+                                {address.name} {address.phone}, {address.email}
+                              </div>
+                              <div>
+                                {address.city} {address.street}, {address.house}
+                                {address.app}
+                              </div>
+                              <div>{address.comm}</div>
+                            </li>
+                            <li>
+                              <Container className="d-flex flex-wrap p-0">
+                                <div className="d-flex justify-content-between w-90 mb-2">
+                                  <input
+                                    type="text"
+                                    id="addressform"
+                                    className="form-control w-auto "
+                                    name="name"
+                                    onChange={handleAddress}
+                                    placeholder={t("uname")}
+                                  ></input>
+                                  <input
+                                    type="text"
+                                    id="addressform"
+                                    className="form-control w-auto "
+                                    name="phone"
+                                    onChange={handleAddress}
+                                    placeholder={t("phone")}
+                                  ></input>
+                                  <input
+                                    type="text"
+                                    id="addressform"
+                                    className="form-control w-auto "
+                                    name="email"
+                                    onChange={handleAddress}
+                                    placeholder="E-mail"
+                                  ></input>
+                                </div>
+                                <div className="d-flex justify-content-between w-90 mb-2">
+                                  <input
+                                    type="text"
+                                    id="addressform"
+                                    className="form-control w-auto "
+                                    name="city"
+                                    onChange={handleAddress}
+                                    placeholder={t("city")}
+                                  ></input>
+                                  <input
+                                    type="text"
+                                    id="addressform"
+                                    className="form-control w-auto "
+                                    name="street"
+                                    onChange={handleAddress}
+                                    placeholder={t("street")}
+                                  ></input>
+                                  <input
+                                    type="text"
+                                    id="addressform"
+                                    className="form-control w-auto "
+                                    name="house"
+                                    onChange={handleAddress}
+                                    placeholder={t("house")}
+                                  ></input>
+                                </div>
+                                <div className="d-flex justify-content-between align-items-start w-90 ">
+                                  <input
+                                    type="text"
+                                    id="addressform"
+                                    className="form-control w-auto "
+                                    name="app"
+                                    onChange={handleAddress}
+                                    placeholder={t("app")}
+                                  ></input>
+                                  <textarea
+                                    type="text"
+                                    id="addressform1"
+                                    className="form-control w-auto "
+                                    name="comm"
+                                    rows={5}
+                                    cols={60}
+                                    onChange={handleAddress}
+                                    placeholder={t("comm")}
+                                  ></textarea>
+                                </div>
+                                <button
+                                  className="bttn-cart"
+                                  onClick={(e, addressid)=>handleUpdateClick(e, address._id)}
+                                >
+                                  {t("update")}
+                                </button>
+                              </Container>
+                            </li>
+                          </ul>
+                        </>
+                      ))}
                     </>
                   )}
                 </Container>
@@ -321,7 +357,8 @@ const Addresses = () => {
                         className="removeCart d-flex align-items-center"
                         onClick={ShowClick}
                       >
-                        <img src={plusbtn} className="me-2"></img> Добавить новый адрес
+                        <img src={plusbtn} className="me-2"></img> Добавить
+                        новый адрес
                       </button>
                     </Container>
                   ) : (
@@ -412,6 +449,7 @@ const Addresses = () => {
                     </Container>
                   )}
                 </Form>
+                <ToastContainer />
               </Container>
             </Container>
           </Container>

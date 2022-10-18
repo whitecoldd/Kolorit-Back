@@ -54,7 +54,7 @@ router.put(
         { _id: req.params.id, "address._id": req.params.addressid },
         {
           $set: {
-            address: req.body.address,
+            "address.$": req.body.address,
           },
         }
       );
