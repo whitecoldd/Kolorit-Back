@@ -43,16 +43,21 @@ export default function Cart(props) {
   }
   const handleDragStart = (e) => e.preventDefault();
   const discounted = useSelector(
-    (state) => state?.user?.currentUser?.discountcard[0].discountPercent
+    (state) => state.user.currentUser.discountcard[0]?.discountPercent
   );
 
   const user = useSelector((state) => state?.user?.currentUser);
-  const discount = user ? JSON.parse(discounted) : null;
-  const totalPrice = cartItems.reduce(
+  const userDis = useSelector((state) => state.user.currentUser.discountcard);
+  const discount = userDis === undefined ? null : JSON.parse(discounted);
+  const totalPrice = !userDis ? cartItems.reduce(
+    (salePrice, item) =>
+      salePrice + item.qty * item.salePrice,
+    0
+  ) : cartItems.reduce(
     (salePrice, item) =>
       salePrice + item.qty * (item.salePrice - discount * item.salePrice),
     0
-  );
+  ) ;
   const delivery = (totalPrice * 1) / 40;
   useEffect(() => {
     const getItems = async () => {
@@ -98,7 +103,7 @@ export default function Cart(props) {
                 )}
                 {cartItems.map((item) => {
                   const disc = item.salePrice - discount * item.salePrice;
-                  const productQty = user ? disc : item.salePrice * item.qty;
+                  const productQty = userDis ? disc * item.qty : item.salePrice * item.qty;
 
                   return (
                     <>

@@ -17,6 +17,7 @@ import flagEn from "../assets/flagEn.png";
 import logo from "../assets/nav-logo.svg";
 import phone from "../assets/phone.png";
 import com from "../assets/com.png";
+import logo1 from "../assets/logo1.svg";
 import prof from "../assets/prof.png";
 import cart from "../assets/cart.png";
 import catnav from "../assets/catnav.svg";
@@ -127,6 +128,9 @@ export default function Navigation({
     setVision(true);
   };
   const total = cartItems.reduce((accum, item) => accum + item.qty, 0);
+
+  const [hide, setHide] = useState(true);
+  const [hideall, setHideall] = useState(true);
   return (
     <>
       <Navbar
@@ -208,12 +212,117 @@ export default function Navigation({
           className="nav-fix sticky-top head position-relative"
           height={72}
         >
-          <Container>
+          <Container className="d-flex">
             <Navbar.Brand>
               <Link to="/">
-                <img src={logo} />
+                <img src={hide ? logo : logo1} width={!Width&&hide ? 180 : "auto"} />
               </Link>
             </Navbar.Brand>
+            {hideall ? (
+              <div className="">
+                {Width ? (
+                  ""
+                ) : (
+                  <div className="d-flex position-relative align-items-center">
+                    {user ? (
+                      <Link
+                        to={`/profile`}
+                        className={
+                          hide
+                            ? "d-flex justify-content-center flex-wrap nav-link p-0 pe-2"
+                            : "d-none"
+                        }
+                      >
+                        <img className="" src={prof} width={20} />
+                      </Link>
+                    ) : (
+                      <Button
+                        variant="transparent"
+                        className={
+                          hide
+                            ? " d-flex justify-content-center flex-wrap nav-link p-0 pe-2"
+                            : "d-none"
+                        }
+                        onClick={() => setOpen(!Open)}
+                      >
+                        {" "}
+                        <img className="" src={prof} width={20} />
+                      </Button>
+                    )}
+                    <Link
+                      to="/cart"
+                      className={
+                        hide
+                          ? "d-flex justify-content-center flex-wrap nav-link p-0 pe-2" 
+                          : "d-none"
+                      }
+                    >
+                      {" "}
+                      {total !== 0 ? (
+                        <Badge badgeContent={Number(total)} color="warning">
+                          <img className="" src={cart} width={25}/>
+                        </Badge>
+                      ) : (
+                        <img className="" src={cart} width={25}/>
+                      )}
+                    </Link>
+                    <Container className="d-flex flex-wrap new-search-form p-0 pe-2">
+                      {/* <div class="dropdown1"> */}
+                      {hide ? (
+                        <button
+                          className="nobr-bttn p-0"
+                          onClick={() => setHide(false)}
+                        >
+                          <SearchIcon/>
+                        </button>
+                      ) : (
+                        <div className="d-flex position-relative">
+                          <Form.Control
+                            placeholder="Поиск..."
+                            id="search"
+                            aria-label="Search"
+                            className="dropdown-search"
+                            value={wordEntered}
+                            onChange={handleFilter}
+                          />
+                          {filteredData.length !== 0 && (
+                            <div className="dropdown-search-content">
+                              {filteredData
+                                .slice(0, 5)
+                                .filter(
+                                  (Items) => Items.lng === myLocalStorageData
+                                )
+                                .map((Items) => (
+                                  <SearchComp
+                                    Items={Items}
+                                    key={Items._id}
+                                    addToCompare={addToCompare}
+                                    removeFromCompare={removeFromCompare}
+                                    selectedItems={selectedItems}
+                                    onAdd={() => onAdd(Items)}
+                                    onRemoveFromPage={() =>
+                                      onRemoveFromPage(Items._id)
+                                    }
+                                  ></SearchComp>
+                                ))}
+                            </div>
+                          )}
+                          <button
+                            className="nobr-bttn new-pos-abs"
+                            onClick={() => setHide(true)}
+                          >
+                            X
+                          </button>
+                        </div>
+                      )}
+                    </Container>
+                  </div>
+                )}
+              </div>
+            ) : (
+              " "
+            )}
+
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               {Width ? (
@@ -238,7 +347,7 @@ export default function Navigation({
                 <div>
                   <img className="img-cat-adapt" src={catnav} />
                   <NavDropdown
-                    className="navdrop me-0 position-relative"
+                    className="navdrop me-0 mt-2 position-relative"
                     aria-expanded="true"
                     id="basic-nav-dropdown"
                     onClick={OpenIt}
