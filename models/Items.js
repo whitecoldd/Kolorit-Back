@@ -10,7 +10,7 @@ const ItemsSchema = new mongoose.Schema(
     currency: { type: String, required: true },
     img: { type: String, required: true },
     code: { type: String, required: true },
-    category: { type: Array, required: true },
+    category: { type: String, required: true },
     brand: { type: String, required: true },
     inStock: { type: String, required: true },
     popularity: { type: Number, required: true },

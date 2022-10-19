@@ -1,7 +1,8 @@
 import "./newproduct.css";
 import { addProduct } from "../../redux/apiCalls";
 import { useDispatch } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { publicRequest } from "../../requestMethods";
 import app from "../../firebase";
 import {
   getStorage,
@@ -15,6 +16,7 @@ export default function NewProduct() {
   const [inputs, setInputs] = useState({});
   const [file, setFile] = useState(null);
   const [cat, setCat] = useState([]);
+  const [brand, setBrand] = useState([]);
   const [comp, setComp] = useState([]);
   const dispatch = useDispatch();
   if (typeof window !== "undefined") {
@@ -28,6 +30,28 @@ export default function NewProduct() {
   const handleCat = (e) => {
     setCat(e.target.value.split(","));
   };
+  useEffect(() => {
+    const getItems = async () => {
+      try {
+        const res = await publicRequest.get(`/api/subsubcat/find`);
+        setCat(res.data);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    getItems();
+  }, []);
+  useEffect(() => {
+    const getItems = async () => {
+      try {
+        const res = await publicRequest.get(`/api/brand/find`);
+        setBrand(res.data);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    getItems();
+  }, []);
   const handleComplect = (event) => {
     setComp(event.target.value.split(","));
   };
@@ -69,13 +93,11 @@ export default function NewProduct() {
           console.log({
             ...inputs,
             img: downloadURL,
-            category: cat,
             complect: comp,
           });
           const product = {
             ...inputs,
             img: downloadURL,
-            category: cat,
             complect: comp,
           };
           addProduct(product, dispatch);
@@ -155,11 +177,13 @@ export default function NewProduct() {
               </div>
               <div className="addProductItem">
                 <label>Categories</label>
-                <input
-                  type="text"
-                  placeholder="drills, screwdrivers"
-                  onChange={handleCat}
-                />
+                <select name="cat" onChange={handleChange}>
+                  <option value={null}>---</option>
+
+                  {cat.map((cat) => (
+                    <option value={cat.name}>{cat.name}</option>
+                  ))}
+                </select>
               </div>
               <div className="addProductItem">
                 <label>Char #1</label>
@@ -333,12 +357,13 @@ export default function NewProduct() {
               </div>
               <div className="addProductItem">
                 <label>Brand</label>
-                <input
-                  name="brand"
-                  type="text"
-                  placeholder="Брэнд"
-                  onChange={handleChange}
-                />
+                <select name="brand" onChange={handleChange}>
+                  <option value={null}>---</option>
+
+                  {brand.map((brand) => (
+                    <option value={brand.name}>{brand.name}</option>
+                  ))}
+                </select>
               </div>
               <div className="addProductItem">
                 <label>Promo</label>

@@ -5,7 +5,7 @@ import { Publish } from "@material-ui/icons";
 import { productData } from "../../dummyData";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useMemo, useState } from "react";
-import { userRequest } from "../../requestMethods";
+import { userRequest, publicRequest } from "../../requestMethods";
 import { updateProduct } from "../../redux/apiCalls";
 import { ToastContainer, toast } from "react-toastify";
 import { injectStyle } from "react-toastify/dist/inject-style";
@@ -33,6 +33,7 @@ export default function Product({ productData }) {
   const [inputs, setInputs] = useState({});
   const [file, setFile] = useState(null);
   const [cat, setCat] = useState([]);
+  const [brand, setBrand] = useState([]);
   const [comp, setComp] = useState([]);
   const handleChange = (e) => {
     setInputs((prev) => {
@@ -45,6 +46,28 @@ export default function Product({ productData }) {
   const handleComplect = (event) => {
     setComp(event.target.value.split(","));
   };
+  useEffect(() => {
+    const getItems = async () => {
+      try {
+        const res = await publicRequest.get(`/api/subsubcat/find`);
+        setCat(res.data);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    getItems();
+  }, []);
+  useEffect(() => {
+    const getItems = async () => {
+      try {
+        const res = await publicRequest.get(`/api/brand/find`);
+        setBrand(res.data);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    getItems();
+  }, []);
   const handleClick = (e) => {
     e.preventDefault();
     const fileName = new Date().getTime() + file.name;
@@ -83,13 +106,11 @@ export default function Product({ productData }) {
           console.log({
             ...inputs,
             img: downloadURL,
-            category: cat,
             complect: comp,
           });
           const product = {
             ...inputs,
             img: downloadURL,
-            category: cat,
             complect: comp,
           };
           updateProduct(productId, product, dispatch);
@@ -274,7 +295,7 @@ export default function Product({ productData }) {
               value={inputs.char6a}
               onChange={handleChange}
             />
-          
+
             <label>guarantee</label>
             <input
               type="text"
@@ -347,20 +368,6 @@ export default function Product({ productData }) {
               value={inputs.singleProd}
               onChange={handleChange}
             />
-            <label>Brand</label>
-            <input
-              type="text"
-              name="brand"
-              value={inputs.brand}
-              onChange={handleChange}
-            />
-            <label>Category</label>
-            <input
-              type="text"
-              name="category"
-              value={cat}
-              onChange={handleCat}
-            />
             <label>Complect</label>
             <input
               type="text"
@@ -368,6 +375,22 @@ export default function Product({ productData }) {
               value={comp}
               onChange={handleComplect}
             />
+            <label>Brand</label>
+            <select name="brand" onChange={handleChange}>
+                  <option value={null}>---</option>
+
+                  {brand.map((brand) => (
+                    <option value={brand.name}>{brand.name}</option>
+                  ))}
+                </select>
+            <label>Category</label>
+            <select name="cat" onChange={handleChange}>
+              <option value={null}>---</option>
+
+              {cat.map((cat) => (
+                <option value={cat.name}>{cat.name}</option>
+              ))}
+            </select>
             <label>In Stock</label>
             <select name="inStock" id="idStock" onChange={handleChange}>
               <option value="В наличии">В наличии</option>

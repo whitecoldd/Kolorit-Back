@@ -23,7 +23,7 @@ export default function ProductList({productRows}) {
     {
       field: "product",
       headerName: "Product",
-      width: 320,
+      width: 220,
       renderCell: (params) => {
         return (
           <div className="productListItem">
