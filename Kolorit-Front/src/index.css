@@ -81,7 +81,7 @@ b {
 
 #search {
   background-image: url("../src/assets/search.png");
-  background-position: 2%;
+  background-position: 5%;
   background-repeat: no-repeat;
   text-indent: 20px;
   background-color: #c5c5c533;
@@ -606,11 +606,48 @@ div.container.model-adapt .item-info-adapt{
 }
 
 @media screen and (max-width: 650px) {
+  .css-13qu1ns-MuiSvgIcon-root path{
+    color: #ff8a1d;
+  }
+
+  div div.container.w-98 {
+    width: 90vw !important;
+  }
+
+  .sales-prod2{
+    height: auto !important;
+  }
+  .sales-prod1{
+    height: auto !important;
+  }
+  
   .dropdown-search-content {
-    top: 186px !important;
-    left: -70px;
-    width: 300px !important;
-    z-index: 1000 !important;
+    top: 54px !important;
+    left: -115px;
+    width: 270px !important;
+    z-index: 99999 !important;
+    border-radius: 0px 0px 50px 50px !important;
+  }
+
+  .dropdown-search::placeholder{
+    padding-left: 10px !important;
+  }
+
+  .dropdown-search-content h4 {
+    color: orange !important;
+    margin-bottom: 0px !important;
+  }
+  .dropdown-search-content small {
+    color: orange !important;
+    margin-bottom: 0px !important;
+  }
+  .dropdown-search-content h4 {
+    color: orange !important;
+    margin-bottom: 0px !important;
+  }
+
+  .dropdown-search-content:last-child{
+    border-radius: 20px 0px !important;
   }
 
   .new-pos-abs{
@@ -1430,6 +1467,7 @@ small {
 .navbar-toggler {
   padding: 0px !important;
   border: none !important;
+  margin-bottom: 10px;
 }
 
 @media screen and (max-width: 1200px) {
@@ -2979,6 +3017,10 @@ select .classic:focus {
     align-items: center !important;
     flex-wrap: wrap !important;
   }
+
+  .new-wid{
+    width: 70vw !important;
+  }
 }
 
 @media screen and (max-width: 550px) {
@@ -3050,6 +3092,14 @@ select .classic:focus {
 
   .cart-total .total-price {
     font-size: 16px;
+  }
+
+  .cart-total{
+    width: 90vw !important;
+  }
+
+  .new-wid{
+    width: 90vw !important;
   }
 
   .container .cart-card .check {

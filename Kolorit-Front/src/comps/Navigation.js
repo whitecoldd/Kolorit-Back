@@ -212,10 +212,10 @@ export default function Navigation({
           className="nav-fix sticky-top head position-relative"
           height={72}
         >
-          <Container className="d-flex">
+          <Container className="d-flex p-0 new-wid">
             <Navbar.Brand>
               <Link to="/">
-                <img src={hide ? logo : logo1} width={!Width&&hide ? 180 : "auto"} />
+                <img src={hide ? logo : logo1} width={!Width&&hide ? 160 : "auto"} />
               </Link>
             </Navbar.Brand>
             {hideall ? (
@@ -266,14 +266,14 @@ export default function Navigation({
                         <img className="" src={cart} width={25}/>
                       )}
                     </Link>
-                    <Container className="d-flex flex-wrap new-search-form p-0 pe-2">
+                    <Container className="d-flex flex-wrap new-search-form p-0 ">
                       {/* <div class="dropdown1"> */}
                       {hide ? (
                         <button
-                          className="nobr-bttn p-0"
+                          className="nobr-bttn p-0 gold mb-1"
                           onClick={() => setHide(false)}
                         >
-                          <SearchIcon/>
+                          <SearchIcon sx={{color: "orange"}}/>
                         </button>
                       ) : (
                         <div className="d-flex position-relative">
@@ -311,7 +311,7 @@ export default function Navigation({
                             className="nobr-bttn new-pos-abs"
                             onClick={() => setHide(true)}
                           >
-                            X
+                            <CloseIcon sx={{paddingBottom: "5px", marginBottom:"1px"}}/>
                           </button>
                         </div>
                       )}
@@ -395,7 +395,7 @@ export default function Navigation({
                   </div>{" "}
                 </div>
               </Nav>
-              <Container className="d-flex flex-wrap ">
+              <Container className={Width ? "d-flex flex-wrap " : "d-none"}>
                 {/* <div class="dropdown1"> */}
                 <Form.Control
                   placeholder="Поиск..."

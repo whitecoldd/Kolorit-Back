@@ -245,6 +245,7 @@ function App() {
                 cartItems={cartItems}
                 onAdd={onAdd}
                 onRemove={onRemove}
+                onRemoveFromPage={onRemoveFromPage}
                 decreaseQty={decreaseQty}
               />
             }

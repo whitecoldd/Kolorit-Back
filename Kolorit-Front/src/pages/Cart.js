@@ -43,11 +43,11 @@ export default function Cart(props) {
   }
   const handleDragStart = (e) => e.preventDefault();
   const discounted = useSelector(
-    (state) => state.user.currentUser.discountcard[0]?.discountPercent
+    (state) => state.user.currentUser?.discountcard[0]?.discountPercent
   );
 
   const user = useSelector((state) => state?.user?.currentUser);
-  const userDis = useSelector((state) => state.user.currentUser.discountcard);
+  const userDis = useSelector((state) => state.user.currentUser?.discountcard);
   const discount = userDis === undefined ? null : JSON.parse(discounted);
   const totalPrice = !userDis ? cartItems.reduce(
     (salePrice, item) =>
@@ -84,11 +84,13 @@ export default function Cart(props) {
     setMyLocalStorageData(lng);
   }, []);
   console.log(discounted);
+
+  const wholeSum = totalPrice + delivery
   return (
     <>
       <Container>
         <Row className="d-flex carthandle">
-          <Col sm={8}>
+          <Col sm={8} className="p-0">
             <Container>
               <Breadcrumb>
                 <Breadcrumb.Item href="/">{t("main")}</Breadcrumb.Item>
@@ -187,19 +189,19 @@ export default function Cart(props) {
               </Container>
             </Container>
           </Col>
-          <Col sm={4}>
+          <Col sm={4} className="p-0">
             <Container className="cart-total p-4 d-flex flex-column align-items-start">
               <h2 className="total-price">
                 {t("chose")}{" "}
-                <span className="total-price1">{totalPrice} MDL</span>
+                <span className="total-price1">{totalPrice.toFixed(1)} MDL</span>
               </h2>
               <h2 className="total-price">
-                {t("del")} <span className="total-price1">{delivery} MDL</span>
+                {t("del")} <span className="total-price1">{delivery.toFixed(1)} MDL</span>
               </h2>
               <h2 className="total-price">
                 {t("all")}{" "}
                 <span className="total-price1">
-                  {totalPrice + delivery} MDL
+                  {wholeSum.toFixed(1)} MDL
                 </span>
               </h2>
               <Container className="smth"></Container>
@@ -222,7 +224,7 @@ export default function Cart(props) {
           </Col>
         </Row>
       </Container>
-      <Container className="d-flex mt-5 mb-3 justify-content-center items-list-handle">
+      <Container className="d-flex mt-5 mb-3 ps-5 pe-5 justify-content-center items-list-handle">
         <AliceCarousel
           responsive={{
             0: {

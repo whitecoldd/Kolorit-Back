@@ -145,7 +145,7 @@ const Profile = () => {
           <Container className="np">
             <Container className="np">
               <Container className="menu-profile-ext">
-                <Container className="d-flex justify-content-between">
+                <Container className="d-flex justify-content-between align-items-center">
                   <h1 className="pad">{t("self")}</h1>
                   <Button
                     variant="warning"
