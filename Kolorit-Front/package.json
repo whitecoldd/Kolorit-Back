@@ -21,7 +21,6 @@
     "i18next": "^21.8.14",
     "i18next-browser-languagedetector": "^6.1.4",
     "i18next-http-backend": "^1.4.1",
-    "kolorit-back": "file:..",
     "react": "^18.2.0",
     "react-alice-carousel": "^2.6.1",
     "react-barcode": "^1.4.5",
